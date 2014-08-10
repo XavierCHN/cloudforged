@@ -1,0 +1,40 @@
+"dota_shops"
+{
+	"consumables"
+	{
+		//"item"		"item_xxxx"
+	}
+	"attributes"
+	{
+	}
+	"misc"
+	{
+	}	
+	"basics"
+	{
+	}
+	"support"
+	{
+	}
+	"magics"			
+	{
+	}
+	"defense"
+	{
+	}
+	"weapons"
+	{
+	}
+	"artifacts"
+	{	
+	}
+	"sideshop1"
+	{
+	}
+	"sideshop2"
+	{
+	}
+	"secretshop"
+	{							
+	}
+}
