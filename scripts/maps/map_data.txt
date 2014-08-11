@@ -1,0 +1,41 @@
+"cloudforged"
+{
+	"nPrepareGameTime"					"10.0"
+	//"nHeroSelectionTime"				"10.0"
+
+	"spawn_locations"
+	{
+		"1"
+		{
+			"SpawnerEntityName"			"spawn_location_1"
+			"FirstPathCorner"			"path_corner_1"
+		}
+		"2"
+		{
+			"SpawnerEntityName"			"spawn_location_2"
+			"FirstPathCorner"			"path_corner_2"
+		}
+		"3"
+		{
+			"SpawnerEntityName"			"spawn_location_3"
+			"FirstPathCorner"			"path_corner_3"
+		}
+	}
+	"boss_spawn_locations"
+	{
+		"boss_name"
+		{
+			"SpawnerEntityName"			"boss_spawner_xxxx"
+		}
+		//"boss_name"
+		//{
+		//	"SpawnerEntityName"			"boss_spawner_xxxx"
+		//}
+		//
+	}
+	"boss_ai_map"
+	{
+		"boss_name1"					"ai_file_name1"
+		//"boss_name2"					"ai_file_name2"
+	}
+}
