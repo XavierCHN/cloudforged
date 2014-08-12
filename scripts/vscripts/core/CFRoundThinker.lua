@@ -126,9 +126,12 @@ function CFRoundThinker:ReadAllEnemiesFromKv()
 
 end
 -------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
 function CFRoundThinker:ReadRoundData(round)
 	return self._tAllEnemies[round]
 end
+-------------------------------------------------------------------------------------------
+
 -------------------------------------------------------------------------------------------
 function CFRoundThinker:StartNextRound()
 	-- 轮数 + 1
@@ -140,3 +143,11 @@ function CFRoundThinker:StartNextRound()
 	-- 调用core/CFSpawner.lua开始这一轮刷怪
 	CFSpawner:SpawnWave(tRoundData.wavedata,tRoundData.spawner)
 end
+-------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------
+function CFRoundThinker:IncreaseRestTime(duration)
+	self._nRoundRestTime = self._nRoundRestTime or 0
+	self._nRoundRestTime = self._nRoundRestTime + duration
+end
+-------------------------------------------------------------------------------------------
