@@ -12,4 +12,10 @@
 		"Ability1"					"templar_assassin_refraction_holdout"		// Ability 1
 		"VisionNighttimeRange"		"1800"										// Range of vision at night time.
 	}
+	"npc_dota_hero_templar_crystal_maiden"
+	{
+		"override_hero"				"npc_dota_hero_crystal_maiden"			// Hero to override
+		"Ability1"					"crystal_maiden_ability_01"		        // Ability 1
+		"VisionNighttimeRange"		"1800"									// Range of vision at night time.
+	}
 }

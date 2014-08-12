@@ -7,6 +7,7 @@ require('items/test')
 
 -- abilities
 require('abilities/test')
+require('abilities/crystal_maiden')
 
 -- core
 require('core/CFRoundThinker')
