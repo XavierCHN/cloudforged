@@ -1,41 +1,50 @@
 "cloudforged"
 {
-	"nPrepareGameTime"					"10.0"
-	//"nHeroSelectionTime"				"10.0"
-
-	"spawn_locations"
+	"wave_data"
 	{
-		"1"
+		"1"//第一波怪物
 		{
-			"SpawnerEntityName"			"spawn_location_1"
-			"FirstPathCorner"			"path_corner_1"
+			"name"					"npc_cf_wave_1"
+			//"spawn_interval"			"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"spawn_location_1"
+					"FirstPathCorner"			"path_corner_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"spawn_location_2"
+					"FirstPathCorner"			"path_corner_2"
+				}
+				
+			}
+			
 		}
-		"2"
+		"2"//第二波怪物
 		{
-			"SpawnerEntityName"			"spawn_location_2"
-			"FirstPathCorner"			"path_corner_2"
-		}
-		"3"
-		{
-			"SpawnerEntityName"			"spawn_location_3"
-			"FirstPathCorner"			"path_corner_3"
+			"name"					"npc_cf_wave_2"
+			//"spawn_interval"			"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"spawn_location_1"
+					"FirstPathCorner"			"path_corner_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"spawn_location_2"
+					"FirstPathCorner"			"path_corner_2"
+				}
+				
+			}
 		}
 	}
-	"boss_spawn_locations"
-	{
-		"boss_name"
-		{
-			"SpawnerEntityName"			"boss_spawner_xxxx"
-		}
-		//"boss_name"
-		//{
-		//	"SpawnerEntityName"			"boss_spawner_xxxx"
-		//}
-		//
-	}
-	"boss_ai_map"
-	{
-		"boss_name1"					"ai_file_name1"
-		//"boss_name2"					"ai_file_name2"
-	}
+	//"boss_data"//待完成
 }
