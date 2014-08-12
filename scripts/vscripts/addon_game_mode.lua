@@ -12,8 +12,8 @@
 -- load everyhing
 require('require_everything')
 
-if ForgedGameMode == nil then
-	ForgedGameMode = class({})
+if CForgedGameMode == nil then
+	CForgedGameMode = class({})
 end
 
 function Precache( context )
@@ -28,7 +28,7 @@ end
 
 -- Create the game mode when we activate
 function Activate()
-	ForgedGameMode:InitGameMode()
+	CForgedGameMode:InitGameMode()
 end
 
 function CForgedGameMode:InitGameMode()

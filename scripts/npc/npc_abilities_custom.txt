@@ -50,8 +50,10 @@
 	"crystal_maiden_ability_01"
 	{
 		"ID"    "2000"
+		"BaseClass"                 "ability_datadriven"
         "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-        "BaseClass"                 "ability_datadriven"
+		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
         "AbilityTextureName"        "ability_crystal_maiden_ability_01"
 	    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
         "MaxLevel"                  "2"
@@ -68,9 +70,9 @@
         {
             "RunScript"
             {
+			  "Target"            "TARGET"
               "ScriptFile"        "scripts/vscripts/abilities/crystal_maiden.lua"
               "Function"          "OnCrystalMaiden01Start"
-              "Target"            "TARGET"
             }
         }
 		// Special

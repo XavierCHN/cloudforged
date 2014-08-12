@@ -1,19 +1,9 @@
 if CCrystalMaiden == nil then
-  print ( '[CloudForged] creating CCrystalMaiden' )
-  CCrystalMaiden = {}
-  CCrystalMaiden.szEntityClassName = "CCrystalMaiden"
-  CCrystalMaiden.szNativeClassName = "dota_ability_crystal_maiden_class"
-  CCrystalMaiden.__index = CCrystalMaiden
-end
-
-function CCrystalMaiden.new( orm )
-  print ( '[CloudForged] CCrystalMaiden:new' )
-  orm = orm or {}
-  setmetatable( orm, CCrystalMaiden )
-  return orm
+	CCrystalMaiden = class({})
 end
 
 function CCrystalMaiden:OnCrystalMaiden01Start(keys)
+	print ( '[CloudForged] CCrystalMaiden:OnCrystalMaiden01Start in function' )
 	local target = keys.target
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local nPlayerID = keys.unit:GetPlayerID()
@@ -21,8 +11,8 @@ function CCrystalMaiden:OnCrystalMaiden01Start(keys)
 	local fire = 1  --Todo
 	local increase = keys.ability:LoadKeyValuesFromString("base_Increase")
 	local area = keys.ability:LoadKeyValuesFromString("base_area")
-	local casterLevel = caster:GetLevel()
-	local targetLevel = caster:GetLevel()
+	local casterLevel = caster:GetLevel()	
+	local targetLevel = caster:GetLevel()	
 	local attribute = 0
 	if( keys.ability:LoadKeyValuesFromString("increase_type") == "int" )then
 		attribute = caster:GetIntellect()
