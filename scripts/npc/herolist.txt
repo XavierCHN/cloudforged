@@ -5,12 +5,12 @@
 
 "CustomHeroList"
 {
-	"npc_dota_hero_axe"					"1"
-	"npc_dota_hero_centaur"				"1"
-	"npc_dota_hero_juggernaut"			"1"
-	"npc_dota_hero_sven"				"1"
-	"npc_dota_hero_bounty_hunter"		"1"
-	"npc_dota_hero_templar_assassin"	"1"
-	"npc_dota_hero_crystal_maiden"		"1"
-	"npc_dota_hero_rubick"				"1"
+	"npc_dota_hero_axe"					"1"		//原名：斧王		改名：红雾死神
+	"npc_dota_hero_centaur"				"1"		//原名：人马		改名：征战暴君
+	"npc_dota_hero_juggernaut"			"1"		//原名：主宰		改名：千面战神
+	"npc_dota_hero_sven"				"1"		//原名：斯温		改名：守夜骑士
+	"npc_dota_hero_bounty_hunter"		"1"		//原名：赏金		改名：匍匐猎人
+	"npc_dota_hero_templar_assassin"	"1"		//原名：圣堂		改名：致命魅影
+	"npc_dota_hero_crystal_maiden"		"1"		//原名：冰女		改名：雪落女王
+	"npc_dota_hero_rubick"				"1"		//原名：拉比克		改名：隐修议员
 }
