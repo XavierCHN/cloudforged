@@ -11,7 +11,7 @@
 
 -------------------------------------------------------------------------------------------
 if CFRoundThinker == nil then
-	CFRoundThinker = calss({})
+	CFRoundThinker = class({})
 end
 -------------------------------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ function CFRoundThinker:InitPara(kv)
 	self._nCurrRound = 0
 	self._currentState = ROUND_STATE_PREPARE
 	self._nRoundRestTime = GameRules:GetGameTime() + ROUND_REST_TIME_BASE
-
+	self._tAllEnemies = {}
 	-- 读取所有的怪信息，赋给self._tAllEnemies
 	self:ReadAllEnemiesFromKv()
 end
@@ -115,13 +115,17 @@ function CFRoundThinker:ReadAllEnemiesFromKv()
 		else
 			-- 读取刷怪点名字和第一个路径点
 			tSingleWaveData.spawner = {}
-			for k,v in pairs(v["spawner"]) do
-				tSingleWaveData.spawner[k].name = v.SpawnerEntityName
-				tSingleWaveData.spawner[k].waypoint = v.FirstPathCorner
+			print('INITINT SPAWNER')
+			for sk,sv in pairs(v["spawner"]) do
+				local index = tonumber(sk)
+				tSingleWaveData.spawner[index] = {}
+				tSingleWaveData.spawner[index].name = sv.SpawnerEntityName
+				tSingleWaveData.spawner[index].waypoint = sv.FirstPathCorner
 			end
 		end
 		-- 存入self.tAllEnemies
-		self._tAllEnemies[k] = tSingleWaveData
+		local i = tonumber(k)
+		self._tAllEnemies[i] = tSingleWaveData
 	end
 
 end
@@ -139,7 +143,6 @@ function CFRoundThinker:StartNextRound()
 	
 	-- 读出这一轮怪的信息
 	local tRoundData = self:ReadRoundData(self._nCurrRound)
-	
 	-- 调用core/CFSpawner.lua开始这一轮刷怪
 	CFSpawner:SpawnWave(tRoundData.wavedata,tRoundData.spawner)
 end

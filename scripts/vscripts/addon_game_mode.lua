@@ -12,8 +12,8 @@
 -- load everyhing
 require('require_everything')
 
-if ForgedGameMode == nil then
-	ForgedGameMode = class({})
+if CForgedGameMode == nil then
+	CForgedGameMode = class({})
 end
 
 function Precache( context )
@@ -28,12 +28,13 @@ end
 
 -- Create the game mode when we activate
 function Activate()
-	ForgedGameMode:InitGameMode()
+	CForgedGameMode:InitGameMode()
 end
 
 function CForgedGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
-	CFRoundThinker:InitPara(0)
+	GameRules:SetPreGameTime(1)
+	CFRoundThinker:InitPara()
 end
 
 -- Evaluate the state of the game

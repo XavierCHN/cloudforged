@@ -77,7 +77,7 @@ function CFSpawner:Think()
 	-- 如果间隔时间已经达到
 	if GameRules:GetGameTime() >= self._fNextUnitSpawnTime then
 		-- 刷一个怪
-		self:_DoSpawn()
+		self:DoSpawn()
 		-- 检验所有怪物是否已经都刷完
 		if self:IsFinishedSpawn() then
 			self._fNextUnitSpawnTime = nil
@@ -107,7 +107,7 @@ function CFSpawner:DoSpawn()
 		local _eFirstTarget = Entities:FindByName(nil,_spawnerFirstTargetName)
 
 		-- 确认实体获取正确
-		if not _eSpawner and _eFirstTarget then
+		if not (_eSpawner and _eFirstTarget) then
 			tPrint(string.format('ERROR ATTEMPT TO SPAWN FAILED: ENTITIES NOT FOUND %s or %s',_spawnerName,_spawnerFirstTargetName))
 			return
 		end
