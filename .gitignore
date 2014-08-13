@@ -26,7 +26,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -38,3 +39,4 @@ Icon
 *.bin
 *.bin
 tools_asset_info.bin
+tools_thumbnail_cache.bin

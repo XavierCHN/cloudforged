@@ -17,7 +17,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
 
-		// Time		
+		// Time			
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"17.0 17.0 17.0 17.0"
 
@@ -71,18 +71,19 @@
             "RunScript"
             {
 			  "Target"            "TARGET"
-              "ScriptFile"        "scripts/vscripts/abilities/crystal_maiden.lua"
+              "ScriptFile"        "scripts/vscripts/abilities/crystalmaiden.lua"
               "Function"          "OnCrystalMaiden01Start"
             }
         }
+	
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"
 		{
 			"01"
 			{
-				"var_type"					"FIELD_STRING"
-				"increase_type"				"int"
+				"var_type"					"FIELD_INTEGER"
+				"increase_type"				"3"  //1 = str 2 = agi 3 = int
 			}
 			"02"
 			{
