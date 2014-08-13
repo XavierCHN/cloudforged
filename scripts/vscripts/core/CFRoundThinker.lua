@@ -99,6 +99,7 @@ end
 -------------------------------------------------------------------------------------------
 function CFRoundThinker:ReadAllEnemiesFromKv()
 	local kv = LoadKeyValues( "scripts/maps/" .. GetMapName() .. ".txt" )
+	if not kv then print('Runtime error, maybe you havent put a mapName KV file in maps/ directory') end
 	for k,v in pairs(kv["wave_data"]) do
 
 		-- 读取单位名称，刷怪间隔，数量，等级信息
