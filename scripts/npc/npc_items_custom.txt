@@ -1,5 +1,58 @@
 "DOTAAbilities"
 {
+	
+	"item_test_attribute"
+	{
+		"ID"					"1100"
+		"BaseClass"				"item_datadriven"
+		"ItemCost"						"2450"
+		"ItemShopTags"					"test"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"0"
+		"ItemAlertable"					"0"
+		"ItemAliases"					"test"
+		"Modifiers"
+		{
+			"modifier_item_test_auto_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"AttributeType"			"strength_level"
+						"AttributeValue"		"%strength_bonus_value"
+						"Function"				"OnItemAdded"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"AttributeType"			"strength_level"
+						"AttributeValue"		"%strength_bonus_value"
+						"Function"				"OnItemTakenAway"
+					}
+				}
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"strength_bonus_value"	"20"
+			}
+		}
+	}
+
+
+
+
 	//=================================================================================================================
 	// Recipe: Arcane Boots
 	//=================================================================================================================

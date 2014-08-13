@@ -21,21 +21,64 @@
 		"AbilityCooldown"		 	"15"
 		"AbilityUnitDamageType"   	"DAMAGE_TYPE_PURE"
 
+		"precache"
+		{
+			"particle_folder"		"particles/units/heroes/hero_ancient_apparition"
+		}
+
 		"OnSpellStart"
 		{
-			"RunScript"				//造成计算后的范围伤害
+			"FireEffect"
 			{
-			  	"Target"
+				"EffectName"		"particles/units/heroes/hero_ancient_apparition/ancient_apparition_ice_blast_final.vpcf"
+				"Target"			"Target"
+				"EffectAttachType"	"follow_origin"
+				"ControlPoints"
 				{
-					"Center"			"TARGET"
-					"Radius"			"%ability_radius"
-					"Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-					"Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
+					"00"			"0 0 20"
 				}
-			  	"AbilityMulti"			"2.0"			//加成
-			  	"AbilityDepenis"		"wisdom_level"	//睿智等级加成
-			  	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
-			  	"Function"		  		"OnCrystalMaiden01Start"
+			}
+			"ApplyModifier"
+			{
+				"Target"			"TARGET"
+				"ModifierName"		"modifier_cm_ice_blast"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_cm_ice_blast"
+			{
+				"Duration"				"2"
+				"IsDebuff"				"1"
+				"ThinkInterval"			"0.2"
+				"OnIntervalThink"
+				{
+					"RunScript"					//造成计算后的范围伤害
+					{
+					  	"Target"				"TARGET"
+					  	"AbilityMulti"			"%ability_multi"			//加成
+					  	"AbilityDepenis"		"wisdom_level"	//睿智等级加成
+					  	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
+					  	"Function"		  		"OnCrystalMaiden01Start"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"					//造成计算后的范围伤害
+					{
+					  	"Target"
+					  	{
+					  		"Center"			"TARGET"
+					  		"Radius"			"%ability_radius"
+					  		"Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
+					  	}
+					  	"AbilityMulti"			"%ability_multi"			//加成
+					  	"AbilityDepenis"		"wisdom_level"	//睿智等级加成
+					  	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
+					  	"Function"		  		"OnCrystalMaiden01Start"
+					}
+				}
 			}
 		}
 		"AbilitySpecial"
@@ -44,6 +87,11 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"ability_radius"		"200"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_multi"			"2.0"
 			}
 		}
 	}

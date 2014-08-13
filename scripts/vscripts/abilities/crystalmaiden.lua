@@ -2,13 +2,16 @@ function OnCrystalMaiden01Start(keys)
 
 	tPrint('vscripts/abilities/crystalmaiden.lua:OnCrystalMaiden01Start(keys)')
 
-	-- 技能 伤害类型为  蛮力等级 * 技能伤害系数 * 主属性值 * 技能等级的平方 * 英雄等级/目标等级
+	--[[ 技能 伤害类型为  蛮力/灵敏/狡诈/智慧等级 * 技能伤害系数 
+	* (力量值*力量系数 + 敏捷值*敏捷系数 + 智力值* 智力系数) * 技能等级的平方 * 英雄等级/目标等级]]
 
 	-- 获取施法者
 	local hCaster = EntIndexToHScript(keys.caster_entindex)
 	
 	-- 获取技能目标列表
 	local thTarget = keys.target_entities
+
+	if not thTarget then print('damage no target') return end
 
 	-- 获取从技能决定依赖天赋 - 从物品获取依赖天赋的等级
 	local nWisdomLevel = ItemCore:GetAttribute(hCaster,keys.AbilityDepenis) or 1

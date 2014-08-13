@@ -33,17 +33,24 @@ end
 
 function CForgedGameMode:InitGameMode()
 	GameRules:SetPreGameTime( 10.0)
-  -- 设定游戏准备时间
+ 	
+ 	-- 设定游戏准备时间
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
 	
 	GameRules:SetPreGameTime(1)
-	CFRoundThinker:InitPara()
+
+	-- 初始化
+	--CFRoundThinker:InitPara()
+
+	ItemCore:Init()
 end
 
 -- Evaluate the state of the game
 function CForgedGameMode:OnThink()
 	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		CFRoundThinker:Think()
+
+		--CFRoundThinker:Think()
+		
 	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
 		return nil
 	end

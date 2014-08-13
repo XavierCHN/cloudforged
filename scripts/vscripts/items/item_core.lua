@@ -1,11 +1,21 @@
 ItemCore = class({})
 
-function ItemCore:GetAttribute(hero,attribute_type)
-    for i = 0,5 do
-        local ITEM = hero:GetItemInSlot(i) 
-        local Attribute = 0
-        if ITEM  then
-            local Attribute = Attribute + tonumber(ITEM:GetSpecialValueFor(attribute_type))
-        end
+function OnItemAdded(keys)
+    print('item core on item added called')
+    for k,v in pairs(keys) do
+        print(k,v)
     end
 end
+
+function OnItemTakenAway(keys)
+    print('item core on item taken away')
+    for k,v in pairs(keys) do
+        print(k,v)
+    end
+end
+
+function ItemCore:Init()
+end
+function ItemCore:GetAttribute(hero,attribute_type)
+end
+
