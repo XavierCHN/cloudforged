@@ -2,100 +2,49 @@
 "DOTAAbilities"
 {
 	"Version"		"1"
-
-	//=================================================================================================================
-	// Templar Assassin: Refraction Holdout
-	//=================================================================================================================
-	"templar_assassin_refraction_holdout"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
-
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
-
-		// Time			
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"17.0 17.0 17.0 17.0"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"100"
-		
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"damage_absorb"				"200 300 400 500"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"bonus_damage"				"20 40 60 80"
-			}
-			"04"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"duration"					"17.0 17.0 17.0 17.0"
-			}
-		}
-	}
-	
 	"crystal_maiden_ability_01"
 	{
-		"ID"    "2000"
-		"BaseClass"                 "ability_datadriven"
-        "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"ID"						"2000"
+		"BaseClass"				 	"ability_datadriven"
+		"AbilityBehavior"		   	"DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-        "AbilityTextureName"        "ability_crystal_maiden_ability_01"
-	    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
-        "MaxLevel"                  "2"
+		"AbilityTextureName"		"ability_crystal_maiden_ability_01"
+		"AbilityCastAnimation"	  	"ACT_DOTA_CAST_ABILITY_1"
+		"MaxLevel"				  	"2"
 
-        // Stats
-        //----------------------------------------------------------------
-        "AbilityCastRange"        "500"
-        "AbilityManaCost"         "75"
-        "AbilityCastPoint"        "0.3"
-        "AbilityCooldown"         "15"
-        "AbilityUnitDamageType"   "DAMAGE_TYPE_PURE"
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityCastRange"			"500"
+		"AbilityManaCost"		 	"75"
+		"AbilityCastPoint"			"0.3"
+		"AbilityCooldown"		 	"15"
+		"AbilityUnitDamageType"   	"DAMAGE_TYPE_PURE"
 
-        "OnSpellStart"
-        {
-            "RunScript"
-            {
-			  "Target"            "TARGET"
-              "ScriptFile"        "scripts/vscripts/abilities/crystalmaiden.lua"
-              "Function"          "OnCrystalMaiden01Start"
-            }
-        }
-	
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"RunScript"				//造成计算后的范围伤害
+			{
+			  	"Target"
+				{
+					"Center"			"TARGET"
+					"Radius"			"%ability_radius"
+					"Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
+				}
+			  	"AbilityMulti"			"2.0"			//加成
+			  	"AbilityDepenis"		"wisdom_level"	//睿智等级加成
+			  	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
+			  	"Function"		  		"OnCrystalMaiden01Start"
+			}
+		}
 		"AbilitySpecial"
 		{
 			"01"
 			{
-				"var_type"					"FIELD_INTEGER"
-				"increase_type"				"3"  //1 = str 2 = agi 3 = int
-			}
-			"02"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"base_Increase"		     	"2.0"
-			}
-			"03"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"base_area"			        "200"
+				"var_type"				"FIELD_INTEGER"
+				"ability_radius"		"200"
 			}
 		}
-        
 	}
 }

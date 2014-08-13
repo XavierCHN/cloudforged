@@ -4,6 +4,7 @@ require('global_function')
 
 -- items
 require('items/test')
+require('items/item_core')
 
 -- abilities
 require('abilities/test')

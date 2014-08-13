@@ -1,61 +1,48 @@
-ABILITY_ATTRIBUTE_INCREASE_TYPE_STR = 1
-ABILITY_ATTRIBUTE_INCREASE_TYPE_AGI = 2
-ABILITY_ATTRIBUTE_INCREASE_TYPE_INT = 3
-
-if CCrystalMaiden == nil then
-	CCrystalMaiden = class({})
-end
-
 function OnCrystalMaiden01Start(keys)
-	print ( '[CloudForged] CCrystalMaiden:OnCrystalMaiden01Start in function' )
-	local target = keys.target
-	local caster = EntIndexToHScript(keys.caster_entindex)
-	local nPlayerID = keys.unit:GetPlayerID()
-	local magic = 1  --Todo
-	local fire = 1  --Todo
-	local increase = keys.ability:GetSpecialValueFor("base_Increase")
-	local area = keys.ability:GetSpecialValueFor("base_area")
-	local casterLevel = caster:GetLevel()	
-	local targetLevel = caster:GetLevel()	
-	local attribute = 0
-	if( keys.ability:GetSpecialValueFor("increase_type") == ABILITY_ATTRIBUTE_INCREASE_TYPE_INT )then
-		attribute = caster:GetIntellect()
-	end
-	print("increase="..tostring(increase))
-	print("area="..tostring(area))
-	print("attribute="..tostring(attribute))
-	local abilityLevel = keys.ability:GetLevel()
-	local damage = (1 + fire/10 ) * magic * attribute * (2.0 + (abilityLevel-1)*0.5) * casterLevel/targetLevel
-	local DamageTable = {
-	    victim = target, 
-	    attacker = caster, 
-	    damage = damage, 
-	    damage_type = DAMAGE_TYPE_PURE, 
-	    damage_flags = 1
-	}
-	print("damage="..tostring(damage))
-	CCrystalMaiden:UnitDamageArea(DamageTable,target:GetOrigin(),200+(abilityLevel-1)*80)
-end
 
-function CCrystalMaiden:UnitDamageTarget(DamageTable)
-	ApplyDamage(damage)
-end
+	tPrint('vscripts/abilities/crystalmaiden.lua:OnCrystalMaiden01Start(keys)')
 
-function CCrystalMaiden:UnitDamageArea(DamageTable,vec,area)
-	local DamageTargets = FindUnitsInRadius(
-		   DamageTable.attacker:GetTeam(),		--caster team
-		   vec,		                --find position
-		   nil,					    --find entity
-		   area,		            --find radius
-		   DOTA_UNIT_TARGET_TEAM_ENEMY,
-		   DOTA_UNIT_TARGET_ALL,
-		   0, FIND_CLOSEST,
-		   false
-	)
-	for k,v in pairs(DamageTargets) do
-		DamageTable.victim = v
-        ApplyDamage(DamageTable)
-	    print("[CloudForged]CrystalMaiden Damagetargets!")
+	-- 技能 伤害类型为  蛮力等级 * 技能伤害系数 * 主属性值 * 技能等级的平方 * 英雄等级/目标等级
+
+	-- 获取施法者
+	local hCaster = EntIndexToHScript(keys.caster_entindex)
+	
+	-- 获取技能目标列表
+	local thTarget = keys.target_entities
+
+	-- 获取从技能决定依赖天赋 - 从物品获取依赖天赋的等级
+	local nWisdomLevel = ItemCore:GetAttribute(hCaster,keys.AbilityDepenis) or 1
+
+	-- 获取技能伤害系数
+	local ability_multi = tonumber(keys.AbilityMulti) 
+
+	-- 获取主属性值
+	local primary_value = hCaster:GetPrimaryStatValue() 
+
+	-- 获取技能等级
+	local ability_level = keys.ability:GetLevel() 
+
+	-- 获取英雄等级
+	local hero_level = hCaster:GetLevel()
+
+	-- 获取敌方等级
+	local target_level = thTarget[1]:GetLevel()
+
+	-- 计算伤害值
+	local damage_to_deal = nWisdomLevel * ability_multi * primary_value * ability_level * ability_level * hero_level / target_level
+
+	-- 传入技能至少造成伤害值
+	if keys.MiniunDamage and damage_to_deal < keys.MiniunDamage then damage_to_deal = keys.MiniunDamage end
+
+	-- 循坏各个目标单位
+	for _,v in pairs(thTarget) do
+		local damage_table = {
+			victim = v,
+			attacker = hCaster,
+			damage = damage_to_deal,
+			damage_type = DAMAGE_TYPE_PURE, 
+	    	damage_flags = 0
+		}
+		ApplyDamage(damage_table)
 	end
 end
-
