@@ -28,7 +28,7 @@ end
 
 function GetDistance(vPos1,vPos2)
     if not (vPos1.x and vPos1.y and vPos2.x and vPos2.y ) then
-        tPrint( 'ERROR: attempt to call function GetDistance with non-vector pramater' , DEV_PRINT )
+        tPrint( 'ERROR: attempt to call function GetDistance with non-vector pramater' )
         return 0
     else
         local fDifx = vPos1.x - vPos2.x
@@ -39,7 +39,7 @@ end
 
 function GetDistance3D(vPos1,vPos2)
     if not (vPos1.x and vPos1.y and vPos1.z and vPos2.x and vPos2.y and vPos2.z ) then
-        tPrint( 'ERROR: attempt to call function GetDistance3D with non-vector pramater' , DEV_PRINT )
+        tPrint( 'ERROR: attempt to call function GetDistance3D with non-vector pramater' )
         return 0
     else
         local fDifx = vPos1.x - vPos2.x
