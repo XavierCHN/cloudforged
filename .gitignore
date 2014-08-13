@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -84,4 +83,7 @@ Icon
 *.bin
 tools_asset_info.bin
 tools_thumbnail_cache.bin
->>>>>>> 019fab5c27cb7319d82a7826b8370233a0d97a5e
+*.bin
+tools_asset_info.bin
+tools_asset_info.bin
+tools_asset_info.bin
