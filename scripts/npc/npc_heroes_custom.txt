@@ -11,4 +11,253 @@
 		"override_hero"				"npc_dota_hero_crystal_maiden"			// Hero to override
 		"Ability1"					"crystal_maiden_ability_01"		        // Ability 1
 	}
+
+	//红雾死神
+	//-----------------------------------------------------------------------------------------------------------------
+	"npc_dota_hero_axe"
+	{
+		"override_hero"			"npc_dota_hero_axe"
+		// Attack
+		//-------------------------------------------------------------------------------------------------------------
+		"AttackDamageMin"			"50"									
+		"AttackDamageMax"			"60"									
+		"AttackRate"				"1.5"																
+
+		// Armor
+		//-------------------------------------------------------------------------------------------------------------
+		"ArmorPhysical"				"4"
+
+		// Attributes
+		//-------------------------------------------------------------------------------------------------------------
+		"AttributeBaseStrength"		"20"									
+		"AttributeStrengthGain"		"2"									
+		"AttributeBaseIntelligence"	"15"									
+		"AttributeIntelligenceGain"	"1"									
+		"AttributeBaseAgility"		"15"									
+		"AttributeAgilityGain"		"1"	
+
+		// Movement
+		//-------------------------------------------------------------------------------------------------------------
+		"MovementSpeed"				"300"
+
+		"VisionNighttimeRange"		"1800"	
+	}
+
+	//征战暴君
+	//-----------------------------------------------------------------------------------------------------------------
+	"npc_dota_hero_centaur"
+	{
+		"override_hero"			"npc_dota_hero_centaur"
+		// Attack
+		//-------------------------------------------------------------------------------------------------------------
+		"AttackDamageMin"			"50"									
+		"AttackDamageMax"			"60"									
+		"AttackRate"				"1.5"																
+
+		// Armor
+		//-------------------------------------------------------------------------------------------------------------
+		"ArmorPhysical"				"4"
+
+		// Attributes
+		//-------------------------------------------------------------------------------------------------------------
+		"AttributeBaseStrength"		"20"									
+		"AttributeStrengthGain"		"2"									
+		"AttributeBaseIntelligence"	"15"									
+		"AttributeIntelligenceGain"	"1"									
+		"AttributeBaseAgility"		"15"									
+		"AttributeAgilityGain"		"1"	
+
+		// Movement
+		//-------------------------------------------------------------------------------------------------------------
+		"MovementSpeed"				"300"
+
+		"VisionNighttimeRange"		"1800"	
+	}
+
+	//千面战神
+	//-----------------------------------------------------------------------------------------------------------------
+	"npc_dota_hero_juggernaut"
+	{
+		"override_hero"			"npc_dota_hero_juggernaut"
+		// Attack
+		//-------------------------------------------------------------------------------------------------------------
+		"AttackDamageMin"			"30"									
+		"AttackDamageMax"			"40"									
+		"AttackRate"				"1.2"																
+
+		// Armor
+		//-------------------------------------------------------------------------------------------------------------
+		"ArmorPhysical"				"2"
+
+		// Attributes
+		//-------------------------------------------------------------------------------------------------------------
+		"AttributeBaseStrength"		"15"									
+		"AttributeStrengthGain"		"1"									
+		"AttributeBaseIntelligence"	"15"									
+		"AttributeIntelligenceGain"	"1"									
+		"AttributeBaseAgility"		"20"									
+		"AttributeAgilityGain"		"2"	
+
+		// Movement
+		//-------------------------------------------------------------------------------------------------------------
+		"MovementSpeed"				"330"
+
+		"VisionNighttimeRange"		"1800"	
+	}
+
+	//守夜骑士
+	//-----------------------------------------------------------------------------------------------------------------
+	"npc_dota_hero_sven"
+	{
+		"override_hero"			"npc_dota_hero_sven"
+		// Attack
+		//-------------------------------------------------------------------------------------------------------------
+		"AttackDamageMin"			"30"									
+		"AttackDamageMax"			"40"									
+		"AttackRate"				"1.2"																
+
+		// Armor
+		//-------------------------------------------------------------------------------------------------------------
+		"ArmorPhysical"				"2"
+
+		// Attributes
+		//-------------------------------------------------------------------------------------------------------------
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"15"									
+		"AttributeStrengthGain"		"1"									
+		"AttributeBaseIntelligence"	"15"									
+		"AttributeIntelligenceGain"	"1"									
+		"AttributeBaseAgility"		"20"									
+		"AttributeAgilityGain"		"2"	
+
+		// Movement
+		//-------------------------------------------------------------------------------------------------------------
+		"MovementSpeed"				"330"
+
+		"VisionNighttimeRange"		"1800"	
+	}
+
+	//匍匐猎人
+	//-----------------------------------------------------------------------------------------------------------------
+	"npc_dota_hero_bounty_hunter"
+	{
+		"override_hero"			"npc_dota_hero_bounty_hunter"
+		// Attack
+		//-------------------------------------------------------------------------------------------------------------
+		"AttackDamageMin"			"20"									
+		"AttackDamageMax"			"30"									
+		"AttackRate"				"1.0"																
+
+		// Armor
+		//-------------------------------------------------------------------------------------------------------------
+		"ArmorPhysical"				"-1"
+
+		// Attributes
+		//-------------------------------------------------------------------------------------------------------------
+		"AttributeBaseStrength"		"15"									
+		"AttributeStrengthGain"		"1"									
+		"AttributeBaseIntelligence"	"15"									
+		"AttributeIntelligenceGain"	"1"									
+		"AttributeBaseAgility"		"20"									
+		"AttributeAgilityGain"		"2"	
+
+		// Movement
+		//-------------------------------------------------------------------------------------------------------------
+		"MovementSpeed"				"350"
+
+		"VisionNighttimeRange"		"1800"	
+	}
+
+	//致命魅影
+	//-----------------------------------------------------------------------------------------------------------------
+	"npc_dota_hero_templar_assassin"
+	{
+		"override_hero"			"npc_dota_hero_templar_assassin"
+		// Attack
+		//-------------------------------------------------------------------------------------------------------------
+		"AttackDamageMin"			"20"									
+		"AttackDamageMax"			"30"									
+		"AttackRate"				"1.0"																
+
+		// Armor
+		//-------------------------------------------------------------------------------------------------------------
+		"ArmorPhysical"				"-1"
+
+		// Attributes
+		//-------------------------------------------------------------------------------------------------------------
+		"AttributeBaseStrength"		"15"									
+		"AttributeStrengthGain"		"1"									
+		"AttributeBaseIntelligence"	"15"									
+		"AttributeIntelligenceGain"	"1"									
+		"AttributeBaseAgility"		"20"									
+		"AttributeAgilityGain"		"2"	
+
+		// Movement
+		//-------------------------------------------------------------------------------------------------------------
+		"MovementSpeed"				"350"
+
+		"VisionNighttimeRange"		"1800"	
+	}
+
+	//雪落女王
+	//-----------------------------------------------------------------------------------------------------------------
+	"npc_dota_hero_crystal_maiden"
+	{
+		"override_hero"			"npc_dota_hero_crystal_maiden"
+		// Attack
+		//-------------------------------------------------------------------------------------------------------------
+		"AttackDamageMin"			"40"									
+		"AttackDamageMax"			"50"									
+		"AttackRate"				"1.3"																
+
+		// Armor
+		//-------------------------------------------------------------------------------------------------------------
+		"ArmorPhysical"				"0"
+
+		// Attributes
+		//-------------------------------------------------------------------------------------------------------------
+		"AttributeBaseStrength"		"15"									
+		"AttributeStrengthGain"		"1"									
+		"AttributeBaseIntelligence"	"20"									
+		"AttributeIntelligenceGain"	"2"									
+		"AttributeBaseAgility"		"15"									
+		"AttributeAgilityGain"		"1"	
+
+		// Movement
+		//-------------------------------------------------------------------------------------------------------------
+		"MovementSpeed"				"340"
+
+		"VisionNighttimeRange"		"1800"	
+	}
+
+	//隐修议员
+	//-----------------------------------------------------------------------------------------------------------------
+	"npc_dota_hero_rubick"
+	{
+		"override_hero"			"npc_dota_hero_rubick"
+		// Attack
+		//-------------------------------------------------------------------------------------------------------------
+		"AttackDamageMin"			"40"									
+		"AttackDamageMax"			"50"									
+		"AttackRate"				"1.3"																
+
+		// Armor
+		//-------------------------------------------------------------------------------------------------------------
+		"ArmorPhysical"				"0"
+
+		// Attributes
+		//-------------------------------------------------------------------------------------------------------------
+		"AttributeBaseStrength"		"15"									
+		"AttributeStrengthGain"		"1"									
+		"AttributeBaseIntelligence"	"20"									
+		"AttributeIntelligenceGain"	"2"									
+		"AttributeBaseAgility"		"15"									
+		"AttributeAgilityGain"		"1"	
+
+		// Movement
+		//-------------------------------------------------------------------------------------------------------------
+		"MovementSpeed"				"340"
+
+		"VisionNighttimeRange"		"1800"	
+	}
 }
