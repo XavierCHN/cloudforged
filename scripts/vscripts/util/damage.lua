@@ -58,8 +58,7 @@
 			attacker_level		= 1,						--攻击者等级
 			victim_level		= 1,						--目标等级
 			ability_level		= 1,						--技能等级
-			attacker_attribute	= 0,						--单位属性数值
-			category_level		= 0,						--精通数值
+			category_level		= 1,						--精通数值
 		},
 	}
 
@@ -79,7 +78,7 @@
 		damage.attacker				= EntIndexToHScript(damage.caster_entindex)						--伤害来源(施法者)
 		damage.attacker_level		= damage.attacker:GetLevel()									--技能施放者的等级
 		damage.ability_level		= damage.ability:GetLevel()										--技能等级
-		damage.category_level		= ItemCore:GetAttribute(damage.attacker,damage.damage_category)	--伤害分类精通
+		damage.category_level		= 1	--ItemCore:GetAttribute(damage.attacker,damage.damage_category)	--伤害分类精通(先使用固定值,等待接口)
 
 		--根据公式计算出伤害(在除以对方的等级之前)
 			--精通等级 * 伤害系数 * (力量 * 力量系数 + 敏捷 * 敏捷系数 + 智力 * 智力系数) * 技能等级 ^ 2 * 英雄等级 / 目标等级
