@@ -9,7 +9,14 @@
 			"damage_base"		"0"									//固定的基础伤害(默认0)
 			"damage_increase"	"1"									//伤害系数(默认1)
 			"damage_type"		"DAMAGE_TYPE_PURE"					//伤害类型(默认纯粹)
-			"damage_category"	"DAMAGE_CATEGORY_FORCE"				//精通类型(默认蛮力)
+			"damage_category"	"force"								//精通类型(默认蛮力)
+				//可选项
+				/*
+					'force'		--蛮力
+					'sensitive'	--灵敏
+					'cunning'	--狡诈
+					'wisdom'	--智慧
+				*/
 			"damage_str"		"1"									//力量加成(默认0)
 			"damage_agi"		"1"									//敏捷加成(默认0)
 			"damage_int"		"1"									//智力加成(默认0)
@@ -18,12 +25,9 @@
 		
 	]]
 
-	--常量
+	--可选项
 		--damage_category	精通类型(默认为蛮力)
-		DAMAGE_CATEGORY_FORCE		= 'force'		--蛮力
-		DAMAGE_CATEGORY_SENSITIVE	= 'sensitive'	--灵敏
-		DAMAGE_CATEGORY_CUNNING		= 'cunning'		--狡诈
-		DAMAGE_CATEGORY_WISDOM		= 'wisdom'		--智慧
+		
 
 
 
@@ -62,7 +66,7 @@
 	--造成伤害主函数(技能)
 	function Damage.__call(Damage, damage)
 		--获取技能
-		local targets	= keys.target_entities	--技能施放目标(数组)
+		local targets	= damage.target_entities	--技能施放目标(数组)
 
 		if not targets then
 			print(debug.traceback '无伤害目标')
@@ -72,10 +76,10 @@
 		setmetatable(damage, Damage.damage_meta)
 		
 		--获取技能传参,构建伤害table
-		damage.attacker				= EntIndexToHScript(keys.caster_entindex)						--伤害来源(施法者)
-		damage.attacker_level		= attacker:GetLevel()											--技能施放者的等级
-		damage.ability_level		= ability:GetLevel()											--技能等级
-		damage.category_level		= ItemCore:GetAttribute(damage.attacker,keys.damage_category)	--伤害分类精通
+		damage.attacker				= EntIndexToHScript(damage.caster_entindex)						--伤害来源(施法者)
+		damage.attacker_level		= damage.attacker:GetLevel()									--技能施放者的等级
+		damage.ability_level		= damage.ability:GetLevel()										--技能等级
+		damage.category_level		= ItemCore:GetAttribute(damage.attacker,damage.damage_category)	--伤害分类精通
 
 		--根据公式计算出伤害(在除以对方的等级之前)
 			--精通等级 * 伤害系数 * (力量 * 力量系数 + 敏捷 * 敏捷系数 + 智力 * 智力系数) * 技能等级 ^ 2 * 英雄等级 / 目标等级
