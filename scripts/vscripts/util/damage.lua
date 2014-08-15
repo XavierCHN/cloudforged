@@ -92,12 +92,17 @@
 									*	damage.ability_level * damage.ability_level
 									*	damage.attacker_level
 
-		--遍历数组进行伤害
+		--遍历数组进行伤害		
 		for i, victim in ipairs(targets) do
 	        damage.victim 		= victim
 			damage.victim_level	= victim:GetLevel()
 			damage.damage 		= math.max(damage.damage_min, damage.damage_base + damage.damage_add / damage.victim_level)
 			
 			ApplyDamage(damage)
+		end
+
+		print('===============DAMAGE DEBUG================')
+		for k, v in pairs(damage) do
+			print(k, v, type(v))
 		end
 	end
