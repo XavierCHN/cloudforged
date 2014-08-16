@@ -43,7 +43,7 @@ local DEFAULT_SPAWN_UNIT_LEVEL = 1
 			[1] = {name = 'enemy_spawner_1',waypoint = 'way_point_1'}
 			--将会随机选择刷怪点，固定一个刷怪点则只传入一个值
 		}]]
-function CFSpawner:SpawnWave( wavedata, spawner)
+function CFSpawner:SpawnWave( round , wavedata, spawner)
 	if not self:CheckValid(wavedata,spawner) then tPrint(' CFSpawner data writting, data invalid') return end
 	
 	-- 读取刷怪信息
@@ -51,15 +51,33 @@ function CFSpawner:SpawnWave( wavedata, spawner)
 	self._fSPawnInterval = wavedata.interval or DEFAULT_SPAWN_INTERVAL
 	self._nUnitToSpawnCount = wavedata.count or DEFAULT_SPAWN_COUNT
 	self._nCreatureLevel = wavedata.level or DEFAULT_SPAWN_UNIT_LEVEL
+	self._szRoundTitle = wavedata.roundtitle or "empty"
+	self._szRoundQuestTitle = wavedata.roundquesttitle or "empty"
 	self._tSpawner = spawner
 
 	-- 初始化变量
 	self._bFinishedSpawn = false
 	self._nUnitsSpawnedThisRound = 0
 	self._nUnitsCurrentlyAlive = 0
+	self._nCoreUnitsKilled = 0
 	self._fNextUnitSpawnTime = GameRules:GetGameTime() + self._fSPawnInterval
 	self._teEnemyUnitList = {}
 	self._playerScore = {}
+
+	-- 更新任务
+	self._entQuest = SpawnEntityFromTableSynchronous( "quest", {
+		name = self._szRoundTitle,
+		title =  self._szRoundQuestTitle
+	})
+	
+	self._entQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_ROUND, round )
+
+	self._entKillCountSubquest = SpawnEntityFromTableSynchronous( "subquest_base", {
+		show_progress_bar = true,
+		progress_bar_hue_shift = -119
+	} )
+	self._entQuest:AddSubquest( self._entKillCountSubquest )
+	self._entKillCountSubquest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, self._nUnitToSpawnCount )
 
 	-- 监听杀怪
 	ListenToGameEvent( "entity_killed", Dynamic_Wrap( CFSpawner, 'OnEntityKilled' ), self )
@@ -128,7 +146,7 @@ function CFSpawner:DoSpawn()
 				_eUnitSpawned:CreatureLevelUp( self._nCreatureLevel - 1 )
 			end
 			-- 让怪开始移动
-			entUnit:SetInitialGoalEntity( _eFirstTarget )
+			_eUnitSpawned:SetInitialGoalEntity( _eFirstTarget )
 
 			-- 需要刷怪数量-1，已经刷怪数量 + 1，存活怪物数量 + 1，填入已经刷怪列表
 			self._nUnitToSpawnCount = self._nUnitToSpawnCount - 1
@@ -145,21 +163,25 @@ end
 -- 监听的怪物被杀死的事件响应
 function CFSpawner:OnEntityKilled(keys)
 	-- 获取被杀死的单位
-	local killedUnit = EntIndexToHScript( event.entindex_killed )
+	local killedUnit = EntIndexToHScript( keys.entindex_killed )
 	if killedUnit then
 		-- 如果被杀死的单位是刷出来的单位，则移除
 		for i, unit in pairs( self._teEnemyUnitList ) do
 			if killedUnit == unit then
-				table.remove( self._vEnemiesRemaining, i )
+				table.remove( self._teEnemyUnitList, i )
+				self._nCoreUnitsKilled = self._nCoreUnitsKilled + 1
+				-- 活着的怪数量 - 1
+				self._nUnitsCurrentlyAlive = self._nUnitsCurrentlyAlive - 1
+				self._entKillCountSubquest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, self._nCoreUnitsKilled )
 				break
 			end
 		end
-		-- 活着的怪数量 - 1
-		self._nUnitsCurrentlyAlive = self._nUnitsCurrentlyAlive - 1
+		
 	end
 
+	
 	-- 增加玩家得分
-	local attackerUnit = EntIndexToHScript( event.entindex_attacker or -1 )
+	local attackerUnit = EntIndexToHScript( keys.entindex_attacker or -1 )
 	if attackerUnit then
 		local playerID = attackerUnit:GetPlayerOwnerID()
 		self._playerScore[playerID] = self._playerScore[playerID] or 0

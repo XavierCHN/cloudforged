@@ -109,6 +109,8 @@ function CFRoundThinker:ReadAllEnemiesFromKv()
 		tSingleWaveData.wavedata.interval = v.spawn_interval
 		tSingleWaveData.wavedata.count = v.count
 		tSingleWaveData.wavedata.level = v.level
+		tSingleWaveData.wavedata.roundtitle = v.RoundTitle
+		tSingleWaveData.wavedata.roundquesttitle = v.RoundQuestTitle
 
 		-- 读取刷怪点信息
 		if not v["spawner"] then
@@ -145,7 +147,7 @@ function CFRoundThinker:StartNextRound()
 	-- 读出这一轮怪的信息
 	local tRoundData = self:ReadRoundData(self._nCurrRound)
 	-- 调用core/CFSpawner.lua开始这一轮刷怪
-	CFSpawner:SpawnWave(tRoundData.wavedata,tRoundData.spawner)
+	CFSpawner:SpawnWave(self._nCurrRound,tRoundData.wavedata,tRoundData.spawner)
 end
 -------------------------------------------------------------------------------------------
 

@@ -81,7 +81,7 @@
 		damage.category_level		= 1	--ItemCore:GetAttribute(damage.attacker,damage.damage_category)	--伤害分类精通(先使用固定值,等待接口)
 
 		--根据公式计算出伤害(在除以对方的等级之前)
-			--精通等级 * 伤害系数 * (力量 * 力量系数 + 敏捷 * 敏捷系数 + 智力 * 智力系数) * 技能等级 ^ 2 * 英雄等级 / 目标等级
+		--精通等级 * 伤害系数 * (力量 * 力量系数 + 敏捷 * 敏捷系数 + 智力 * 智力系数) * 技能等级 ^ 2 * 英雄等级 / 目标等级
 		damage.damage_add			=	damage.category_level
 									*	damage.damage_increase
 									*	(
