@@ -99,11 +99,11 @@
 	//红雾死神 1技能 主动
 	//技能名字 地狱咆哮
 	//-------------------------------------------------------------------------------------------
-	"HWSS_HellRoar"
+	"axe_hell_roar"
 	{
 		// General
 		//---------------------------------------------------------------------------------------
-		"AbilityName"					"HWSS_HellRoar"
+		"AbilityName"					"axe_hell_roar"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET" 
 		"BaseClass"						"ability_datadriven"  
 		"AbilityTextureName"			"axe_berserkers_call"
@@ -119,7 +119,7 @@
 
 		// Cost
 		//---------------------------------------------------------------------------------------
-		"AbilityManaCost"				"75"
+		"AbilityManaCost"				"45"
 
 		//OnSpellStart
 		//---------------------------------------------------------------------------------------
@@ -164,10 +164,10 @@
 		{
 			"create_hellroar"
 			{
-				"Duration" 	"3"
+				"Duration" 	"1"
 				"EffectName" 	"particles\generic_gameplay\generic_stunned.vpcf"
 				"EffectAttachType" 	"follow_overhead"
-				"Duration"  "3"
+				"Duration"  "1"
 				"OverrideAnimation" "ACT_DOTA_DISABLED"
 				"States"
 				{
@@ -184,11 +184,11 @@
 	//红雾死神 3技能 被动
 	//技能名字 战争意志
 	//-------------------------------------------------------------------------------------------
-	"HWSS_WarWill"
+	"axe_war_will"
 	{
 		// General
 		//---------------------------------------------------------------------------------------
-		"AbilityName"					"HWSS_WarWill"
+		"AbilityName"					"axe_war_will"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE" 
 		"BaseClass"						"ability_datadriven"  
 		"AbilityTextureName"			"axe_battle_hunger"
@@ -196,6 +196,7 @@
 		// Casting
 		//---------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0 0.0 0.0 0.0" 
+		"AbilityCastRange"				"300"
 
 		//Modifiers
 		//----------------------------------------------------------------------------------------
@@ -223,9 +224,19 @@
 			"01"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"ability_increase"	"1.1 1.2 1.3 1.4"
+				"chance"			"35"
 			}
 			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"range"				"300"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"ability_increase"	"1.1 1.2 1.3 1.4"
+			}
+			"04"
 			{
 				"var_type"			"FIELD_FLOAT"
 				"ability_str"		"1.0 1.1 1.2 1.3"
