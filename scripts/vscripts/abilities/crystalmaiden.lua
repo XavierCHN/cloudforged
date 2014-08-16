@@ -50,10 +50,11 @@ function OnCrystalMaiden01Start(keys)
 	    	damage_flags = 0
 		}
 		ApplyDamage(damage_table)
-		
-		local hIceEffect = CreateUnitByName(
+	end
+	
+	local hIceEffect = CreateUnitByName(
 	        "npc_CFroged_unit_CrystalMaiden_iceEffect"
-		    ,v:GetOrigin()
+		    ,thTarget[1]:GetOrigin()
 		    ,false
 		    ,hCaster
 		    ,hCaster
@@ -61,15 +62,28 @@ function OnCrystalMaiden01Start(keys)
     	)
     	local nIceIndex = ParticleManager:CreateParticle("particles/units/heroes/hero_invoker/invoker_ice_wall_shards.vpcf", PATTACH_CUSTOMORIGIN, hIceEffect)
     		
-    	ParticleManager:SetParticleControl(nIceIndex, 0, v:GetOrigin())
+    	ParticleManager:SetParticleControl(nIceIndex, 0, thTarget[1]:GetOrigin())
+		ParticleManager:SetParticleControl(nIceIndex, 1, thTarget[1]:GetOrigin())
 		
       	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString('Release_Effect'),
     	function ()
 	        hIceEffect:Destroy()
+			print('[CrystalMaiden01]Release Effect!')
 	    	return nil
     	end,3)
-		
-	end
 	
 	PrintTable(thTarget)
 end
+
+function OnCrystalMaiden02Start(keys)
+	
+end
+
+function OnCrystalMaiden03Start(keys)
+	
+end
+
+function OnCrystalMaiden04Start(keys)
+	
+end
+
