@@ -95,4 +95,141 @@
 			}
 		}
 	}
+
+	//红雾死神 1技能 主动
+	//技能名字 地狱咆哮
+	//-------------------------------------------------------------------------------------------
+	"HWSS_HellRoar"
+	{
+		// General
+		//---------------------------------------------------------------------------------------
+		"AbilityName"					"HWSS_HellRoar"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET" 
+		"BaseClass"						"ability_datadriven"  
+		"AbilityTextureName"			"axe_berserkers_call"
+
+		// Casting
+		//---------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.3" 
+		"AbilityCastRange"				"500"
+
+		//Time
+		//---------------------------------------------------------------------------------------
+		"AbilityCooldown"		 		"13 12 11 10"
+
+		// Cost
+		//---------------------------------------------------------------------------------------
+		"AbilityManaCost"				"75"
+
+		//OnSpellStart
+		//---------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"Damage"
+			{
+				"Target"
+				{
+					"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+					"Radius"	"500"
+					"Center"	"CASTER"
+					"Target"	"TARGET"
+				}
+				"Damage"		"200"
+				"Type"		"DAMAGE_TYPE_PHYSICAL"
+			}
+			"ApplyModifier"
+			{
+				"Target"
+				{
+					"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+					"Radius"	"500"
+					"Center"	"CASTER"
+					"Target"	"TARGET"
+				}
+				"ModifierName"		"create_hellroar"
+			}
+
+			"FireEffect"
+			{
+				"EffectName"		"particles\econ\items\abaddon\abaddon_feathers_mace\abaddon_aphotic_shield_explosion_ref.vpcf"
+				"EffectAttachType"	"follow_chest"
+			}
+		}
+
+		"Modifiers"
+		{
+			"create_hellroar"
+			{
+				"Duration" 	"3"
+				"EffectName" 	"particles\generic_gameplay\generic_stunned.vpcf"
+				"EffectAttachType" 	"follow_overhead"
+				"Duration"  "3"
+				"OverrideAnimation" "ACT_DOTA_DISABLED"
+				"States"
+				{
+					"MODIFIER_STATE_STUNNED" "MODIFIER_STATE_VALUE_ENABLED"
+				}
+				
+			}
+		}
+
+
+	}
+
+
+	//红雾死神 3技能 被动
+	//技能名字 战争意志
+	//-------------------------------------------------------------------------------------------
+	"HWSS_WarWill"
+	{
+		// General
+		//---------------------------------------------------------------------------------------
+		"AbilityName"					"HWSS_WarWill"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE" 
+		"BaseClass"						"ability_datadriven"  
+		"AbilityTextureName"			"axe_battle_hunger"
+
+		// Casting
+		//---------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0" 
+
+		//Modifiers
+		//----------------------------------------------------------------------------------------
+		"Modifiers"
+		{
+			"create_ability_1"
+			{
+				"Passive"		"1"
+				"OnAttacked"
+				{
+					"Damage"
+					{
+						"Type"		"DAMAGE_TYPE_MAGICAL"
+						"Damage"	"100"
+						"Target"	"ATTACKER"
+					}
+				}
+			}
+		}
+
+		// Special
+		//-----------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"ability_increase"	"1.1 1.2 1.3 1.4"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"ability_str"		"1.0 1.1 1.2 1.3"
+			}
+		}
+	}
 }
