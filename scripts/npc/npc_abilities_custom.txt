@@ -146,41 +146,25 @@
 				"Damage"		"200"
 				"Type"		"DAMAGE_TYPE_PHYSICAL"
 			}
-			"ApplyModifier"
+
+			"Stun"		//眩晕
 			{
 				"Target"
 				{
 					"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
 					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 					"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
-					"Radius"	"500"
+					"Radius"	"%range"
 					"Center"	"CASTER"
 					"Target"	"TARGET"
 				}
-				"ModifierName"		"create_hellroar"
+				"Duration"		"1"
 			}
 
 			"FireEffect"
 			{
 				"EffectName"		"particles\econ\items\abaddon\abaddon_feathers_mace\abaddon_aphotic_shield_explosion_ref.vpcf"
 				"EffectAttachType"	"follow_chest"
-			}
-		}
-
-		"Modifiers"
-		{
-			"create_hellroar"
-			{
-				"Duration" 	"1"
-				"EffectName" 	"particles\generic_gameplay\generic_stunned.vpcf"
-				"EffectAttachType" 	"follow_overhead"
-				"Duration"  "1"
-				"OverrideAnimation" "ACT_DOTA_DISABLED"
-				"States"
-				{
-					"MODIFIER_STATE_STUNNED" "MODIFIER_STATE_VALUE_ENABLED"
-				}
-				
 			}
 		}
 
@@ -405,5 +389,71 @@
 				}
 			}
 		}
+	}
+
+	//斧王大招
+	//技能名字 泰坦之力
+	//-------------------------------------------------------------------------------------------
+	"axe_titan_force"
+	{
+		// General
+		//---------------------------------------------------------------------------------------
+		"AbilityName"					"axe_titan_force"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT|DOTA_ABILITY_BEHAVIOR_AOE" 
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"BaseClass"						"ability_datadriven"  
+		"AbilityTextureName"			"axe_culling_blade"
+
+		// Casting
+		//---------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0" 
+		"AbilityCastRange"				"500"
+
+		//Time
+		//---------------------------------------------------------------------------------------
+		"AbilityCooldown"		 		"30"
+
+		// Cost
+		//---------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100"
+
+		//OnSpellStart
+		//---------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"		"scripts/vscripts/abilities/abilities.lua"
+				"Function"			"axe_titan_force"
+				"Target"			"POINT"
+			}
+			"Damage"
+			{
+				"Target"
+				{
+					"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+					"Radius"	"%radius"
+					"Center"	"POINT"
+					"Target"	"TARGET"
+				}
+				"Damage"		"300"
+				"Type"			"DAMAGE_TYPE_COMPOSITE"
+			}
+		}
+
+		// Special
+		//-----------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{	
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"radius"		"400"
+			}
+		}
+
 	}
 }

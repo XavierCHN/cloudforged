@@ -21,3 +21,10 @@ function axe_war_will_hidden( keys )
 		ExecuteOrderFromTable(order) 
 	end
 end
+
+--红雾死神大招
+function axe_titan_force( keys )
+	local caster = EntIndexToHScript(keys.caster_entindex) 
+	local vec=keys.origin
+	print(vec)
+end
