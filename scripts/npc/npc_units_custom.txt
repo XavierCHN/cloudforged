@@ -8,7 +8,7 @@
 		//所有小怪的BaseClass都使用这个
 		"Model"						"models/creeps/neutral_creeps/n_creep_satyr_a/n_creep_satyr_a.vmdl"	
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
-		"SoundSet"					"0"// Name of sound set.
+		"SoundSet"					"Undying_Zombie"// Name of sound set.
 		"Level"						"1"
 		"ModelScale"				"1"
 		//模型比例，具体调整
@@ -86,5 +86,96 @@
 		"VisionDaytimeRange"		"2000"		//白天视野
 		"VisionNighttimeRange"		"2000"		//夜晚视野
 
+	}
+
+
+
+
+
+
+	//刷金币的小怪
+	"creep_gold"
+	{
+		"BaseClass"					"npc_dota_creature"	
+		//所有小怪的BaseClass都使用这个
+		"Model"						"models/courier/greevil/gold_greevil.vmdl"	
+		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
+		"SoundSet"					"Undying_Zombie"// Name of sound set.
+		"Level"						"1"
+		"ModelScale"				"1"
+		//模型比例，具体调整
+		"IsAncient"					"0"
+		"IsNeutralUnitType"			"0"
+		"SelectOnSpawn"				"0"
+		"CanBeDominated"			"0"
+		"IgnoreAddSummonedToSelection" "0"
+		"AutoAttacksByDefault"		"0"
+
+		// Abilities
+		//----------------------------------------------------------------
+
+		"Ability1"					""			// Ability 1.
+		"Ability2"					""			// Ability 2.
+		"Ability3"					""			// Ability 3.
+		"Ability4"					""			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		"Ability6"					""			// Ability 6 - Extra.
+		"Ability7"					""			// Ability 7 - Extra.
+		"Ability8"					""			// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"1"			// 物理护甲
+		"MagicalResistance"			"0"			// 魔法抗性
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		  	"DOTA_UNIT_CAP_MELEE_ATTACK"
+
+		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
+		"AttackDamageMin"			    "20"									// 最小攻击
+		"AttackDamageMax"			    "30"									// 最大攻击
+		"AttackAcquisitionRange"		"200"			//攻击获取距离
+		"AttackRange"				    "200"			//攻击距离
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"			//杀死经验值
+		"BountyGoldMin"				"50"			//杀死金钱最少
+		"BountyGoldMax"				"70"			//杀死金钱最多
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
+		"RingRadius"				"50"
+		"HealthBarOffset"			"-1"		// -1 means use the models
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"//DOTA_UNIT_CAP_MOVE_FLY
+		"MovementSpeed"				"300"		//移动速度
+		"MovementTurnRate"			"0.5"		//转身速度
+		"HasAggressiveStance"		"0"			//
+		"FollowRange"				"0"			//跟随距离
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"50"		//生命值
+		"StatusHealthRegen"			"0"			//生命恢复速度
+		"StatusMana"				"100"		//魔法值
+		"StatusManaRegen"			"0"			//魔法恢复速度
+		"StatusStartingMana"		"-1"		//初始魔法，-1表示满魔法
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_HERO"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"2000"		//白天视野
+		"VisionNighttimeRange"		"2000"		//夜晚视野
 	}
 }

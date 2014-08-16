@@ -42,8 +42,8 @@ function CForgedGameMode:InitGameMode()
 
 	-- 初始化
 	CFRoundThinker:InitPara()
-
 	ItemCore:Init()
+	
 end
 
 -- Evaluate the state of the game
