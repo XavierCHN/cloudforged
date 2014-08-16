@@ -109,7 +109,9 @@
 		// General
 		//---------------------------------------------------------------------------------------
 		"AbilityName"					"axe_hell_roar"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET" 
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_AOE" 
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"BaseClass"						"ability_datadriven"  
 		"AbilityTextureName"			"axe_berserkers_call"
 
@@ -182,9 +184,105 @@
 			}
 		}
 
+		// Special
+		//-----------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"range"			"500"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"ability_increase"	"1.1"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"ability_str"		"1.1 1.2 1.3 1.4"
+			}
+		}
 
 	}
 
+
+	//红雾死神 2技能 主动
+	//技能名字 螺旋飞斧
+	//-------------------------------------------------------------------------------------------
+	"axe_spiral_axe"
+	{
+		// General
+		//---------------------------------------------------------------------------------------
+		"AbilityName"					"axe_spiral_axe"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_IMMEDIATE" 
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"BaseClass"						"ability_datadriven"  
+		"AbilityTextureName"			"axe_counter_helix"
+
+		// Casting
+		//---------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0" 
+		"AbilityCastRange"				"300 350 400 450"
+
+		//Time
+		//---------------------------------------------------------------------------------------
+		"AbilityCooldown"		 		"1.0 0.8 0.6 0.4"
+
+		// Cost
+		//---------------------------------------------------------------------------------------
+		"AbilityManaCost"				"5 10 15 20"
+
+		//OnSpellStart
+		//---------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"FireEffect"	
+			{
+				"EffectName" 			"particles\econ\items\axe\axe_weapon_bloodchaser\axe_attack_blur_counterhelix_bloodchaser_b.vpcf"
+				"EffectAttachType"		"follow_chest"
+			}
+			"Damage"
+			{
+				"Target"
+				{
+					"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+					"Radius"	"%radius"
+					"Center"	"CASTER"
+					"Target"	"TARGET"
+				}
+				"Damage"		"100"
+				"Type"		"DAMAGE_TYPE_PHYSICAL"
+			}
+		}
+
+		// Special
+		//-----------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"radius"		"300 350 400 450"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"ability_increase"	"1.1"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"ability_str"		"0.5 0.4 0.3 0.2"
+			}
+		}
+
+
+	}
 
 	//红雾死神 3技能 被动
 	//技能名字 战争意志
@@ -195,6 +293,8 @@
 		//---------------------------------------------------------------------------------------
 		"AbilityName"					"axe_war_will"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE" 
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"BaseClass"						"ability_datadriven"  
 		"AbilityTextureName"			"axe_battle_hunger"
 
@@ -207,16 +307,25 @@
 		//----------------------------------------------------------------------------------------
 		"Modifiers"
 		{
-			"create_ability_1"
+			"create_ability_3"
 			{
 				"Passive"		"1"
 				"OnAttacked"
 				{
 					"Damage"
 					{
-						"Type"		"DAMAGE_TYPE_MAGICAL"
+						"Type"		"DAMAGE_TYPE_PURE"
 						"Damage"	"100"
 						"Target"	"ATTACKER"
+					}
+				}
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"		"scripts/vscripts/abilities/abilities.lua"
+						"Function"			"axe_war_will_hidden_learn"
+						"Target"			"CASTER"
 					}
 				}
 			}
@@ -239,12 +348,61 @@
 			"03"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"ability_increase"	"1.1 1.2 1.3 1.4"
+				"ability_increase"	"1.1 1.1 1.2 1.2"
 			}
 			"04"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"ability_str"		"1.0 1.1 1.2 1.3"
+				"ability_str"		"0.5 0.6 0.7 0.8"
+			}
+		}
+	}
+
+	//红雾死神 3技能 隐藏被动
+	//-------------------------------------------------------------------------------------------
+	"axe_war_will_hidden"
+	{
+		// General
+		//---------------------------------------------------------------------------------------
+		"AbilityName"					"axe_war_will_hidden"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE|DOTA_ABILITY_BEHAVIOR_HIDDEN" 
+		"BaseClass"						"ability_datadriven"  
+		"MaxLevel"						"1"
+
+		// Casting
+		//---------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+
+		//Modifiers
+		//----------------------------------------------------------------------------------------
+		"Modifiers"
+		{
+			"create_ability_3_hidden"
+			{
+				"Passive"	"1"
+				"OnAttackStart"
+				{
+					"Random"
+					{
+						"Chance"	"35"
+						"OnSuccess"
+						{
+							"RunScript"
+							{
+								"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+								"Function"		"axe_war_will_hidden"
+								"Target"
+								{
+									"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO|DOTA_UNIT_TARGET_MECHANICAL"
+									"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+									"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+									"Radius"	"300"
+									"Center"	"CASTER"
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}

@@ -17,7 +17,7 @@
 		//Ability
 		//-------------------------------------------------------------------------------------------------------------
 		"Ability1"		"axe_hell_roar"
-
+		"Ability2"		"axe_spiral_axe"
 		"Ability3"		"axe_war_will"
 		
 		// Armor
