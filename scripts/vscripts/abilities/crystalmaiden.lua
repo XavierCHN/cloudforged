@@ -1,5 +1,5 @@
 function OnCrystalMaiden01Start(keys)
-
+	
 	tPrint('vscripts/abilities/crystalmaiden.lua:OnCrystalMaiden01Start(keys)')
 
 	--[[ 技能 伤害类型为  蛮力/灵敏/狡诈/智慧等级 * 技能伤害系数 
@@ -7,6 +7,9 @@ function OnCrystalMaiden01Start(keys)
 
 	-- 获取施法者
 	local hCaster = EntIndexToHScript(keys.caster_entindex)
+	
+	-- 获取玩家ID
+	local nPlayerId = hCaster:GetPlayerID()
 	
 	-- 获取技能目标列表
 	local thTarget = keys.target_entities
@@ -36,7 +39,7 @@ function OnCrystalMaiden01Start(keys)
 
 	-- 传入技能至少造成伤害值
 	if keys.MiniunDamage and damage_to_deal < keys.MiniunDamage then damage_to_deal = keys.MiniunDamage end
-
+	
 	-- 循坏各个目标单位
 	for _,v in pairs(thTarget) do
 		local damage_table = {
@@ -47,5 +50,26 @@ function OnCrystalMaiden01Start(keys)
 	    	damage_flags = 0
 		}
 		ApplyDamage(damage_table)
+		
+		local hIceEffect = CreateUnitByName(
+	        "npc_CFroged_unit_CrystalMaiden_iceEffect"
+		    ,v:GetOrigin()
+		    ,false
+		    ,hCaster
+		    ,hCaster
+	     	,hCaster:GetTeam()
+    	)
+    	local nIceIndex = ParticleManager:CreateParticle("particles/units/heroes/hero_invoker/invoker_ice_wall_shards.vpcf", PATTACH_CUSTOMORIGIN, hIceEffect)
+    		
+    	ParticleManager:SetParticleControl(nIceIndex, 0, v:GetOrigin())
+		
+      	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString('Release_Effect'),
+    	function ()
+	        hIceEffect:Destroy()
+	    	return nil
+    	end,3)
+		
 	end
+	
+	PrintTable(thTarget)
 end

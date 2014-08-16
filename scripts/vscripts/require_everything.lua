@@ -16,3 +16,5 @@ require('core/CFSpawner')
 
 --util
 require('util/damage')
+require('util/common')
+require('util/timers')

@@ -28,16 +28,6 @@
 
 		"OnSpellStart"
 		{
-			"FireEffect"
-			{
-				"EffectName"		"particles/units/heroes/hero_ancient_apparition/ancient_apparition_ice_blast_final.vpcf"
-				"Target"			"Target"
-				"EffectAttachType"	"follow_origin"
-				"ControlPoints"
-				{
-					"00"			"0 0 20"
-				}
-			}
 			"ApplyModifier"
 			{
 				"Target"			"TARGET"
@@ -48,23 +38,12 @@
 		{
 			"modifier_cm_ice_blast"
 			{
-				"Duration"				"2"
+				"Duration"				"0.6"
 				"IsDebuff"				"1"
 				"ThinkInterval"			"0.2"
 				"OnIntervalThink"
 				{
-					"RunScript"					//造成计算后的范围伤害
-					{
-					  	"Target"				"TARGET"
-					  	"AbilityMulti"			"%ability_multi"			//加成
-					  	"AbilityDepenis"		"wisdom_level"	//睿智等级加成
-					  	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
-					  	"Function"		  		"OnCrystalMaiden01Start"
-					}
-				}
-				"OnDestroy"
-				{
-					"RunScript"					//造成计算后的范围伤害
+					"RunScript"					//造成计算后的单体伤害
 					{
 					  	"Target"
 					  	{
@@ -74,7 +53,7 @@
 							"Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
 					  	}
 					  	"AbilityMulti"			"%ability_multi"			//加成
-					  	"AbilityDepenis"		"wisdom_level"	//睿智等级加成
+					  	"AbilityDepenis"		"wisdom_level"	            //睿智等级加成
 					  	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
 					  	"Function"		  		"OnCrystalMaiden01Start"
 					}
@@ -86,7 +65,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"ability_radius"		"200"
+				"ability_radius"		"400"
 			}
 			"02"
 			{
@@ -95,4 +74,26 @@
 			}
 		}
 	}
+	"ability_dummy_unit"
+    {
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+    
+        "Modifiers"
+	    {
+	    	"dummy_unit"
+            {
+                "Passive"                        "1"
+                "IsHidden"                        "1"    
+                "States"
+                {
+                    "MODIFIER_STATE_UNSELECTABLE"         "MODIFIER_STATE_VALUE_ENABLED"
+                    "MODIFIER_STATE_INVULNERABLE"         "MODIFIER_STATE_VALUE_ENABLED"
+                    "MODIFIER_STATE_NOT_ON_MINIMAP"       "MODIFIER_STATE_VALUE_ENABLED"
+                    "MODIFIER_STATE_NO_HEALTH_BAR"        "MODIFIER_STATE_VALUE_ENABLED"
+                    "MODIFIER_STATE_NO_UNIT_COLLISION"    "MODIFIER_STATE_VALUE_ENABLED"
+                }
+            }
+		}
+    }
 }

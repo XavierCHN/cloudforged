@@ -32,7 +32,6 @@ function Activate()
 end
 
 function CForgedGameMode:InitGameMode()
-	GameRules:SetPreGameTime( 10.0)
  	
  	-- 设定游戏准备时间
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )

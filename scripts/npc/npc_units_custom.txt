@@ -89,4 +89,16 @@
 			"XPGain"					"15"
 		}
 	}
+	"npc_CFroged_unit_CrystalMaiden_iceEffect"
+  	{
+  		"model"					"models/development/invisiblebox.vmdl"
+  		"BaseClass"				"npc_dota_creep_neutral"
+		"Ability1"				"ability_dummy_unit"
+  		"AttackCapabilities"	"DOTA_UNIT_CAP_NO_ATTACK"
+  		"MovementCapabilities"	"DOTA_UNIT_CAP_MOVE_NONE"
+  		"VisionDaytimeRange"	"100"
+  		"VisionNighttimeRange"	"100"
+  		"HasInventory"			"0"
+  		"WakesNeutrals"			"0"
+  	}
 }
