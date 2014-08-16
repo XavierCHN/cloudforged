@@ -202,9 +202,20 @@ end
 -- 返回是否所有怪已经都被杀死
 function CFSpawner:IsWaveClear()
 	if self._bFinishedSpawn and self._nUnitsCurrentlyAlive == 0 then
+		self:FinishRound()
 		return true
 	end
 	return false
+end
+-------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------
+-- 删除这一轮的任务
+function CFSpawner:FinishRound()
+	if self._entQuest then
+		UTIL_Remove(self._entQuest)
+		self._entQuest = nil
+	end
 end
 -------------------------------------------------------------------------------------------
 

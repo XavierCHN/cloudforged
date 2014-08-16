@@ -16,3 +16,6 @@ require('core/CFSpawner')
 
 --util
 require('util/damage')
+
+-- map control
+require('map/teleportcontrol')

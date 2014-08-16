@@ -76,8 +76,26 @@ function CFRoundThinker:ThinkFighting()
 			CForgedGameMode:FinishedGame()
 		else
 			-- 如果还有下一轮，那么久
-			self._currentState = ROUND_STATE_FIGHTING
+			self._currentState = ROUND_STATE_REST
 			self._nRoundRestTime = GameRules:GetGameTime() + ROUND_REST_TIME_BASE
+
+			-- 启动倒计时条
+			if self._entCountDown == nil then
+				self._entCountDown = SpawnEntityFromTableSynchronous( "quest", {
+					name = "#CFRoundCountingDown",
+					title =  "#CFRound_Next_Round_Count_Down"
+				})
+				self._entCountDown:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_ROUND, self._nCurrRound )
+
+				self._entCountDownBar = SpawnEntityFromTableSynchronous( "subquest_base", {
+					show_progress_bar = true,
+					progress_bar_hue_shift = -119
+				} )
+				self._entCountDown:AddSubquest( self._entCountDownBar )
+				self._entCountDownBar:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, self._nRoundRestTime - GameRules:GetGameTime() )
+				self._entCountDownBar:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, self._nRoundRestTime - GameRules:GetGameTime() )
+				print('round conter started '..self._nRoundRestTime - GameRules:GetGameTime())
+			end
 		end
 
 	end
@@ -90,8 +108,12 @@ function CFRoundThinker:ThinkRest()
 	if GameRules:GetGameTime() >= self._nRoundRestTime then
 		self._currentState = ROUND_STATE_FIGHTING
 		self:StartNextRound()
+		UTIL_RemoveImmediate(self._entCountDown)
+		self._entCountDown = nil 
 	else
-
+		print(self._nRoundRestTime - GameRules:GetGameTime())
+		-- 减少倒计时条
+		self._entCountDownBar:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, self._nRoundRestTime - GameRules:GetGameTime() )
 	end
 end
 -------------------------------------------------------------------------------------------
@@ -155,5 +177,8 @@ end
 function CFRoundThinker:IncreaseRestTime(duration)
 	self._nRoundRestTime = self._nRoundRestTime or 0
 	self._nRoundRestTime = self._nRoundRestTime + duration
+	if self._entCountDownBar then
+		SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, self._nRoundRestTime - GameRules:GetGameTime() )
+	end
 end
 -------------------------------------------------------------------------------------------
