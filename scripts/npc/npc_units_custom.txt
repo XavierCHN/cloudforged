@@ -68,7 +68,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"50"		//生命值
+		"StatusHealth"				"100"		//生命值
 		"StatusHealthRegen"			"0"			//生命恢复速度
 		"StatusMana"				"100"		//魔法值
 		"StatusManaRegen"			"0"			//魔法恢复速度
@@ -160,7 +160,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"50"		//生命值
+		"StatusHealth"				"250"		//生命值
 		"StatusHealthRegen"			"0"			//生命恢复速度
 		"StatusMana"				"100"		//魔法值
 		"StatusManaRegen"			"0"			//魔法恢复速度

@@ -11,7 +11,7 @@
 		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityTextureName"		"ability_crystal_maiden_ability_01"
 		"AbilityCastAnimation"	  	"ACT_DOTA_CAST_ABILITY_1"
-		"MaxLevel"				  	"2"
+		"MaxLevel"				  	"4"
 
 		// Stats
 		//----------------------------------------------------------------
@@ -20,11 +20,6 @@
 		"AbilityCastPoint"			"0.3"
 		"AbilityCooldown"		 	"15"
 		"AbilityUnitDamageType"   	"DAMAGE_TYPE_PURE"
-
-		"precache"
-		{
-			"particle_folder"		"particles/units/heroes/hero_ancient_apparition"
-		}
 
 		"OnSpellStart"
 		{
@@ -43,6 +38,12 @@
 				"ThinkInterval"			"0.2"
 				"OnIntervalThink"
 				{
+				    "FireSound"
+					{
+						"EffectName"	"sounds/vo/invoker/invo_ability_icewall_04.vsnd"
+						"Target"		"CASTER"
+					}
+			
 					"RunScript"					//造成计算后的单体伤害
 					{
 					  	"Target"
@@ -56,6 +57,218 @@
 					  	"AbilityDepenis"		"wisdom_level"	            //睿智等级加成
 					  	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
 					  	"Function"		  		"OnCrystalMaiden01Start"
+					}
+				}
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ability_radius"		"400"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_multi"			"2.0"
+			}
+		}
+	}
+	
+	"crystal_maiden_ability_02"
+	{
+		"ID"						"2001"
+		"BaseClass"				 	"ability_datadriven"
+		"AbilityBehavior"		   	"DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"		"ability_crystal_maiden_ability_02"
+		"AbilityCastAnimation"	  	"ACT_DOTA_CAST_ABILITY_2"
+		"MaxLevel"				  	"4"
+		
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityManaCost"		 	"75"
+		"AbilityCastPoint"			"0.3"
+		"AbilityCooldown"		 	"15"
+
+		"OnSpellStart"
+		{
+			"RunScript"					
+			{
+				"Radius"			    "%ability_radius"
+				"AbilityMulti"			"%ability_multi"			//加成
+				"AbilityDepenis"		"wisdom_level"	            //睿智等级加成
+				"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
+				"Function"		  		"OnCrystalMaiden02Start"
+			}
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ability_radius"		"700"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_multi"			"1.0"
+			}
+		}
+	}
+	
+	"crystal_maiden_ability_03"
+	{
+		"ID"						"2002"
+		"BaseClass"				 	"ability_datadriven"
+		"AbilityTextureName"		"ability_crystal_maiden_ability_03"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"				  	"4"
+		
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityUnitDamageType"   	"DAMAGE_TYPE_PURE"
+		
+		"Modifiers"
+	    {
+	    	"passive_mana_regen"
+            {
+                "Passive"                                     "1"
+                "IsHidden"                                    "1"    
+                "Properties"
+				{
+                    "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"   "%ability_mana_regen"
+                }
+            }
+			
+			"passive_aoe_damage"
+            {
+			    "Passive"                                     "1"
+                "OnAttackLanded"
+		        {
+		            "Random"
+			        {
+			            "Chance"        "%ability_chance_base"
+				        "PseudoRandom"  "DOTA_PSEUDO_RANDOM_ITEM_MKB"
+				        "OnSuccess"
+				        {
+		                	"RunScript"					
+	    	            	{
+			                	"Target"
+		                 		{
+			                		"Center"		    "TARGET"
+			                  		"Radius"		    "%ability_radius"
+			                 		"Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+			                 		"Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
+			                 	}
+		            	        "AbilityMulti"			"%ability_multi"			//加成
+		                 		"AbilityDepenis"		"wisdom_level"	            //睿智等级加成
+		    	            	"AbilityChance"		    "%ability_chance_base"
+		    	            	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
+			                	"Function"		  		"OnCrystalMaiden03Start"
+		                 	}
+				        }
+			        }
+	        	}
+            }
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ability_radius"		"300"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_multi"			"2.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_chance_base"	"10 15 20 25"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_mana_regen"	"2.5 5 7.5 10"
+			}
+		}
+	}
+	
+	"crystal_maiden_ability_04"
+	{
+		"ID"						"2003"
+		"BaseClass"				 	"ability_datadriven"
+		"AbilityBehavior"		   	"DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"		"ability_crystal_maiden_ability_01"
+		"AbilityCastAnimation"	  	"ACT_DOTA_CAST_ABILITY_4"
+		"MaxLevel"				  	"4"
+
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityCastRange"			"500"
+		"AbilityManaCost"		 	"75"
+		"AbilityCastPoint"			"0.3"
+		"AbilityCooldown"		 	"60"
+		"AbilityUnitDamageType"   	"DAMAGE_TYPE_PURE"
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"Target"			"TARGET"
+				"ModifierName"		"modifier_cm_ice_start"
+			}
+			"DelayedAction"
+            {
+                "Delay"   "2.5"
+                "Action"
+                {
+                    "ApplyModifier"
+			        {
+				        "Target"			"TARGET"
+				        "ModifierName"		"modifier_cm_ice_damage"
+			        }
+                }
+            }
+		}
+		"Modifiers"
+		{
+		    "modifier_cm_ice_start"
+			{
+				"Duration"				"2.0"
+				"IsDebuff"				"1"
+				"ThinkInterval"			"0.2"
+				"OnIntervalThink"
+				{
+					"RunScript"					
+		        	{
+		        		"Target"                "TARGET"
+		        		"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
+		        		"Function"		  		"OnCrystalMaidenSpell04Start"
+		        	}
+				}
+			}
+			"modifier_cm_ice_damage"
+			{
+				"Duration"				"1.0"
+				"IsDebuff"				"1"
+				"ThinkInterval"			"0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"					//造成计算后的单体伤害
+					{
+					  	"Target"                "TARGET"
+					  	"AbilityMulti"			"%ability_multi"			//加成
+					  	"AbilityDepenis"		"wisdom_level"	            //睿智等级加成
+					  	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
+					  	"Function"		  		"OnCrystalMaidenSpell04Release"
 					}
 				}
 			}
