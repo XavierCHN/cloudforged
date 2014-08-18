@@ -220,46 +220,30 @@
 
 		"OnSpellStart"
 		{
+		    "RunScript"					
+		    {
+		        "Target"                "TARGET"
+		        "ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
+		        "Function"		  		"OnCrystalMaidenSpell04Init"
+		    }
+		 	"Stun"
+		    {
+			    "Target"		"TARGET"
+			    "Duration"		"4.0"
+	    	}
 			"ApplyModifier"
 			{
 				"Target"			"TARGET"
 				"ModifierName"		"modifier_cm_ice_start"
 			}
-			"DelayedAction"
-            {
-                "Delay"   "2.5"
-                "Action"
-                {
-                    "ApplyModifier"
-			        {
-				        "Target"			"TARGET"
-				        "ModifierName"		"modifier_cm_ice_damage"
-			        }
-                }
-            }
 		}
 		"Modifiers"
 		{
-		    "modifier_cm_ice_start"
+			"modifier_cm_ice_start"
 			{
-				"Duration"				"2.0"
+				"Duration"				"3"
 				"IsDebuff"				"1"
-				"ThinkInterval"			"0.2"
-				"OnIntervalThink"
-				{
-					"RunScript"					
-		        	{
-		        		"Target"                "TARGET"
-		        		"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
-		        		"Function"		  		"OnCrystalMaidenSpell04Start"
-		        	}
-				}
-			}
-			"modifier_cm_ice_damage"
-			{
-				"Duration"				"1.0"
-				"IsDebuff"				"1"
-				"ThinkInterval"			"0.1"
+				"ThinkInterval"			"0.03"
 				"OnIntervalThink"
 				{
 					"RunScript"					//造成计算后的单体伤害
@@ -268,7 +252,7 @@
 					  	"AbilityMulti"			"%ability_multi"			//加成
 					  	"AbilityDepenis"		"wisdom_level"	            //睿智等级加成
 					  	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
-					  	"Function"		  		"OnCrystalMaidenSpell04Release"
+					  	"Function"		  		"OnCrystalMaidenSpell04Start"
 					}
 				}
 			}

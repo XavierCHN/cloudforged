@@ -211,7 +211,7 @@
 		"Ability1"				    "crystal_maiden_ability_01" 
 		"Ability2"				    "crystal_maiden_ability_02"
 		"Ability3"				    "crystal_maiden_ability_03" 	
-		//"Ability4"				    "crystal_maiden_ability_04" 	
+		"Ability4"				    "crystal_maiden_ability_04" 	
 
 		// Armor
 		//-------------------------------------------------------------------------------------------------------------
