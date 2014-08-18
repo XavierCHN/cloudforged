@@ -682,10 +682,6 @@
 
 		"OnSpellStart"
 		{
-			"Blink"
-			{
-				"Target" 			"POINT"
-			}
 			"RunScript"
 			{
 				"ScriptFile"			"scripts/vscripts/abilities/templar.lua"
