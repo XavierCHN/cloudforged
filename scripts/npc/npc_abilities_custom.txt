@@ -669,4 +669,53 @@
 		}
 
 	}
+
+
+	//圣堂大招
+	//技能名称， 樱之环
+	"templar_sakura_circle"
+	{
+		"BaseClass"					"ability_datadriven"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityCastPoint"			"0.0"
+		"AbilityTextureName"		"templar_sakura_circle"
+
+		"OnSpellStart"
+		{
+			"Blink"
+			{
+				"Target" 			"POINT"
+			}
+			"RunScript"
+			{
+				"ScriptFile"			"scripts/vscripts/abilities/templar.lua"
+				"Target"				"POINT"
+				"Function"				"PlantACircleTrap"
+			}
+		}
+	}
+	//樱花陷阱的陷阱单位
+	"ability_cf_ta_trap_dummy"
+	{
+		"BaseClass" 					"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"            "rubick_empty1"
+    
+        "Modifiers"
+	    {
+	    	"dummy_unit"
+            {
+                "Passive"                        "1"
+                "IsHidden"                        "1"    
+                "States"
+                {
+                    "MODIFIER_STATE_UNSELECTABLE"         "MODIFIER_STATE_VALUE_ENABLED"
+                    "MODIFIER_STATE_INVULNERABLE"         "MODIFIER_STATE_VALUE_ENABLED"
+                    "MODIFIER_STATE_NOT_ON_MINIMAP"       "MODIFIER_STATE_VALUE_ENABLED"
+                    "MODIFIER_STATE_NO_HEALTH_BAR"        "MODIFIER_STATE_VALUE_ENABLED"
+                    "MODIFIER_STATE_NO_UNIT_COLLISION"    "MODIFIER_STATE_VALUE_ENABLED"
+                }
+            }
+		}
+	}
 }

@@ -177,6 +177,9 @@
 		"AttackDamageMax"			"30"									
 		"AttackRate"				"1.0"																
 
+		//Abilities
+		"Ability4"					"templar_sakura_circle"
+
 		// Armor
 		//-------------------------------------------------------------------------------------------------------------
 		"ArmorPhysical"				"-1"

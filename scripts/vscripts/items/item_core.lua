@@ -50,9 +50,9 @@ function OnAddItemCategory(keys)
     local caster = keys.caster
     -- 读取设置值，默认增加值为0
     local value_add = {
-        [DAMAGE_CATEGORY_FORCE] = tonumber(keys.CategoryForce or "0" )
-        [DAMAGE_CATEGORY_SENSITIVE] = tonumber(keys.CategorySensitive or "0" )
-        [DAMAGE_CATEGORY_CUNNING] = tonumber(keys.CategoryCunning or "0" )
+        [DAMAGE_CATEGORY_FORCE] = tonumber(keys.CategoryForce or "0" ),
+        [DAMAGE_CATEGORY_SENSITIVE] = tonumber(keys.CategorySensitive or "0" ),
+        [DAMAGE_CATEGORY_CUNNING] = tonumber(keys.CategoryCunning or "0" ),
         [DAMAGE_CATEGORY_WISDOM] = tonumber(keys.CategoryWisdom or "0" )
     }
     -- 将各种精通等级写入英雄Context
@@ -70,9 +70,9 @@ function OnRemoveItemCategory(keys)
     local caster = keys.caster
     -- 获取物品所定义的精通等级，默认为0
     local value_remove = {
-        [DAMAGE_CATEGORY_FORCE] = tonumber(keys.CategoryForce or "0" )
-        [DAMAGE_CATEGORY_SENSITIVE] = tonumber(keys.CategorySensitive or "0" )
-        [DAMAGE_CATEGORY_CUNNING] = tonumber(keys.CategoryCunning or "0" )
+        [DAMAGE_CATEGORY_FORCE] = tonumber(keys.CategoryForce or "0" ),
+        [DAMAGE_CATEGORY_SENSITIVE] = tonumber(keys.CategorySensitive or "0" ),
+        [DAMAGE_CATEGORY_CUNNING] = tonumber(keys.CategoryCunning or "0" ),
         [DAMAGE_CATEGORY_WISDOM] = tonumber(keys.CategoryWisdom or "0" )
     }
     -- 为英雄的精通等级设置新值，可能为负数，但是没关系
