@@ -1,8 +1,5 @@
 function OnGoldTeleport(keys)
-    print('ON GOLD TELEPORT CALLED')
-    for k,v in pairs(keys) do
-        print(k,v)
-    end
+
     local eTelEntity = keys.activator
     
     if eTelEntity then 
@@ -18,7 +15,12 @@ function OnGoldTeleport(keys)
                 local unitSpawned = {}
                 eGoldSpawner:SetContextThink(DoUniqueString('gold_spawner_spawn_gold'),
                     function()
-                        if #unitSpawned < 30 then 
+                        local currentSpawned = 0
+                        for k,v in pairs(unitSpawned) do
+                            if v:IsAlive() then currentSpawned = currentSpawned + 1 end
+                        end
+                        -- 同时存在的活着的怪物只能有30个
+                        if #currentSpawned < 30 then 
                             for i=1,nSingleSpawnCount do
                                 local goldCreep = CreateUnitByName('creep_gold', eGoldSpawner:GetOrigin() + RandomVector(200) , true, nil, nil, DOTA_TEAM_BADGUYS)
                                 goldCreep:SetInitialGoalEntity(eTelEntity)

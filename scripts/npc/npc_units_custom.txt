@@ -2,7 +2,7 @@
 "DOTAUnits"
 {
 	"Version"	"1"
-	"npc_cf_enemy_mega_greevil"//
+	"npc_cf_enemy_satyr"//第一轮怪物//
 	{
 		"BaseClass"					"npc_dota_creature"	
 		//所有小怪的BaseClass都使用这个
@@ -85,11 +85,7 @@
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"2000"		//白天视野
 		"VisionNighttimeRange"		"2000"		//夜晚视野
-
 	}
-
-
-
 
 
 
