@@ -60,7 +60,7 @@
 	function DamageTarget(damage)
 
 		--获取技能
-		local targets	= damage.target_entities	--技能施放目标(数组)
+		local targets	= damage.target_entities or {damage.victim}	--技能施放目标(数组)
 
 		if not targets then
 			print(debug.traceback '无伤害目标')
@@ -70,11 +70,11 @@
 		setmetatable(damage, Damage.damage_meta)
 		
 		--获取技能传参,构建伤害table
-		damage.attacker				= EntIndexToHScript(damage.caster_entindex)												--伤害来源(施法者)
+		damage.attacker				= damage.attacker or EntIndexToHScript(damage.caster_entindex)							--伤害来源(施法者)
 		damage.attacker_level		= damage.attacker:GetLevel()															--技能施放者的等级
 		damage.ability_level		= damage.ability:GetLevel()																--技能等级
 		damage.category_level		= ItemCore:GetAttribute(damage.attacker,damage.damage_category)							--伤害分类精通
-		damage.damage_type			= type(damage.damage_type) == 'number' and damage.damage_type or _G[damage.damage_type]	--转换伤害类型常量
+		damage.damage_type			= type(damage.damage_type) == 'string' and _G[damage.damage_type] or damage.damage_type	--转换伤害类型常量
 
 		--根据公式计算出伤害(在除以对方的等级之前)
 		--精通等级 * 伤害系数 * (力量 * 力量系数 + 敏捷 * 敏捷系数 + 智力 * 智力系数) * 技能等级 ^ 2 * 英雄等级 / 目标等级
