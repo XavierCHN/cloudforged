@@ -2,7 +2,7 @@
 "DOTAUnits"
 {
 	"Version"	"1"
-	"npc_cf_enemy_mega_greevil"//
+	"npc_cf_enemy_satyr"//第一轮怪物//
 	{
 		"BaseClass"					"npc_dota_creature"	
 		//所有小怪的BaseClass都使用这个
@@ -85,12 +85,7 @@
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"2000"		//白天视野
 		"VisionNighttimeRange"		"2000"		//夜晚视野
-
 	}
-
-
-
-
 
 
 	//刷金币的小怪
@@ -178,11 +173,26 @@
 		"VisionDaytimeRange"		"2000"		//白天视野
 		"VisionNighttimeRange"		"2000"		//夜晚视野
 	}
+
+
+  	//以下是英雄技能的马甲单位
 	"npc_CFroged_unit_CrystalMaiden_iceEffect"
   	{
   		"model"					"models/development/invisiblebox.vmdl"
   		"BaseClass"				"npc_dota_creep_neutral"
 		"Ability1"				"ability_dummy_unit"
+  		"AttackCapabilities"	"DOTA_UNIT_CAP_NO_ATTACK"
+  		"MovementCapabilities"	"DOTA_UNIT_CAP_MOVE_NONE"
+  		"VisionDaytimeRange"	"100"
+  		"VisionNighttimeRange"	"100"
+  		"HasInventory"			"0"
+  		"WakesNeutrals"			"0"
+  	}
+  	"npc_cf_ta_trap"
+  	{
+  		"model"					"models/development/invisiblebox.vmdl"
+  		"BaseClass"				"npc_dota_creature"
+  		"Ability1"				"ability_cf_ta_trap_dummy"
   		"AttackCapabilities"	"DOTA_UNIT_CAP_NO_ATTACK"
   		"MovementCapabilities"	"DOTA_UNIT_CAP_MOVE_NONE"
   		"VisionDaytimeRange"	"100"
