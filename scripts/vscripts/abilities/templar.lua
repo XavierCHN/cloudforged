@@ -95,6 +95,27 @@ function PlantACircleTrap(keys)
             
             -- 移除英雄移动限制
             caster:RemoveModifierByName('modifier_rooted') 
+            
+            -- 调用Damage施加伤害
+            local damage_keys = {
+              caster_entindex = keys.caster_entindex,
+              ability = keys.ability,
+              damage_category = DAMAGE_CATEGORY_SENSITIVE,
+              damage_type = DAMAGE_TYPE_PURE,
+              damage_agi = 0.4,
+              damage_min = 200,
+              target_entities = FindUnitsInRadius(
+                caster:GetTeam(),
+                caster:GetOrigin(),
+                nil,
+                500,
+                DOTA_UNIT_TARGET_TEAM_ENEMY,
+                DOTA_UNIT_TARGET_ALL,
+                0, FIND_CLOSEST,
+                false)
+            }
+            DamageTarget(damage_keys)
+
           end, 0.8)
         return nil
       end
