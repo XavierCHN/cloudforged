@@ -11,7 +11,7 @@
 		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityTextureName"		"ability_crystal_maiden_ability_01"
 		"AbilityCastAnimation"	  	"ACT_DOTA_CAST_ABILITY_1"
-		"MaxLevel"				  	"2"
+		"MaxLevel"				  	"4"
 
 		// Stats
 		//----------------------------------------------------------------
@@ -21,23 +21,8 @@
 		"AbilityCooldown"		 	"15"
 		"AbilityUnitDamageType"   	"DAMAGE_TYPE_PURE"
 
-		"precache"
-		{
-			"particle_folder"		"particles/units/heroes/hero_ancient_apparition"
-		}
-
 		"OnSpellStart"
 		{
-			"FireEffect"
-			{
-				"EffectName"		"particles/units/heroes/hero_ancient_apparition/ancient_apparition_ice_blast_final.vpcf"
-				"Target"			"Target"
-				"EffectAttachType"	"follow_origin"
-				"ControlPoints"
-				{
-					"00"			"0 0 20"
-				}
-			}
 			"ApplyModifier"
 			{
 				"Target"			"TARGET"
@@ -48,23 +33,18 @@
 		{
 			"modifier_cm_ice_blast"
 			{
-				"Duration"				"2"
+				"Duration"				"0.6"
 				"IsDebuff"				"1"
 				"ThinkInterval"			"0.2"
 				"OnIntervalThink"
 				{
-					"RunScript"					//造成计算后的范围伤害
+				    "FireSound"
 					{
-					  	"Target"				"TARGET"
-					  	"AbilityMulti"			"%ability_multi"			//加成
-					  	"AbilityDepenis"		"wisdom_level"	//睿智等级加成
-					  	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
-					  	"Function"		  		"OnCrystalMaiden01Start"
+						"EffectName"	"sounds/vo/invoker/invo_ability_icewall_04.vsnd"
+						"Target"		"CASTER"
 					}
-				}
-				"OnDestroy"
-				{
-					"RunScript"					//造成计算后的范围伤害
+			
+					"RunScript"					//造成计算后的单体伤害
 					{
 					  	"Target"
 					  	{
@@ -74,7 +54,7 @@
 							"Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
 					  	}
 					  	"AbilityMulti"			"%ability_multi"			//加成
-					  	"AbilityDepenis"		"wisdom_level"	//睿智等级加成
+					  	"AbilityDepenis"		"wisdom_level"	            //睿智等级加成
 					  	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
 					  	"Function"		  		"OnCrystalMaiden01Start"
 					}
@@ -86,7 +66,219 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"ability_radius"		"200"
+				"ability_radius"		"400"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_multi"			"2.0"
+			}
+		}
+	}
+	
+	"crystal_maiden_ability_02"
+	{
+		"ID"						"2001"
+		"BaseClass"				 	"ability_datadriven"
+		"AbilityBehavior"		   	"DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"		"ability_crystal_maiden_ability_02"
+		"AbilityCastAnimation"	  	"ACT_DOTA_CAST_ABILITY_2"
+		"MaxLevel"				  	"4"
+		
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityManaCost"		 	"75"
+		"AbilityCastPoint"			"0.3"
+		"AbilityCooldown"		 	"15"
+
+		"OnSpellStart"
+		{
+			"RunScript"					
+			{
+				"Radius"			    "%ability_radius"
+				"AbilityMulti"			"%ability_multi"			//加成
+				"AbilityDepenis"		"wisdom_level"	            //睿智等级加成
+				"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
+				"Function"		  		"OnCrystalMaiden02Start"
+			}
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ability_radius"		"700"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_multi"			"1.0"
+			}
+		}
+	}
+	
+	"crystal_maiden_ability_03"
+	{
+		"ID"						"2002"
+		"BaseClass"				 	"ability_datadriven"
+		"AbilityTextureName"		"ability_crystal_maiden_ability_03"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"				  	"4"
+		
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityUnitDamageType"   	"DAMAGE_TYPE_PURE"
+		
+		"Modifiers"
+	    {
+	    	"passive_mana_regen"
+            {
+                "Passive"                                     "1"
+                "IsHidden"                                    "1"    
+                "Properties"
+				{
+                    "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"   "%ability_mana_regen"
+                }
+            }
+			
+			"passive_aoe_damage"
+            {
+			    "Passive"                                     "1"
+                "OnAttackLanded"
+		        {
+		            "Random"
+			        {
+			            "Chance"        "%ability_chance_base"
+				        "PseudoRandom"  "DOTA_PSEUDO_RANDOM_ITEM_MKB"
+				        "OnSuccess"
+				        {
+		                	"RunScript"					
+	    	            	{
+			                	"Target"
+		                 		{
+			                		"Center"		    "TARGET"
+			                  		"Radius"		    "%ability_radius"
+			                 		"Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+			                 		"Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
+			                 	}
+		            	        "AbilityMulti"			"%ability_multi"			//加成
+		                 		"AbilityDepenis"		"wisdom_level"	            //睿智等级加成
+		    	            	"AbilityChance"		    "%ability_chance_base"
+		    	            	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
+			                	"Function"		  		"OnCrystalMaiden03Start"
+		                 	}
+				        }
+			        }
+	        	}
+            }
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ability_radius"		"300"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_multi"			"2.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_chance_base"	"10 15 20 25"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_mana_regen"	"2.5 5 7.5 10"
+			}
+		}
+	}
+	
+	"crystal_maiden_ability_04"
+	{
+		"ID"						"2003"
+		"BaseClass"				 	"ability_datadriven"
+		"AbilityBehavior"		   	"DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"		"ability_crystal_maiden_ability_01"
+		"AbilityCastAnimation"	  	"ACT_DOTA_CAST_ABILITY_4"
+		"MaxLevel"				  	"4"
+
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityCastRange"			"500"
+		"AbilityManaCost"		 	"75"
+		"AbilityCastPoint"			"0.3"
+		"AbilityCooldown"		 	"60"
+		"AbilityUnitDamageType"   	"DAMAGE_TYPE_PURE"
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"Target"			"TARGET"
+				"ModifierName"		"modifier_cm_ice_start"
+			}
+			"DelayedAction"
+            {
+                "Delay"   "2.5"
+                "Action"
+                {
+                    "ApplyModifier"
+			        {
+				        "Target"			"TARGET"
+				        "ModifierName"		"modifier_cm_ice_damage"
+			        }
+                }
+            }
+		}
+		"Modifiers"
+		{
+		    "modifier_cm_ice_start"
+			{
+				"Duration"				"2.0"
+				"IsDebuff"				"1"
+				"ThinkInterval"			"0.2"
+				"OnIntervalThink"
+				{
+					"RunScript"					
+		        	{
+		        		"Target"                "TARGET"
+		        		"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
+		        		"Function"		  		"OnCrystalMaidenSpell04Start"
+		        	}
+				}
+			}
+			"modifier_cm_ice_damage"
+			{
+				"Duration"				"1.0"
+				"IsDebuff"				"1"
+				"ThinkInterval"			"0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"					//造成计算后的单体伤害
+					{
+					  	"Target"                "TARGET"
+					  	"AbilityMulti"			"%ability_multi"			//加成
+					  	"AbilityDepenis"		"wisdom_level"	            //睿智等级加成
+					  	"ScriptFile"			"scripts/vscripts/abilities/crystalmaiden.lua"
+					  	"Function"		  		"OnCrystalMaidenSpell04Release"
+					}
+				}
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ability_radius"		"400"
 			}
 			"02"
 			{
@@ -96,15 +288,43 @@
 		}
 	}
 
+	
+	"ability_dummy_unit"
+    {
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+    
+        "Modifiers"
+	    {
+	    	"dummy_unit"
+            {
+                "Passive"                        "1"
+                "IsHidden"                        "1"    
+                "States"
+                {
+                    "MODIFIER_STATE_UNSELECTABLE"         "MODIFIER_STATE_VALUE_ENABLED"
+                    "MODIFIER_STATE_INVULNERABLE"         "MODIFIER_STATE_VALUE_ENABLED"
+                    "MODIFIER_STATE_NOT_ON_MINIMAP"       "MODIFIER_STATE_VALUE_ENABLED"
+                    "MODIFIER_STATE_NO_HEALTH_BAR"        "MODIFIER_STATE_VALUE_ENABLED"
+                    "MODIFIER_STATE_NO_UNIT_COLLISION"    "MODIFIER_STATE_VALUE_ENABLED"
+                }
+            }
+		}
+    }
+
+
+
 	//红雾死神 1技能 主动
 	//技能名字 地狱咆哮
 	//-------------------------------------------------------------------------------------------
-	"HWSS_HellRoar"
+	"axe_hell_roar"
 	{
 		// General
 		//---------------------------------------------------------------------------------------
-		"AbilityName"					"HWSS_HellRoar"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET" 
+		"AbilityName"					"axe_hell_roar"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_AOE" 
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"BaseClass"						"ability_datadriven"  
 		"AbilityTextureName"			"axe_berserkers_call"
 
@@ -119,7 +339,7 @@
 
 		// Cost
 		//---------------------------------------------------------------------------------------
-		"AbilityManaCost"				"75"
+		"AbilityManaCost"				"45"
 
 		//OnSpellStart
 		//---------------------------------------------------------------------------------------
@@ -139,18 +359,19 @@
 				"Damage"		"200"
 				"Type"		"DAMAGE_TYPE_PHYSICAL"
 			}
-			"ApplyModifier"
+
+			"Stun"		//眩晕
 			{
 				"Target"
 				{
 					"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
 					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 					"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
-					"Radius"	"500"
+					"Radius"	"%range"
 					"Center"	"CASTER"
 					"Target"	"TARGET"
 				}
-				"ModifierName"		"create_hellroar"
+				"Duration"		"1"
 			}
 
 			"FireEffect"
@@ -160,57 +381,148 @@
 			}
 		}
 
-		"Modifiers"
+		// Special
+		//-----------------------------------------------------------------------------------------
+		"AbilitySpecial"
 		{
-			"create_hellroar"
+			"01"
 			{
-				"Duration" 	"3"
-				"EffectName" 	"particles\generic_gameplay\generic_stunned.vpcf"
-				"EffectAttachType" 	"follow_overhead"
-				"Duration"  "3"
-				"OverrideAnimation" "ACT_DOTA_DISABLED"
-				"States"
+				"var_type"		"FIELD_INTEGER"
+				"range"			"500"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"ability_increase"	"1.1"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"ability_str"		"1.1 1.2 1.3 1.4"
+			}
+		}
+
+	}
+
+
+	//红雾死神 2技能 主动
+	//技能名字 螺旋飞斧
+	//-------------------------------------------------------------------------------------------
+	"axe_spiral_axe"
+	{
+		// General
+		//---------------------------------------------------------------------------------------
+		"AbilityName"					"axe_spiral_axe"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_IMMEDIATE" 
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"BaseClass"						"ability_datadriven"  
+		"AbilityTextureName"			"axe_counter_helix"
+
+		// Casting
+		//---------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0" 
+		"AbilityCastRange"				"300 350 400 450"
+
+		//Time
+		//---------------------------------------------------------------------------------------
+		"AbilityCooldown"		 		"1.0 0.8 0.6 0.4"
+
+		// Cost
+		//---------------------------------------------------------------------------------------
+		"AbilityManaCost"				"5 10 15 20"
+
+		//OnSpellStart
+		//---------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"FireEffect"	
+			{
+				"EffectName" 			"particles\econ\items\axe\axe_weapon_bloodchaser\axe_attack_blur_counterhelix_bloodchaser_b.vpcf"
+				"EffectAttachType"		"follow_chest"
+			}
+			"Damage"
+			{
+				"Target"
 				{
-					"MODIFIER_STATE_STUNNED" "MODIFIER_STATE_VALUE_ENABLED"
+					"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+					"Radius"	"%radius"
+					"Center"	"CASTER"
+					"Target"	"TARGET"
 				}
-				
+				"Damage"		"100"
+				"Type"		"DAMAGE_TYPE_PHYSICAL"
+			}
+		}
+
+		// Special
+		//-----------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"radius"		"300 350 400 450"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"ability_increase"	"1.1"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"ability_str"		"0.5 0.4 0.3 0.2"
 			}
 		}
 
 
 	}
 
-
 	//红雾死神 3技能 被动
 	//技能名字 战争意志
 	//-------------------------------------------------------------------------------------------
-	"HWSS_WarWill"
+	"axe_war_will"
 	{
 		// General
 		//---------------------------------------------------------------------------------------
-		"AbilityName"					"HWSS_WarWill"
+		"AbilityName"					"axe_war_will"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE" 
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"BaseClass"						"ability_datadriven"  
 		"AbilityTextureName"			"axe_battle_hunger"
 
 		// Casting
 		//---------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0 0.0 0.0 0.0" 
+		"AbilityCastRange"				"300"
 
 		//Modifiers
 		//----------------------------------------------------------------------------------------
 		"Modifiers"
 		{
-			"create_ability_1"
+			"create_ability_3"
 			{
 				"Passive"		"1"
 				"OnAttacked"
 				{
 					"Damage"
 					{
-						"Type"		"DAMAGE_TYPE_MAGICAL"
+						"Type"		"DAMAGE_TYPE_PURE"
 						"Damage"	"100"
 						"Target"	"ATTACKER"
+					}
+				}
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"		"scripts/vscripts/abilities/abilities.lua"
+						"Function"			"axe_war_will_hidden_learn"
+						"Target"			"CASTER"
 					}
 				}
 			}
@@ -223,13 +535,138 @@
 			"01"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"ability_increase"	"1.1 1.2 1.3 1.4"
+				"chance"			"35"
 			}
 			"02"
 			{
+				"var_type"			"FIELD_INTEGER"
+				"range"				"300"
+			}
+			"03"
+			{
 				"var_type"			"FIELD_FLOAT"
-				"ability_str"		"1.0 1.1 1.2 1.3"
+				"ability_increase"	"1.1 1.1 1.2 1.2"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"ability_str"		"0.5 0.6 0.7 0.8"
 			}
 		}
+	}
+
+	//红雾死神 3技能 隐藏被动
+	//-------------------------------------------------------------------------------------------
+	"axe_war_will_hidden"
+	{
+		// General
+		//---------------------------------------------------------------------------------------
+		"AbilityName"					"axe_war_will_hidden"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE|DOTA_ABILITY_BEHAVIOR_HIDDEN" 
+		"BaseClass"						"ability_datadriven"  
+		"MaxLevel"						"1"
+
+		// Casting
+		//---------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+
+		//Modifiers
+		//----------------------------------------------------------------------------------------
+		"Modifiers"
+		{
+			"create_ability_3_hidden"
+			{
+				"Passive"	"1"
+				"OnAttackStart"
+				{
+					"Random"
+					{
+						"Chance"	"35"
+						"OnSuccess"
+						{
+							"RunScript"
+							{
+								"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+								"Function"		"axe_war_will_hidden"
+								"Target"
+								{
+									"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO|DOTA_UNIT_TARGET_MECHANICAL"
+									"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+									"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+									"Radius"	"300"
+									"Center"	"CASTER"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	//斧王大招
+	//技能名字 泰坦之力
+	//-------------------------------------------------------------------------------------------
+	"axe_titan_force"
+	{
+		// General
+		//---------------------------------------------------------------------------------------
+		"AbilityName"					"axe_titan_force"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT|DOTA_ABILITY_BEHAVIOR_AOE" 
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"BaseClass"						"ability_datadriven"  
+		"AbilityTextureName"			"axe_culling_blade"
+
+		// Casting
+		//---------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0" 
+		"AbilityCastRange"				"500"
+
+		//Time
+		//---------------------------------------------------------------------------------------
+		"AbilityCooldown"		 		"30"
+
+		// Cost
+		//---------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100"
+
+		//OnSpellStart
+		//---------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"		"scripts/vscripts/abilities/abilities.lua"
+				"Function"			"axe_titan_force"
+				"Target"			"POINT"
+			}
+			"Damage"
+			{
+				"Target"
+				{
+					"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+					"Radius"	"%radius"
+					"Center"	"POINT"
+					"Target"	"TARGET"
+				}
+				"Damage"		"300"
+				"Type"			"DAMAGE_TYPE_COMPOSITE"
+			}
+		}
+
+		// Special
+		//-----------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{	
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"radius"		"400"
+			}
+		}
+
 	}
 }

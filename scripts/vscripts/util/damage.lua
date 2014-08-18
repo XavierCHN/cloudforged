@@ -5,7 +5,7 @@
 		"RunScript"
 		{
 			"ScriptFile"		"scripts/vscripts/util/damage.lua"
-			"Function"			"Damage"
+			"Function"			"DamageTarget"
 			"damage_base"		"0"									//固定的基础伤害(默认0)
 			"damage_increase"	"1"									//伤害系数(默认1)
 			"damage_type"		"DAMAGE_TYPE_PURE"					//伤害类型(默认纯粹)
@@ -24,12 +24,6 @@
 		}
 		
 	]]
-
-	--可选项
-		--damage_category	精通类型(默认为蛮力)
-		
-
-
 
 	--全局Damage表
 	Damage = {}
@@ -63,7 +57,8 @@
 	}
 
 	--造成伤害主函数(技能)
-	function Damage.__call(Damage, damage)
+	function DamageTarget(damage)
+
 		--获取技能
 		local targets	= damage.target_entities	--技能施放目标(数组)
 
@@ -79,6 +74,7 @@
 		damage.attacker_level		= damage.attacker:GetLevel()									--技能施放者的等级
 		damage.ability_level		= damage.ability:GetLevel()										--技能等级
 		damage.category_level		= 1	--ItemCore:GetAttribute(damage.attacker,damage.damage_category)	--伤害分类精通(先使用固定值,等待接口)
+		damage.damage_type			= _G[damage.damage_type]										--转换伤害类型常量
 
 		--根据公式计算出伤害(在除以对方的等级之前)
 		--精通等级 * 伤害系数 * (力量 * 力量系数 + 敏捷 * 敏捷系数 + 智力 * 智力系数) * 技能等级 ^ 2 * 英雄等级 / 目标等级
@@ -101,8 +97,4 @@
 			ApplyDamage(damage)
 		end
 
-		print('===============DAMAGE DEBUG================')
-		for k, v in pairs(damage) do
-			print(k, v, type(v))
-		end
 	end

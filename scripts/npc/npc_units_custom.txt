@@ -68,7 +68,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"50"		//生命值
+		"StatusHealth"				"100"		//生命值
 		"StatusHealthRegen"			"0"			//生命恢复速度
 		"StatusMana"				"100"		//魔法值
 		"StatusManaRegen"			"0"			//魔法恢复速度
@@ -156,7 +156,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"50"		//生命值
+		"StatusHealth"				"250"		//生命值
 		"StatusHealthRegen"			"0"			//生命恢复速度
 		"StatusMana"				"100"		//魔法值
 		"StatusManaRegen"			"0"			//魔法恢复速度
@@ -174,4 +174,16 @@
 		"VisionDaytimeRange"		"2000"		//白天视野
 		"VisionNighttimeRange"		"2000"		//夜晚视野
 	}
+	"npc_CFroged_unit_CrystalMaiden_iceEffect"
+  	{
+  		"model"					"models/development/invisiblebox.vmdl"
+  		"BaseClass"				"npc_dota_creep_neutral"
+		"Ability1"				"ability_dummy_unit"
+  		"AttackCapabilities"	"DOTA_UNIT_CAP_NO_ATTACK"
+  		"MovementCapabilities"	"DOTA_UNIT_CAP_MOVE_NONE"
+  		"VisionDaytimeRange"	"100"
+  		"VisionNighttimeRange"	"100"
+  		"HasInventory"			"0"
+  		"WakesNeutrals"			"0"
+  	}
 }
