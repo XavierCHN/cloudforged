@@ -268,73 +268,11 @@ function OnCrystalMaidenSpell04Start(keys)
 	CCrystalMaiden:OnCrystalMaiden04Start(keys)
 end
 
+function OnCrystalMaidenSpell04Init(keys)
+	CCrystalMaiden:initIceEffectData(keys)
+end
+
 function CCrystalMaiden:OnCrystalMaiden04Start(keys)
-	tPrint('vscripts/abilities/crystalmaiden.lua:OnCrystalMaiden04Start(keys)')
-	
-	--[[ 技能 伤害类型为  蛮力/灵敏/狡诈/智慧等级 * 技能伤害系数 
-	* (力量值*力量系数 + 敏捷值*敏捷系数 + 智力值* 智力系数) * 技能等级的平方 * 英雄等级/目标等级]]
-
-	-- 获取施法者
-	local hCaster = EntIndexToHScript(keys.caster_entindex)
-	
-	-- 获取玩家ID
-	local nPlayerId = hCaster:GetPlayerID()
-
-	local nIceIndex
-	
-	local vec = hCaster:GetOrigin()
-	
-	local vecEffect
-	
-	local hIceEffect
-	
-	if(self.nIceEffectIndex == nil)then
-		self:initIceEffectData()
-		hIceEffect = CreateUnitByName(
-	        "npc_CFroged_unit_CrystalMaiden_iceEffect"
-		    ,hCaster:GetOrigin()
-		    ,false
-		    ,hCaster
-		    ,hCaster
-	     	,hCaster:GetTeam()
-    	)
-        nIceIndex = ParticleManager:CreateParticle("particles/units/heroes/hero_invoker/invoker_ice_wall_shards.vpcf", PATTACH_CUSTOMORIGIN, hIceEffect)
-	    local range = RandomInt(0,700)
-        vecEffect = Vector(vec.x + math.cos(self.nIceEffectIndex*0.314)*range,vec.y+ math.sin(self.nIceEffectIndex*0.314)*range,vec.z+(range/10))
-        ParticleManager:SetParticleControl(nIceIndex, 0, vecEffect)
-        ParticleManager:SetParticleControl(nIceIndex, 1, vecEffect)
-		
-		self.vIceEffect[self.nIceEffectIndex].hUnit = hIceEffect
-		self.vIceEffect[self.nIceEffectIndex].nIceEffect = nIceIndex
-		self.vIceEffect[self.nIceEffectIndex].vec = vecEffect
-		self.nIceEffectIndex = self.nIceEffectIndex + 1
-	else
-	    hIceEffect = CreateUnitByName(
-	        "npc_CFroged_unit_CrystalMaiden_iceEffect"
-		    ,hCaster:GetOrigin()
-		    ,false
-		    ,hCaster
-		    ,hCaster
-	     	,hCaster:GetTeam()
-    	)
-        nIceIndex = ParticleManager:CreateParticle("particles/units/heroes/hero_invoker/invoker_ice_wall_shards.vpcf", PATTACH_CUSTOMORIGIN, hIceEffect)
-	    local range = RandomInt(0,700)
-        vecEffect = Vector(vec.x + math.cos(self.nIceEffectIndex*0.314)*range,vec.y+ math.sin(self.nIceEffectIndex*0.314)*range,vec.z+(range/2))
-        ParticleManager:SetParticleControl(nIceIndex, 0, vecEffect)
-        ParticleManager:SetParticleControl(nIceIndex, 1, vecEffect)
-		
-		self.vIceEffect[self.nIceEffectIndex].hUnit = hIceEffect
-		self.vIceEffect[self.nIceEffectIndex].nIceEffect = nIceIndex
-		self.vIceEffect[self.nIceEffectIndex].vec = vecEffect
-		self.nIceEffectIndex = self.nIceEffectIndex + 1
-	end
-end
-
-function OnCrystalMaidenSpell04Release(keys)
-	CCrystalMaiden:OnCrystalMaiden04Release(keys)
-end
-
-function CCrystalMaiden:OnCrystalMaiden04Release(keys)
 	tPrint('vscripts/abilities/crystalmaiden.lua:OnCrystalMaiden04Release(keys)')
 
 	--[[ 技能 伤害类型为  蛮力/灵敏/狡诈/智慧等级 * 技能伤害系数 
@@ -375,54 +313,36 @@ function CCrystalMaiden:OnCrystalMaiden04Release(keys)
 	-- 传入技能至少造成伤害值
 	if keys.MiniunDamage and damage_to_deal < keys.MiniunDamage then damage_to_deal = keys.MiniunDamage end
 	
-	local vTargetVec = thTarget:GetOrigin()
+	local vec = thTarget:GetOrigin()
 	
-	local nIceRadForWard
+    local nIceIndex = ParticleManager:CreateParticle("particles/units/heroes/hero_ancient_apparition/ancient_apparition_cold_feet_marker_b.vpcf", PATTACH_CUSTOMORIGIN, self.hUnit)
+
+    local vecEffect = Vector(vec.x + math.cos(self.nTime * 33 *0.5)*self.range,vec.y+ math.sin(self.nTime * 33 *0.5)*self.range,self.high)
+    ParticleManager:SetParticleControl(nIceIndex, 0, vecEffect)
+    ParticleManager:SetParticleControl(nIceIndex, 1, vecEffect)
 	
-	local nSpeed = 60
-	
-	local damage_table = {
-			victim = thTarget,
-			attacker = hCaster,
-			damage = damage_to_deal,
-			damage_type = DAMAGE_TYPE_PURE, 
-	    	damage_flags = 0
-	}
-	
-	for i = 0,9 do
-		if (self.vIceEffect[i].hUnit ~= nil) then
-		    nIceRadForWard = GetRadBetweenTwoVec2D(self.vIceEffect[i].vec,vTargetVec)
-			print("nIceRadForWard="..tostring(nIceRadForWard))
-			
-			self.vIceEffect[i].vec.x = math.cos(nIceRadForWard) * nSpeed + self.vIceEffect[i].vec.x
-		    self.vIceEffect[i].vec.y = math.sin(nIceRadForWard) * nSpeed + self.vIceEffect[i].vec.y
-			
-			self.vIceEffect[i].vec = Vector(self.vIceEffect[i].vec.x,self.vIceEffect[i].vec.y,self.vIceEffect[i].vec.z)
-			
-			print("v.vec.x="..tostring(self.vIceEffect[i].vec.x))
-			print("v.vec.y="..tostring(self.vIceEffect[i].vec.y))
-			print("v.vec.z="..tostring(self.vIceEffect[i].vec.z))
-			
-		    ParticleManager:SetParticleControl(self.vIceEffect[i].nIceEffect, 0, self.vIceEffect[i].vec)
-	        ParticleManager:SetParticleControl(self.vIceEffect[i].nIceEffect, 1, self.vIceEffect[i].vec)
-		    if(GetDistanceBetweenTwoVec2D(vTargetVec,self.vIceEffect[i].vec) < 50) then
-		        ApplyDamage(damage_table)
-			    self.vIceEffect[i].hUnit:RemoveSelf()
-				self.vIceEffect[i].hUnit = nil
-		    end
+	self.range = self.range - 3
+	self.high = self.high + 10
+	self.nTime = self.nTime + 0.03
+	if(self.nTime>=3)then
+		GameRules:GetGameModeEntity():SetContextThink(
+		DoUniqueString('Release_Effect'),
+		function ()
+		    self.nTime = 0
+	        self.range = 300
+	        self.high = 0
+			self.hUnit:RemoveSelf()
+			local damage_table = {
+			    victim = thTarget,
+			    attacker = hCaster,
+			    damage = damage_to_deal,
+			    damage_type = DAMAGE_TYPE_PURE, 
+	    	    damage_flags = 0
+	        }
+            ApplyDamage(damage_table)
+	        return nil
 		end
-	end
-	self.nTime = self.nTime + 0.1
-	if(self.nTime>1)then
-		for i = 0,9 do
-			if (self.vIceEffect[i].hUnit ~= nil) then
-				self.vIceEffect[i].hUnit:RemoveSelf()
-				self.vIceEffect[i].hUnit = nil
-			end
-			self.vIceEffect[i] = nil
-		end
-		self.nIceEffectIndex = 0
-		self.nTime = 0
+		,1)
 	end
 end
 
@@ -438,16 +358,22 @@ function GetDistanceBetweenTwoVec2D(a, b)
     return math.sqrt(xx*xx + yy*yy)
 end
 
-function CCrystalMaiden:initIceEffectData()
+function CCrystalMaiden:initIceEffectData(keys)
 	print("init IceEffect data in")
-	self.vIceEffect = self.vIceEffect or {}
-	for i = 0,10 do
-		self.vIceEffect[i] = { 
-		    hUnit = nil,                 
-			nIceEffect = 0,
-			vec = nil,
-		}
-	end
-	self.nIceEffectIndex = 0
+	self.hUnit = nil
 	self.nTime = 0
+	self.range = 300
+	self.high = 0
+	
+	local hCaster = EntIndexToHScript(keys.caster_entindex)
+	local targetPoint = keys.target:GetOrigin()
+	self.high = GetGroundPosition(targetPoint,nil).z
+	self.hUnit = CreateUnitByName(
+	        "npc_CFroged_unit_CrystalMaiden_iceEffect"
+		    ,hCaster:GetOrigin()
+		    ,false
+		    ,hCaster
+		    ,hCaster
+	     	,hCaster:GetTeam()
+    )
 end

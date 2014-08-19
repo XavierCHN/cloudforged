@@ -60,7 +60,7 @@
 	function DamageTarget(damage)
 		print('damage called for '..#damage.target_entities)
 		--获取技能
-		local targets	= damage.target_entities	--技能施放目标(数组)
+		local targets	= damage.target_entities or {damage.victim}	--技能施放目标(数组)
 
 		if not targets then
 			print(debug.traceback '无伤害目标')
@@ -70,13 +70,15 @@
 		setmetatable(damage, Damage.damage_meta)
 		
 		--获取技能传参,构建伤害table
-		damage.attacker				= EntIndexToHScript(damage.caster_entindex)						--伤害来源(施法者)
-		damage.attacker_level		= damage.attacker:GetLevel()									--技能施放者的等级
-		damage.ability_level		= damage.ability:GetLevel()										--技能等级
-		damage.category_level		= ItemCore:GetAttribute(damage.attacker,damage.damage_category)	--伤害分类精通(先使用固定值,等待接口)
-		damage.damage_type			= _G[damage.damage_type]										--转换伤害类型常量
-
+		damage.attacker		= damage.attacker or EntIndexToHScript(damage.caster_entindex)							--伤害来源(施法者)
+		damage.attacker_level	= damage.attacker:GetLevel()															--技能施放者的等级
+		damage.ability_level	= damage.ability:GetLevel()																--技能等级
+		damage.category_level	= ItemCore:GetAttribute(damage.attacker,damage.damage_category)							--伤害分类精通
+		damage.damage_type	= type(damage.damage_type) == 'string' and _G[damage.damage_type] or damage.damage_type	--转换伤害类型常量
+		
+		
 		--根据公式计算出伤害(在除以对方的等级之前)
+<<<<<<< HEAD
 		--精通等级 * 伤害系数 * (力量 * 力量系数 + 敏捷 * 敏捷系数 + 智力 * 智力系数) * 技能等级 ^ 2 * 英雄等级 / 目标等级
 		damage.damage_add			=	damage.category_level
 									*	damage.damage_increase
@@ -96,6 +98,35 @@
 			
 			local damage_dealt = ApplyDamage(damage)
 			print('damage dealt'..damage_dealt) 
+=======
+		-- 伤害计算公式：
+		-- 至少造成基础伤害
+		-- 最终伤害 = 基础伤害 + 加成伤害
+		-- 精通等级 = （1+物品增加的精通等级/100） == 已经在GetAttribute计算
+		-- 加成伤害 = (精通等级 * 伤害系数 * (1+（力量*力量系数 + 敏捷*敏捷系数 + 智力*智力系数） )
+		-- * 技能等级 * 英雄等级)/目标等级
+		
+		
+		damage.damage_result			=	damaeg.damage_base +
+								( damage.category_level
+								*	damage.damage_increase
+								*	
+								(1 +	
+									(damage.attacker:GetStrength()	* damage.damage_str
+									+	damage.attacker:GetAgility()	* damage.damage_agi
+									+	damage.attacker:GetIntellect()	* damage.damage_int
+								)
+								)
+								*	damage.ability_level * damage.ability_level
+								*	damage.attacker_level)
+
+		--遍历数组进行伤害		
+		for i, victim in ipairs(targets) do
+	        	damage.victim 		= victim
+	        	damage.victim_level	= victim:GetLevel()
+			damage.damage 		= math.max(damage.damage_min, damage.damage_result / damage.victim_level )
+			ApplyDamage(damage)
+>>>>>>> origin/master
 		end
 
 	end
