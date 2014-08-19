@@ -71,7 +71,7 @@ function PlantACircleTrap(keys)
             
             -- 为了避免陷阱循环出错的临时表
             local temp = {}
-            
+            --[[
             -- 在陷阱列表中循环
             for k,v in pairs(TATraps) do
               
@@ -97,7 +97,7 @@ function PlantACircleTrap(keys)
                     false)
                 }
                 DamageTarget(damage_keys)
-
+                
                 -- 移除陷阱特效的粒子特效
                 UTIL_RemoveImmediate(v.owning_unit)
                 ParticleManager:ReleaseParticleIndex(k)
@@ -109,9 +109,9 @@ function PlantACircleTrap(keys)
                 local particle_blink = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_trap_explode.vpcf', PATTACH_CUSTOMORIGIN, dummy_unit) 
                 ParticleManager:SetParticleControl( particle_blink , 0 , v.position )
                 ParticleManager:ReleaseParticleIndex( particle_blink )
-
+               
               end
-            end
+            end ]]
             
             -- 移除英雄移动限制
             caster:RemoveModifierByName('modifier_rooted') 
@@ -138,7 +138,6 @@ function OnSakuraBladeImpact(keys)
         if not v:IsAlive() then
           
           local dummy_unit = CreateUnitByName('npc_cf_ta_trap', trap_pos, false, caster, caster, caster:GetTeam())
-          -- 创建粒子特效并设置位置
           local trap_particle = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_trap.vpcf', PATTACH_CUSTOMORIGIN, dummy_unit)
           ParticleManager:SetParticleControl(trap_particle, 0, trap_pos)
 
@@ -149,4 +148,139 @@ function OnSakuraBladeImpact(keys)
         end
       end,0.2)
   end
+end
+
+function OnPathtonSakura(keys)
+  -- 获取施法者
+  local caster = keys.caster
+  -- 避免重复释放
+  if caster:HasModifier('modifier_phantom_sakura_interlock') then
+    return
+  end 
+  -- 获取施法者位置
+  local caster_origin = caster:GetOrigin()
+  -- 设定旋转角度
+  local move_rotate_angle = QAngle(0,144,0)
+  -- 设置启示位置
+  local move_start_pos = caster_origin + Vector( 500 , 0 , 0 )
+  -- 设置运动目标位置
+  local move_target_pos = RotatePosition(caster_origin, move_rotate_angle, move_start_pos)
+  -- 计数器
+  local corner_count = 0
+  -- 创建第一个陷阱粒子特效并保存
+  local dummy_unit = CreateUnitByName('npc_cf_ta_trap', move_target_pos, false, caster, caster, caster:GetTeam())
+  local trap_particle = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_trap.vpcf', PATTACH_CUSTOMORIGIN, dummy_unit)
+  ParticleManager:SetParticleControl(trap_particle, 0, move_target_pos)
+  table.insert(TATraps,trap_particle,{
+    position = move_target_pos,
+    owning_unit = dummy_unit
+  })
+  -- 初始化玩家移动位置
+  caster:SetOrigin(move_start_pos)
+  -- 让玩家无法移动
+  caster:AddNewModifier(caster, nil, 'modifier_rooted', {}) 
+  -- 开始玩家运动计时器
+  caster:SetContextThink(DoUniqueString('phantom_sakura_main'),
+    function()
+      -- 获取玩家位置
+      local cOrigin = caster:GetOrigin()
+      -- 计算下一个运动位置
+      local rOrigin = cOrigin + (move_target_pos - move_start_pos):Normalized() * 60
+      -- 设置玩家面向角度
+      caster:SetForwardVector((move_target_pos - move_start_pos):Normalized())
+      -- 设置英雄的运动位置
+      caster:SetOrigin(rOrigin)
+
+      -- 如果距离目标位置距离大于30，继续循环
+      if GetTrapDistance(cOrigin,move_target_pos) > 40 then
+        return 0.03
+      else
+        corner_count = corner_count + 1
+        if corner_count >= 5 then
+          caster:SetOrigin(caster_origin)
+          local jump_up_offset = Vector(0,0,80)
+          local drop_down_offset = Vector(0,0,0)
+          local rOrigin = caster:GetOrigin() + jump_up_offset
+          local jumping_up = true
+          caster:SetContextThink(DoUniqueString('jumping'),
+            function()
+              caster:SetOrigin(rOrigin)
+              --==================================
+              if jumping_up then
+                jump_up_offset.z = jump_up_offset.z - 8
+                rOrigin = rOrigin + jump_up_offset
+              else
+                drop_down_offset.z = drop_down_offset.z - 20
+                rOrigin = rOrigin + drop_down_offset
+              end
+              if rOrigin.z > 1200 then
+                jumping_up = false
+
+                return 0.8
+              end
+              --==================================
+              if rOrigin.z < caster_origin.z - 20 then
+                -- 让英雄回到初始位置
+                caster:SetOrigin(caster_origin)
+                -- 在陷阱列表中循环
+                for k,v in pairs(TATraps) do
+                  -- 引爆周围300单位的所有陷阱
+                  if GetTrapDistance(v.position,caster_origin) < 700 then
+                    -- 调用Damage施加伤害
+                    local damage_keys = {
+                      caster_entindex = keys.caster_entindex,
+                      ability = keys.ability,
+                      damage_category = DAMAGE_CATEGORY_SENSITIVE,
+                      damage_type = DAMAGE_TYPE_PURE,
+                      damage_agi = 0.4,
+                      damage_min = 200,
+                      target_entities = FindUnitsInRadius(
+                        caster:GetTeam(),
+                        v.position,
+                        nil,
+                        100,
+                        DOTA_UNIT_TARGET_TEAM_ENEMY,
+                        DOTA_UNIT_TARGET_ALL,
+                        0, FIND_CLOSEST,
+                        false)
+                    }
+                    DamageTarget(damage_keys)
+                    -- 移除陷阱特效的粒子特效
+                    UTIL_RemoveImmediate(v.owning_unit)
+                    ParticleManager:ReleaseParticleIndex(k)
+                    -- 将粒子特效移除出列表
+                    TATraps[k] = nil
+                    -- 为引爆的粒子特效增加引爆粒子特效
+                    local particle_blink = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_trap_explode.vpcf', PATTACH_CUSTOMORIGIN, dummy_unit) 
+                    ParticleManager:SetParticleControl( particle_blink , 0 , v.position )
+                    ParticleManager:ReleaseParticleIndex( particle_blink )
+                  end
+                end
+                return nil
+              end
+              return 0.03
+            end,
+          0.03)
+          caster:RemoveModifierByName('modifier_rooted') 
+          caster:RemoveModifierByName('modifier_phantom_sakura_interlock') 
+          return nil
+        else
+          -- 终点变起点，继续循环。
+          move_start_pos = move_target_pos
+          caster:SetOrigin(move_start_pos)
+          move_target_pos = RotatePosition(caster_origin, move_rotate_angle, move_start_pos)
+          -- 创建下一个粒子特效并存储
+          local dummy_unit = CreateUnitByName('npc_cf_ta_trap', move_target_pos, false, caster, caster, caster:GetTeam())
+          local trap_particle = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_trap.vpcf', PATTACH_CUSTOMORIGIN, dummy_unit)
+          ParticleManager:SetParticleControl(trap_particle, 0, move_target_pos)
+          table.insert(TATraps,trap_particle,{
+            position = move_target_pos,
+            owning_unit = dummy_unit
+          })
+
+          return 0.03
+        end
+      end
+    end,
+  0.03)
 end

@@ -85,7 +85,7 @@
 		-- * 技能等级 * 英雄等级)/目标等级
 		
 		
-		damage.damage_result=	damaeg.damage_base +
+		damage.damage_result=	damage.damage_base +
 								( damage.category_level
 								*	damage.damage_increase
 								*	

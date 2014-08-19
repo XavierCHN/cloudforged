@@ -801,6 +801,38 @@
 			}
 		}
 	}
+	"templar_phantom_sakura"
+	{
+		"BaseClass"					"ability_datadriven"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityCastPoint"			"0.0"
+		"AbilityTextureName"		"templar_sakura_circle"
+		"AbilityCastAnimation"		"run"
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"		"scripts/vscripts/abilities/templar.lua"
+				"Target"			"CASTER"
+				"Function"			"OnPathtonSakura"
+			}
+			"ApplyModifier"
+			{
+				"ModifierName"		"modifier_phantom_sakura_interlock"
+				"Target"			"CASTER"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_phantom_sakura_interlock"
+			{
+				"Passive"		"0"
+				"IsHidden"		"1"
+			}
+		}
+	}
+
 	//樱花陷阱的陷阱单位
 	"ability_cf_ta_trap_dummy"
 	{
