@@ -76,7 +76,6 @@
 		damage.category_level	= ItemCore:GetAttribute(damage.attacker,damage.damage_category)							--伤害分类精通
 		damage.damage_type	= type(damage.damage_type) == 'string' and _G[damage.damage_type] or damage.damage_type	--转换伤害类型常量
 		damage.victim_level	= victim:GetLevel()
-		damaeg.damage_base	= damage.damage_base or 0
 		
 		--根据公式计算出伤害(在除以对方的等级之前)
 		-- 伤害计算公式：
