@@ -75,7 +75,7 @@
 		damage.ability_level	= damage.ability:GetLevel()																--技能等级
 		damage.category_level	= ItemCore:GetAttribute(damage.attacker,damage.damage_category)							--伤害分类精通
 		damage.damage_type	= type(damage.damage_type) == 'string' and _G[damage.damage_type] or damage.damage_type	--转换伤害类型常量
-		damage.victim_level	= victim:GetLevel()
+		
 		
 		--根据公式计算出伤害(在除以对方的等级之前)
 		-- 伤害计算公式：
@@ -97,12 +97,13 @@
 								)
 								)
 								*	damage.ability_level * damage.ability_level
-								*	damage.attacker_level) / damage.victim_level
+								*	damage.attacker_level)
 
 		--遍历数组进行伤害		
 		for i, victim in ipairs(targets) do
 	        	damage.victim 		= victim
-			damage.damage 		= math.max(damage.damage_min, damage.damage_result )
+	        	damage.victim_level	= victim:GetLevel()
+			damage.damage 		= math.max(damage.damage_min, damage.damage_result / damage.victim_level )
 			ApplyDamage(damage)
 		end
 
