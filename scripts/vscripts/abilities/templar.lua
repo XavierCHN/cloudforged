@@ -78,6 +78,26 @@ function PlantACircleTrap(keys)
               -- 引爆周围300单位的所有陷阱
               if GetTrapDistance(v.position,point) < 300 then
                
+                -- 调用Damage施加伤害
+                local damage_keys = {
+                  caster_entindex = keys.caster_entindex,
+                  ability = keys.ability,
+                  damage_category = DAMAGE_CATEGORY_SENSITIVE,
+                  damage_type = DAMAGE_TYPE_PURE,
+                  damage_agi = 0.4,
+                  damage_min = 200,
+                  target_entities = FindUnitsInRadius(
+                    caster:GetTeam(),
+                    v.position,
+                    nil,
+                    50,
+                    DOTA_UNIT_TARGET_TEAM_ENEMY,
+                    DOTA_UNIT_TARGET_ALL,
+                    0, FIND_CLOSEST,
+                    false)
+                }
+                DamageTarget(damage_keys)
+
                 -- 移除陷阱特效的粒子特效
                 UTIL_RemoveImmediate(v.owning_unit)
                 ParticleManager:ReleaseParticleIndex(k)
@@ -96,25 +116,7 @@ function PlantACircleTrap(keys)
             -- 移除英雄移动限制
             caster:RemoveModifierByName('modifier_rooted') 
             
-            -- 调用Damage施加伤害
-            local damage_keys = {
-              caster_entindex = keys.caster_entindex,
-              ability = keys.ability,
-              damage_category = DAMAGE_CATEGORY_SENSITIVE,
-              damage_type = DAMAGE_TYPE_PURE,
-              damage_agi = 0.4,
-              damage_min = 200,
-              target_entities = FindUnitsInRadius(
-                caster:GetTeam(),
-                caster:GetOrigin(),
-                nil,
-                500,
-                DOTA_UNIT_TARGET_TEAM_ENEMY,
-                DOTA_UNIT_TARGET_ALL,
-                0, FIND_CLOSEST,
-                false)
-            }
-            DamageTarget(damage_keys)
+            
 
           end, 0.8)
         return nil
@@ -124,3 +126,27 @@ function PlantACircleTrap(keys)
     end,0.07)
 end
 
+function OnSakuraBladeImpact(keys)
+  local caster = keys.caster
+  for k,v in pairs(keys) do
+    print(k,v)
+  end
+  for k,v in pairs(keys.target_entities) do
+    local trap_pos = v:GetOrigin()
+    v:SetContextThink(DoUniqueString('sakura_blade_death'),
+      function()
+        if not v:IsAlive() then
+          
+          local dummy_unit = CreateUnitByName('npc_cf_ta_trap', trap_pos, false, caster, caster, caster:GetTeam())
+          -- 创建粒子特效并设置位置
+          local trap_particle = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_trap.vpcf', PATTACH_CUSTOMORIGIN, dummy_unit)
+          ParticleManager:SetParticleControl(trap_particle, 0, trap_pos)
+
+          table.insert(TATraps,trap_particle,{
+            position = trap_pos,
+            owning_unit = dummy_unit
+          })
+        end
+      end,0.2)
+  end
+end

@@ -58,7 +58,7 @@
 
 	--造成伤害主函数(技能)
 	function DamageTarget(damage)
-
+		print('damage called for '..#damage.target_entities)
 		--获取技能
 		local targets	= damage.target_entities	--技能施放目标(数组)
 
@@ -81,7 +81,7 @@
 		damage.damage_add			=	damage.category_level
 									*	damage.damage_increase
 									*	(
-											damage.attacker:GetStrength()	* damage.damage_str
+										1 +	damage.attacker:GetStrength()	* damage.damage_str
 										+	damage.attacker:GetAgility()	* damage.damage_agi
 										+	damage.attacker:GetIntellect()	* damage.damage_int
 									)
@@ -94,7 +94,8 @@
 			damage.victim_level	= victim:GetLevel()
 			damage.damage 		= math.max(damage.damage_min, damage.damage_base + damage.damage_add / damage.victim_level)
 			
-			ApplyDamage(damage)
+			local damage_dealt = ApplyDamage(damage)
+			print('damage dealt'..damage_dealt) 
 		end
 
 	end

@@ -690,6 +690,133 @@
 			}
 		}
 	}
+	//圣堂法球
+	//樱花之刃
+	"templar_sakura_blade"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"holdout_glacier_arrows"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"625"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0 0.0 0.0 0.0"
+		//"AbilityDuration"				"0.25 0.5 0.75 1.0"
+
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"0 0 0 0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"6"
+
+		// Data-Driven
+		//-------------------------------------------------------------------------------------------------------------
+		"Modifiers"
+		{
+			"modifier_holdout_glacier_arrow_owner"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Orb"
+				{
+					"Priority"			"DOTA_ORB_PRIORITY_ABILITY"
+					"ProjectileName"	"particles/units/heroes/hero_templar_assassin/templar_assassin_meld_attack.vpcf"
+					"CastAttack"		"1"
+				}
+
+				"OnOrbFire"
+				{
+					"SpendMana"
+					{
+						"Mana"	"%AbilityManaCost"
+					}
+				}
+
+				"OnOrbImpact"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/abilities/templar.lua"
+						"Target"
+						{
+							"Center"			"TARGET"
+							"Radius"			"%radius"
+							"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types"				"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+						}
+						"Function"				"OnSakuraBladeImpact"
+					}
+					"RunScript"
+					{
+						"ScriptFile"		"scripts/vscripts/util/damage.lua"
+						"Target"			"TARGET"
+						"Function"			"DamageTarget"
+						"damage_base"		"0"									//固定的基础伤害(默认0)
+						"damage_increase"	"1"									//伤害系数(默认1)
+						"damage_type"		"DAMAGE_TYPE_PURE"					//伤害类型(默认纯粹)
+						"damage_category"	"cunning"								//精通类型(默认蛮力)
+						"damage_agi"		"1.2"									//敏捷加成(默认0)
+					}
+					"RunScript"
+					{
+						"ScriptFile"		"scripts/vscripts/util/damage.lua"
+						"Target"
+						{
+							"Center"		"TARGET"
+							"Radius"		"%radius"
+							"Teams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types"			"DOTA_UNIT_TARGET_HERO"
+						}
+						"Function"			"DamageTarget"
+						"damage_category"	"cunning"								//精通类型(默认蛮力)
+					}
+				}
+			}
+		}
+
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"duration"						"0.1"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"knockback_distance"			"10 15 20 25"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"slow_duration"					"1.0 1.5 2.0 2.5"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"frost_arrows_movement_speed"	"-11 -15 -18 -20"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"radius"						"100"
+			}
+		}
+	}
 	//樱花陷阱的陷阱单位
 	"ability_cf_ta_trap_dummy"
 	{

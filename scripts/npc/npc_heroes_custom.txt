@@ -176,8 +176,11 @@
 		"AttackDamageMin"			"20"									
 		"AttackDamageMax"			"30"									
 		"AttackRate"				"1.0"																
+		"AttackRange"				"600"
+		"AttackAcquisitionRange"	"650"
 
 		//Abilities
+		"Ability3"					"templar_sakura_blade"
 		"Ability4"					"templar_sakura_circle"
 
 		// Armor
