@@ -32,6 +32,9 @@ function Precache( context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_invoker/invoker_ice_wall_icicle.vpcf", context )
 	PrecacheResource( "particle", "particles/hw_fx/hw_roshan_death_e.vpcf", context )
 
+    PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_gnoll/n_creep_gnoll.vmdl", context )
+    PrecacheResource( "model", "models/creeps/mega_greevil/mega_greevil.vmdl", context )
+
 end
 
 -- Create the game mode when we activate
@@ -42,7 +45,7 @@ end
 function CForgedGameMode:InitGameMode()
  	
  	-- 设定游戏准备时间
-	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
+	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 0.1 )
 
 	GameRules:GetGameModeEntity():SetCameraDistanceOverride(1800)
 	GameRules:SetPreGameTime(1)
@@ -55,7 +58,7 @@ function CForgedGameMode:InitGameMode()
 	
 	-- 初始化
 	CFRoundThinker:InitPara()
-	ItemCore:Init()
+	--ItemCore:Init()
 	
 end
 
@@ -82,4 +85,9 @@ function CForgedGameMode:OnEntityKilled( keys )
   if (killerEntity:IsHero()) then
 	killerEntity:AddExperience(50, true)
   end 
+end
+
+function CForgedGameMode:FinishedGame()
+    GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS) 
+    GameRules:SetSafeToLeave(true)
 end

@@ -32,6 +32,12 @@ function CFRoundThinker:InitPara(kv)
 	self._tAllEnemies = {}
 	-- 读取所有的怪信息，赋给self._tAllEnemies
 	self:ReadAllEnemiesFromKv()
+
+	-- 注册控制台测试变量
+	Convars:RegisterCommand('cf_skip_to_round', function(round)
+		print('console command skip to another round')
+		self.nCurrentRound = round - 1
+	end, 'skip to Nth round in cloudforged mode', FCVAR_CHEAT) 
 end
 -------------------------------------------------------------------------------------------
 
@@ -70,7 +76,7 @@ function CFRoundThinker:ThinkFighting()
 	if CFSpawner:IsWaveClear() then
 
 		-- 如果每一轮的怪物都被干掉了
-		if self._nCurrRound > #self._tAllEnemies then
+		if self._nCurrRound >= #self._tAllEnemies then
 
 			-- 让主程序addon_game_mode.lua结束游戏
 			CForgedGameMode:FinishedGame()
@@ -151,6 +157,7 @@ function CFRoundThinker:ReadAllEnemiesFromKv()
 		-- 存入self.tAllEnemies
 		local i = tonumber(k)
 		self._tAllEnemies[i] = tSingleWaveData
+		print('ENEMIES LOADED, TOTAL ENEMY WAVES'..#self._tAllEnemies)
 	end
 
 end
