@@ -695,7 +695,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE|DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_IMMEDIATE" 
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"BaseClass"						"ability_datadriven"  
-		"AbilityTextureName"			"axe_culling_blade"
+		"AbilityTextureName"			"enchantress_natures_attendants"
 
 		// Casting
 		//---------------------------------------------------------------------------------------
@@ -709,6 +709,48 @@
 		// Cost
 		//---------------------------------------------------------------------------------------
 		"AbilityManaCost"				"5"
+
+		//----------------------------------------------------------------------------------------
+		"OnToggleOn"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+				"Function"		"rubick_sacrifice_on"
+				"Target"		"CASTER"
+			}
+		}
+
+		"OnToggleOff"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+				"Function"		"rubick_sacrifice_off"
+				"Target"		"CASTER"
+			}
+		}
+
+		// Special
+		//-----------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{	
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"radius"		"1000"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"time"			"1.0 0.9 0.8 0.7"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"percentage"	"1 2 4 6"
+			}
+		}
 	}
 
 	//圣堂大招
