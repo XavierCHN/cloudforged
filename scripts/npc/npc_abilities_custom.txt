@@ -684,6 +684,33 @@
 	}
 
 
+	//隐修议员 拉比克 1技能 主动
+	//技能名字 牺牲
+	//=====================================================================================
+	"rubick_sacrifice"
+	{
+		// General
+		//---------------------------------------------------------------------------------------
+		"AbilityName"					"rubick_sacrifice"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE|DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_IMMEDIATE" 
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"BaseClass"						"ability_datadriven"  
+		"AbilityTextureName"			"axe_culling_blade"
+
+		// Casting
+		//---------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0" 
+		"AbilityCastRange"				"1000"
+
+		//Time
+		//---------------------------------------------------------------------------------------
+		"AbilityCooldown"		 		"0"
+
+		// Cost
+		//---------------------------------------------------------------------------------------
+		"AbilityManaCost"				"5"
+	}
+
 	//圣堂大招
 	//技能名称， 樱之环
 	"templar_sakura_circle"
