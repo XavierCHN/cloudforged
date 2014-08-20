@@ -607,12 +607,13 @@
 		//---------------------------------------------------------------------------------------
 		"OnSpellStart"
 		{
-			"FireEffect"
+			"RunScript"		//暂时使用脚本进行创建特效
 			{
-				"EffectName"		"particles\hw_fx\hw_roshan_death_e.vpcf"
-				"Target"			"POINT"
-				"ControlPoints"		"follow_origin"
+				"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+				"Function"		"axe_titan_force_effect"
+				"Target"		"POINT"
 			}
+
 			"CreateThinker"
 			{
 				"Target"		"POINT"
@@ -666,7 +667,7 @@
 			"03"
 			{
 				"var_type"		"FIELD_FLOAT"
-				"timeover"		"4"
+				"timeover"		"15"
 			}
 			"04"
 			{

@@ -1,12 +1,4 @@
 
---红雾死神 3技能 添加隐藏被动
-function axe_war_will_hidden_learn( keys )
-	local caster=EntIndexToHScript(keys.caster_entindex) 
-	local abilityName="axe_war_will_hidden"
-	caster:AddAbility(abilityName) 
-	local ability=caster:FindAbilityByName(abilityName) 
-	ability:SetLevel(1) 
-end
 
 --红雾死神 3技能 隐藏被动
 function axe_war_will_hidden( keys )
@@ -23,8 +15,10 @@ function axe_war_will_hidden( keys )
 end
 
 --红雾死神大招
-function axe_titan_force( keys )
+function axe_titan_force_effect( keys )
 	local caster = EntIndexToHScript(keys.caster_entindex) 
-	local vec=keys.origin
-	print(vec)
+	local vec=keys.target_points
+	local effect = ParticleManager:CreateParticle("particles/hw_fx/hw_roshan_death_e.vpcf",PATTACH_WORLDORIGIN,caster)
+	ParticleManager:SetParticleControl(effect,0,vec[1])
+	ParticleManager:ReleaseParticleIndex(effect) 
 end
