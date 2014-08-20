@@ -101,7 +101,7 @@
 
 		--遍历数组进行伤害		
 		for i, victim in ipairs(targets) do
-				if victim:IsAlive() and victim:IsValidEntity() then
+				if IsValidEntity(victim) and victim:IsAlive() then
 		        	damage.victim 		= victim
 		        	damage.victim_level	= victim:GetLevel()
 					damage.damage 		= math.max(damage.damage_min, damage.damage_result / damage.victim_level)
