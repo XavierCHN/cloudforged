@@ -177,27 +177,32 @@ function OnPathtonSakura(keys)
   })
   -- 初始化玩家移动位置
   caster:SetOrigin(move_start_pos)
+  local cOrigin = move_start_pos
   -- 让玩家无法移动
   caster:AddNewModifier(caster, nil, 'modifier_rooted', {}) 
   -- 开始玩家运动计时器
   caster:SetContextThink(DoUniqueString('phantom_sakura_main'),
     function()
-      -- 获取玩家位置
-      local cOrigin = caster:GetOrigin()
       -- 计算下一个运动位置
       local rOrigin = cOrigin + (move_target_pos - move_start_pos):Normalized() * 60
+      -- 存储当前运动位置
+      cOrigin = rOrigin
       -- 设置玩家面向角度
       caster:SetForwardVector((move_target_pos - move_start_pos):Normalized())
       -- 设置英雄的运动位置
       caster:SetOrigin(rOrigin)
 
-      -- 如果距离目标位置距离大于30，继续循环
+      -- 如果距离目标位置距离大于40，继续循环
       if GetTrapDistance(cOrigin,move_target_pos) > 40 then
         return 0.03
       else
+        -- 计算已经转向的次数
         corner_count = corner_count + 1
+        -- 如果转向次数达到五次，完成了五角星
         if corner_count >= 5 then
+          -- 让英雄回到初始位置
           caster:SetOrigin(caster_origin)
+          -- 英雄开始跳跃
           local jump_up_offset = Vector(0,0,80)
           local drop_down_offset = Vector(0,0,0)
           local rOrigin = caster:GetOrigin() + jump_up_offset
@@ -206,7 +211,7 @@ function OnPathtonSakura(keys)
             function()
               caster:SetOrigin(rOrigin)
               --==================================
-              if jumping_up then
+              if jumping_up then -- 伪跳跃加速度
                 jump_up_offset.z = jump_up_offset.z - 8
                 rOrigin = rOrigin + jump_up_offset
               else
@@ -224,7 +229,7 @@ function OnPathtonSakura(keys)
                 caster:SetOrigin(caster_origin)
                 -- 在陷阱列表中循环
                 for k,v in pairs(TATraps) do
-                  -- 引爆周围300单位的所有陷阱
+                  -- 引爆周围700单位的所有陷阱
                   if GetTrapDistance(v.position,caster_origin) < 700 then
                     -- 调用Damage施加伤害
                     local damage_keys = {
@@ -232,8 +237,9 @@ function OnPathtonSakura(keys)
                       ability = keys.ability,
                       damage_category = DAMAGE_CATEGORY_SENSITIVE,
                       damage_type = DAMAGE_TYPE_PURE,
-                      damage_agi = 0.4,
+                      damage_agi = 0.04, --  伤害敏捷系数加成0.04
                       damage_min = 200,
+                      -- 对周围100范围内的单位造成伤害
                       target_entities = FindUnitsInRadius(
                         caster:GetTeam(),
                         v.position,
@@ -261,7 +267,9 @@ function OnPathtonSakura(keys)
               return 0.03
             end,
           0.03)
+          -- 让英雄恢复移动 
           caster:RemoveModifierByName('modifier_rooted') 
+          -- 移除连锁
           caster:RemoveModifierByName('modifier_phantom_sakura_interlock') 
           return nil
         else
