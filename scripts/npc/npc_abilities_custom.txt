@@ -430,6 +430,12 @@
 		//---------------------------------------------------------------------------------------
 		"OnSpellStart"
 		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"create_spiral_axe_act"
+				"Target"		"CASTER"
+			}
+
 			"FireEffect"	
 			{
 				"EffectName" 			"particles\econ\items\axe\axe_weapon_bloodchaser\axe_attack_blur_counterhelix_bloodchaser_b.vpcf"
@@ -459,6 +465,15 @@
 			{
 				"EffectName"	"Hero_Axe.CounterHelix"
 				"Target"		"CASTER"
+			}
+		}
+
+		"Modifiers"
+		{
+			"create_spiral_axe_act"
+			{
+				"Duration"	"0.2"
+				"OverrideAnimation"		"ACT_DOTA_CAST_ABILITY_3"
 			}
 		}
 
