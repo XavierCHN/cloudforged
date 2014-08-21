@@ -787,28 +787,17 @@
 					}
 				}
 
-				"ThinkInterval"		"1"
-				"OnIntervalThink"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"create_wise_hidden"
-						"Target"
-						{
-							"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
-							"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-							"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
-							"Center"	"CASTER"
-							"Radius"	"600"
-						}
-					}
-				}
+				"Aura" 			"create_wise_hidden"
+				"Aura_Radius" 	"%radius"
+				"Aura_Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"Aura_Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+				"Aura_Flags" "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 			}
 
 			"create_wise_hidden"
 			{
 				"IsDebuff"	"1"
-				"Duration"	"1.1"
+				"IsPurgable"	"0"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"%magical"
@@ -829,10 +818,15 @@
 			}	
 			"02"
 			{
+				"var_type"		"FIELD_INTEGER"
+				"radius"		"600"
+			}
+			"03"
+			{
 				"var_type"		"FIELD_FLOAT"
 				"magical"		"-10 -15 -20 -25"
 			}
-			"03"
+			"04"
 			{
 				"var_type"		"FIELD_FLOAT"
 				"armor"			"-5 -10 -15 -20"
