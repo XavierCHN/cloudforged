@@ -367,6 +367,12 @@
 				"EffectName"		"particles\econ\items\abaddon\abaddon_feathers_mace\abaddon_aphotic_shield_explosion_ref.vpcf"
 				"EffectAttachType"	"follow_chest"
 			}
+
+			"FireSound"
+			{
+				"EffectName"	"Hero_Beastmaster.Primal_Roar"
+				"Target"		"CASTER"
+			}
 		}
 
 		// Special
@@ -449,6 +455,11 @@
 				}
 			}
 
+			"FireSound"
+			{
+				"EffectName"	"Hero_Axe.CounterHelix"
+				"Target"		"CASTER"
+			}
 		}
 
 		// Special
@@ -618,6 +629,12 @@
 			{
 				"Target"		"POINT"
 				"ModifierName"	"create_titan"
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"Dire.ancient.Destruction"
+				"Target"		"CASTER"
 			}
 		}
 

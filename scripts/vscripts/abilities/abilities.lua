@@ -81,3 +81,14 @@ function rubick_wise( keys )
 		 												return 1
 		 											end, 0)
 end
+
+
+--
+function rubick_wise_hidden( keys )
+	local target = keys.target_entities
+
+	for i,v in pairs(target) do
+		print(i)
+		print(v)
+	end
+end

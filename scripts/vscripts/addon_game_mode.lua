@@ -35,6 +35,8 @@ function Precache( context )
     PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_gnoll/n_creep_gnoll.vmdl", context )
     PrecacheResource( "model", "models/creeps/mega_greevil/mega_greevil.vmdl", context )
 
+	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts", context )
+    
 end
 
 -- Create the game mode when we activate
