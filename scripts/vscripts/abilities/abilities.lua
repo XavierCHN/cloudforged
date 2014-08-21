@@ -64,3 +64,20 @@ end
 function rubick_sacrifice_off( keys )
 	rubick_sacrifice_is=false
 end
+
+--隐修议员 3技能 被动
+function rubick_wise( keys )
+	local caster = EntIndexToHScript(keys.caster_entindex)
+	local ability=keys.ability
+	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("rubick_wise_loop"), 
+		 											function()
+		 												local hp = caster:GetHealth()
+		 												local i=ability:GetLevel()-1
+		 												local x=ability:GetLevelSpecialValueFor("int", i)
+		 												local a_hp = caster:GetIntellect()*x
+		 												if hp<caster:GetMaxHealth() and caster:IsAlive() then
+		 													caster:SetHealth(hp+a_hp)
+		 												end
+		 												return 1
+		 											end, 0)
+end

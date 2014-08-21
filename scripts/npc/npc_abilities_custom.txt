@@ -753,6 +753,93 @@
 		}
 	}
 
+	//隐修议员 3技能 被动
+	//技能名字 明智
+	//=====================================================================================
+	"rubick_wise"
+	{
+		// General
+		//---------------------------------------------------------------------------------------
+		"AbilityName"					"rubick_wise"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE" 
+		"BaseClass"						"ability_datadriven"  
+		"AbilityTextureName"			"rubick_null_field"
+
+		// Casting
+		//---------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0" 
+		"AbilityCastRange"				"600"
+
+		//Modifiers
+		//---------------------------------------------------------------------------------------
+		"Modifiers"
+		{
+			"create_wise"
+			{
+				"Passive"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+						"Function"		"rubick_wise"
+						"Target"		"CASTER"
+					}
+				}
+
+				"ThinkInterval"		"1"
+				"OnIntervalThink"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"create_wise_hidden"
+						"Target"
+						{
+							"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+							"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+							"Center"	"CASTER"
+							"Radius"	"600"
+						}
+					}
+				}
+			}
+
+			"create_wise_hidden"
+			{
+				"IsDebuff"	"1"
+				"Duration"	"1.1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"%magical"
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%armor"
+				}
+			
+			}
+		}
+
+		// Special
+		//-----------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"int"			"1.2 1.5 1.8 2.1"
+			}	
+			"02"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"magical"		"-10 -15 -20 -25"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"armor"			"-5 -10 -15 -20"
+			}
+		}
+	}
+
 	//圣堂大招
 	//技能名称， 樱之环
 	"templar_sakura_circle"
