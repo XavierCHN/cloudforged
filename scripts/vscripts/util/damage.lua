@@ -70,11 +70,11 @@
 		setmetatable(damage, Damage.damage_meta)
 		
 		--获取技能传参,构建伤害table
-		damage.attacker			= damage.attacker or EntIndexToHScript(damage.caster_entindex)							--伤害来源(施法者)
-		damage.attacker_level	= damage.attacker:GetLevel()															--技能施放者的等级
-		damage.ability_level	= damage.ability:GetLevel()																--技能等级
-		damage.category_level	= ItemCore:GetAttribute(damage.attacker,damage.damage_category)							--伤害分类精通
-		damage.damage_type		= type(damage.damage_type) == 'string' and _G[damage.damage_type] or damage.damage_type	--转换伤害类型常量
+		damage.attacker			= damage.caster_entindex and EntIndexToHScript(damage.caster_entindex) or damage.attacker	--伤害来源(施法者)
+		damage.attacker_level	= damage.attacker:GetLevel()																--技能施放者的等级
+		damage.ability_level	= damage.ability:GetLevel()																	--技能等级
+		damage.category_level	= ItemCore:GetAttribute(damage.attacker,damage.damage_category)								--伤害分类精通
+		damage.damage_type		= type(damage.damage_type) == 'string' and _G[damage.damage_type] or damage.damage_type		--转换伤害类型常量
 		
 
 		-- 伤害计算公式：
@@ -101,7 +101,7 @@
 
 		--遍历数组进行伤害		
 		for i, victim in ipairs(targets) do
-				if victim:IsAlive() and IsValidEntity(victim) then
+				if IsValidEntity(victim) and victim:IsAlive() then
 		        	damage.victim 		= victim
 		        	damage.victim_level	= victim:GetLevel()
 					damage.damage 		= math.max(damage.damage_min, damage.damage_result / damage.victim_level)
