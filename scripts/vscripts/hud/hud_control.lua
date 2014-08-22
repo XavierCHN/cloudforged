@@ -1,0 +1,1 @@
+if CFHUD == nil then
