@@ -633,11 +633,11 @@
 		//---------------------------------------------------------------------------------------
 		"OnSpellStart"
 		{
-			"RunScript"		//暂时使用脚本进行创建特效
+			"FireEffect"
 			{
-				"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
-				"Function"		"axe_titan_force_effect"
-				"Target"		"POINT"
+				"TargetPoint"		"POINT"
+				"EffectName"		"particles\hw_fx\hw_roshan_death_e.vpcf"
+				"EffectAttachType"	"world_origin"
 			}
 
 			"CreateThinker"
