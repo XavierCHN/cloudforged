@@ -256,9 +256,9 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityLayout"	"4"
 		"Ability1"		"rubick_sacrifice"
-		"Ability2"		""
+		"Ability2"		"rubick_Bless"
 		"Ability3"		"rubick_wise"
-		"Ability4"		""
+		"Ability4"		"rubick_respawn_str"
 		"Ability5"		""
 		"Ability6"		""
 		"Ability7"		""

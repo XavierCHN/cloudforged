@@ -75,11 +75,34 @@ end
 
 
 --
-function rubick_wise_hidden( keys )
-	local target = keys.target_entities
+function rubick_Bless( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local i=keys.ability:GetLevel()
+	local overtime = 0
+	local ability      =nil
+	local abilityName  =nil
+	local modifierName =nil
 
-	for i,v in pairs(target) do
-		print(i)
-		print(v)
+	if target:IsOpposingTeam(caster:GetTeam()) then
+		abilityName="rubick_Bless_enemy_hidden"
+		modifierName="create_Bless_enemy"
+		target:AddAbility(abilityName)
+		overtime=keys.ability:GetLevelSpecialValueFor("time_enemy", i-1)
+		ability = target:FindAbilityByName(abilityName)
+		ability:SetLevel(i)
+	else
+		abilityName="rubick_Bless_friendly_hidden"
+		modifierName="create_Bless_friendly"
+		target:AddAbility(abilityName)
+		overtime=keys.ability:GetLevelSpecialValueFor("time_friendly", i-1)
+		ability = target:FindAbilityByName(abilityName)
+		ability:SetLevel(i)
 	end
+	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("rubick_Bless_time"), 
+		 											function()
+		 												target:RemoveAbility(abilityName)
+		 												target:RemoveModifierByName(modifierName)
+		 												return nil
+		 											end, overtime)
 end

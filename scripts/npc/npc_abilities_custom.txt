@@ -724,7 +724,7 @@
 		// General
 		//---------------------------------------------------------------------------------------
 		"AbilityName"					"rubick_sacrifice"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE|DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_IMMEDIATE" 
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_TOGGLE" 
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"BaseClass"						"ability_datadriven"  
 		"AbilityTextureName"			"enchantress_natures_attendants"
@@ -785,6 +785,211 @@
 		}
 	}
 
+	//隐修议员 拉比克 2技能 主动
+	//技能名字 祝福
+	//=====================================================================================
+	"rubick_Bless"
+	{
+		// General
+		//---------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+		"BaseClass"						"ability_datadriven"  
+		"AbilityTextureName"			"rubick_spell_steal"
+
+		// Casting
+		//---------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0" 
+		"AbilityCastRange"				"800"
+
+		//Time
+		//---------------------------------------------------------------------------------------
+		"AbilityCooldown"		 		"10"
+
+		// Cost
+		//---------------------------------------------------------------------------------------
+		"AbilityManaCost"				"50 75 100 125"
+
+		//OnSpellStart
+		//---------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+				"Function"		"rubick_Bless"
+				"Target"		"TARGET"
+			}
+		}
+
+		"AbilitySpecial"
+		{	
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"time_friendly"	"5"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"attack"		"1 2 4 8"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"armor"			"1 2 3 4"
+			}
+			"04"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"mana"			"1 2 4 8"
+			}
+			"05"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"time_enemy"	"5"
+			}
+			"06"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"mag"			"-1 -2 -3 -4"
+			}
+			"07"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"attack_2"		"-1 -2 -4 -8"
+			}
+			"08"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"armor_2"			"-1 -2 -3 -4"
+			}
+		}
+	}
+
+	//祝福 隐藏被动 友军
+	"rubick_Bless_friendly_hidden"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE|DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"						"ability_datadriven"
+		"AbilityCastPoint"				"0.0" 
+		"AbilityCooldown"		 		"0"
+		"AbilityManaCost"				"0"
+		"MaxLevel"						"4"
+		"AbilityTextureName"			"rubick_spell_steal"
+
+		"Modifiers"
+		{
+			"create_Bless_friendly"
+			{
+				"Passive"		"1"
+				"OnTakeDamage"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"create_Bless_friendly_buff"
+						"Target"		"CASTER"
+					}
+				}
+			}
+
+			"create_Bless_friendly_buff"
+			{
+				"IsHidden"		"1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Duration"		"5"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%armor"
+					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"		"%attack"
+					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"			"%mana"
+				}
+			}
+		}
+
+		"AbilitySpecial"
+		{	
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"mana"			"1 2 4 8"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"attack"		"1 2 4 8"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"armor"			"1 2 3 4"
+			}
+		}
+	}
+
+	//祝福 隐藏被动 敌人
+	"rubick_Bless_enemy_hidden"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE|DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"						"ability_datadriven"
+		"AbilityCastPoint"				"0.0" 
+		"AbilityCooldown"		 		"0"
+		"AbilityManaCost"				"0"
+		"MaxLevel"						"4"
+		"AbilityTextureName"			"rubick_spell_steal"
+
+		"Modifiers"
+		{
+			"create_Bless_enemy"
+			{
+				"Passive"		"1"
+				"IsDebuff"		"1"
+				"OnTakeDamage"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"create_Bless_enemy_buff"
+						"Target"		"CASTER"
+					}
+				}
+			}
+
+			"create_Bless_enemy_buff"
+			{
+				"IsHidden"		"1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Duration"		"5"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%armor"
+					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"		"%attack"
+					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"%mag"
+				}
+			}
+		}
+
+		"AbilitySpecial"
+		{	
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"mag"			"-1 -2 -3 -4"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"attack"		"-1 -2 -4 -8"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"armor"			"-1 -2 -3 -4"
+			}
+		}
+	}
+
 	//隐修议员 3技能 被动
 	//技能名字 明智
 	//=====================================================================================
@@ -792,7 +997,7 @@
 	{
 		// General
 		//---------------------------------------------------------------------------------------
-		"AbilityName"					"rubick_wise"
+		//"AbilityName"					"rubick_wise"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE" 
 		"BaseClass"						"ability_datadriven"  
 		"AbilityTextureName"			"rubick_null_field"
@@ -865,6 +1070,51 @@
 			}
 		}
 	}
+
+	//隐修议员 大招
+	//技能名字 焕然一新
+	//=====================================================================================
+	"rubick_respawn_str"
+	{
+		// General
+		//---------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE" 
+		"BaseClass"						"ability_datadriven"  
+		"AbilityTextureName"			"rubick_null_field"
+
+		// Casting
+		//---------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0" 
+
+		"OnOwnerDied"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+				"Function"		"rubick_respawn_str"
+				"Target"		"CASTER"
+			}
+		}
+
+		"Modifiers"
+		{
+			"create_respawn_str"
+			{
+				"Passive"	"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_REINCARNATION"	"5"
+				}
+			}
+
+			"create_x"
+			{
+				
+			}
+		}
+
+	}
+
 
 	//圣堂大招
 	//技能名称， 樱之环
