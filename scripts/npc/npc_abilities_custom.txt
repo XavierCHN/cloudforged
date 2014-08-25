@@ -704,12 +704,12 @@
 			"04"
 			{
 				"var_type"		"FIELD_FLOAT"
-				"increase"		"1.1 1.2 1.3 1.4"
+				"increase"		"1.2 1.3 1.4"
 			}
 			"05"
 			{
 				"var_type"		"FIELD_FLOAT"
-				"str"			"0.3 0.4 0.5 0.6"
+				"str"			"0.4 0.5 0.6"
 			}
 		}
 
@@ -751,6 +751,12 @@
 				"Function"		"rubick_sacrifice_on"
 				"Target"		"CASTER"
 			}
+
+			"ApplyModifier"
+			{
+				"ModifierName"		"create_rubick_sacrifice_effect"
+				"Target"			"CASTER"
+			}
 		}
 
 		"OnToggleOff"
@@ -761,8 +767,24 @@
 				"Function"		"rubick_sacrifice_off"
 				"Target"		"CASTER"
 			}
+
 		}
 
+		"Modifiers"
+		{
+			"create_rubick_sacrifice_effect"
+			{
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"		"particles/econ/courier/courier_trail_orbit/courier_trail_orbit.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"TARGET"
+					}
+				}
+			}
+		}
 		// Special
 		//-----------------------------------------------------------------------------------------
 		"AbilitySpecial"
@@ -1072,47 +1094,171 @@
 	}
 
 	//隐修议员 大招
-	//技能名字 焕然一新
+	//技能名字 自然的庇护
 	//=====================================================================================
-	"rubick_respawn_str"
+	"rubick_natural_shelter"
 	{
 		// General
 		//---------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE" 
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_CHANNELLED" 
 		"BaseClass"						"ability_datadriven"  
-		"AbilityTextureName"			"rubick_null_field"
+		"AbilityTextureName"			"rubick_telekinesis"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 
 		// Casting
 		//---------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0" 
+		"AbilityCastRange"				"800"
+		"AbilityChannelTime"			"10"
 
-		"OnOwnerDied"
+		//Time
+		//---------------------------------------------------------------------------------------
+		"AbilityCooldown"		 		"40 50 60"
+
+		// Cost
+		//---------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100 150 200"
+
+		"OnSpellStart"
 		{
 			"RunScript"
 			{
 				"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
-				"Function"		"rubick_respawn_str"
+				"Function"		"rubick_natural_shelter"
 				"Target"		"CASTER"
 			}
 		}
 
-		"Modifiers"
+		"OnChannelInterrupted"
 		{
-			"create_respawn_str"
+			"RunScript"
 			{
-				"Passive"	"1"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_REINCARNATION"	"5"
-				}
-			}
-
-			"create_x"
-			{
-				
+				"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+				"Function"		"rubick_natural_shelter_channel_is"
+				"Target"		"CASTER"
 			}
 		}
 
+		"OnChannelFinish"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+				"Function"		"rubick_natural_shelter_channel_is"
+				"Target"		"CASTER"
+			}
+		}
+
+		// Special
+		//-----------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"radius"		"800"
+			}	
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"attributes"	"15 20 25"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"heal_mana"		"1.5 2 2.5"
+			}
+			"04"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"min_heal"		"1"
+			}
+		}
+
+	}
+
+	//自然的庇护 马甲特效
+	"rubick_natural_shelter_dummy"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE" 
+		"BaseClass"						"ability_datadriven"
+
+		"Modifiers"
+		{
+			"modifier_dummy_ability"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+				"States"
+				{
+					"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"		//不可选择
+					"MODIFIER_STATE_INVULNERABLE"	"MODIFIER_STATE_VALUE_ENABLED"		//无敌
+					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"	//无碰撞
+				}
+
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"	"particles/econ/courier/courier_greevil_green/courier_greevil_green_ambient_3.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target"		"CASTER"
+					}
+				}
+			}
+		}
+	}
+
+	//隐修议员 自然的庇护 光环
+	"rubick_natural_shelter_aura"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE|DOTA_ABILITY_BEHAVIOR_AURA|DOTA_ABILITY_BEHAVIOR_HIDDEN" 
+		"BaseClass"						"ability_datadriven"
+		"MaxLevel"						"3"
+		"AbilityTextureName"			"rubick_telekinesis"
+
+		"Modifiers"
+		{
+			"create_rubick_natural_shelter_aura"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+				"Aura"			"create_rubick_natural_shelter_aura_1"
+				"Aura_Radius"	"800"
+				"Aura_Teams"	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				"Aura_Types"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"Aura_Flags"	"DOTA_UNIT_TARGET_FLAG_NONE"
+			}
+
+			"create_rubick_natural_shelter_aura_1"
+			{
+				"IsPurgable"	"0"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%attributes"
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"		"%attributes"
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%attributes"
+					"MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE"	"%heal_mana"
+					"MODIFIER_PROPERTY_MANA_REGEN_PERCENTAGE"	"%heal_mana"
+					"MODIFIER_PROPERTY_MIN_HEALTH"				"1"
+				}
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"attributes"	"15 20 25"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"heal_mana"		"1.5 2 2.5"
+			}
+		}
+		
 	}
 
 

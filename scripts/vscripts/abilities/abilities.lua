@@ -53,7 +53,9 @@ function rubick_sacrifice_on( keys )
 end
 
 function rubick_sacrifice_off( keys )
+	local caster = keys.caster
 	rubick_sacrifice_is=false
+	caster:RemoveModifierByName("create_rubick_sacrifice_effect")
 end
 
 --隐修议员 3技能 被动
@@ -74,7 +76,7 @@ function rubick_wise( keys )
 end
 
 
---
+--隐修议员 2技能
 function rubick_Bless( keys )
 	local caster = keys.caster
 	local target = keys.target
@@ -105,4 +107,68 @@ function rubick_Bless( keys )
 		 												target:RemoveModifierByName(modifierName)
 		 												return nil
 		 											end, overtime)
+end
+
+
+
+--隐修议员 4技能
+--全局变量
+rubick_natural_shelter_channel=false
+--
+function rubick_natural_shelter( keys )
+	local caster = keys.caster
+	local vec_caster = caster:GetOrigin()
+	local dummy_left = {}
+	local dummy_right = {}
+	local i = 1
+	local angle = QAngle(0,-5,0)
+	local unitName = "npc_dummy"
+	local abilityName = "rubick_natural_shelter_dummy"
+	rubick_natural_shelter_channel=true
+
+	local abilityName_aura = "rubick_natural_shelter_aura"
+	caster:AddAbility(abilityName_aura)
+	local ability_aura=caster:FindAbilityByName(abilityName_aura)
+	ability_aura:SetLevel(keys.ability:GetLevel())
+
+
+	for Len=100,800,100 do
+		local vec_left = vec_caster+Vector(0,Len,0)
+		local vec_right = vec_caster+Vector(0,-Len,0)
+		dummy_left[i]=CreateUnitByName(unitName, vec_left, false, caster, nil, caster:GetTeam())
+		dummy_left[i]:AddAbility(abilityName)
+		local ability1 = dummy_left[i]:FindAbilityByName(abilityName)
+		ability1:SetLevel(1)
+		dummy_right[i]=CreateUnitByName(unitName, vec_right, false, caster, nil, caster:GetTeam())
+		dummy_right[i]:AddAbility(abilityName)
+		local ability2 = dummy_right[i]:FindAbilityByName(abilityName)
+		ability2:SetLevel(1)
+		i=i+1
+	end
+	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("rubick_natural_shelter_time"), 
+		function( )
+			if rubick_natural_shelter_channel then
+				for k=1,8,1 do
+					local vec_left = dummy_left[k]:GetOrigin()
+					local vec_right = dummy_right[k]:GetOrigin()
+					local vec_left_rotate = RotatePosition(vec_caster, angle, vec_left)
+					local vec_right_rotate = RotatePosition(vec_caster, angle, vec_right)
+					dummy_left[k]:SetOrigin(vec_left_rotate)
+					dummy_right[k]:SetOrigin(vec_right_rotate)
+				end
+				return 0.03
+			else
+				for k=1,8,1 do
+					dummy_left[k]:Kill(dummy_left[k], dummy_left[k])
+					dummy_right[k]:Kill(dummy_right[k], dummy_right[k])
+				end
+				caster:RemoveAbility(abilityName_aura)
+				caster:RemoveModifierByName("create_rubick_natural_shelter_aura")
+				return nil
+			end
+		end, 0)
+end
+
+function rubick_natural_shelter_channel_is( keys )
+	rubick_natural_shelter_channel=false
 end

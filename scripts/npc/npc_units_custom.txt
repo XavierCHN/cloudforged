@@ -2,6 +2,33 @@
 "DOTAUnits"
 {
 	"Version"	"1"
+
+	//马甲 用于技能的制作
+	"npc_dummy"
+	{
+		"Model"						"models/creeps/lane_creeps/creep_radiant_melee/radiant_melee.vmdl"
+		"BaseClass"					"npc_dota_warlock_golem"
+		"Level"						"6"
+		"ModelScale" 				"0.0"
+		"ArmorPhysical"				"0"	
+		"StatusHealth"				"75"		
+		"StatusHealthRegen"			"0.0"		
+		"StatusMana"				"0"			
+		"StatusManaRegen"			"0.0"
+		"BountyXP"					"0"		
+		"BountyGoldMin"				"0"		
+		"BountyGoldMax"				"0"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"0"
+		"VisionDaytimeRange"		"400"
+		"VisionNighttimeRange"		"400"
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+		"Ability1"					""
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+	}
+
 	//第一波
 	"npc_cf_enemy_ghost"
 	{
