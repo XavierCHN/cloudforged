@@ -172,3 +172,26 @@ end
 function rubick_natural_shelter_channel_is( keys )
 	rubick_natural_shelter_channel=false
 end
+
+
+function centaur_speed_support( keys )
+	local caster = keys.caster
+	local point = keys.target_points
+	local unit = CreateUnitByName("npc_dummy", caster:GetOrigin(), false, caster, nil, caster:GetTeam())
+
+	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("centaur_speed_support_time"), 
+		function( )
+			local vec_caster = caster:GetOrigin()
+			if	(vec_caster - point[1]):Length()>=50 then
+				local vec_caster_2=caster:GetAbsOrigin()
+				local face=(point[1] - vec_caster_2)
+				local vec=face:Normalized() * 3.0
+				caster:SetOrigin(vec_caster_2 + face)
+				return 0.03
+			else
+				GameRules:SendCustomMessage("Over", caster:GetTeam(), 1)
+				return nil
+			end
+
+		end, 0)
+end

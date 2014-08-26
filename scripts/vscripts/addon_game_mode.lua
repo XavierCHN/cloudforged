@@ -38,7 +38,8 @@ function Precache( context )
     PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_gnoll/n_creep_gnoll.vmdl", context )
     PrecacheResource( "model", "models/creeps/mega_greevil/mega_greevil.vmdl", context )
     PrecacheResource( "model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_melee.vmdl", context )
-
+    PrecacheResource( "model", "models/creeps/roshan/roshan.vmdl", context )
+   
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts", context )
 
     

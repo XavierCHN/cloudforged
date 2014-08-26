@@ -1464,4 +1464,42 @@
             }
 		}
 	}
+
+	
+	//征战暴君 1技能 主动
+	//技能名字 快速支援
+	//==========================================================================================
+	"centaur_speed_support"
+	{
+		// General
+		//---------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT" 
+		"BaseClass"						"ability_datadriven"  
+		"AbilityTextureName"			"centaur_stampede"
+
+		// Casting
+		//---------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0" 
+		"AbilityCastRange"				"900 1100 1300 1500"
+
+		//Time
+		//---------------------------------------------------------------------------------------
+		"AbilityCooldown"		 		"11 9 7 5"
+
+		// Cost
+		//---------------------------------------------------------------------------------------
+		"AbilityManaCost"				"60 50 40 30"
+
+		//OnSpellStart
+		//---------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+				"Function"		"centaur_speed_support"
+				"Target"		"POINT"
+			}
+		}
+	}
 }
