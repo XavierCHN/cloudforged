@@ -34,14 +34,15 @@ function Precache( context )
 	PrecacheResource( "particle", "particles/econ/courier/courier_trail_orbit/courier_trail_orbit.vpcf", context )
 	PrecacheResource( "particle", "particles/econ/courier/courier_greevil_green/courier_greevil_green_ambient_3.vpcf", context )
 
-
     PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_gnoll/n_creep_gnoll.vmdl", context )
     PrecacheResource( "model", "models/creeps/mega_greevil/mega_greevil.vmdl", context )
     PrecacheResource( "model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_melee.vmdl", context )
     PrecacheResource( "model", "models/creeps/roshan/roshan.vmdl", context )
    
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts", context )
-
+	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_axe.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_elder_titan.vsndevts", context )
+	
     
 end
 

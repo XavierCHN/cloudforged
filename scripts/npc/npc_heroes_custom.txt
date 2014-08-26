@@ -55,9 +55,9 @@
 		//Ability
 		//-------------------------------------------------------------------------------------------------------------
 		"Ability1"		"centaur_speed_support"
-		"Ability2"		""
-		"Ability3"		""
-		"Ability4"		""
+		"Ability2"		"centaur_gravitational_hoof_stomp"
+		"Ability3"		"centaur_more_fight_more_brave"
+		"Ability4"		"centaur_trample_road"
 
 		// Armor
 		//-------------------------------------------------------------------------------------------------------------

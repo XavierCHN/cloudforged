@@ -159,8 +159,8 @@ function rubick_natural_shelter( keys )
 				return 0.03
 			else
 				for k=1,8,1 do
-					dummy_left[k]:Kill(dummy_left[k], dummy_left[k])
-					dummy_right[k]:Kill(dummy_right[k], dummy_right[k])
+					dummy_left[k]:RemoveSelf()
+					dummy_right[k]:RemoveSelf()
 				end
 				caster:RemoveAbility(abilityName_aura)
 				caster:RemoveModifierByName("create_rubick_natural_shelter_aura")
@@ -174,24 +174,123 @@ function rubick_natural_shelter_channel_is( keys )
 end
 
 
+--征战暴君 1技能
 function centaur_speed_support( keys )
 	local caster = keys.caster
 	local point = keys.target_points
-	local unit = CreateUnitByName("npc_dummy", caster:GetOrigin(), false, caster, nil, caster:GetTeam())
+	caster:SetForwardVector((point[1] - caster:GetOrigin()):Normalized())
 
 	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("centaur_speed_support_time"), 
 		function( )
 			local vec_caster = caster:GetOrigin()
 			if	(vec_caster - point[1]):Length()>=50 then
+				local vec_point = point[1]
 				local vec_caster_2=caster:GetAbsOrigin()
-				local face=(point[1] - vec_caster_2)
-				local vec=face:Normalized() * 3.0
-				caster:SetOrigin(vec_caster_2 + face)
-				return 0.03
+				local face=(vec_point - vec_caster_2)
+				local vec=face:Normalized() * 50.0
+				caster:SetOrigin(vec_caster_2 + vec)
+				return 0.01
 			else
-				GameRules:SendCustomMessage("Over", caster:GetTeam(), 1)
+				caster:RemoveModifierByName("modifier_phased")
+				caster:RemoveModifierByName("create_speed_support_animation")
 				return nil
 			end
 
 		end, 0)
+end
+
+
+--征战暴君 2技能
+function centaur_hoof_stomp( keys )
+	local caster = keys.caster
+	local group = keys.target_entities
+	local time = 0
+	local overtime = 0.15
+
+	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("centaur_hoof_stomp_1"), 
+		function( )
+			if time<overtime then
+				local casterVec = caster:GetOrigin()
+				local casterAbs = caster:GetAbsOrigin()
+
+				for i,unit in pairs(group) do
+					local unitVec = unit:GetOrigin()
+					local unitAbs = unit:GetAbsOrigin()
+					if (casterVec - unitVec):Length()>200 then
+						local face = casterAbs - unitAbs
+						local vec = face:Normalized() * 50.0
+						unit:SetAbsOrigin(unitAbs + vec)
+					end
+				end
+				time = time + 0.01
+				return 0.01
+			else
+				return nil
+			end
+		end, 0)
+end
+
+--征战暴君 4技能
+function centaur_trample_road_run(caster)
+	local overVec = caster:GetOrigin() + 1700 * caster:GetForwardVector()
+	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("trample_road_run"), 
+		function( )
+			local casterVec = caster:GetOrigin()
+			if (overVec - casterVec):Length()>50 then
+				local casterAbs = caster:GetAbsOrigin()
+				local face = overVec - casterVec
+				local vec = face:Normalized() * 35.0
+				caster:SetAbsOrigin(casterAbs + vec)
+				return 0.01
+			else
+				caster:RemoveSelf()
+				return nil
+			end
+		end, 0) 
+end
+
+function centaur_trample_road( keys )
+	local caster = keys.caster
+	local point = keys.target_points
+	local casterVec = caster:GetOrigin()
+	local face = (point[1] - casterVec):Normalized()
+	local angle = caster:GetAngles()
+	caster:SetForwardVector(face)
+	local abilityName = "centaur_trample_road_dummy"
+
+	faceLast=(casterVec - point[1]):Normalized()
+	local casterLast = casterVec + 700 * faceLast
+
+	local unit_a = {}
+	local Len = 175
+	for i=1,8,2 do
+		local unitLast = casterVec + Len*faceLast
+		local vec_a = RotatePosition(casterLast, QAngle(0,90,0), unitLast)
+		local vec_b = RotatePosition(casterLast, QAngle(0,-90,0), unitLast)
+		unit_a[i] = CreateUnitByName("npc_dota_hero_centaur", vec_a, false, caster, nil, caster:GetTeam())
+		unit_a[i+1] = CreateUnitByName("npc_dota_hero_centaur", vec_b, false, caster, nil, caster:GetTeam())
+		unit_a[i]:SetForwardVector(face)
+		unit_a[i+1]:SetForwardVector(face)
+		unit_a[i]:SetModelScale(1.0)
+		unit_a[i+1]:SetModelScale(1.0)
+		unit_a[i]:AddAbility(abilityName)
+		unit_a[i+1]:AddAbility(abilityName)
+		local ability_a = unit_a[i]:FindAbilityByName(abilityName)
+		local ability_b = unit_a[i+1]:FindAbilityByName(abilityName)
+		ability_a:SetLevel(1) 
+		ability_b:SetLevel(1) 
+		unit_a[i]:SetBaseStrength(caster:GetStrength())
+		unit_a[i+1]:SetBaseStrength(caster:GetStrength())
+		Len=Len+150
+	end
+
+	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("trample_road_time_1"), 
+		function( )
+			for i=1,8,1 do
+				centaur_trample_road_run(unit_a[i])
+			end
+			EmitSoundOn("Hero_Centaur.Stampede.Cast", caster) 
+			return nil
+		end, 1)
+
 end
