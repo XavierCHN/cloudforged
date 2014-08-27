@@ -1845,12 +1845,12 @@
 			"02"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"increase"			"1.1 1.2 1.3 1.4"
+				"increase"			"1.1 1.1 1.2 1.2"
 			}
 			"03"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"str"				"1.5"
+				"str"				"1.2"
 			}
 		}
 	}
@@ -1980,6 +1980,12 @@
 						"Target"		"TARGET"
 					}
 
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_trample_road_dummy_animation_2"
+						"Target"		"TARGET"
+					}
+
 				}
 			}
 
@@ -1987,6 +1993,21 @@
 			{
 				"Duration"	"3"
 				"OverrideAnimation"	"ACT_DOTA_RUN"
+			}
+
+			"modifier_trample_road_dummy_animation_2"
+			{
+				"Duration"	"3"
+				"ThinkInterval"	"0.2"
+				"OnIntervalThink"
+				{
+					"AttachEffect"
+					{
+						"EffectName"	"particles\units\heroes\hero_centaur\centaur_warstomp.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target"		"TARGET"
+					}
+				}
 			}
 		}
 	}

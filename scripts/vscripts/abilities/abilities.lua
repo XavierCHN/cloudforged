@@ -231,7 +231,7 @@ function centaur_hoof_stomp( keys )
 end
 
 --征战暴君 4技能
-function centaur_trample_road_run(caster)
+function centaur_trample_road_run(caster,hero,ability)
 	local overVec = caster:GetOrigin() + 1700 * caster:GetForwardVector()
 	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("trample_road_run"), 
 		function( )
@@ -247,6 +247,33 @@ function centaur_trample_road_run(caster)
 				return nil
 			end
 		end, 0) 
+	local teams = DOTA_UNIT_TARGET_TEAM_ENEMY
+	local types = DOTA_UNIT_TARGET_BASIC+DOTA_UNIT_TARGET_HERO+DOTA_UNIT_TARGET_MECHANICAL
+	local flags = DOTA_UNIT_TARGET_FLAG_NONE
+	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("trample_road_run"), 
+		function( )
+			if	IsValidEntity(caster) then 
+				local i=ability:GetLevel() - 1
+				local increase = ability:GetLevelSpecialValueFor("increase", i)
+				local str = ability:GetLevelSpecialValueFor("str", i)
+				local group = FindUnitsInRadius(hero:GetTeam(), caster:GetOrigin(), nil, 150, teams, types, flags, FIND_CLOSEST, true)
+				
+				for i,unit in pairs(group) do
+					local damageTable = {attacker= hero,
+										victim=unit,
+										ability=ability,
+										damage_increase=increase,
+										damage_type=DAMAGE_TYPE_PURE,
+										damage_category="force",
+										damage_str=str}
+					DamageTarget(damageTable)
+				end
+				return 0.2
+			else
+				return nil
+			end
+
+		end, 0)
 end
 
 function centaur_trample_road( keys )
@@ -287,7 +314,7 @@ function centaur_trample_road( keys )
 	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("trample_road_time_1"), 
 		function( )
 			for i=1,8,1 do
-				centaur_trample_road_run(unit_a[i])
+				centaur_trample_road_run(unit_a[i],caster,keys.ability)
 			end
 			EmitSoundOn("Hero_Centaur.Stampede.Cast", caster) 
 			return nil
