@@ -1530,6 +1530,10 @@
 				"OverrideAnimation"		"ACT_DOTA_RUN"
 				"EffectName"			"particles\units\heroes\hero_centaur\centaur_stampede.vpcf"
 				"EffectAttachType"		"follow_chest"
+				"States"
+			    {
+			        "MODIFIER_STATE_COMMAND_RESTRICTED" "MODIFIER_STATE_VALUE_ENABLED"
+			    }  
 			}
 		}
 
@@ -1949,6 +1953,7 @@
 					"MODIFIER_STATE_INVULNERABLE"	"MODIFIER_STATE_VALUE_ENABLED"		//无敌
 					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"	//无碰撞
 					"MODIFIER_STATE_DISARMED"		"MODIFIER_STATE_VALUE_ENABLED"		//无法攻击
+					"MODIFIER_STATE_NOT_ON_MINIMAP"	"MODIFIER_STATE_VALUE_ENABLED"		//隐藏小地图
 				}
 
 				"OnCreated"
