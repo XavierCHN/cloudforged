@@ -480,7 +480,7 @@
 		"MagicalResistance" "0" // 魔法抗性
 		// Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities" "DOTA_UNIT_CAP_ RANGED _ATTACK"
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
 		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
 		"AttackDamageMin" "550" // 最小攻击
 		"AttackDamageMax" "552" // 最大攻击

@@ -34,6 +34,18 @@ function Precache( context )
 	PrecacheResource( "particle", "particles/econ/courier/courier_trail_orbit/courier_trail_orbit.vpcf", context )
 	PrecacheResource( "particle", "particles/econ/courier/courier_greevil_green/courier_greevil_green_ambient_3.vpcf", context )
 
+    -- TA特效
+    PrecacheResource( "particle", "particles/hero_templar/antimage_blink_end_b.vpcf", context)
+    PrecacheResource( "particle", "particles/units/heroes/hero_warlock/warlock_rain_of_chaos_start.vpcf", context)
+    PrecacheResource( "particle", "particles/hero_templar/antimage_blink_start_sparkles.vpcf", context)
+    PrecacheResource( "particle", "particles/hero_templar/antimage_manavoid_explode_b.vpcf", context)
+    PrecacheResource( "particle", "particles/hero_templar/abysal/abyssal_blade.vpcf", context)
+    PrecacheResource( "particle", "particles/econ/courier/courier_jadehoof_ambient/jadehoof_special_blossoms.vpcf", context)
+
+
+    -- TA音效
+    PrecacheResource( "soundfile", 'soundevents/game_sounds_heroes/game_sounds_templar_assassin.vsndevts', context)
+
     PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_gnoll/n_creep_gnoll.vmdl", context )
     PrecacheResource( "model", "models/creeps/mega_greevil/mega_greevil.vmdl", context )
     PrecacheResource( "model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_melee.vmdl", context )
@@ -42,9 +54,9 @@ function Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_axe.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_elder_titan.vsndevts", context )
-
+    -- 刷金币的小怪模型
+    PrecacheResource( "model", "models/courier/greevil/gold_greevil.vmdl", context )
     --刷怪预载入，从第3波到第23波依次排序
-    PrecacheResource( "model", "models/creeps/lane_creeps/creep_bad_melee_diretide/creep_bad_melee_diretide.vmdl", context )
     PrecacheResource( "model", "models/creeps/lane_creeps/creep_good_melee/creep_good_melee.vmdl", context )
     PrecacheResource( "model", "models/creeps/lane_creeps/creep_good_ranged/creep_good_ranged.vmdl", context )
     PrecacheResource( "model", "models/creeps/lane_creeps/creep_bad_ranged/lane_dire_ranged.vmdl", context )
@@ -77,9 +89,9 @@ function CForgedGameMode:InitGameMode()
  	-- 设定游戏准备时间
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 0.1 )
 
-	GameRules:GetGameModeEntity():SetCameraDistanceOverride(1800)
+	GameRules:GetGameModeEntity():SetCameraDistanceOverride(1600)
 	GameRules:SetPreGameTime(1)
-		
+
     GameRules:SetUseCustomHeroXPValues ( true )
     -- 是否使用自定义的英雄经验
 

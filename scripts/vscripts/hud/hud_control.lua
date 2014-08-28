@@ -1,1 +1,1 @@
-if CFHUD == nil then
+CFHUD = CFHUD or class({})

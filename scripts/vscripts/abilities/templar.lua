@@ -51,9 +51,7 @@ function PlantACircleTrap(keys)
 
         local particle_blink_start = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_refraction_break.vpcf', PATTACH_CUSTOMORIGIN, caster) 
         ParticleManager:SetParticleControl(particle_blink_start, 0, caster:GetOrigin())
-        ParticleManager:ReleaseParticleIndex(particle_blink_start) --[[Returns:void
-        Frees the specified particle index
-        ]]
+        ParticleManager:ReleaseParticleIndex(particle_blink_start)
         -- 在跳出放陷阱循环后，将英雄放到樱花环的中心
         caster:SetOrigin(point)
         
@@ -64,61 +62,37 @@ function PlantACircleTrap(keys)
         
         -- 让英雄无法移动
         caster:AddNewModifier(caster, nil, 'modifier_rooted', {})
+        caster:AddNewModifier(caster, nil, 'modifier_silence', {})
 
         -- 0.8秒之后，释放樱花环
         caster:SetContextThink(DoUniqueString("release_circle"), 
           function()
-            
-            -- 为了避免陷阱循环出错的临时表
-            local temp = {}
-            --[[
-            -- 在陷阱列表中循环
-            for k,v in pairs(TATraps) do
-              
-              -- 引爆周围300单位的所有陷阱
-              if GetTrapDistance(v.position,point) < 300 then
-               
-                -- 调用Damage施加伤害
-                local damage_keys = {
-                  caster_entindex = keys.caster_entindex,
-                  ability = keys.ability,
-                  damage_category = DAMAGE_CATEGORY_SENSITIVE,
-                  damage_type = DAMAGE_TYPE_PURE,
-                  damage_agi = 0.4,
-                  damage_min = 200,
-                  target_entities = FindUnitsInRadius(
-                    caster:GetTeam(),
-                    v.position,
-                    nil,
-                    50,
-                    DOTA_UNIT_TARGET_TEAM_ENEMY,
-                    DOTA_UNIT_TARGET_ALL,
-                    0, FIND_CLOSEST,
-                    false)
-                }
-                DamageTarget(damage_keys)
-                
-                -- 移除陷阱特效的粒子特效
-                UTIL_RemoveImmediate(v.owning_unit)
-                ParticleManager:ReleaseParticleIndex(k)
-                
-                -- 将粒子特效移除出列表
-                TATraps[k] = nil
-
-                -- 为引爆的粒子特效增加引爆粒子特效
-                local particle_blink = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_trap_explode.vpcf', PATTACH_CUSTOMORIGIN, dummy_unit) 
-                ParticleManager:SetParticleControl( particle_blink , 0 , v.position )
-                ParticleManager:ReleaseParticleIndex( particle_blink )
-               
-              end
-            end ]]
-            
+            caster:RemoveModifierByName('modifier_rooted') 
+            caster:RemoveModifierByName('modifier_silence') 
+            -- 获取自身周围500范围内的目标并施加伤害
+            -- 调用Damage施加伤害
+            local damage_keys = {
+              caster_entindex = keys.caster_entindex,
+              ability = keys.ability,
+              damage_category = DAMAGE_CATEGORY_SENSITIVE,
+              damage_type = DAMAGE_TYPE_PURE,
+              damage_agi = 0.4,
+              damage_min = 200,
+              target_entities = FindUnitsInRadius(
+                caster:GetTeam(),
+                caster:GetOrigin(),
+                nil,
+                500,
+                DOTA_UNIT_TARGET_TEAM_ENEMY,
+                DOTA_UNIT_TARGET_ALL,
+                0, FIND_CLOSEST,
+                false)
+            }
+            DamageTarget(damage_keys)
             -- 移除英雄移动限制
             caster:RemoveModifierByName('modifier_rooted') 
-            
-            
-
-          end, 0.8)
+          end, 
+        0.03)
         return nil
       end
 
@@ -153,10 +127,12 @@ end
 function OnPathtonSakura(keys)
   -- 获取施法者
   local caster = keys.caster
+
   -- 避免重复释放
   if caster:HasModifier('modifier_phantom_sakura_interlock') then
     return
-  end 
+  end
+
   -- 获取施法者位置
   local caster_origin = caster:GetOrigin()
   -- 设定旋转角度
@@ -183,30 +159,41 @@ function OnPathtonSakura(keys)
   -- 开始玩家运动计时器
   caster:SetContextThink(DoUniqueString('phantom_sakura_main'),
     function()
-      -- 计算下一个运动位置
-      local rOrigin = cOrigin + (move_target_pos - move_start_pos):Normalized() * 60
-      -- 存储当前运动位置
-      cOrigin = rOrigin
-      -- 设置玩家面向角度
-      caster:SetForwardVector((move_target_pos - move_start_pos):Normalized())
       -- 设置英雄的运动位置
-      caster:SetOrigin(rOrigin)
+      caster:SetOrigin(move_target_pos)
+      local p = ParticleManager:CreateParticle('particles/hero_templar/antimage_blink_end_b.vpcf',PATTACH_CUSTOMORIGIN,caster)
+      -- 创建闪烁粒子特效
+      ParticleManager:SetParticleControl(p, 0, caster:GetOrigin())
+      ParticleManager:ReleaseParticleIndex(p)
+      move_start_pos = move_target_pos
+      move_target_pos = RotatePosition(caster_origin, move_rotate_angle, move_start_pos)
+      -- 创建下一个粒子特效并存储
+      local dummy_unit = CreateUnitByName('npc_cf_ta_trap', move_target_pos, false, caster, caster, caster:GetTeam())
+      local trap_particle = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_trap.vpcf', PATTACH_CUSTOMORIGIN, dummy_unit)
+      ParticleManager:SetParticleControl(trap_particle, 0, move_target_pos)
+      table.insert(TATraps,trap_particle,{
+        position = move_target_pos,
+        owning_unit = dummy_unit
+      })
 
-      -- 如果距离目标位置距离大于40，继续循环
-      if GetTrapDistance(cOrigin,move_target_pos) > 40 then
-        return 0.03
-      else
         -- 计算已经转向的次数
         corner_count = corner_count + 1
+
         -- 如果转向次数达到五次，完成了五角星
         if corner_count >= 5 then
           -- 让英雄回到初始位置
           caster:SetOrigin(caster_origin)
+
+          local p = ParticleManager:CreateParticle('particles/units/heroes/hero_warlock/warlock_rain_of_chaos_start.vpcf', PATTACH_CUSTOMORIGIN,caster)
+          ParticleManager:SetParticleControl(p, 0, caster_origin)
+          ParticleManager:ReleaseParticleIndex(p)
+          caster:EmitSound('Hero_TemplarAssassin.Trap')
           -- 英雄开始跳跃
           local jump_up_offset = Vector(0,0,80)
           local drop_down_offset = Vector(0,0,0)
           local rOrigin = caster:GetOrigin() + jump_up_offset
           local jumping_up = true
+
           caster:SetContextThink(DoUniqueString('jumping'),
             function()
               caster:SetOrigin(rOrigin)
@@ -261,6 +248,7 @@ function OnPathtonSakura(keys)
                     ParticleManager:SetParticleControl( particle_blink , 0 , v.position )
                     ParticleManager:ReleaseParticleIndex( particle_blink )
                   end
+                  caster:EmitSound('Hero_TemplarAssassin.Trap.Explode')
                 end
                 return nil
               end
@@ -272,23 +260,115 @@ function OnPathtonSakura(keys)
           -- 移除连锁
           caster:RemoveModifierByName('modifier_phantom_sakura_interlock') 
           return nil
-        else
-          -- 终点变起点，继续循环。
-          move_start_pos = move_target_pos
-          caster:SetOrigin(move_start_pos)
-          move_target_pos = RotatePosition(caster_origin, move_rotate_angle, move_start_pos)
-          -- 创建下一个粒子特效并存储
-          local dummy_unit = CreateUnitByName('npc_cf_ta_trap', move_target_pos, false, caster, caster, caster:GetTeam())
-          local trap_particle = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_trap.vpcf', PATTACH_CUSTOMORIGIN, dummy_unit)
-          ParticleManager:SetParticleControl(trap_particle, 0, move_target_pos)
-          table.insert(TATraps,trap_particle,{
-            position = move_target_pos,
-            owning_unit = dummy_unit
-          })
-
-          return 0.03
-        end
-      end
+        end -- 结束 跳跃
+        return 0.03
     end,
   0.03)
+end
+
+function OnSakuraFall(keys)
+  -- 获取释放英雄
+  local caster = keys.caster
+  
+  -- 获取英雄朝向
+  local forward_vec = caster:GetForwardVector()
+
+  local caster_origin = caster:GetOrigin()
+  print(forward_vec)
+  local currentLength = 30
+  caster:SetContextThink(DoUniqueString('sakura_fall'),
+    function()
+      for angleStart = -40,40,10 do
+        local angle = QAngle(0,angleStart,0)
+        local pPos = RotatePosition(caster_origin, angle, caster_origin + forward_vec * currentLength)
+        local p = ParticleManager:CreateParticle('particles/hero_templar/antimage_manavoid_explode_b.vpcf', PATTACH_CUSTOMORIGIN, caster)
+        ParticleManager:SetParticleControl(p, 0, pPos)
+        ParticleManager:ReleaseParticleIndex(p)
+
+        local damage_keys = {
+              caster_entindex = keys.caster_entindex,
+              ability = keys.ability,
+              damage_category = DAMAGE_CATEGORY_CUNNING,
+              damage_type = DAMAGE_TYPE_PURE,
+              damage_min = 30,
+              target_entities = FindUnitsInRadius(
+                caster:GetTeam(),
+                pPos,
+                nil,
+                100 + currentLength / 20, -- 数学渣
+                DOTA_UNIT_TARGET_TEAM_ENEMY,
+                DOTA_UNIT_TARGET_ALL,
+                0, FIND_CLOSEST,
+                false)
+            }
+            DamageTarget(damage_keys)
+
+      end
+      currentLength = currentLength + 150
+      if currentLength > 1800 then
+        return nil
+      end
+      return 0.07
+    end,
+  0.03)
+end
+
+function OnSakuraPath(keys)
+  local caster = keys.caster
+  local caster_origin = caster:GetOrigin()
+  local caster_fv = caster:GetForwardVector()
+  -- 获取单位向后的Vector
+  local caster_bv = caster_fv--RotatePosition(caster_origin, QAngle(0,-180,0), caster_origin + caster_fv):Normalized()
+  caster_bv.z = 0
+--[[
+  local p = ParticleManager:CreateParticle('particles/hero_templar/abysal/abyssal_blade.vpcf', PATTACH_CUSTOMORIGIN, caster)
+  ParticleManager:SetParticleControl(p, 0, caster_origin)
+  ParticleManager:ReleaseParticleIndex(p) 
+  local p_count = 0
+  caster:SetContextThink(DoUniqueString('sakura_blade'), 
+    function() 
+      local target = FindUnitsInRadius(
+          caster:GetTeam(),
+          caster_origin,
+          nil,
+          800,
+          DOTA_UNIT_TARGET_TEAM_ENEMY, 
+          DOTA_UNIT_TARGET_ALL,
+          0, FIND_CLOSEST,
+          false)
+        if #target >= 1 then
+          local i = RandomInt(1, #target)
+          local p = ParticleManager:CreateParticle('particles/hero_templar/abysal/abyssal_blade_impact_pnt.vpcf', PATTACH_CUSTOMORIGIN, caster)
+          ParticleManager:SetParticleControl(p, 0, target[i]:GetOrigin())
+          ParticleManager:ReleaseParticleIndex(p)
+        end
+        p_count = p_count + 1
+        if p_count >= 15 then
+          return nil
+        end
+        return 0.32
+    end,
+  0.03) 
+]]
+local dummy_unit = CreateUnitByName('npc_cf_ta_trap', caster:GetOrigin(), false, caster, caster, caster:GetTeam())
+  local p = ParticleManager:CreateParticle('particles/econ/items/juggernaut/jugg_sword_dragon/juggernaut_blade_fury_dragon.vpcf',
+   PATTACH_CUSTOMORIGIN, dummy_unit)
+
+  caster:AddNewModifier(caster, nil, "modifier_rooted", {})
+  local currentLength = 0
+  caster:SetContextThink(DoUniqueString('sakura_path'),
+      function()
+        local rOrigin = caster_origin + caster_bv * currentLength
+        caster:SetOrigin(rOrigin)
+        currentLength = currentLength + 70
+        ParticleManager:SetParticleControl(p, 0, rOrigin)
+        if currentLength >= 1000 then 
+          caster:RemoveModifierByName('modifier_rooted')
+          ParticleManager:ReleaseParticleIndex(p)  
+          UTIL_RemoveImmediate(dummy_unit)
+          return nil
+        end
+        return 0.03
+      end,
+    0.03)
 end

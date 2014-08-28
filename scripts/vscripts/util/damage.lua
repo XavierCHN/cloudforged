@@ -108,7 +108,8 @@
 		        	damage.victim_level	= victim:GetLevel()
 					damage.damage 		= math.max(damage.damage_min, damage.damage_result / damage.victim_level)
 
-					ApplyDamage(damage)
+					local damage_dealt = ApplyDamage(damage)
+					print('damage dealt[]:'..damage_dealt)
 				end
 		end
 

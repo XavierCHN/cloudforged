@@ -20,7 +20,7 @@ function OnGoldTeleport(keys)
                             if v:IsAlive() then currentSpawned = currentSpawned + 1 end
                         end
                         -- 同时存在的活着的怪物只能有30个
-                        if #currentSpawned < 30 then 
+                        if currentSpawned < 30 then 
                             for i=1,nSingleSpawnCount do
                                 local goldCreep = CreateUnitByName('creep_gold', eGoldSpawner:GetOrigin() + RandomVector(200) , true, nil, nil, DOTA_TEAM_BADGUYS)
                                 goldCreep:SetInitialGoalEntity(eTelEntity)

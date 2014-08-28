@@ -186,12 +186,14 @@
 		"AttackRange"				"600"
 		"AttackAcquisitionRange"	"650"
 
-		//Abilities
-		"Ability1"					""
-		"Ability2"					"templar_phantom_sakura"
-		"Ability3"					"templar_sakura_blade"
-		"Ability4"					"templar_sakura_circle"
+		"AbilityLayout"				"4"
 
+		//Abilities
+		"Ability1"					"templar_sakura_fall"
+		"Ability2"					"templar_sakura_circle"
+		"Ability3"					"templar_sakura_path"
+		"Ability4"					"templar_phantom_sakura"
+		
 		// Armor
 		//-------------------------------------------------------------------------------------------------------------
 		"ArmorPhysical"				"-1"
