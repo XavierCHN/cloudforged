@@ -58,11 +58,13 @@
 
 	--造成伤害主函数(技能)
 	function DamageTarget(damage)
-		print('damage called for '..#damage.target_entities)
+		
 		--获取技能
 		local targets	= damage.target_entities or {damage.victim}	--技能施放目标(数组)
-
-		if not targets then
+		
+		print('damage called for '..#targets)
+		
+		if #targets == 0 then
 			print(debug.traceback '无伤害目标')
 		end
 

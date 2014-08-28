@@ -86,6 +86,25 @@ end
 
 -- 从物品中获取精通等级的方法，返回值为英雄所拥有的对应精通等级的数值/100 + 1
 function ItemCore:GetAttribute(hero,category_name)
-    return tonumber( hero:GetContext(category_name) or "100") / 100 + 1
+    return tonumber( hero:GetContext(category_name) or "0") / 100 + 1
 end
 
+-- 让一个英雄只能拥有一种类型物品的方法
+function ItemCore:CheckItemType(hero, newitem)
+    -- 循环英雄身上所有物品
+    for i = 0, 11 do
+        local ITEM= hero:GetItemInSlot(i)
+        if ITEM then
+            local item_type = ITEM:GetSpecialValueFor("item_type")
+            local item_new_type = newitem:GetSpecialValueFor("item_type")
+            -- 如果物品类型和身上某一个物品类型相同
+            if item_type == item_new_type and (not item_new_type == "other")then
+                -- 为玩家增加购买金钱
+                PlayerResource:SetGold(hero:GetPlayerID(), PlayerResource:GetUnreliableGold(hero:GetPlayerID())+ newitem:GetCost(), false)
+                -- 移除物品
+                item:Remove()
+                break
+            end
+        end
+    end
+end

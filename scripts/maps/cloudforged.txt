@@ -4,12 +4,12 @@
 	{
 		"1"//第一波怪物
 		{
-			"name"					"npc_cf_enemy_ghost"
-			"spawn_interval"		"0.1" //每个怪之间的刷怪时间间隔，可以不定义
-			"count"					"5"//刷怪数量可以不定义，为默认刷怪数量
-			"level"					"1" //怪物等级，可以不定义，默认为1级
-			"RoundTitle"			"#CFRound_Title_Round_Melee_Ghost"
-			"RoundQuestTitle"		"#CFRound_Quest_Title_Round_Melee_Ghost"
+			"name"					"npc_cf_enemy_01_necro_warrior"
+			//"spawn_interval"		"0.1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"					"5"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"					"1" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_1"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_1"
 			"spawner"
 			{
 				"1"//随机的刷怪点，可以定义多个,至少要有一个
@@ -29,16 +29,603 @@
 				}
 				
 			}
-			
 		}
-		"2"//第二波怪物
+		"2"
 		{
-			"name"					"npc_cf_enemy_zombie"
+			"name"					"npc_cf_enemy_02_creep_bad_melee"
 			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
 			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
 			//"level"				"5" //怪物等级，可以不定义，默认为1级
-			"RoundTitle"			"#CFRound_Title_Round_Zombie"
-			"RoundQuestTitle"		"#CFRound_Quest_Title_Round_Zombie"
+			"RoundTitle"			"#CFRound_Title_2"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_2"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"3"
+		{
+			"name"					"npc_cf_enemy_03_creep_bad_melee_diretide"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_3"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_3"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"4"
+		{
+			"name"					"npc_cf_enemy_04_creep_good_melee"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_4"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_4"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"5"
+		{
+			"name"					"npc_cf_enemy_05_creep_good_ranged"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_5"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_5"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"6"
+		{
+			"name"					"npc_cf_enemy_06_lane_dire_ranged"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_6"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_6"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"7"
+		{
+			"name"					"npc_cf_enemy_07_creep_radiant_ranged_diretide"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_7"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_7"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"8"
+		{
+			"name"					"npc_cf_enemy_08_necro_archer"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_8"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_8"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"9"
+		{
+			"name"					"npc_cf_enemy_09_creep_radiant_melee_diretide"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_9"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_9"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"10"
+		{
+			"name"					"npc_cf_enemy_10_n_creep_beast"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_10"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_10"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"11"
+		{
+			"name"					"npc_cf_enemy_11_n_creep_forest_troll_berserker"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_11"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_11"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"12"
+		{
+			"name"					"npc_cf_enemy_12_n_creep_centaur_med"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_12"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_12"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"13"
+		{
+			"name"					"npc_cf_enemy_13_n_creep_centaur_lrg"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_13"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_13"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"14"
+		{
+			"name"					"npc_cf_enemy_14_n_creep_furbolg_disrupter"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_14"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_14"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"15"
+		{
+			"name"					"npc_cf_enemy_15_neutral_creep_golem_a"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_15"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_15"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"16"
+		{
+			"name"					"npc_cf_enemy_16_n_creep_ogre_med"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_16"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_16"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"17"
+		{
+			"name"					"npc_cf_enemy_17_n_creep_satyr_a"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_17"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_17"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"18"
+		{
+			"name"					"npc_cf_enemy_18_n_creep_worg_large"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_18"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_18"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"19"
+		{
+			"name"					"npc_cf_enemy_19_n_creep_black_drake"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_19"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_19"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"20"
+		{
+			"name"					"npc_cf_enemy_20_n_creep_dragonspawn_b"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_20"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_20"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"21"
+		{
+			"name"					"npc_cf_enemy_21_mega_greevil"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_21"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_21"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"22"
+		{
+			"name"					"npc_cf_enemy_22_n_creep_gargoyle"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_22"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_22"
+			"spawner"
+			{
+				"1"//随机的刷怪点，可以定义多个,至少要有一个
+				{
+					"SpawnerEntityName"			"CFSpawner_1"
+					"FirstPathCorner"			"CFSpawner_1_path_1"
+				}
+				"2"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_2"
+					"FirstPathCorner"			"CFSpawner_2_path_1"
+				}
+				"3"//随机的刷怪点，可以定义多个
+				{
+					"SpawnerEntityName"			"CFSpawner_3"
+					"FirstPathCorner"			"CFSpawner_3_path_1"
+				}
+				
+			}
+		}
+		"23"
+		{
+			"name"					"npc_cf_enemy_23_n_creep_dragonspawn_a"
+			//"spawn_interval"		"1" //每个怪之间的刷怪时间间隔，可以不定义
+			//"count"				"50"//刷怪数量可以不定义，为默认刷怪数量
+			//"level"				"5" //怪物等级，可以不定义，默认为1级
+			"RoundTitle"			"#CFRound_Title_23"
+			"RoundQuestTitle"		"#CFRound_Quest_Title_23"
 			"spawner"
 			{
 				"1"//随机的刷怪点，可以定义多个,至少要有一个

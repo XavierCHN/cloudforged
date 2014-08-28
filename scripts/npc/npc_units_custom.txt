@@ -28,132 +28,6 @@
 		"Ability3"					""
 		"Ability4"					""
 	}
-
-	//第一波
-	"npc_cf_enemy_ghost"
-	{
-	    "BaseClass"    "npc_dota_creature"
-	    "Model"    "models/creeps/mega_greevil/mega_greevil.vmdl"
-	    "ModelScale"	"0.8"
-	    "SoundSet"    "Creep_Good_Melee"
-	    "GameSoundsFile"    "soundevents/game_sounds_creeps.vsndevts"
-	    "MinimapIcon"    ""
-	    "MinimapIconSize"    "50"
-	    "HealthBarOffset"    "-1"
-	    "Ability1"    ""
-	    "Ability2"    ""
-	    "Ability3"    ""
-	    "Ability4"    ""
-	    "Ability5"    ""
-	    "Ability6"    ""
-	    "Ability7"    ""
-	    "Ability8"    ""
-	    "ArmorPhysical"    "0"
-	    "MagicalResistance"    "0"
-	    "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-	    "AttackDamageMin"    "25"
-	    "AttackDamageMax"    "30"
-	    "AttackRate"    "1.5"
-	    "AttackAnimationPoint"    "0.4"
-	    "AttackAcquisitionRange"    "200"
-	    "AttackRange"    "200"
-	    "ProjectileModel"    ""
-	    "ProjectileSpeed"    ""
-	    "AttributePrimary"    "DOTA_ATTRIBUTE_STRENGTH"
-	    "AttributeBaseStrength"    "0"
-	    "AttributeStrengthGain"    "0"
-	    "AttributeBaseIntelligence"    "0"
-	    "AttributeIntelligenceGain"    "0"
-	    "AttributeBaseAgility"    "0"
-	    "AttributeAgilityGain"    "0"
-	    "BountyXP"    "18"
-	    "BountyGoldMin"    "5"
-	    "BountyGoldMax"    "10"
-	    "BoundsHullName"    "DOTA_HULL_SIZE_SMALL"
-	    "RingRadius"    "20"
-	    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
-	    "MovementSpeed"    "300"
-	    "MovementTurnRate"    "1.5"
-	    "StatusHealth"    "50"
-	    "StatusHealthRegen"    "1"
-	    "StatusMana"    "0"
-	    "StatusManaRegen"    "0"
-	    "TeamName"    "DOTA_TEAM_BADGUYS"
-	    "CombatClassAttack"    "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	    "CombatClassDefend"    "DOTA_COMBAT_CLASS_DEFEND_SOFT"
-	    "UnitRelationshipClass"    "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	    "VisionDaytimeRange"    "1500"
-	}
-	//第二波
-	"npc_cf_enemy_zombie"
-	{
-	    "BaseClass"    "npc_dota_creature"
-	    "Model"    "models/creeps/neutral_creeps/n_creep_gnoll/n_creep_gnoll.vmdl"
-	    "ModelScale"    "0.8"
-	    "SoundSet"    "Undying_Zombie"
-	    "GameSoundsFile"    "soundevents/game_sounds_heroes/game_sounds_undying.vsndevts"
-	    "MinimapIcon"    ""
-	    "MinimapIconSize"    "50"
-	    "HealthBarOffset"    "-1"
-	    "Ability1"    ""
-	    "Ability2"    ""
-	    "Ability3"    ""
-	    "Ability4"    ""
-	    "Ability5"    ""
-	    "Ability6"    ""
-	    "Ability7"    ""
-	    "Ability8"    ""
-	    "ArmorPhysical"    "1"
-	    "MagicalResistance"    "1"
-	    "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-	    "AttackDamageMin"    "25"
-	    "AttackDamageMax"    "30"
-	    "AttackRate"    "1.5"
-	    "AttackAnimationPoint"    "0.4"
-	    "AttackAcquisitionRange"    "200"
-	    "AttackRange"    "200"
-	    "ProjectileModel"    ""
-	    "ProjectileSpeed"    ""
-	    "AttributePrimary"    "DOTA_ATTRIBUTE_STRENGTH"
-	    "AttributeBaseStrength"    "0"
-	    "AttributeStrengthGain"    "0"
-	    "AttributeBaseIntelligence"    "0"
-	    "AttributeIntelligenceGain"    "0"
-	    "AttributeBaseAgility"    "0"
-	    "AttributeAgilityGain"    "0"
-	    "BountyXP"    "18"
-	    "BountyGoldMin"    "5"
-	    "BountyGoldMax"    "10"
-	    "BoundsHullName"    "DOTA_HULL_SIZE_SMALL"
-	    "RingRadius"    "50"
-	    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
-	    "MovementSpeed"    "300"
-	    "MovementTurnRate"    "1.5"
-	    "StatusHealth"    "50"
-	    "StatusHealthRegen"    "1"
-	    "StatusMana"    "0"
-	    "StatusManaRegen"    "0"
-	    "TeamName"    "DOTA_TEAM_BADGUYS"
-	    "CombatClassAttack"    "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	    "CombatClassDefend"    "DOTA_COMBAT_CLASS_DEFEND_SOFT"
-	    "UnitRelationshipClass"    "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	    "VisionDaytimeRange"    "1500"
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	//刷金币的小怪
 	"creep_gold"
 	{
@@ -239,8 +113,6 @@
 		"VisionDaytimeRange"		"2000"		//白天视野
 		"VisionNighttimeRange"		"2000"		//夜晚视野
 	}
-
-
   	//以下是英雄技能的马甲单位
 	"npc_CFroged_unit_CrystalMaiden_iceEffect"
   	{
@@ -266,9 +138,9 @@
   		"HasInventory"			"0"
   		"WakesNeutrals"			"0"
   	}
-
-
-
+  	//===========================================
+	//以下是每一波小怪
+  	//===========================================
 	//1
 	"npc_cf_enemy_01_necro_warrior"
 	{
@@ -344,15 +216,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
 	//2
 	"npc_cf_enemy_02_creep_bad_melee"
 	{
@@ -430,16 +293,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//3
 	"npc_cf_enemy_03_creep_bad_melee_diretide"
 	{
@@ -517,16 +370,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//4
 	"npc_cf_enemy_04_creep_good_melee"
 	{
@@ -604,16 +447,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//5
 	"npc_cf_enemy_05_creep_good_ranged"
 	{
@@ -691,16 +524,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//6
 	"npc_cf_enemy_06_lane_dire_ranged"
 	{
@@ -778,16 +601,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//7
 	"npc_cf_enemy_07_creep_radiant_ranged_diretide"
 	{
@@ -865,16 +678,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//8
 	"npc_cf_enemy_08_necro_archer"
 	{
@@ -952,16 +755,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//9
 	"npc_cf_enemy_09_creep_radiant_melee_diretide"
 	{
@@ -1039,16 +832,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//10
 	"npc_cf_enemy_10_n_creep_beast"
 	{
@@ -1126,16 +909,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//11
 	"npc_cf_enemy_11_n_creep_forest_troll_berserker"
 	{
@@ -1213,16 +986,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//12
 	"npc_cf_enemy_12_n_creep_centaur_med"
 	{
@@ -1300,16 +1063,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//13
 	"npc_cf_enemy_13_n_creep_centaur_lrg"
 	{
@@ -1387,16 +1140,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//14
 	"npc_cf_enemy_14_n_creep_furbolg_disrupter"
 	{
@@ -1474,16 +1217,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//15
 	"npc_cf_enemy_15_neutral_creep_golem_a"
 	{
@@ -1561,16 +1294,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//16
 	"npc_cf_enemy_16_n_creep_ogre_med"
 	{
@@ -1648,16 +1371,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//17
 	"npc_cf_enemy_17_n_creep_satyr_a"
 	{
@@ -1718,7 +1431,7 @@
 		"FollowRange" "0" //跟随距离
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth" "7500" //生命值
+		"StatusHealth" "28000" //生命值
 		"StatusHealthRegen" "0" //生命恢复速度
 		"StatusMana" "0" //魔法值
 		"StatusManaRegen" "0" //魔法恢复速度
@@ -1735,16 +1448,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//18
 	"npc_cf_enemy_18_n_creep_worg_large"
 	{
@@ -1822,16 +1525,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//19
 	"npc_cf_enemy_19_n_creep_black_drake"
 	{
@@ -1909,16 +1602,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//20
 	"npc_cf_enemy_20_n_creep_dragonspawn_b"
 	{
@@ -1979,7 +1662,7 @@
 		"FollowRange" "0" //跟随距离
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth" "250" //生命值
+		"StatusHealth" "42000" //生命值
 		"StatusHealthRegen" "0" //生命恢复速度
 		"StatusMana" "0" //魔法值
 		"StatusManaRegen" "0" //魔法恢复速度
@@ -1996,16 +1679,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//21
 	"npc_cf_enemy_21_mega_greevil"
 	{
@@ -2083,16 +1756,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//22
 	"npc_cf_enemy_22_n_creep_gargoyle"
 	{
@@ -2170,16 +1833,6 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
-
-
-
-
-
-
-
-
-
 	//23
 	"npc_cf_enemy_23_n_creep_dragonspawn_a"
 	{
@@ -2257,5 +1910,4 @@
 		"VisionDaytimeRange" "2000" //白天视野
 		"VisionNighttimeRange" "2000" //夜晚视野
 	}
-
 }
