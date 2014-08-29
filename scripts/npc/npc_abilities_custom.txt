@@ -1615,10 +1615,6 @@
 				"OverrideAnimation"		"ACT_DOTA_RUN"
 				"EffectName"			"particles\units\heroes\hero_centaur\centaur_stampede.vpcf"
 				"EffectAttachType"		"follow_chest"
-				"States"
-			    {
-			        "MODIFIER_STATE_COMMAND_RESTRICTED" "MODIFIER_STATE_VALUE_ENABLED"
-			    }  
 			}
 		}
 
@@ -1649,8 +1645,9 @@
 
 		// Casting
 		//---------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0" 
+		"AbilityCastPoint"				"0.4" 
 		"AbilityCastRange"				"500"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 
 		//Time
 		//---------------------------------------------------------------------------------------
@@ -1664,12 +1661,6 @@
 		//---------------------------------------------------------------------------------------
 		"OnSpellStart"
 		{
-			"ApplyModifier"
-			{
-				"ModifierName"		"create_speed_support_animation"
-				"Target"			"CASTER"
-			}
-
 			"RunScript"
 			{
 				"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
@@ -1693,22 +1684,11 @@
 
 		"Modifiers"
 		{
-			"create_speed_support_animation"
-			{
-				"IsHidden"				"1"
-				"Duration"				"0.6"
-				"OverrideAnimation"		"ACT_DOTA_CAST_ABILITY_1"
-				"States"
-			    {
-			        "MODIFIER_STATE_STUNNED" "MODIFIER_STATE_VALUE_ENABLED"
-			    }  
-			}
-
 			"create_speed_support_effect"
 			{
 				"IsHidden"				"1"
-				"Duration"				"1"
-				"ThinkInterval"		"0.6"
+				"Duration"				"0.2"
+				"ThinkInterval"		"0.1"
 				"OnIntervalThink"	
 				{
 					"AttachEffect"
