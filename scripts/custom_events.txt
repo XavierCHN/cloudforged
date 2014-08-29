@@ -1,0 +1,14 @@
+"CustomEvents"
+{
+	"quest_show"
+	{
+		"PlayerID"			"short"
+		"QuestName"			"string"
+		"QuestDescription"	"string"
+	}
+	"player_accept_quest"
+	{
+		"PlayerID"			"short"
+		"QuestName"			"string"
+	}
+}
