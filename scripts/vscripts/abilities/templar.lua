@@ -305,7 +305,7 @@ function OnSakuraFall(keys)
 
       end
       currentLength = currentLength + 150
-      if currentLength > 1800 then
+      if currentLength > 500 then
         return nil
       end
       return 0.07
@@ -317,55 +317,23 @@ function OnSakuraPath(keys)
   local caster = keys.caster
   local caster_origin = caster:GetOrigin()
   local caster_fv = caster:GetForwardVector()
-  -- 获取单位向后的Vector
-  local caster_bv = caster_fv--RotatePosition(caster_origin, QAngle(0,-180,0), caster_origin + caster_fv):Normalized()
-  caster_bv.z = 0
---[[
-  local p = ParticleManager:CreateParticle('particles/hero_templar/abysal/abyssal_blade.vpcf', PATTACH_CUSTOMORIGIN, caster)
-  ParticleManager:SetParticleControl(p, 0, caster_origin)
-  ParticleManager:ReleaseParticleIndex(p) 
-  local p_count = 0
-  caster:SetContextThink(DoUniqueString('sakura_blade'), 
-    function() 
-      local target = FindUnitsInRadius(
-          caster:GetTeam(),
-          caster_origin,
-          nil,
-          800,
-          DOTA_UNIT_TARGET_TEAM_ENEMY, 
-          DOTA_UNIT_TARGET_ALL,
-          0, FIND_CLOSEST,
-          false)
-        if #target >= 1 then
-          local i = RandomInt(1, #target)
-          local p = ParticleManager:CreateParticle('particles/hero_templar/abysal/abyssal_blade_impact_pnt.vpcf', PATTACH_CUSTOMORIGIN, caster)
-          ParticleManager:SetParticleControl(p, 0, target[i]:GetOrigin())
-          ParticleManager:ReleaseParticleIndex(p)
-        end
-        p_count = p_count + 1
-        if p_count >= 15 then
-          return nil
-        end
-        return 0.32
-    end,
-  0.03) 
-]]
-local dummy_unit = CreateUnitByName('npc_cf_ta_trap', caster:GetOrigin(), false, caster, caster, caster:GetTeam())
-  local p = ParticleManager:CreateParticle('particles/econ/items/juggernaut/jugg_sword_dragon/juggernaut_blade_fury_dragon.vpcf',
-   PATTACH_CUSTOMORIGIN, dummy_unit)
+  local ABILITY = keys.ability
 
   caster:AddNewModifier(caster, nil, "modifier_rooted", {})
   local currentLength = 0
   caster:SetContextThink(DoUniqueString('sakura_path'),
       function()
-        local rOrigin = caster_origin + caster_bv * currentLength
+        local rOrigin = caster_origin + caster_fv * currentLength
         caster:SetOrigin(rOrigin)
         currentLength = currentLength + 70
-        ParticleManager:SetParticleControl(p, 0, rOrigin)
-        if currentLength >= 1000 then 
+        if currentLength >= 700 then 
           caster:RemoveModifierByName('modifier_rooted')
-          ParticleManager:ReleaseParticleIndex(p)  
-          UTIL_RemoveImmediate(dummy_unit)
+          -- 有30%的概率刷新1技能
+          local intChance = RandomInt(1, 100)
+          if intChance > 70 then
+            local ABILITY_DANCE = caster:FindAbilityByName('templar_sakura_fall') 
+            if ABILITY_DANCE then ABILITY_DANCE:EndCooldown() end
+          end
           return nil
         end
         return 0.03

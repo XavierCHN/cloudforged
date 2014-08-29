@@ -105,11 +105,22 @@ function QuestTest(keys)
     QuestDescription = quest_desc})
 
     print("======GAME EVENT FIRED========")
+    --[[
     ListenToGameEvent("player_accept_quest",
     	function(keys)
     		for k,v in pairs(keys) do
     			print(k,v)
     		end
     	end, 
-    nil) 
+    nil)]]
+    Convars:RegisterCommand('player_accept_quest',
+    	function(keys)
+
+    		print("accept quest clicked")
+    		print(keys)
+    		--[[
+    		for k,v in pairs(keys) do
+    			print(k,v)
+    		end]]
+    		end, "		", 0)
 end

@@ -77,6 +77,8 @@ function Precache( context )
     PrecacheResource( "model", "models/creeps/mega_greevil/mega_greevil.vmdl", context )
     PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_gargoyle/n_creep_gargoyle.vmdl", context )
     PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_dragonspawn_a/n_creep_dragonspawn_a.vmdl", context )
+    -- 小兵的统一音效
+    PrecacheResource( "soundfile", 'soundevents/game_sounds_heroes/game_sounds_undying.vsndevts', context)
 end
 
 -- Create the game mode when we activate
@@ -90,7 +92,7 @@ function CForgedGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 0.1 )
 
 	GameRules:GetGameModeEntity():SetCameraDistanceOverride(1600)
-	GameRules:SetPreGameTime(1)
+	GameRules:SetPreGameTime(90)
 
     GameRules:SetUseCustomHeroXPValues ( true )
     -- 是否使用自定义的英雄经验
@@ -112,7 +114,21 @@ function CForgedGameMode:OnThink()
 	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
 		return nil
 	end
-	return 1
+--[[等HUD做好，再启用。 todo
+    self._hudHide = self._hudHide or false
+    if not self._hudHide then
+        SendToServerConsole("sv_cheats 1")
+        SendToConsole('dota_sf_hud_actionpanel 0')
+        SendToConsole('dota_sf_hud_inventory 0')
+        SendToConsole('dota_sf_hud_top 0')
+        SendToConsole('dota_no_minimap 1')
+        SendToConsole('dota_render_crop_height 0')
+        SendToConsole('dota_render_y_inset 0')
+        SendToServerConsole("sv_cheats 0")
+        self._hudHide = true
+    end
+]]
+    return 0.1
 end
 
 function CForgedGameMode:OnEntityKilled( keys )

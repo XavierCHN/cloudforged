@@ -9,6 +9,5 @@
 	"player_accept_quest"
 	{
 		"PlayerID"			"short"
-		"QuestName"			"string"
 	}
 }
