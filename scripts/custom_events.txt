@@ -1,13 +1,24 @@
 "CustomEvents"
 {
-	"quest_show"
+	"player_trigger_new_quest"
 	{
-		"PlayerID"			"short"
-		"QuestName"			"string"
-		"QuestDescription"	"string"
+		"_playerid"				"short"
+		"_questname"			"string"
+		"_questtargetvalue"		"short"
 	}
-	"player_accept_quest"
+	"player_quest_update"
 	{
-		"PlayerID"			"short"
+		"_playerid"				"short"
+		"_questname"			"string"
+	}
+	"player_cancel_quest"
+	{
+		"_playerid"				"short"
+		"_questname"			"string"
+	}
+	"custom_error_show"
+	{
+		"player_ID"		"short"
+		"_error"		"string"
 	}
 }

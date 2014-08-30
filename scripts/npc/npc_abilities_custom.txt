@@ -1270,6 +1270,7 @@
 		"AbilityTextureName"		"templar_sakura_circle"
 		"AbilityCooldown"			"25"
 		"AbilityCastRange"			"1200"
+		"AbilityManaCost"			"100"
 
 		"OnSpellStart"
 		{
@@ -1281,6 +1282,7 @@
 			}
 		}
 	}
+	//樱之杀
 	"templar_sakura_fall"
 	{
 		"BaseClass"					"ability_datadriven"
@@ -1288,6 +1290,7 @@
 		"AbilityCastPoint"			"0.0"
 		"AbilityTextureName"		"templar_sakura_fall"
 		"AbilityCooldown"			"14"
+		"AbilityManaCost"			"30"
 
 		"OnSpellStart"
 		{
@@ -1299,6 +1302,7 @@
 			}
 		}
 	}
+	//樱之乱舞
 	"templar_phantom_sakura"
 	{
 		"BaseClass"					"ability_datadriven"
@@ -1309,6 +1313,7 @@
 		"AbilityTextureName"		"templar_phantom_sakura"
 		"AbilityCastAnimation"		"run"
 		"AbilityCooldown"			"28"
+		"AbilityManaCost"			"150"
 
 		"OnSpellStart"
 		{
@@ -1333,13 +1338,15 @@
 			}
 		}
 	}
+	//樱之疾
 	"templar_sakura_path"
 	{
 		"BaseClass"					"ability_datadriven"
 		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityCastPoint"			"0.0"
-		"AbilityTextureName"		"templar_sakura_circle"
-		"AbilityCooldown"			"8 7 6 5"
+		"AbilityTextureName"		"templar_sakura_path"
+		"AbilityCooldown"			"7 5 3 1"
+		"AbilityManaCost"			"10"
 
 		"precache"
 		{
@@ -1376,7 +1383,61 @@
 			}
 		}
 	}
+	//樱之魅影
+	"templar_sakura_path_passive"
+	{
+		"BaseClass"					"ability_datadriven"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityTextureName"		"templar_sakura_path"
+		"MaxLevel"					"7"
 
+		"precache"
+		{
+			"particle_folder"		"particles/units/heroes/hero_templar_assassin"
+		}
+
+		"Modifiers"
+		{
+			"modifier_sakura_path_passive_effect"
+			{
+				"IsHidden"			"0"
+				"Passive"			"1"
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"Target"			"CASTER"
+						"EffectAttachType"	"follow_origin"
+						"EffectName"		"particles/units/heroes/hero_templar_assassin/templar_assassin_refraction.vpcf"
+					}
+				}
+				"States"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"			"%agi_bonus"
+					"MODIFIER_PROPERTY_EVASION_CONSTANT"			"%evasion_bonus"
+					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"		"%bonus_damage"
+				}
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"agi_bonus"			"3 5 7 9 15 20 25"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"evasion_bonus"		"3 5 7 9 15 20 25"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"bonus_damage"		"10 20 30 40 50 60 70"
+			}
+		}
+	}
 	//樱花陷阱的陷阱单位
 	"ability_cf_ta_trap_dummy"
 	{

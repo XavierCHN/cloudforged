@@ -54,6 +54,7 @@ function CFSpawner:SpawnWave( round , wavedata, spawner)
 	self._szRoundTitle = wavedata.roundtitle or "empty"
 	self._szRoundQuestTitle = wavedata.roundquesttitle or "empty"
 	self._tSpawner = spawner
+	self._nCurrentRound = round
 
 	-- 初始化变量
 	self._bFinishedSpawn = false
@@ -173,10 +174,17 @@ function CFSpawner:OnEntityKilled(keys)
 				-- 活着的怪数量 - 1
 				self._nUnitsCurrentlyAlive = self._nUnitsCurrentlyAlive - 1
 				self._entKillCountSubquest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, self._nCoreUnitsKilled )
+
+				-- 增加通用物品掉落，掉落概率 = 轮数*2/1000
+				local chance = RandomInt(1, 10000 )
+				print("CFSpawner, Drop Random Result:".. chance)
+				if chance < self._nCurrentRound * 2 then
+					print("CFSpawner Trying to drop loot")
+					CFGeneral:DropLoot("item_cf_feather",killedUnit:GetOrigin())
+				end
 				break
 			end
 		end
-		
 	end
 
 	

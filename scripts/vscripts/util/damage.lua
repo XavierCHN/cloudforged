@@ -62,7 +62,7 @@
 		--获取技能
 		local targets	= damage.target_entities or {damage.victim}	--技能施放目标(数组)
 		
-		print('damage called for '..#targets)
+		--print('damage called for '..#targets)
 		
 		if #targets == 0 then
 			print(debug.traceback '无伤害目标')

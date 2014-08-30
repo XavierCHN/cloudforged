@@ -148,7 +148,7 @@
 		"Model" 	"models/creeps/item_creeps/i_creep_necro_warrior/necro_warrior.vmdl"
 		"SoundSet" "Undying_Zombie"// Name of sound set.
 		"Level" "1"
-		"ModelScale" "1"
+		"ModelScale" "0.4"
 		//模型比例，具体调整
 		"IsAncient" "0"
 		"IsNeutralUnitType" "0"
@@ -481,13 +481,13 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
-		"AttackDamageMin" "550" // 最小攻击
-		"AttackDamageMax" "552" // 最大攻击
+		"AttackDamageMin" "28" // 最小攻击
+		"AttackDamageMax" "32" // 最大攻击
 		"AttackAcquisitionRange" "1200" //攻击获取距离
-		"AttackRange" "1150" //攻击距离
-		"ProjectileModel" "ranged_badguy" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
+		"AttackRange" "500" //攻击距离
+		"ProjectileModel" "particles/base_attacks/ranged_goodguy.vpcf" 
 		"ProjectileSpeed" "900"//投射物的飞行速度 
+
 		// Bounty
 		//----------------------------------------------------------------
 		"BountyXP" "0" //杀死经验值
@@ -507,7 +507,7 @@
 		"FollowRange" "0" //跟随距离
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth" "0" //生命值
+		"StatusHealth" "2300" //生命值
 		"StatusHealthRegen" "0" //生命恢复速度
 		"StatusMana" "0" //魔法值
 		"StatusManaRegen" "0" //魔法恢复速度
@@ -557,13 +557,13 @@
 		"MagicalResistance" "0" // 魔法抗性
 		// Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities" "DOTA_UNIT_CAP_ RANGED _ATTACK"
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
 		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
 		"AttackDamageMin" "28" // 最小攻击
 		"AttackDamageMax" "32" // 最大攻击
 		"AttackAcquisitionRange" "300" //攻击获取距离
-		"AttackRange" "200" //攻击距离
-		"ProjectileModel" "ranged_badguy" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
+		"AttackRange" "600" //攻击距离
+		"ProjectileModel" "particles/base_attacks/ranged_badguy.vpcf" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
 		"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
@@ -711,13 +711,13 @@
 		"MagicalResistance" "0" // 魔法抗性
 		// Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities" "DOTA_UNIT_CAP_ RANGED _ATTACK"
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
 		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
 		"AttackDamageMin" "47" // 最小攻击
 		"AttackDamageMax" "51" // 最大攻击
 		"AttackAcquisitionRange" "500" //攻击获取距离
-		"AttackRange" "450" //攻击距离
-		"ProjectileModel" "necronomicon_archer_projectile" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
+		"AttackRange" "500" //攻击距离
+		"ProjectileModel" "particles/items2_fx/necronomicon_archer_projectile_explosion.vpcf" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
 		"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
@@ -788,13 +788,13 @@
 		"MagicalResistance" "0" // 魔法抗性
 		// Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities" "DOTA_UNIT_CAP_ RANGED _ATTACK"
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
 		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
 		"AttackDamageMin" "52" // 最小攻击
 		"AttackDamageMax" "56" // 最大攻击
 		"AttackAcquisitionRange" "350" //攻击获取距离
-		"AttackRange" "300" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
+		"AttackRange" "500" //攻击距离
+		//"ProjectileModel" "particles/units/heroes/hero_rubick/rubick_base_attack.vpcf" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
 		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------

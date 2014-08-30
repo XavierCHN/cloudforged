@@ -108,3 +108,19 @@ function ItemCore:CheckItemType(hero, newitem)
         end
     end
 end
+
+function ItemCore:FindItemByName(hero,itemname)
+    for i = 0,11 do
+        local ITEM = hero:GetItemInSlot(i)
+        if ITEM then
+            print(i)
+            print(ITEM:GetName())
+            --[[
+            if ITEM:GetName() == itemname then
+                return ITEM
+            end]]
+        end
+    end
+    print("ITEM NOT FOUND RETURNING NIL")
+    return nil
+end

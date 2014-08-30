@@ -1,0 +1,3 @@
+function MapLootInit()
+    
+end
