@@ -3,6 +3,94 @@
 {
 	"Version"	"1"
 
+	//拉比克 召唤物
+	"npc_dota_rubick_defend"
+	{
+		// General
+		"BaseClass"					"npc_dota_lone_druid_bear"
+		"Model"						"models/creeps/lane_creeps/creep_radiant_melee/radiant_melee.mdl"
+		"SoundSet"					"Creep_Good_Melee"			
+		"ModelScale" 				"1.75"
+		"Level"						"6"
+		"ConsideredHero"			"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					""			// Ability 1.
+		"Ability2"					""			// Ability 2.
+		"Ability3"					""			// Ability 3.
+		"Ability4"					""			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		"Ability6"					""			// Ability 6 - Extra.
+		"Ability7"					""			// Ability 7 - Extra.
+		"Ability8"					""			// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"			// Physical protection.
+		"MagicalResistance"			"30"			// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"1"		// Damage range min.
+		"AttackDamageMax"			"2"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1"			// Speed of attack.
+		"AttackAnimationPoint"		"0.467"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
+		"AttackRange"				"128"		// Range within a target can be attacked.
+		"ProjectileModel"			""			// Particle system model for projectile.
+		"ProjectileSpeed"			""			// Speed of projectile.
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"0"			// Base strength
+		"AttributeStrengthGain"		"0"			// Strength bonus per level.
+		"AttributeBaseIntelligence"	"0"			// Base intelligence
+		"AttributeIntelligenceGain"	"0"			// Intelligence bonus per level.
+		"AttributeBaseAgility"		"0"			// Base agility
+		"AttributeAgilityGain"		"0"			// Agility bonus per level.
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"		// Experience earn.
+		"BountyGoldMin"				"0"		// Gold earned min.
+		"BountyGoldMax"				"0"		// Gold earned max.
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"75"
+		"HealthBarOffset"			"250"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"			// Type of locomotion - ground, air
+		"MovementSpeed"				"330"		// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1000"		// Base health.
+		"StatusHealthRegen"			"1.5"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"			// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1200"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1200"		// Range of vision at night time.
+
+	}	
+
 	//马甲 用于技能的制作
 	"npc_dummy"
 	{
@@ -207,7 +295,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -284,7 +372,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -361,7 +449,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -438,7 +526,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -515,7 +603,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -592,7 +680,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -669,7 +757,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -746,7 +834,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -823,7 +911,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -900,7 +988,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -977,7 +1065,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -1054,7 +1142,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -1131,7 +1219,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -1208,7 +1296,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -1285,7 +1373,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -1362,7 +1450,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -1439,7 +1527,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_STRONG"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -1516,7 +1604,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -1593,7 +1681,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_PIERCE"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_PIERCE"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -1670,7 +1758,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -1747,7 +1835,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_PIERCE"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_PIERCE"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -1824,7 +1912,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_PIERCE"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_PIERCE"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
@@ -1901,7 +1989,7 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName" "DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //攻击类型
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"

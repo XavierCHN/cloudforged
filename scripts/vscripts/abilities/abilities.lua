@@ -58,7 +58,7 @@ function rubick_sacrifice_off( keys )
 	caster:RemoveModifierByName("create_rubick_sacrifice_effect")
 end
 
---隐修议员 3技能 被动
+--隐修议员 4技能 被动
 function rubick_wise( keys )
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local ability=keys.ability
@@ -111,7 +111,7 @@ end
 
 
 
---隐修议员 4技能
+--隐修议员 大招
 --全局变量
 rubick_natural_shelter_channel=false
 --
@@ -319,5 +319,42 @@ function centaur_trample_road( keys )
 			EmitSoundOn("Hero_Centaur.Stampede.Cast", caster) 
 			return nil
 		end, 1)
+
+end
+
+--拉比克 3技能 召唤
+hRubickUnit=nil
+function rubick_defend( keys )
+	
+	if hRubickUnit~=nil then
+		hRubickUnit:RemoveSelf() 
+	end
+
+	local caster = keys.caster
+	local vec = caster:GetOrigin() + 200*caster:GetForwardVector()
+	hRubickUnit = CreateUnitByName("npc_dota_rubick_defend", vec, false, nil, nil, caster:GetTeam())
+	hRubickUnit.vOwner=caster:GetOwner()
+	hRubickUnit:SetControllableByPlayer(caster:GetPlayerID(), true)
+	hRubickUnit:SetForwardVector((hRubickUnit:GetOrigin() - caster:GetOrigin()):Normalized())
+	local ability = keys.ability
+	local i = ability:GetLevel()-1
+
+	--获取最小攻击=施法者最小攻击+施法者的智力*智力加成系数
+	local BaseDamageMin=caster:GetBaseDamageMin() + caster:GetIntellect() * ability:GetLevelSpecialValueFor("int", i)
+	--获取最大攻击=最小攻击+5
+	local BaseDamageMax=BaseDamageMin + 5
+
+	hRubickUnit:SetBaseDamageMin(BaseDamageMin)
+	hRubickUnit:SetBaseDamageMax(BaseDamageMax)	
+
+	--获取护甲=施法者护甲+施法者敏捷*敏捷加成系数
+	local armor = caster:GetPhysicalArmorValue() + caster:GetAgility() * ability:GetLevelSpecialValueFor("agi", i)+5
+	hRubickUnit:SetPhysicalArmorBaseValue(armor)
+
+	--获取生命值=1000 + 施法者的力量*力量加成系数
+	local health = 1000 + caster:GetStrength() * ability:GetLevelSpecialValueFor("str", i)
+	hRubickUnit:SetMaxHealth(health)
+	hRubickUnit:SetHealth(health)
+
 
 end

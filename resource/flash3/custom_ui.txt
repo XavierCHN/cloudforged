@@ -9,6 +9,13 @@
 //		"File"			"CFHud"
 //		"Depth"			"50"
 //	}
+
+	"1"//任务面板
+	{
+		"File"			"Quest"
+		"Depth"			"55"
+	}
+	
 	//"1"
 	//{
 	//	"File"		"Example"
