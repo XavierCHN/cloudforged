@@ -1056,6 +1056,75 @@
 		}
 	}
 
+	//隐修议员 守护 
+	//大兵被动 正气
+	//=====================================================================================
+	"rubick_defend_ability_1"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"magnataur_reverse_polarity"
+		"AbilityCastPoint"				"0.0" 
+		"AbilityCastRange"				"250"
+		"AbilityCooldown"		 		"0"
+		"AbilityManaCost"				"0"
+		"MaxLevel"						"1"
+	}
+
+	//隐修议员 守护 
+	//大兵被动 正义之剑
+	//=====================================================================================
+	"rubick_defend_ability_2"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"legion_commander_moment_of_courage"
+		"AbilityCastPoint"				"0.0" 
+		"AbilityCooldown"		 		"0"
+		"AbilityManaCost"				"0"
+		"MaxLevel"						"1"
+
+		"Modifiers"
+		{
+			"modifier_rubick_defend_ability_2"
+			{
+				"IsHidden"		"1"
+				"Passive"		"1"
+
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"	"%chance"
+						"OnSuccess"
+						{
+							"RunScript"
+							{
+								"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+								"Function"		"rubick_defend_ability_2"
+								"Target"		"UNIT"
+							}
+						}
+					}
+				}
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"chance"		"40"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"heal"			"10"
+			}
+		}
+	}
+
 	//隐修议员 4技能 被动
 	//技能名字 明智
 	//=====================================================================================

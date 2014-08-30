@@ -339,6 +339,12 @@ function rubick_defend( keys )
 	local ability = keys.ability
 	local i = ability:GetLevel()-1
 
+	local ability_1 = hRubickUnit:FindAbilityByName("rubick_defend_ability_1")
+	ability_1:SetLevel(1)
+	rubick_defend_ability_1(hRubickUnit,caster)
+	local ability_2 = hRubickUnit:FindAbilityByName("rubick_defend_ability_2")
+	ability_2:SetLevel(1)
+
 	--获取最小攻击=施法者最小攻击+施法者的智力*智力加成系数
 	local BaseDamageMin=caster:GetBaseDamageMin() + caster:GetIntellect() * ability:GetLevelSpecialValueFor("int", i)
 	--获取最大攻击=最小攻击+5
@@ -358,3 +364,46 @@ function rubick_defend( keys )
 
 
 end
+
+
+--大兵正气
+function rubick_defend_ability_1(caster,hero)
+	local num = hero:GetIntellect()
+
+	local teams = DOTA_UNIT_TARGET_TEAM_ENEMY
+	local types = DOTA_UNIT_TARGET_BASIC+DOTA_UNIT_TARGET_HERO
+	local flags = DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES
+	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("rubick_defend_ability_1_time"), 
+		function( )
+			if caster:IsAlive() then
+				local group = FindUnitsInRadius(caster:GetTeam(), caster:GetOrigin(), nil, 250, teams, types, flags, FIND_CLOSEST, true)
+
+				for i,unit in pairs(group) do
+					local damageTable = {victim=unit,
+										attacker=caster,
+										damage_type=DAMAGE_TYPE_MAGICAL,
+										damage=num}
+					ApplyDamage(damageTable)
+				end
+				return 1
+			else
+				return nil
+			end
+		end, 0)
+end
+
+--大兵正义之剑
+function rubick_defend_ability_2( keys )
+	local caster = keys.caster
+	local target = keys.target
+
+	local num = caster:GetHealth() * 0.1
+	local damageTable = {victim=target,
+						attacker=caster,
+						damage_type=DAMAGE_TYPE_PHYSICAL,
+						damage=num}
+	ApplyDamage(damageTable)
+
+	print(num)
+end
+
