@@ -8,28 +8,43 @@
 				...
 			============================
 ]]
-
+-------------------------------------------------------------------------------------------------------------------
 -- load everyhing
 require('require_everything')
+-------------------------------------------------------------------------------------------------------------------
 
+-------------------------------------------------------------------------------------------------------------------
 if CForgedGameMode == nil then
 	CForgedGameMode = class({})
 end
+-------------------------------------------------------------------------------------------------------------------
 
+-------------------------------------------------------------------------------------------------------------------
 local function PrecacheSound(sound, context )
     PrecacheResource( "soundfile", sound, context)
 end
+-------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------
 local function PrecacheParticle(particle, context )
     PrecacheResource( "particle",  particle, context)
 end
+-------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------
 local function PrecacheModel(model, context )
     PrecacheResource( "model", model, context )
 end
+-------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------
 -- Create the game mode when we activate
 function Activate()
     CForgedGameMode:InitGameMode()
 end
+-------------------------------------------------------------------------------------------------------------------
 
+-------------------------------------------------------------------------------------------------------------------
 function Precache( context )
 	--[[
 		Precache things we know we'll use.  Possible file types include (but not limited to):
@@ -94,8 +109,10 @@ function Precache( context )
         end
     end
 end
+-------------------------------------------------------------------------------------------------------------------
 
-
+-------------------------------------------------------------------------------------------------------------------
+-- 游戏模式初始化
 function CForgedGameMode:InitGameMode()
  	
  	-- 设定游戏准备时间
@@ -106,22 +123,25 @@ function CForgedGameMode:InitGameMode()
     GameRules:SetUseCustomHeroXPValues ( true )
     
     -- 事件监听
-    ListenToGameEvent('entity_killed', Dynamic_Wrap(CForgedGameMode, 'OnEntityKilled'), self)
+    --ListenToGameEvent('entity_killed', Dynamic_Wrap(CForgedGameMode, 'OnEntityKilled'), self) -- 暂时禁用
     ListenToGameEvent('dota_player_gained_level', Dynamic_Wrap(CForgedGameMode, 'OnPlayerGainLevel'), self) 
-    
+    -- 注册物品事件监听
+    ItemCore:RegistEvents()
+
     -- 自定义等级
     self._eGameMode = GameRules:GetGameModeEntity() 
     self._eGameMode:SetUseCustomHeroLevels ( true )
     self._eGameMode:SetCustomHeroMaxLevel ( CUSTOM_MAX_LEVEL )
-    self._eGameMode:SetCustomXPRequiredToReachNextLevel( CUSTOM_XP_TABLE )
+    self._eGameMode:SetCustomXPRequiredToReachNextLevel( CUSTOM_XP_TABLE ) --  TODO
     self._eGameMode:SetCameraDistanceOverride(1600)
 	
-	-- 初始化
+	-- 初始化刷怪器
 	CFRoundThinker:InitPara()
-	
 end
+-------------------------------------------------------------------------------------------------------------------
 
--- Evaluate the state of the game
+-------------------------------------------------------------------------------------------------------------------
+-- 游戏主循环
 function CForgedGameMode:OnThink()
 	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 
@@ -129,23 +149,11 @@ function CForgedGameMode:OnThink()
 	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
 		return nil
 	end
---[[等HUD做好，再启用。 todo
-    self._hudHide = self._hudHide or false
-    if not self._hudHide then
-        SendToServerConsole("sv_cheats 1")
-        SendToConsole('dota_sf_hud_actionpanel 0')
-        SendToConsole('dota_sf_hud_inventory 0')
-        SendToConsole('dota_sf_hud_top 0')
-        SendToConsole('dota_no_minimap 1')
-        SendToConsole('dota_render_crop_height 0')
-        SendToConsole('dota_render_y_inset 0')
-        SendToServerConsole("sv_cheats 0")
-        self._hudHide = true
-    end
-]]
     return 0.1
 end
+-------------------------------------------------------------------------------------------------------------------
 
+-------------------------------------------------------------------------------------------------------------------
 function CForgedGameMode:OnEntityKilled( keys )
   print( '[CForged] OnEntityKilled Called' )
   --PrintTable( keys )
@@ -156,17 +164,21 @@ function CForgedGameMode:OnEntityKilled( keys )
   local killerEntity =EntIndexToHScript( keys.entindex_attacker )
 
   if (killerEntity:IsHero()) then
-	killerEntity:AddExperience(50, true)
+	-- 每个小怪默认50经验值？
+    killerEntity:AddExperience(50, true)
   end 
 end
+-------------------------------------------------------------------------------------------------------------------
 
+-------------------------------------------------------------------------------------------------------------------
 -- 在CFSpawner调用的游戏结束，TODO，以后可以修改
 function CForgedGameMode:FinishedGame()
     GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS) 
     GameRules:SetSafeToLeave(true)
 end
+-------------------------------------------------------------------------------------------------------------------
 
-
+-------------------------------------------------------------------------------------------------------------------
 -- 事件监听
 function CForgedGameMode:OnPlayerGainLevel(keys)
     print("ON PLAYER GAIN LEVEL CALLED",keys.nPlayerID,keys.level)
@@ -178,3 +190,4 @@ function CForgedGameMode:OnPlayerGainLevel(keys)
         hero:SetAbilityPoints(hero:GetAbilityPoints() - 1)
     end
 end
+-------------------------------------------------------------------------------------------------------------------

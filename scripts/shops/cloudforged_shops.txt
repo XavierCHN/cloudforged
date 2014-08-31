@@ -8,7 +8,7 @@
 	}
 	"attributes"
 	{
-
+		"item"		"item_zs_steel_axe_lvl1"
 	}
 
 	"weapons_armor"

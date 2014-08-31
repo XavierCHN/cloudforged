@@ -28,7 +28,317 @@
 	//商店出售物品，ID 范围 1301-1600
 	//所有合成卷轴的ID = 他所合成的物品的ID + 1
 	//=================================
-	
+
+	//主手武器 item_zs_xxxx
+	//副手武器 item_fs_xxxx
+	//衣服     item_yf_xxxx
+	//裤子     item_kz_xxxx
+	//鞋子     item_xz_xxxx
+	//请严格遵守，这是区分物品类型的关键
+
+	// 区域：基础斧子
+	"item_zs_steel_axe_lvl1"//1302
+	{
+		"ID"					"1302"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_steel_axe_lvl1"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"500"
+	    "ItemQuality"			"common"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "Modifiers"
+	    {
+	    	"modifier_steel_axe_lvl1"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"		"%bonus_damage"
+	    		}
+	    	}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"bonus_damage"		"10"
+	    	}
+	    }
+	}
+	"item_zs_steel_axe_lvl2"//1303
+	{
+		"ID"					"1303"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_steel_axe_lvl2"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"1000"
+	    "ItemQuality"			"common"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "Modifiers"
+	    {
+	    	"modifier_steel_axe_lv2"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"		"%bonus_damage"
+	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"		"%str_bonus"
+	    		}
+	    	}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"bonus_damage"		"20"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"str_bonus"			"10"
+	    	}
+	    }
+	}
+	"item_recipe_zs_steel_axe_lvl2"//1304
+	{
+		"ID"							"1304"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_steel_axe_lvl2"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_steel_axe_lvl1"
+		}
+	}
+	"item_zs_steel_axe_lvl3"//1305
+	{
+		"ID"					"1305"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_steel_axe_lvl3"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"1500"
+	    "ItemQuality"			"common"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "Modifiers"
+	    {
+	    	"modifier_steel_axe_lvl3"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"		"%bonus_damage"
+	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"		"%str_bonus"
+	    			"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"		"%health_regen"
+	    		}
+	    	}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"bonus_damage"		"25"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"str_bonus"			"15"
+	    	}
+	    	"03"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"health_regen"		"4"
+	    	}
+	    }
+	}
+	"item_recipe_zs_steel_axe_lvl3"//1306
+	{
+		"ID"							"1306"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_steel_axe_lvl3"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_steel_axe_lvl2"
+		}
+	}
+	"item_zs_steel_axe_lvl4"//1307
+	{
+		"ID"					"1307"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_steel_axe_lvl4"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"3000"
+	    "ItemQuality"			"common"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "Modifiers"
+	    {
+	    	"modifier_steel_axe_lvl4"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"		"%bonus_damage"
+	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"		"%str_bonus"
+	    			"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"		"%health_regen"
+	    			"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"%magic_resist"
+	    		}
+	    	}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"bonus_damage"		"30"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"str_bonus"			"20"
+	    	}
+	    	"03"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"health_regen"		"6"
+	    	}
+	    	"04"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"magic_resist"		"15"
+	    	}
+	    }
+	}
+	"item_recipe_zs_steel_axe_lvl4"//1308
+	{
+		"ID"							"1308"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"1500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_steel_axe_lvl4"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_steel_axe_lvl3"
+		}
+	}
+	"item_zs_steel_axe_lvl5"//1309
+	{
+		"ID"					"1309"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_steel_axe_lvl5"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"5000"
+	    "ItemQuality"			"common"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "Modifiers"
+	    {
+	    	"modifier_steel_axe_lvl5"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"		"%bonus_damage"
+	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"		"%str_bonus"
+	    			"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"		"%health_regen"
+	    			"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"%magic_resist"
+	    			"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"	"%damage_reduce"
+	    		}
+	    	}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"bonus_damage"		"50"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"str_bonus"			"40"
+	    	}
+	    	"03"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"health_regen"		"13"
+	    	}
+	    	"04"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"magic_resist"		"30"
+	    	}
+	    	"05"
+	    	{
+	    		"var_type"			"FIELD_INTEGER"
+	    		"damage_reduce"		"10"
+	    	}
+	    }
+	}
+	"item_recipe_steel_axe_lvl5"//1310
+	{
+		"ID"							"1310"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"2000"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_steel_axe_lvl5"
+		"ItemRequirements"
+		{
+			"01"						"item_steel_axe_lvl4"
+		}
+	}
+	// 结束区域：基础斧子
+
+
 	//停怪
 	"item_cf_increase_rest"	
 	{	
