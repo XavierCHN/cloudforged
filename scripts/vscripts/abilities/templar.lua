@@ -223,7 +223,7 @@ function OnPathtonSakura(keys)
                         caster:GetTeam(),
                         v.position,
                         nil,
-                        100,
+                        150,
                         DOTA_UNIT_TARGET_TEAM_ENEMY,
                         DOTA_UNIT_TARGET_ALL,
                         0, FIND_CLOSEST,
@@ -234,8 +234,8 @@ function OnPathtonSakura(keys)
                         ability = keys.ability,
                         damage_category = DAMAGE_CATEGORY_SENSITIVE,
                         damage_type = DAMAGE_TYPE_PURE,
-                        damage_agi = 0.04, --  伤害敏捷系数加成0.04
-                        damage_min = 200,
+                        damage_agi = 0.6, --  伤害敏捷系数加成0.04
+                        damage_min = 300,
                         -- 对周围100范围内的单位造成伤害
                         target_entities = targets
                       }

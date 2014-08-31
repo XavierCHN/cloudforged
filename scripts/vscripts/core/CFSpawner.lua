@@ -176,10 +176,8 @@ function CFSpawner:OnEntityKilled(keys)
 				self._entKillCountSubquest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, self._nCoreUnitsKilled )
 
 				-- 增加通用物品掉落，掉落概率 = 轮数*2/1000
-				local chance = RandomInt(1, 10000 )
-				print("CFSpawner, Drop Random Result:".. chance)
+				local chance = RandomInt(1, 1000 )
 				if chance < self._nCurrentRound * 2 then
-					print("CFSpawner Trying to drop loot")
 					CFGeneral:DropLoot("item_cf_feather",killedUnit:GetOrigin())
 				end
 				break
