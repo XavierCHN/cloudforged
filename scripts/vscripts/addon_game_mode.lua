@@ -59,8 +59,9 @@ function Precache( context )
     PrecacheSound( 'soundevents/game_sounds_heroes/game_sounds_templar_assassin.vsndevts', context)
 	PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts", context )
 	PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_axe.vsndevts", context )
-	PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_elder_titan.vsndevts", context )
-    
+    PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_elder_titan.vsndevts", context )
+    PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_crystalmaiden.vsndevts", context )
+
     -- 小兵的统一音效
     PrecacheSound( 'soundevents/game_sounds_heroes/game_sounds_undying.vsndevts', context)
     PrecacheSound( 'soundevents/game_sounds_creeps.vsndevts', context )
@@ -99,19 +100,24 @@ function CForgedGameMode:InitGameMode()
  	
  	-- 设定游戏准备时间
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 0.1 )
-
-	GameRules:GetGameModeEntity():SetCameraDistanceOverride(1600)
-	GameRules:SetPreGameTime(120)
-
-    GameRules:SetUseCustomHeroXPValues ( true )
+    GameRules:SetHeroSelectionTime(TIME_HERO_SELECTION)
+	GameRules:SetPreGameTime(TIME_PRE_GAME)
     -- 是否使用自定义的英雄经验
-
+    GameRules:SetUseCustomHeroXPValues ( true )
+    
+    -- 事件监听
     ListenToGameEvent('entity_killed', Dynamic_Wrap(CForgedGameMode, 'OnEntityKilled'), self)
-    -- 监听单位被击杀的事件
+    ListenToGameEvent('dota_player_gained_level', Dynamic_Wrap(CForgedGameMode, 'OnPlayerGainLevel'), self) 
+    
+    -- 自定义等级
+    self._eGameMode = GameRules:GetGameModeEntity() 
+    self._eGameMode:SetUseCustomHeroLevels ( true )
+    self._eGameMode:SetCustomHeroMaxLevel ( CUSTOM_MAX_LEVEL )
+    self._eGameMode:SetCustomXPRequiredToReachNextLevel( CUSTOM_XP_TABLE )
+    self._eGameMode:SetCameraDistanceOverride(1600)
 	
 	-- 初始化
 	CFRoundThinker:InitPara()
-	--ItemCore:Init()
 	
 end
 
@@ -154,7 +160,21 @@ function CForgedGameMode:OnEntityKilled( keys )
   end 
 end
 
+-- 在CFSpawner调用的游戏结束，TODO，以后可以修改
 function CForgedGameMode:FinishedGame()
     GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS) 
     GameRules:SetSafeToLeave(true)
+end
+
+
+-- 事件监听
+function CForgedGameMode:OnPlayerGainLevel(keys)
+    print("ON PLAYER GAIN LEVEL CALLED",keys.nPlayerID,keys.level)
+    tPrintTable(keys)
+    local hero = EntIndexToHScript(keys.player):GetAssignedHero()
+    local nLevel = hero:GetLevel()
+    -- 如果等级超过25级，不给技能点
+    if nLevel > 25 then
+        hero:SetAbilityPoints(hero:GetAbilityPoints() - 1)
+    end
 end

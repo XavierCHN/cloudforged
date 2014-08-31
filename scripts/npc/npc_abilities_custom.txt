@@ -1378,12 +1378,13 @@
 	"templar_sakura_circle"
 	{
 		"BaseClass"					"ability_datadriven"
-		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_POINT"
-		"AbilityCastPoint"			"0.0"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityCastPoint"			"0.3"
 		"AbilityTextureName"		"templar_sakura_circle"
 		"AbilityCooldown"			"25"
 		"AbilityCastRange"			"1200"
 		"AbilityManaCost"			"100"
+		"AbilityCastAnimation"		"ACT_DOTA_IDLE+meld"
 
 		"OnSpellStart"
 		{
@@ -1399,11 +1400,12 @@
 	"templar_sakura_fall"
 	{
 		"BaseClass"					"ability_datadriven"
-		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityCastPoint"			"0.0"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityCastPoint"			"0.2"
 		"AbilityTextureName"		"templar_sakura_fall"
 		"AbilityCooldown"			"14"
 		"AbilityManaCost"			"30"
+		"AbilityCastAnimation"		"ACT_DOTA_ATTACK+meld"
 
 		"OnSpellStart"
 		{
@@ -1413,6 +1415,11 @@
 				"Target"				"CASTER"
 				"Function"				"OnSakuraFall"
 			}
+			"FireSound"
+			{
+				"EffectName"			"Hero_Crystal.CrystalNova"
+				"Target"				"CASTER"
+			}
 		}
 	}
 	//樱之乱舞
@@ -1421,12 +1428,13 @@
 		"BaseClass"					"ability_datadriven"
 
 		"AbilityType"				"DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityCastPoint"			"0.0"
-		"AbilityTextureName"		"templar_phantom_sakura"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityCastPoint"			"0.3"
+		"AbilityTextureName"		"ACT_DOTA_CAST_ABILITY_2"
 		"AbilityCastAnimation"		"run"
 		"AbilityCooldown"			"28"
 		"AbilityManaCost"			"150"
+
 
 		"OnSpellStart"
 		{
@@ -1455,15 +1463,17 @@
 	"templar_sakura_path"
 	{
 		"BaseClass"					"ability_datadriven"
-		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityCastPoint"			"0.0"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET  | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityCastPoint"			"0.2"
 		"AbilityTextureName"		"templar_sakura_path"
 		"AbilityCooldown"			"7 5 3 1"
 		"AbilityManaCost"			"10"
+		"AbilityTextureName"		"ACT_DOTA_RUN"
 
 		"precache"
 		{
 			"particle_folder"		"particles/econ/courier/courier_jadehoof_ambient"
+			"particle_folder"		"particles/units/heroes/hero_queenofpain"
 		}
 
 		"OnSpellStart"
@@ -1478,6 +1488,12 @@
 			{
 				"ModifierName"			"modifier_templar_sakura_path"
 				"Target"				"CASTER"
+			}
+			"FireEffect"
+			{
+				"Target"			"CASTER"
+				"EffectAttachType"	"follow_origin"
+				"EffectName"		"particles/units/heroes/hero_queenofpain/queen_blink_end.vpcf"
 			}
 		}
 		"Modifiers"
@@ -1506,7 +1522,7 @@
 
 		"precache"
 		{
-			"particle_folder"		"particles/units/heroes/hero_templar_assassin"
+			
 		}
 
 		"Modifiers"
@@ -1517,14 +1533,9 @@
 				"Passive"			"1"
 				"OnCreated"
 				{
-					"AttachEffect"
-					{
-						"Target"			"CASTER"
-						"EffectAttachType"	"follow_origin"
-						"EffectName"		"particles/units/heroes/hero_templar_assassin/templar_assassin_refraction.vpcf"
-					}
+					
 				}
-				"States"
+				"Properties"
 				{
 					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"			"%agi_bonus"
 					"MODIFIER_PROPERTY_EVASION_CONSTANT"			"%evasion_bonus"

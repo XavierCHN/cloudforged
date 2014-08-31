@@ -29,6 +29,7 @@ function PlantACircleTrap(keys)
 
       -- 创建粒子特效绑定马甲
       local dummy_unit = CreateUnitByName('npc_cf_ta_trap', point, false, caster, caster, caster:GetTeam())
+      dummy_unit:EmitSound('Hero_TemplarAssassin.Trap')
 
       -- 计算本粒子特效位置
       local trap_pos = RotatePosition( point , direction , trap_pos)
@@ -50,7 +51,7 @@ function PlantACircleTrap(keys)
       if direction.y >= 360 then
 
         local particle_blink_start = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_refraction_break.vpcf', PATTACH_CUSTOMORIGIN, caster) 
-        ParticleManager:SetParticleControl(particle_blink_start, 0, caster:GetOrigin())
+        ParticleManager:SetParticleControl(particle_blink_start, 1, caster:GetOrigin())
         ParticleManager:ReleaseParticleIndex(particle_blink_start)
         -- 在跳出放陷阱循环后，将英雄放到樱花环的中心
         caster:SetOrigin(point)
@@ -169,6 +170,7 @@ function OnPathtonSakura(keys)
       move_target_pos = RotatePosition(caster_origin, move_rotate_angle, move_start_pos)
       -- 创建下一个粒子特效并存储
       local dummy_unit = CreateUnitByName('npc_cf_ta_trap', move_target_pos, false, caster, caster, caster:GetTeam())
+      dummy_unit:EmitSound('Hero_TemplarAssassin.Trap')
       local trap_particle = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_trap.vpcf', PATTACH_CUSTOMORIGIN, dummy_unit)
       ParticleManager:SetParticleControl(trap_particle, 0, move_target_pos)
       table.insert(TATraps,trap_particle,{
@@ -264,7 +266,7 @@ function OnPathtonSakura(keys)
           caster:RemoveModifierByName('modifier_phantom_sakura_interlock') 
           return nil
         end -- 结束 跳跃
-        return 0.03
+        return 0.1
     end,
   0.03)
 end
@@ -333,16 +335,19 @@ function OnSakuraPath(keys)
   local ABILITY_EFFECT = caster:FindAbilityByName('templar_sakura_path_passive')
   if ABILITY_EFFECT then ABILITY_EFFECT:SetLevel(level) end
   caster:SetContext("sakura_path_passive_level", tostring(level) , 0 )
+  local sakura_disappear_time = GameRules:GetGameTime() + 4.9
+  caster:SetContext("sakura_path_disappear_time",tostring(sakura_disappear_time),4.9)
   caster:SetContextThink(DoUniqueString('passive_check'),
     function()
-      print(caster:GetContext('sakura_path_passive_level'))
-      print(tostring(level))
-      print(caster:GetContext('sakura_path_passive_level') == level )
-      if caster:GetContext('sakura_path_passive_level') == level then
-        print('passive disappear')
+      local time = GameRules:GetGameTime()
+      if not caster:GetContext("sakura_path_disappear_time") then return nil end
+      if time >= tonumber(caster:GetContext("sakura_path_disappear_time")) then
         caster:SetContext("sakura_path_passive_level", "0" , 0 )
         ABILITY_EFFECT:SetLevel(0)
-        -- 移除附加的精通等级
+        caster:SetContext("sakura_path_disappear_time","0", 0)
+        if caster:HasModifier('modifier_sakura_path_passive_effect') then
+          caster:RemoveModifierByName('modifier_sakura_path_passive_effect')
+        end
       end
       return nil
     end,

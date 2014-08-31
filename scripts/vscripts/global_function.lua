@@ -20,7 +20,7 @@ end
 function tPrintTable(msg)
     tPrint('--P.RINTING TABLE--')
     for k,v in pairs(msg) do
-        local sMsg = tostring(k)..' : '..tosting(v)
+        local sMsg = tostring(k)..' : '..tostring(v)
         tPrint(sMsg)
     end
     tPrint('--E.NDPRINT TABLE--')
