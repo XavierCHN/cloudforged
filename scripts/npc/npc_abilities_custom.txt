@@ -1069,6 +1069,31 @@
 		"AbilityCooldown"		 		"0"
 		"AbilityManaCost"				"0"
 		"MaxLevel"						"1"
+
+		"Modifiers"
+		{
+			"modifier_rubick_defend_ability_1"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"	"particles\items2_fx\refresher.vpcf"
+						"EffectAttachType"	"follow_head"
+						"Target"			"CASTER"
+					}
+
+					"AttachEffect"
+					{
+						"EffectName"	"particles\generic_gameplay\dropped_tango.vpcf"
+						"EffectAttachType"	"follow_head"
+						"Target"			"CASTER"
+					}
+				}
+			}
+		}
 	}
 
 	//隐修议员 守护 
