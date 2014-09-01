@@ -186,13 +186,14 @@
 		"AttackRange"				"600"
 		"AttackAcquisitionRange"	"650"
 
-		"AbilityLayout"				"4"
+		"AbilityLayout"				"5"
 
 		//Abilities
 		"Ability1"					"templar_sakura_fall"
 		"Ability2"					"templar_sakura_circle"
 		"Ability3"					"templar_sakura_path"
-		"Ability4"					"templar_phantom_sakura"
+		"Ability4"					"templar_sakura_path_passive"
+		"Ability5"					"templar_phantom_sakura"
 		
 		// Armor
 		//-------------------------------------------------------------------------------------------------------------
@@ -210,6 +211,10 @@
 		// Movement
 		//-------------------------------------------------------------------------------------------------------------
 		"MovementSpeed"				"350"
+
+		//魔法
+		"StatusMana" "300" //魔法值
+		"StatusManaRegen" "49.99" //魔法恢复速度
 
 		"VisionNighttimeRange"		"1800"	
 	}

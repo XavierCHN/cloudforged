@@ -29,6 +29,7 @@ function PlantACircleTrap(keys)
 
       -- 创建粒子特效绑定马甲
       local dummy_unit = CreateUnitByName('npc_cf_ta_trap', point, false, caster, caster, caster:GetTeam())
+      dummy_unit:EmitSound('Hero_TemplarAssassin.Trap')
 
       -- 计算本粒子特效位置
       local trap_pos = RotatePosition( point , direction , trap_pos)
@@ -50,7 +51,7 @@ function PlantACircleTrap(keys)
       if direction.y >= 360 then
 
         local particle_blink_start = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_refraction_break.vpcf', PATTACH_CUSTOMORIGIN, caster) 
-        ParticleManager:SetParticleControl(particle_blink_start, 0, caster:GetOrigin())
+        ParticleManager:SetParticleControl(particle_blink_start, 1, caster:GetOrigin())
         ParticleManager:ReleaseParticleIndex(particle_blink_start)
         -- 在跳出放陷阱循环后，将英雄放到樱花环的中心
         caster:SetOrigin(point)
@@ -169,6 +170,7 @@ function OnPathtonSakura(keys)
       move_target_pos = RotatePosition(caster_origin, move_rotate_angle, move_start_pos)
       -- 创建下一个粒子特效并存储
       local dummy_unit = CreateUnitByName('npc_cf_ta_trap', move_target_pos, false, caster, caster, caster:GetTeam())
+      dummy_unit:EmitSound('Hero_TemplarAssassin.Trap')
       local trap_particle = ParticleManager:CreateParticle('particles/units/heroes/hero_templar_assassin/templar_assassin_trap.vpcf', PATTACH_CUSTOMORIGIN, dummy_unit)
       ParticleManager:SetParticleControl(trap_particle, 0, move_target_pos)
       table.insert(TATraps,trap_particle,{
@@ -219,25 +221,28 @@ function OnPathtonSakura(keys)
                   -- 引爆周围700单位的所有陷阱
                   if GetTrapDistance(v.position,caster_origin) < 700 then
                     -- 调用Damage施加伤害
-                    local damage_keys = {
-                      caster_entindex = keys.caster_entindex,
-                      ability = keys.ability,
-                      damage_category = DAMAGE_CATEGORY_SENSITIVE,
-                      damage_type = DAMAGE_TYPE_PURE,
-                      damage_agi = 0.04, --  伤害敏捷系数加成0.04
-                      damage_min = 200,
-                      -- 对周围100范围内的单位造成伤害
-                      target_entities = FindUnitsInRadius(
+                    local targets = FindUnitsInRadius(
                         caster:GetTeam(),
                         v.position,
                         nil,
-                        100,
+                        150,
                         DOTA_UNIT_TARGET_TEAM_ENEMY,
                         DOTA_UNIT_TARGET_ALL,
                         0, FIND_CLOSEST,
                         false)
-                    }
-                    DamageTarget(damage_keys)
+                    if #targets > 0 then
+                      local damage_keys = {
+                        caster_entindex = keys.caster_entindex,
+                        ability = keys.ability,
+                        damage_category = DAMAGE_CATEGORY_SENSITIVE,
+                        damage_type = DAMAGE_TYPE_PURE,
+                        damage_agi = 0.6, --  伤害敏捷系数加成0.04
+                        damage_min = 300,
+                        -- 对周围100范围内的单位造成伤害
+                        target_entities = targets
+                      }
+                      DamageTarget(damage_keys)
+                    end
                     -- 移除陷阱特效的粒子特效
                     UTIL_RemoveImmediate(v.owning_unit)
                     ParticleManager:ReleaseParticleIndex(k)
@@ -261,7 +266,7 @@ function OnPathtonSakura(keys)
           caster:RemoveModifierByName('modifier_phantom_sakura_interlock') 
           return nil
         end -- 结束 跳跃
-        return 0.03
+        return 0.1
     end,
   0.03)
 end
@@ -285,24 +290,27 @@ function OnSakuraFall(keys)
         ParticleManager:SetParticleControl(p, 0, pPos)
         ParticleManager:ReleaseParticleIndex(p)
 
-        local damage_keys = {
-              caster_entindex = keys.caster_entindex,
-              ability = keys.ability,
-              damage_category = DAMAGE_CATEGORY_CUNNING,
-              damage_type = DAMAGE_TYPE_PURE,
-              damage_min = 30,
-              target_entities = FindUnitsInRadius(
+        local targets = FindUnitsInRadius(
                 caster:GetTeam(),
                 pPos,
                 nil,
-                100 + currentLength / 20, -- 数学渣
+                80, -- 数学渣
                 DOTA_UNIT_TARGET_TEAM_ENEMY,
                 DOTA_UNIT_TARGET_ALL,
                 0, FIND_CLOSEST,
                 false)
-            }
-            DamageTarget(damage_keys)
+        if #targets > 0 then
 
+          local damage_keys = {
+            caster_entindex = keys.caster_entindex,
+            ability = keys.ability,
+            damage_category = DAMAGE_CATEGORY_CUNNING,
+            damage_type = DAMAGE_TYPE_PURE,
+            damage_min = 30,
+            target_entities = targets
+          }
+          DamageTarget(damage_keys)
+        end
       end
       currentLength = currentLength + 150
       if currentLength > 500 then
@@ -320,6 +328,38 @@ function OnSakuraPath(keys)
   local ABILITY = keys.ability
 
   caster:AddNewModifier(caster, nil, "modifier_rooted", {})
+
+  -- 提升被动等级
+  local level = tonumber(caster:GetContext('sakura_path_passive_level') or 0)
+  level = math.min( level + 1 , 7 )
+  local ABILITY_EFFECT = caster:FindAbilityByName('templar_sakura_path_passive')
+  if ABILITY_EFFECT then ABILITY_EFFECT:SetLevel(level) end
+  caster:SetContext("sakura_path_passive_level", tostring(level) , 0 )
+  local sakura_disappear_time = GameRules:GetGameTime() + 4.9
+  caster:SetContext("sakura_path_disappear_time",tostring(sakura_disappear_time),4.9)
+  caster:SetContextThink(DoUniqueString('passive_check'),
+    function()
+      local time = GameRules:GetGameTime()
+      if not caster:GetContext("sakura_path_disappear_time") then return nil end
+      if time >= tonumber(caster:GetContext("sakura_path_disappear_time")) then
+        caster:SetContext("sakura_path_passive_level", "0" , 0 )
+        ABILITY_EFFECT:SetLevel(0)
+        caster:SetContext("sakura_path_disappear_time","0", 0)
+        if caster:HasModifier('modifier_sakura_path_passive_effect') then
+          caster:RemoveModifierByName('modifier_sakura_path_passive_effect')
+        end
+      end
+      return nil
+    end,
+  5)
+
+  -- 有30%的概率刷新1技能
+  local intChance = RandomInt(1, 100)
+  if intChance > 70 then
+    local ABILITY_DANCE = caster:FindAbilityByName('templar_sakura_fall') 
+    if ABILITY_DANCE then ABILITY_DANCE:EndCooldown() end
+  end
+
   local currentLength = 0
   caster:SetContextThink(DoUniqueString('sakura_path'),
       function()
@@ -328,12 +368,8 @@ function OnSakuraPath(keys)
         currentLength = currentLength + 70
         if currentLength >= 700 then 
           caster:RemoveModifierByName('modifier_rooted')
-          -- 有30%的概率刷新1技能
-          local intChance = RandomInt(1, 100)
-          if intChance > 70 then
-            local ABILITY_DANCE = caster:FindAbilityByName('templar_sakura_fall') 
-            if ABILITY_DANCE then ABILITY_DANCE:EndCooldown() end
-          end
+          
+          caster:RemoveModifierByName('modifier_templar_sakura_path')
           return nil
         end
         return 0.03

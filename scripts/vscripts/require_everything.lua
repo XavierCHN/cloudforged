@@ -1,6 +1,7 @@
 -- general
 require('constants')
 require('global_function')
+require('settings')
 
 -- items
 require('items/test')

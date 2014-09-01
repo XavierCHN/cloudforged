@@ -155,7 +155,7 @@
 		//----------------------------------------------------------------
 		"AttackCapabilities"		  	"DOTA_UNIT_CAP_MELEE_ATTACK"
 
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		
 		"AttackDamageMin"			    "20"									// 最小攻击
 		"AttackDamageMax"			    "30"									// 最大攻击
@@ -236,7 +236,7 @@
 		"Model" 	"models/creeps/item_creeps/i_creep_necro_warrior/necro_warrior.vmdl"
 		"SoundSet" "Undying_Zombie"// Name of sound set.
 		"Level" "1"
-		"ModelScale" "1"
+		"ModelScale" "0.4"
 		//模型比例，具体调整
 		"IsAncient" "0"
 		"IsNeutralUnitType" "0"
@@ -261,18 +261,16 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "10" // 最小攻击
 		"AttackDamageMax" "15" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
-		"BountyGoldMin" "50" //杀死金钱最少
-		"BountyGoldMax" "70" //杀死金钱最多
+		"BountyXP" "10" //杀死经验值
+		"BountyGoldMin" "33" //杀死金钱最少
+		"BountyGoldMax" "44" //杀死金钱最多
 		// Bounds
 		//----------------------------------------------------------------
 		"BoundsHullName" "DOTA_HULL_SIZE_HERO"
@@ -287,7 +285,7 @@
 		"FollowRange" "0" //跟随距离
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth" "200" //生命值
+		"StatusHealth" "150" //生命值
 		"StatusHealthRegen" "0" //生命恢复速度
 		"StatusMana" "0" //魔法值
 		"StatusManaRegen" "0" //魔法恢复速度
@@ -308,19 +306,17 @@
 	"npc_cf_enemy_02_creep_bad_melee"
 	{
 		"BaseClass" "npc_dota_creature"
-		//所有小怪的BaseClass都使用这个
 		"Model" "models/creeps/lane_creeps/creep_bad_melee/creep_bad_melee.vmdl"
-		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
 		"Level" "2"
 		"ModelScale" "1"
-		//模型比例，具体调整
 		"IsAncient" "0"
 		"IsNeutralUnitType" "0"
 		"SelectOnSpawn" "0"
 		"CanBeDominated" "0"
 		"IgnoreAddSummonedToSelection" "0"
 		"AutoAttacksByDefault" "0"
+
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1" "" // Ability 1.
@@ -331,6 +327,7 @@
 		"Ability6" "" // Ability 6 - Extra.
 		"Ability7" "" // Ability 7 - Extra.
 		"Ability8" "" // Ability 8 - Extra.
+
 		// Armor
 		//----------------------------------------------------------------
 		"ArmorPhysical" "0" // 物理护甲
@@ -338,18 +335,16 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "13	" // 最小攻击
 		"AttackDamageMax" "17" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
-		"BountyGoldMin" "50" //杀死金钱最少
-		"BountyGoldMax" "70" //杀死金钱最多
+		"BountyXP" "15" //杀死经验值
+		"BountyGoldMin" "44" //杀死金钱最少
+		"BountyGoldMax" "55" //杀死金钱最多
 		// Bounds
 		//----------------------------------------------------------------
 		"BoundsHullName" "DOTA_HULL_SIZE_HERO"
@@ -364,7 +359,7 @@
 		"FollowRange" "0" //跟随距离
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth" "400" //生命值
+		"StatusHealth" "350" //生命值
 		"StatusHealthRegen" "0" //生命恢复速度
 		"StatusMana" "0" //魔法值
 		"StatusManaRegen" "0" //魔法恢复速度
@@ -376,6 +371,7 @@
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
 
 		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
 		// Vision
 		//----------------------------------------------------------------
 		"VisionDaytimeRange" "2000" //白天视野
@@ -385,13 +381,10 @@
 	"npc_cf_enemy_03_creep_bad_melee_diretide"
 	{
 		"BaseClass" "npc_dota_creature"
-		//所有小怪的BaseClass都使用这个
 		"Model" "models/creeps/lane_creeps/creep_bad_melee_diretide/creep_bad_melee_diretide.vmdl"
-		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
 		"Level" "3"
 		"ModelScale" "1"
-		//模型比例，具体调整
 		"IsAncient" "0"
 		"IsNeutralUnitType" "0"
 		"SelectOnSpawn" "0"
@@ -415,16 +408,14 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "17" // 最小攻击
 		"AttackDamageMax" "21" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "20" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -462,13 +453,10 @@
 	"npc_cf_enemy_04_creep_good_melee"
 	{
 		"BaseClass" "npc_dota_creature"
-		//所有小怪的BaseClass都使用这个
 		"Model" "models/creeps/lane_creeps/creep_good_melee/creep_good_melee.vmdl"
-		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
 		"Level" "4"
 		"ModelScale" "1"
-		//模型比例，具体调整
 		"IsAncient" "0"
 		"IsNeutralUnitType" "0"
 		"SelectOnSpawn" "0"
@@ -492,16 +480,14 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "28" // 最小攻击
 		"AttackDamageMax" "32" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "30" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -569,16 +555,16 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
-		"AttackDamageMin" "550" // 最小攻击
-		"AttackDamageMax" "552" // 最大攻击
+		"AttackDamageMin" "15" // 最小攻击
+		"AttackDamageMax" "22" // 最大攻击
 		"AttackAcquisitionRange" "1200" //攻击获取距离
-		"AttackRange" "1150" //攻击距离
-		"ProjectileModel" "ranged_badguy" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
+		"AttackRange" "500" //攻击距离
+		"ProjectileModel" "particles/base_attacks/ranged_goodguy.vpcf" 
 		"ProjectileSpeed" "900"//投射物的飞行速度 
+
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "40" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -595,7 +581,7 @@
 		"FollowRange" "0" //跟随距离
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth" "0" //生命值
+		"StatusHealth" "2300" //生命值
 		"StatusHealthRegen" "0" //生命恢复速度
 		"StatusMana" "0" //魔法值
 		"StatusManaRegen" "0" //魔法恢复速度
@@ -645,17 +631,17 @@
 		"MagicalResistance" "0" // 魔法抗性
 		// Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities" "DOTA_UNIT_CAP_ RANGED _ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
+		
 		"AttackDamageMin" "28" // 最小攻击
 		"AttackDamageMax" "32" // 最大攻击
 		"AttackAcquisitionRange" "300" //攻击获取距离
-		"AttackRange" "200" //攻击距离
-		"ProjectileModel" "ranged_badguy" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
+		"AttackRange" "600" //攻击距离
+		"ProjectileModel" "particles/base_attacks/ranged_badguy.vpcf" 
 		"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "50" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -723,16 +709,16 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "43" // 最小攻击
 		"AttackDamageMax" "47" // 最大攻击
 		"AttackAcquisitionRange" "600" //攻击获取距离
 		"AttackRange" "500" //攻击距离
-		"ProjectileModel" "ghost_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
+		"ProjectileModel" "ghost_base_attack" 
 		"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "60" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -799,17 +785,17 @@
 		"MagicalResistance" "0" // 魔法抗性
 		// Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities" "DOTA_UNIT_CAP_ RANGED _ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
+		
 		"AttackDamageMin" "47" // 最小攻击
 		"AttackDamageMax" "51" // 最大攻击
 		"AttackAcquisitionRange" "500" //攻击获取距离
-		"AttackRange" "450" //攻击距离
-		"ProjectileModel" "necronomicon_archer_projectile" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
+		"AttackRange" "500" //攻击距离
+		"ProjectileModel" "particles/items2_fx/necronomicon_archer_projectile_explosion.vpcf" 
 		"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "70" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -876,17 +862,16 @@
 		"MagicalResistance" "0" // 魔法抗性
 		// Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities" "DOTA_UNIT_CAP_ RANGED _ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
+		
 		"AttackDamageMin" "52" // 最小攻击
 		"AttackDamageMax" "56" // 最大攻击
 		"AttackAcquisitionRange" "350" //攻击获取距离
-		"AttackRange" "300" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
+		"AttackRange" "500" //攻击距离
+		//"ProjectileModel" "particles/units/heroes/hero_rubick/rubick_base_attack.vpcf" 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "80" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -954,16 +939,14 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "68" // 最小攻击
 		"AttackDamageMax" "72" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "90" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -1031,16 +1014,14 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "62" // 最小攻击
 		"AttackDamageMax" "66" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "100" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -1108,16 +1089,14 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "99" // 最小攻击
 		"AttackDamageMax" "103" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "110" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -1185,16 +1164,14 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "199" // 最小攻击
 		"AttackDamageMax" "203" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "120" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -1262,16 +1239,14 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "203" // 最小攻击
 		"AttackDamageMax" "207" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "130" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -1339,16 +1314,14 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "1000" // 最小攻击
 		"AttackDamageMax" "1004" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "140" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -1416,16 +1389,14 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "220" // 最小攻击
 		"AttackDamageMax" "222" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "150" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -1493,16 +1464,14 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "171" // 最小攻击
 		"AttackDamageMax" "175" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "160" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -1570,16 +1539,14 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "171" // 最小攻击
 		"AttackDamageMax" "175" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "170" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -1647,16 +1614,16 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "201" // 最小攻击
 		"AttackDamageMax" "205" // 最大攻击
 		"AttackAcquisitionRange" "700" //攻击获取距离
 		"AttackRange" "600" //攻击距离
-		"ProjectileModel" "black_drake_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
+		"ProjectileModel" "black_drake_attack" 
 		"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "200" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -1724,16 +1691,14 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "35" // 最小攻击
 		"AttackDamageMax" "37" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "230" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -1801,16 +1766,16 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "320" // 最小攻击
 		"AttackDamageMax" "324" // 最大攻击
 		"AttackAcquisitionRange" "700" //攻击获取距离
 		"AttackRange" "600" //攻击距离
-		"ProjectileModel" "black_drake_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
+		"ProjectileModel" "black_drake_attack" 
 		"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "270" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -1878,16 +1843,16 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "321" // 最小攻击
 		"AttackDamageMax" "325" // 最大攻击
 		"AttackAcquisitionRange" "700" //攻击获取距离
 		"AttackRange" "600" //攻击距离
-		"ProjectileModel" "fountain_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
+		"ProjectileModel" "fountain_attack" 
 		"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "310" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds
@@ -1955,16 +1920,14 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		//攻击类型DOTA_UNIT_CAP_RANGED_ATTACK为远程，这里是近战，远程要定义攻击弹道
+		
 		"AttackDamageMin" "1290" // 最小攻击
 		"AttackDamageMax" "1293" // 最大攻击
 		"AttackAcquisitionRange" "200" //攻击获取距离
 		"AttackRange" "128" //攻击距离
-		//"ProjectileModel" "rubick_base_attack" //这是攻击投射物的模型，可以选择远程攻击英雄的，如是远程请把最前面的//删除
-		//"ProjectileSpeed" "900"//投射物的飞行速度 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP" "0" //杀死经验值
+		"BountyXP" "350" //杀死经验值
 		"BountyGoldMin" "50" //杀死金钱最少
 		"BountyGoldMax" "70" //杀死金钱最多
 		// Bounds

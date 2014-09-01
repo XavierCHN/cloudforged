@@ -10,12 +10,16 @@
 //		"Depth"			"50"
 //	}
 
-	"1"//任务面板
+	//"1"//任务面板
+	//{
+	//	"File"			"Quest"
+	//	"Depth"			"55"
+	//}
+	"2"//错误信息
 	{
-		"File"			"Quest"
-		"Depth"			"55"
+		"File"			"CustomError"
+		"Depth"			"10"
 	}
-	
 	//"1"
 	//{
 	//	"File"		"Example"
