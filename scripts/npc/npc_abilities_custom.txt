@@ -615,6 +615,7 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"BaseClass"						"ability_datadriven"  
 		"AbilityTextureName"			"axe_culling_blade"
+		"AOERadius"						"500"
 
 		// Casting
 		//---------------------------------------------------------------------------------------
@@ -1674,7 +1675,7 @@
 			{
 				"IsHidden"				"1"
 				"Duration"				"1"
-				"OverrideAnimation"		"ACT_DOTA_RUN"
+				"OverrideAnimation"		"ACT_DOTA_SPAWN"
 				"EffectName"			"particles\units\heroes\hero_centaur\centaur_stampede.vpcf"
 				"EffectAttachType"		"follow_chest"
 			}
