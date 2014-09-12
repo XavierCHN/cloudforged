@@ -375,7 +375,7 @@ function rubick_defend_ability_1(caster,hero)
 	local flags = DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES
 	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("rubick_defend_ability_1_time"), 
 		function( )
-			if IsValidEntity(caster) then
+			if caster:IsAlive() then
 				local group = FindUnitsInRadius(caster:GetTeam(), caster:GetOrigin(), nil, 250, teams, types, flags, FIND_CLOSEST, true)
 
 				for i,unit in pairs(group) do
@@ -404,5 +404,6 @@ function rubick_defend_ability_2( keys )
 						damage=num}
 	ApplyDamage(damageTable)
 
+	print(num)
 end
 

@@ -26,6 +26,8 @@ function tPrintTable(msg)
     tPrint('--E.NDPRINT TABLE--')
 end
 
+
+---------------------------------------------------------------------------------------------------
 if CFGeneral == nil then
     CFGeneral = class({})
 end
@@ -43,3 +45,4 @@ end
 function CFGeneral:ShowError(msg, playerid)
     FireGameEvent('custom_error_show', {player_ID = playerid, _error = msg})
 end
+---------------------------------------------------------------------------------------------------

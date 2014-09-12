@@ -155,18 +155,6 @@ end
 
 -------------------------------------------------------------------------------------------------------------------
 function CForgedGameMode:OnEntityKilled( keys )
-  print( '[CForged] OnEntityKilled Called' )
-  --PrintTable( keys )
-
-  -- 储存被击杀的单位
-  local killedUnit = EntIndexToHScript( keys.entindex_killed )
-  -- 储存杀手单位
-  local killerEntity =EntIndexToHScript( keys.entindex_attacker )
-
-  if (killerEntity:IsHero()) then
-	-- 每个小怪默认50经验值？
-    killerEntity:AddExperience(50, true)
-  end 
 end
 -------------------------------------------------------------------------------------------------------------------
 

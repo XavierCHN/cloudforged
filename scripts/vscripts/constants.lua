@@ -19,11 +19,6 @@ if DEBUG_MODE == nil then
     end
 end
 
---tPrint
-ALWAYS_PRINT = 0
-DEV_PRINT = 1
-LOG_PRINT = 2
-
 --伤害系统 精通类型
 DAMAGE_CATEGORY_FORCE		= 'force'		--蛮力
 DAMAGE_CATEGORY_SENSITIVE	= 'sensitive'	--灵敏
