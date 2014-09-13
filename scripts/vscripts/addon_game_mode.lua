@@ -81,6 +81,8 @@ function Precache( context )
     PrecacheSound( 'soundevents/game_sounds_heroes/game_sounds_undying.vsndevts', context)
     PrecacheSound( 'soundevents/game_sounds_creeps.vsndevts', context )
 
+    PrecacheUnitByNameAsync('npc_dota_hero_invoker', function() print('precache finished') end) 
+
     -- 从KV文件统一载入小怪模型
     local unit_kv = LoadKeyValues("scripts/npc/npc_units_custom.txt")
     if unit_kv then
@@ -119,6 +121,7 @@ function CForgedGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 0.1 )
     GameRules:SetHeroSelectionTime(TIME_HERO_SELECTION)
 	GameRules:SetPreGameTime(TIME_PRE_GAME)
+
     -- 是否使用自定义的英雄经验
     GameRules:SetUseCustomHeroXPValues ( true )
     
@@ -127,6 +130,9 @@ function CForgedGameMode:InitGameMode()
     ListenToGameEvent('dota_player_gained_level', Dynamic_Wrap(CForgedGameMode, 'OnPlayerGainLevel'), self) 
     -- 注册物品事件监听
     ItemCore:RegistEvents()
+
+    -- 注册控制台命令
+    self:RegisterConsoleCommands()
 
     -- 自定义等级
     self._eGameMode = GameRules:GetGameModeEntity() 
@@ -137,6 +143,12 @@ function CForgedGameMode:InitGameMode()
 	
 	-- 初始化刷怪器
 	CFRoundThinker:InitPara()
+end
+-------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------
+function CForgedGameMode:RegisterConsoleCommands()
+    Convars:RegisterConvar('cf_spawn_enemy_unit', 'true', '如果设置为false，则不刷怪', 0 ) 
 end
 -------------------------------------------------------------------------------------------------------------------
 
@@ -182,6 +194,6 @@ end
 
 -------------------------------------------------------------------------------------------------------------------
 function CForgedGameMode:RegisterLivingBoss(bossUnit)
-    self._boss = self._boss or {]
+    self._boss = self._boss or {}
     table.insert(self._boss,bossUnit)
 end

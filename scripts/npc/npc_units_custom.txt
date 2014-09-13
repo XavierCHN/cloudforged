@@ -229,15 +229,26 @@
   	//===========================================
   	// BOSS们
   	//===========================================
+  	
+  	// 最终BOSS，卡尔
 	"npc_cf_boss_invoker"
 	{
-		"BaseClass"			"npc_dota_creature"
-		"Model"				"models/heroes/hero_invoker.vmdl"
-		"ModelScale"		"3"
-		"IsNeutralUnitType"	"0"
-		"CanBeDominated"	"0"
-		"AutoAttacksByDefault"	"1"
 
+		// General
+		//
+		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
+		"Model"						"models/heroes/invoker/invoker.vmdl"// Model.
+		"ModelScale"				"3"
+		"SoundSet"					"Hero_Invoker"					// Name of sound set.
+		"MinimapIcon"				""
+		"MinimapIconSize"			"200"
+		"Level"						"1"
+
+		// "Level"						"200"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		
 		"Ability1"			"invoker_sun_strike"
 		"Ability2"			"invoker_deafening_blast"
 		"Ability3"			"invoker_cold_snap"
@@ -248,24 +259,48 @@
 		"Ability8"			"invoker_wex"
 		"Ability9"			"invoker_exort"
 
+		// Armor
+		//----------------------------------------------------------------
 		"ArmorPhysical"		"30"
 		"MagicalResistance"	"40"
 
+		// Attack
+		//----------------------------------------------------------------
 		"AttackCapabilities"	"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"		"750"
-		"AttackDamageMax"		"800"
+		"AttackDamageMin"		"1314"
+		"AttackDamageMax"		"1516"
 		"AttackAcquisitionRange"	"800"
 		"AttackRange"				"800"
-		"AttackRate"				"0.5"
+		"AttackRate"				"0.3"
+		"AttackAnimationPoint"		"0.2"		// Normalized time in animation cycle to attack.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"ProjectileModel"			"particles/units/heroes/hero_invoker/invoker_base_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"750"		// Speed of projectile.
+		
 
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"0"			// Base strength
+		"AttributeStrengthGain"		"0"			// Strength bonus per level.
+		"AttributeBaseIntelligence"	"0"			// Base intelligence
+		"AttributeIntelligenceGain"	"0"			// Intelligence bonus per level.
+		"AttributeBaseAgility"		"0"			// Base agility
+		"AttributeAgilityGain"		"0"			// Agility bonus per level.
+
+		// Bounty
+		//----------------------------------------------------------------
 		"BountyXP"					"1500"
 		"BountyGoldMin"				"12000"
 		"BountyGoldMax"				"15000"
+
 		// Bounds
 		//----------------------------------------------------------------
-		"BoundsHullName" 			"DOTA_HULL_SIZE_HERO"
-		"RingRadius" 				"50"
-		"HealthBarOffset" 			"-1" // -1 means use the models
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"			// Hull type used for navigation/locomotion.
+		"ProjectileCollisionSize"	"50"
+		"RingRadius"				"130"
+		"HealthBarOffset"			"260"
+
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities" 		"DOTA_UNIT_CAP_MOVE_GROUND"//DOTA_UNIT_CAP_MOVE_FLY
@@ -273,12 +308,13 @@
 		"MovementTurnRate" 			"0.5" //转身速度
 		"HasAggressiveStance" 		"0" //
 		"FollowRange" 				"0" //跟随距离
+
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth" 				"150" //生命值
+		"StatusHealth" 				"1500000" //生命值
 		"StatusHealthRegen" 		"0" //生命恢复速度
-		"StatusMana" 				"0" //魔法值
-		"StatusManaRegen" 			"0" //魔法恢复速度
+		"StatusMana" 				"2000" //魔法值
+		"StatusManaRegen" 			"200" //魔法恢复速度
 		"StatusStartingMana" 		"-1" //初始魔法，-1表示满魔法
 		// Team
 		//----------------------------------------------------------------
@@ -291,11 +327,23 @@
 		//----------------------------------------------------------------
 		"VisionDaytimeRange" 	"2000" //白天视野
 		"VisionNighttimeRange" 	"2000" //夜晚视野
-
 		"vscripts"					"AIs/boss_invoker_ai.lua"
 
 		"Creature"
 		{
+			"DefaultState"				"Invade"
+			
+			"States"
+			{
+				"Invade"
+				{
+					"Name"				"Invade"
+					"Aggression"		"100.0"
+					"Avoidance"			"0.0"
+					"Support"			"0.0"
+				}
+			}
+			
 			"AttachWearables"
 			{
 				"Wearable1"

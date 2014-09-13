@@ -306,7 +306,7 @@
 		// General
 		//---------------------------------------------------------------------------------------
 		"AbilityName"					"axe_hell_roar"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_AOE" 
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE" 
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_COMPOSITE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"BaseClass"						"ability_datadriven"  
@@ -339,7 +339,7 @@
 				"damage_str"		"%str"
 				"Target"
 				{
-					"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+					"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 					"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
 					"Radius"	"%range"
@@ -352,7 +352,7 @@
 			{
 				"Target"
 				{
-					"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+					"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 					"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
 					"Radius"	"%range"
@@ -407,7 +407,7 @@
 		// General
 		//---------------------------------------------------------------------------------------
 		"AbilityName"					"axe_spiral_axe"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_IMMEDIATE" 
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE" 
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"BaseClass"						"ability_datadriven"  
@@ -452,7 +452,7 @@
 				"damage_str"		"%str"
 				"Target"
 				{
-					"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+					"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 					"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
 					"Radius"	"%radius"
@@ -560,7 +560,7 @@
 								"Function"		"axe_war_will_hidden"
 								"Target"
 								{
-									"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO|DOTA_UNIT_TARGET_MECHANICAL"
+									"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_MECHANICAL"
 									"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 									"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
 									"Radius"	"300"
@@ -609,7 +609,7 @@
 		// General
 		//---------------------------------------------------------------------------------------
 		"AbilityName"					"axe_titan_force"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT|DOTA_ABILITY_BEHAVIOR_AOE" 
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE" 
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_COMPOSITE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -672,7 +672,7 @@
 						"damage_str"		"%str"
 						"Target"
 						{
-							"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+							"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 							"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 							"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
 							"Radius"	"%radius"
@@ -895,7 +895,7 @@
 	//祝福 隐藏被动 友军
 	"rubick_Bless_friendly_hidden"
 	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE|DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"BaseClass"						"ability_datadriven"
 		"AbilityCastPoint"				"0.0" 
 		"AbilityCooldown"		 		"0"
@@ -955,7 +955,7 @@
 	//祝福 隐藏被动 敌人
 	"rubick_Bless_enemy_hidden"
 	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE|DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"BaseClass"						"ability_datadriven"
 		"AbilityCastPoint"				"0.0" 
 		"AbilityCooldown"		 		"0"
@@ -1239,7 +1239,7 @@
 	{
 		// General
 		//---------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_CHANNELLED" 
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED" 
 		"BaseClass"						"ability_datadriven"  
 		"AbilityTextureName"			"rubick_telekinesis"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
@@ -1351,7 +1351,7 @@
 	//隐修议员 自然的庇护 光环
 	"rubick_natural_shelter_aura"
 	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE|DOTA_ABILITY_BEHAVIOR_AURA|DOTA_ABILITY_BEHAVIOR_HIDDEN" 
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_HIDDEN" 
 		"BaseClass"						"ability_datadriven"
 		"MaxLevel"						"3"
 		"AbilityTextureName"			"rubick_telekinesis"
@@ -1730,7 +1730,7 @@
 				"Function"		"centaur_hoof_stomp"
 				"Target"
 				{
-					"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+					"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 					"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
 					"Radius"	"%radius"
@@ -1765,7 +1765,7 @@
 					{
 						"Target"
 						{
-							"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+							"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 							"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 							"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
 							"Radius"	"%radius"
@@ -1784,7 +1784,7 @@
 						"damage_str"		"%str"
 						"Target"
 						{
-							"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+							"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 							"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 							"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
 							"Radius"	"%radius"
@@ -1803,7 +1803,7 @@
 						"ModifierName"	"modifier_phased"
 						"Target"
 						{
-							"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+							"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 							"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 							"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
 							"Radius"	"%radius"
@@ -1816,7 +1816,7 @@
 						"ModifierName"	"modifier_phased"
 						"Target"
 						{
-							"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+							"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 							"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 							"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
 							"Radius"	"%radius"
@@ -1905,7 +1905,7 @@
 								"damage_str"		"%str"
 								"Target"
 								{
-									"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+									"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 									"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 									"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
 									"Radius"	"%radius"
@@ -1917,7 +1917,7 @@
 								"ModifierName"	"create_more_fight_more_brave_animation"
 								"Target"
 								{
-									"Types"		"DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+									"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 									"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 									"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
 									"Radius"	"%radius"
