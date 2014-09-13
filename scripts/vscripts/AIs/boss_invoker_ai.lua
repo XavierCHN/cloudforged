@@ -1,6 +1,7 @@
 --[[
  卡尔BOSS的AI
 ]]
+
 require( "AIs/ai_core" )
 
 local BossAbilities = {
@@ -119,22 +120,19 @@ function BossInvokerThink()
 
     -- 如果BOSS已经死亡，注册重新刷新的计时器，同时注销这个单位的AI
     if thisEntity:IsNull() or not thisEntity:IsAlive() then
-        
         print('boss invoker is killed, respawning')
         GameRules:GetGameModeEntity():SetContextThink('boss_invoker_respawner', 
             function() 
                 print('respawning invoker')
                 
-                local respawned_boss = CreateUnitByName('npc_cf_boss_invoker', BossInvokerStartPosition, true, nil, nil, DOTA_TEAM_NOTEAM)
+                local respawned_boss = CreateUnitByName('npc_cf_boss_invoker', BossInvokerStartPosition, true, nil, nil, DOTA_TEAM_BADGUYS)
 
                 FireGameEvent('show_center_message', {
                     message = "#Boss_invoker_has_respawn",
                     duration = 5
                 }) 
             end,
-        10)
-        -- 300)
-
+        300)
         return nil
     end
 
@@ -153,6 +151,9 @@ function BossInvokerThink()
     if ( thisEntity:GetOrigin() - BossInvokerStartPosition ):Length() >= 2000 then
         thisEntity:SetHealth( thisEntity:GetMaxHealth() )
         thisEntity:SetOrigin( BossInvokerStartPosition )
+        
+        thisEntity:Stop()
+
         return 1
     end
 

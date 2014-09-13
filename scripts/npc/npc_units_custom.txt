@@ -242,9 +242,8 @@
 		"SoundSet"					"Hero_Invoker"					// Name of sound set.
 		"MinimapIcon"				""
 		"MinimapIconSize"			"200"
-		"Level"						"1"
-
-		// "Level"						"200"
+		// "Level"						"1"
+		"Level"						"200"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -343,7 +342,7 @@
 					"Support"			"0.0"
 				}
 			}
-			
+
 			"AttachWearables"
 			{
 				"Wearable1"
@@ -754,7 +753,7 @@
 		"Model" "models/creeps/lane_creeps/creep_bad_ranged/lane_dire_ranged.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "6"
+		"Level" "12"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -831,7 +830,7 @@
 		"Model" "models/creeps/lane_creeps/creep_radiant_ranged_diretide/creep_radiant_ranged_diretide.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "7"
+		"Level" "14"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -908,7 +907,7 @@
 		"Model" "models/creeps/item_creeps/i_creep_necro_archer/necro_archer.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "8"
+		"Level" "16"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -985,7 +984,7 @@
 		"Model" "models/creeps/lane_creeps/creep_radiant_melee_diretide/creep_radiant_melee_diretide.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "9"
+		"Level" "18"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -1061,7 +1060,7 @@
 		"Model" "models/creeps/neutral_creeps/n_creep_beast/n_creep_beast.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "10"
+		"Level" "20"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -1136,7 +1135,7 @@
 		"Model" "models/creeps/neutral_creeps/n_creep_forest_trolls/n_creep_forest_troll_berserker.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "11"
+		"Level" "22"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -1211,7 +1210,7 @@
 		"Model" "models/creeps/neutral_creeps/n_creep_centaur_med/n_creep_centaur_med.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "12"
+		"Level" "24"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -1286,7 +1285,7 @@
 		"Model" "models/creeps/neutral_creeps/n_creep_centaur_lrg/n_creep_centaur_lrg.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "13"
+		"Level" "26"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -1361,7 +1360,7 @@
 		"Model" "models/creeps/neutral_creeps/n_creep_furbolg/n_creep_furbolg_disrupter.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "14"
+		"Level" "28"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -1436,7 +1435,7 @@
 		"Model" "models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "15"
+		"Level" "30"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -1511,7 +1510,7 @@
 		"Model" "models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "16"
+		"Level" "40"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -1586,7 +1585,7 @@
 		"Model" "models/creeps/neutral_creeps/n_creep_satyr_a/n_creep_satyr_a.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "17"
+		"Level" "45"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -1661,7 +1660,7 @@
 		"Model" "models/creeps/neutral_creeps/n_creep_worg_large/n_creep_worg_large.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "18"
+		"Level" "50"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -1736,7 +1735,7 @@
 		"Model" "models/creeps/neutral_creeps/n_creep_black_drake/n_creep_black_drake.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "19"
+		"Level" "55"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -1813,7 +1812,7 @@
 		"Model" "models/creeps/neutral_creeps/n_creep_dragonspawn_b/n_creep_dragonspawn_b.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "20"
+		"Level" "60"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -1888,7 +1887,7 @@
 		"Model" "models/creeps/mega_greevil/mega_greevil.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "21"
+		"Level" "70"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -1965,7 +1964,7 @@
 		"Model" "models/creeps/neutral_creeps/n_creep_gargoyle/n_creep_gargoyle.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "22"
+		"Level" "80"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
@@ -2042,7 +2041,7 @@
 		"Model" "models/creeps/neutral_creeps/n_creep_dragonspawn_a/n_creep_dragonspawn_a.vmdl"
 		// 到AssertBrowser找一个vmdl。必须至少要有攻击动画
 		"SoundSet" "Undying_Zombie"// Name of sound set.
-		"Level" "23"
+		"Level" "90"
 		"ModelScale" "1"
 		//模型比例，具体调整
 		"IsAncient" "0"
