@@ -47,6 +47,11 @@ function PlantACircleTrap(keys)
       -- 为下一次循环修改位置
       direction = direction + QAngle(0,60,0)
 
+      -- 获取技能变量
+      local damage_agi_ratio = tonumber(keys.ability:GetLevelSpecialValueFor('damage_agi',keys.ability:GetLevel() -1))
+      local ability_damage_min = tonumber(keys.ability:GetLevelSpecialValueFor('damage_min',keys.ability:GetLevel() -1))
+      local ability_radius = tonumber(keys.ability:GetLevelSpecialValueFor('ability_radius',keys.ability:GetLevel() -1))
+
       -- 跳出循环的条件
       if direction.y >= 360 then
 
@@ -65,7 +70,6 @@ function PlantACircleTrap(keys)
         caster:AddNewModifier(caster, nil, 'modifier_rooted', {})
         caster:AddNewModifier(caster, nil, 'modifier_silence', {})
 
-        -- 0.8秒之后，释放樱花环
         caster:SetContextThink(DoUniqueString("release_circle"), 
           function()
             caster:RemoveModifierByName('modifier_rooted') 
@@ -77,13 +81,13 @@ function PlantACircleTrap(keys)
               ability = keys.ability,
               damage_category = DAMAGE_CATEGORY_SENSITIVE,
               damage_type = DAMAGE_TYPE_PURE,
-              damage_agi = 0.4,
-              damage_min = 200,
+              damage_agi = damage_agi_ratio,
+              damage_min = ability_damage_min,
               target_entities = FindUnitsInRadius(
                 caster:GetTeam(),
                 caster:GetOrigin(),
                 nil,
-                500,
+                ability_radius,
                 DOTA_UNIT_TARGET_TEAM_ENEMY,
                 DOTA_UNIT_TARGET_ALL,
                 0, FIND_CLOSEST,
@@ -133,6 +137,8 @@ function OnPathtonSakura(keys)
   if caster:HasModifier('modifier_phantom_sakura_interlock') then
     return
   end
+
+  local damage_agi_ratio = tonumber(keys.ability:GetLevelSpecialValueFor('damage_agi',keys.ability:GetLevel() -1))
 
   -- 获取施法者位置
   local caster_origin = caster:GetOrigin()
@@ -225,7 +231,7 @@ function OnPathtonSakura(keys)
                         caster:GetTeam(),
                         v.position,
                         nil,
-                        150,
+                        300,
                         DOTA_UNIT_TARGET_TEAM_ENEMY,
                         DOTA_UNIT_TARGET_ALL,
                         0, FIND_CLOSEST,
@@ -236,9 +242,8 @@ function OnPathtonSakura(keys)
                         ability = keys.ability,
                         damage_category = DAMAGE_CATEGORY_SENSITIVE,
                         damage_type = DAMAGE_TYPE_PURE,
-                        damage_agi = 0.6, --  伤害敏捷系数加成0.04
+                        damage_agi = damage_agi_ratio, --  伤害敏捷系数加成0.04
                         damage_min = 300,
-                        -- 对周围100范围内的单位造成伤害
                         target_entities = targets
                       }
                       DamageTarget(damage_keys)
@@ -278,6 +283,10 @@ function OnSakuraFall(keys)
   -- 获取英雄朝向
   local forward_vec = caster:GetForwardVector()
 
+  -- 获取技能数值
+  local damage_base = tonumber(keys.ability:GetLevelSpecialValueFor('damage_base',keys.ability:GetLevel() -1))
+  local damage_length = tonumber( keys.ability:GetLevelSpecialValueFor('length',keys.ability:GetLevel() -1))
+  print(damage_length)
   local caster_origin = caster:GetOrigin()
   print(forward_vec)
   local currentLength = 30
@@ -306,14 +315,14 @@ function OnSakuraFall(keys)
             ability = keys.ability,
             damage_category = DAMAGE_CATEGORY_CUNNING,
             damage_type = DAMAGE_TYPE_PURE,
-            damage_min = 30,
+            damage_min = damage_base,
             target_entities = targets
           }
           DamageTarget(damage_keys)
         end
       end
       currentLength = currentLength + 150
-      if currentLength > 500 then
+      if currentLength > damage_length then
         return nil
       end
       return 0.07

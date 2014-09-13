@@ -1421,6 +1421,24 @@
 				"Function"				"PlantACircleTrap"
 			}
 		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ability_radius"		"400 500 600 700"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_agi"			"0.15 0.16 0.17 0.18"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_min"			"150 200 250 300"
+			}
+		}
 	}
 	//樱之杀
 	"templar_sakura_fall"
@@ -1445,6 +1463,19 @@
 			{
 				"EffectName"			"Hero_Crystal.CrystalNova"
 				"Target"				"CASTER"
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"damage_base"			"20 30 40 50"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"length"		"400 500 700 900"
 			}
 		}
 	}
@@ -1482,6 +1513,14 @@
 			{
 				"Passive"		"0"
 				"IsHidden"		"1"
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"damage_agi"			"0.6 0.8 1.2"
 			}
 		}
 	}
