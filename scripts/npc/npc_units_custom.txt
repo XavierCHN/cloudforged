@@ -227,6 +227,106 @@
   		"WakesNeutrals"			"0"
   	}
   	//===========================================
+  	// BOSS们
+  	//===========================================
+	"npc_cf_boss_invoker"
+	{
+		"BaseClass"			"npc_dota_creature"
+		"Model"				"models/heroes/hero_invoker.vmdl"
+		"ModelScale"		"3"
+		"IsNeutralUnitType"	"0"
+		"CanBeDominated"	"0"
+		"AutoAttacksByDefault"	"1"
+
+		"Ability1"			"invoker_sun_strike"
+		"Ability2"			"invoker_deafening_blast"
+		"Ability3"			"invoker_cold_snap"
+		"Ability4"			"invoker_forge_spirit"
+		"Ability5"			"invoker_ice_wall"
+		"Ability6"			"invoker_alacrity"
+		"Ability7"			"invoker_quas"
+		"Ability8"			"invoker_wex"
+		"Ability9"			"invoker_exort"
+
+		"ArmorPhysical"		"30"
+		"MagicalResistance"	"40"
+
+		"AttackCapabilities"	"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"		"750"
+		"AttackDamageMax"		"800"
+		"AttackAcquisitionRange"	"800"
+		"AttackRange"				"800"
+		"AttackRate"				"0.5"
+
+		"BountyXP"					"1500"
+		"BountyGoldMin"				"12000"
+		"BountyGoldMax"				"15000"
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName" 			"DOTA_HULL_SIZE_HERO"
+		"RingRadius" 				"50"
+		"HealthBarOffset" 			"-1" // -1 means use the models
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities" 		"DOTA_UNIT_CAP_MOVE_GROUND"//DOTA_UNIT_CAP_MOVE_FLY
+		"MovementSpeed" 			"450" //移动速度
+		"MovementTurnRate" 			"0.5" //转身速度
+		"HasAggressiveStance" 		"0" //
+		"FollowRange" 				"0" //跟随距离
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth" 				"150" //生命值
+		"StatusHealthRegen" 		"0" //生命恢复速度
+		"StatusMana" 				"0" //魔法值
+		"StatusManaRegen" 			"0" //魔法恢复速度
+		"StatusStartingMana" 		"-1" //初始魔法，-1表示满魔法
+		// Team
+		//----------------------------------------------------------------
+		"TeamName" 			"DOTA_TEAM_NEUTRALS"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_BASIC"  //攻击类型
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"  //护甲类型
+
+		"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange" 	"2000" //白天视野
+		"VisionNighttimeRange" 	"2000" //夜晚视野
+
+		"vscripts"					"AIs/boss_invoker_ai.lua"
+
+		"Creature"
+		{
+			"AttachWearables"
+			{
+				"Wearable1"
+				{
+					"ItemDef"			"48"
+				}
+				"Wearable2"
+				{
+					"ItemDef"			"89"
+				}
+				"Wearable3"
+				{
+					"ItemDef"			"98"
+				}
+				"Wearable4"
+				{
+					"ItemDef"			"99"
+				}
+				"Wearable5"
+				{
+					"ItemDef"			"100"
+				}
+				"Wearable6"
+				{
+					"ItemDef"			"305"
+				}
+			}
+		}
+	}
+
+  	//===========================================
 	//以下是每一波小怪
   	//===========================================
 	//1

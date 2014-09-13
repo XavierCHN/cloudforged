@@ -179,3 +179,9 @@ function CForgedGameMode:OnPlayerGainLevel(keys)
     end
 end
 -------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------
+function CForgedGameMode:RegisterLivingBoss(bossUnit)
+    self._boss = self._boss or {]
+    table.insert(self._boss,bossUnit)
+end
