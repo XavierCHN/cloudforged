@@ -9,6 +9,9 @@
 	"attributes"
 	{
 		"item"		"item_zs_steel_axe_lvl1"
+		"item"		"item_zs_steel_sword_lvl1"
+		"item"		"item_zs_steel_shuriken_lvl1"
+		"item"		"item_zs_basic_staff_lvl1"
 	}
 
 	"weapons_armor"
