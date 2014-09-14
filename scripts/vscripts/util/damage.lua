@@ -83,7 +83,7 @@
 		-- 至少造成基础伤害
 		-- 最终伤害 = 基础伤害 + 加成伤害
 		-- 精通等级 = （1+物品增加的精通等级/100） == 已经在GetAttribute计算
-		-- 加成伤害 = (精通等级 * 伤害系数 * (1+（力量*力量系数 + 敏捷*敏捷系数 + 智力*智力系数） )
+		-- 加成伤害 = (精通等级 * 伤害系数 * (1+((力量*力量系数 + 敏捷*敏捷系数 + 智力*智力系数) /100 )
 		-- * 技能等级 * 英雄等级)/目标等级
 		
 		
@@ -92,11 +92,11 @@
 								*	damage.damage_increase
 								*	
 									(1 +
-										(
+										((
 											damage.attacker:GetStrength()	* damage.damage_str
 										+	damage.attacker:GetAgility()	* damage.damage_agi
 										+	damage.attacker:GetIntellect()	* damage.damage_int
-										)
+										) / 100 )
 									)
 								*	damage.ability_level * damage.ability_level
 								*	damage.attacker_level
