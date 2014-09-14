@@ -183,7 +183,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"250"		//生命值
+		"StatusHealth"				"450"		//生命值
 		"StatusHealthRegen"			"0"			//生命恢复速度
 		"StatusMana"				"100"		//魔法值
 		"StatusManaRegen"			"0"			//魔法恢复速度
@@ -200,6 +200,7 @@
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"2000"		//白天视野
 		"VisionNighttimeRange"		"2000"		//夜晚视野
+
 	}
   	//以下是英雄技能的马甲单位
 	"npc_CFroged_unit_CrystalMaiden_iceEffect"
