@@ -1,7 +1,7 @@
 "DOTAAbilities"
 {
 	//=================================
-	//掉落物品, ID 范围 1001-1300
+	//掉落物品, ID 范围 1001-1030
 	//=================================
 	"item_cf_feather"	
 	{	
@@ -14,20 +14,527 @@
 	    "AbilityCastRange"	"500"
 	    "AbilityCastPoint"	"0.2"
 		
-	    "ItemCost"	"10000"
+	    "ItemCost"		"3000"
 	    "ItemQuality"	"artifact"
+	    "ItemStackable"	"0"
+	    "ItemShareability"	"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"	"0"
+	    "ItemInitialCharges"	"1"
+	    "ItemKillable"	"0"
+	}	
+	//停怪
+	"item_cf_increase_rest"	
+	{	
+	    "ID"	"1301"
+	    "BaseClass"	"item_datadriven"
+	    "AbilityTextureName"	"item_cf_increase_rest"
+		"Model"				"models/props_debris/creep_camp001o.vmdl"
+	    "AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		
+	    "ItemCost"	"5000"
+	    "ItemQuality"	"rare"
 	    "ItemStackable"	"1"
 	    "ItemShareability"	"ITEM_FULLY_SHAREABLE"
 	    "ItemPermanent"	"0"
 	    "ItemInitialCharges"	"1"
 	    "ItemKillable"	"0"
-		
-	}	
 
-	//=================================
-	//商店出售物品，ID 范围 1301-1600
-	//所有合成卷轴的ID = 他所合成的物品的ID + 1
-	//=================================
+	    "OnSpellStart"
+	    {
+	    	"SpendCharge"
+	    	{}
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"scripts/vscripts/items/general_item.lua"
+	    		"Target"		"CASTER"
+	    		"RestTime"		"%rest_time"
+	    		"Function"		"OnItemRestPurchased"
+	    	}
+	    }
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"rest_time"		"30"
+			}
+		}
+	}
+	//消耗品 ID范围 1100 -
+	"item_heal_lvl1"
+	{
+		"ID"							"1101"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_heal_lvl1"
+		"ItemKillable"					"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"200"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+		"SideShop"						"1"
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"Target" "CURSOR_TARGET"
+				"ModifierName" "heal_lvl1"
+			}
+
+			"SpendCharge"
+			{}
+		}
+
+		"Modifiers"
+		{
+			"heal_lvl1"
+			{
+				"Duration" "20"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%health_regen"
+				}
+				
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"health_regen"			"30"
+			}
+		}
+	}
+	"item_heal_lvl2"
+	{
+		"ID"							"1102"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_heal_lvl2"
+		"ItemKillable"					"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"400"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+		"SideShop"						"1"
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"Target" "CURSOR_TARGET"
+				"ModifierName" "heal_lvl2"
+			}
+
+			"SpendCharge"
+			{}
+		}
+		"Modifiers"
+		{
+			"heal_lvl2"
+			{
+				"Duration" "20"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%health_regen"
+				}
+				
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"health_regen"			"50"
+			}
+		}
+	}
+	"item_heal_lvl3"
+	{
+		"ID"							"1103"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_heal_lvl3"
+		"ItemKillable"					"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"200"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+		"SideShop"						"1"
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"Target" "CURSOR_TARGET"
+				"ModifierName" "heal_lvl3"
+			}
+
+			"SpendCharge"
+			{}
+		}
+
+		"Modifiers"
+		{
+			"heal_lvl3"
+			{
+				"Duration" "20"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%health_regen"
+				}
+				
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"health_regen"			"120"
+			}
+		}
+	}
+	"item_mana_lvl1"
+	{
+		"ID"							"1104"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_mana_lvl1"
+		"ItemKillable"					"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"350"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+		"SideShop"						"1"
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"Target" "CURSOR_TARGET"
+				"ModifierName" "mana_lvl1"
+			}
+
+			"SpendCharge"
+			{}
+		}
+
+		"Modifiers"
+		{
+			"mana_lvl1"
+			{
+				
+				"EffectName" "particles/items_fx/healing_clarity.vpcf"
+				"EffectAttachType" "follow_origin"
+				"Duration" "10"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT" "%mana_regen"
+				}
+				
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"mana_regen"			"50"
+			}
+		}
+	}
+	"item_mana_lvl2"
+	{
+		"ID"							"1105"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_mana_lvl2"
+		"ItemKillable"					"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"550"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+		"SideShop"						"1"
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"Target" "CURSOR_TARGET"
+				"ModifierName" "mana_lvl2"
+			}
+
+			"SpendCharge"
+			{}
+		}
+
+		"Modifiers"
+		{
+			"mana_lvl2"
+			{
+				
+				"EffectName" "particles/items_fx/healing_clarity.vpcf"
+				"EffectAttachType" "follow_origin"
+				"Duration" "10"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT" "%mana_regen"
+				}
+				
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"mana_regen"			"80"
+			}
+		}
+	}
+	"item_mana_lvl3"
+	{
+		"ID"							"1106"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_mana_lvl3"
+		"ItemKillable"					"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"800"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+		"SideShop"						"1"
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"Target" "CURSOR_TARGET"
+				"ModifierName" "mana_lvl3"
+			}
+
+			"SpendCharge"
+			{}
+		}
+
+		"Modifiers"
+		{
+			"mana_lvl3"
+			{
+				
+				"EffectName" "particles/items_fx/healing_clarity.vpcf"
+				"EffectAttachType" "follow_origin"
+				"Duration" "10"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT" "%mana_regen"
+				}
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"mana_regen"			"120"
+			}
+		}
+	}
+
+	//物品合成宝石 1110
+	"item_gem_manli"
+	{
+		"ID"							"1110"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_gem_manli"
+		"ItemKillable"					"0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"300"
+		"ItemShopTags"					"rare"
+		"ItemQuality"					"rare"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"1"
+		"ItemInitialCharges"			"1"
+	}
+	"item_gem_ruizhi"
+	{
+		"ID"							"1111"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_gem_ruizhi"
+		"ItemKillable"					"0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"300"
+		"ItemShopTags"					"rare"
+		"ItemQuality"					"rare"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"1"
+		"ItemInitialCharges"			"1"
+	}
+	"item_gem_jiaozha"
+	{
+		"ID"							"1112"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_gem_jiaozha"
+		"ItemKillable"					"0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"300"
+		"ItemShopTags"					"rare"
+		"ItemQuality"					"rare"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"1"
+		"ItemInitialCharges"			"1"
+	}
+	"item_gem_lingmin"
+	{
+		"ID"							"1113"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_gem_lingmin"
+		"ItemKillable"					"0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"300"
+		"ItemShopTags"					"rare"
+		"ItemQuality"					"rare"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"1"
+		"ItemInitialCharges"			"1"
+	}
+
+	
 
 	//主手武器 item_zs_xxxx
 	//副手武器 item_fs_xxxx
@@ -36,6 +543,10 @@
 	//鞋子     item_xz_xxxx
 	//请严格遵守，这是区分物品类型的关键
 
+	//=================================
+	//武器部分，ID 范围 1301-1600
+	//所有合成卷轴的ID = 他所合成的物品的ID + 1
+	//=================================
 	// 区域：基础斧子
 	"item_zs_steel_axe_lvl1"//1302
 	{
@@ -330,16 +841,16 @@
 		// Recipe
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
-		"ItemResult"					"item_steel_axe_lvl5"
+		"ItemResult"					"item_zs_steel_axe_lvl5"
 		"ItemRequirements"
 		{
-			"01"						"item_steel_axe_lvl4"
+			"01"						"item_zs_steel_axe_lvl4"
 		}
 	}
 	// 结束区域：基础斧子
 
 
-	// 区域：基础剑
+	// 区域：基础剑 1311
 	"item_zs_steel_sword_lvl1"//1302
 	{
 		"ID"					"1311"
@@ -641,7 +1152,7 @@
 	}
 	// 结束区域：基础剑
 
-	// 区域：基础暗器
+	// 区域：基础暗器 1321
 	"item_zs_steel_shuriken_lvl1"//1302
 	{
 		"ID"					"1321"
@@ -944,7 +1455,7 @@
 	// 结束区域：基础暗器
 
 
-	// 区域：基础法杖
+	// 区域：基础法杖 1331
 	"item_zs_basic_staff_lvl1"//1302
 	{
 		"ID"					"1331"
@@ -1246,49 +1757,1660 @@
 	}
 	// 结束区域：基础法杖
 
-
-	//停怪
-	"item_cf_increase_rest"	
-	{	
-	    "ID"	"1301"
-	    "BaseClass"	"item_datadriven"
-	    "AbilityTextureName"	"item_cf_increase_rest"
-		"Model"				"models/props_debris/creep_camp001o.vmdl"
-	    "AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	//高级斧子们 ID开始 1400
+	"item_zs_axe_bingyuansuifu"//1400
+	{
+		"ID"					"1400"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_axe_bingyuansuifu"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
 		
-	    "ItemCost"	"5000"
-	    "ItemQuality"	"rare"
-	    "ItemStackable"	"1"
-	    "ItemShareability"	"ITEM_FULLY_SHAREABLE"
-	    "ItemPermanent"	"0"
-	    "ItemInitialCharges"	"1"
-	    "ItemKillable"	"0"
+	    "ItemCost"				"99999"
+	    "ItemPurchasable"		"0"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "AbilityCooldown"		"5"
 
 	    "OnSpellStart"
 	    {
-	    	"SpendCharge"
-	    	{}
 	    	"RunScript"
 	    	{
-	    		"ScriptFile"	"scripts/vscripts/items/general_item.lua"
-	    		"Target"		"CASTER"
-	    		"RestTime"		"%rest_time"
-	    		"Function"		"OnItemRestPurchased"
+	    		"ScriptFile"		"scripts/vscripts/items/ItemAxe.lua"
+	    		"Target"			"POINT"
+	    		"Function"			"OnBingyuanSuifuCast"
+	    	}
+	    }
+	    "Modifiers"
+	    {
+	    	"item_zs_axe_bingyuansuifu"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
+	    		}
+	    	}
+	    	"modifier_item_zs_axe_bingyuansuifu"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"str_bonus"		"55"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"for_bonus"		"47"
+	    	}
+	    }
+	}
+	"item_recipe_zs_axe_bingyuansuifu"//1401
+	{
+		"ID"							"1401"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_axe_bingyuansuifu"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_steel_axe_lvl5;item_gem_manli"
+		}
+	}
+	"item_zs_axe_gaolitiefu"//1402
+	{
+		"ID"					"1402"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_axe_gaolitiefu"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
+		
+	    "ItemCost"				"99999"
+	    "ItemPurchasable"		"0"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "AbilityCooldown"		"15"
+
+	    "OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"		"scripts/vscripts/items/ItemAxe.lua"
+	    		"Target"			"POINT"
+	    		"Function"			"OnGaoliTiefuCast"
 	    	}
 	    }
 
-		"AbilitySpecial"
-		{
-			"01"
+	    "Modifiers"
+	    {
+	    	"item_zs_axe_gaolitiefu"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
+	    		}
+	    	}
+	    	"modifier_item_zs_axe_gaolitiefu"
 			{
-				"var_type"		"FIELD_INTEGER"
-				"rest_time"		"30"
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
 			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"str_bonus"		"55"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"for_bonus"		"47"
+	    	}
+	    }
+	}
+	"item_recipe_zs_axe_gaolitiefu"//1403
+	{
+		"ID"							"1403"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_axe_gaolitiefu"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_steel_axe_lvl5;item_gem_manli;item_cf_feather"
 		}
-	}	
+	}
+	"item_zs_axe_shijunzhifu"//1404
+	{
+	    "ID"					"1404"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_axe_shijunzhifu"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		
+	    "ItemCost"				"99999"
+	    "ItemPurchasable"		"0"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
 
+	    "AbilityCooldown"		"10"
 
+	    "OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"		"scripts/vscripts/items/ItemAxe.lua"
+	    		"Target"			"CASTER"
+	    		"Function"			"OnShijunZhifuCast"
+	    	}
+	    }
 
+	    "Modifiers"
+	    {
+	    	"item_zs_axe_shijunzhifu"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
+	    		}
+	    	}
+	    	"modifier_item_zs_axe_shijunzhifu"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"str_bonus"		"83"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"for_bonus"		"79"
+	    	}
+	    }
+	}
+	"item_recipe_zs_axe_shijunzhifu"//1405
+	{
+		"ID"							"1405"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_axe_shijunzhifu"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_axe_bingyuansuifu;item_gem_manli;item_cf_feather"
+		}
+	}
+	"item_zs_axe_toululiefu"//1406
+	{
+		"ID"					"1406"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_axe_toululiefu"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+	    "AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	    "AbilityUnitTargetType"	"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_MECHANICAL"
+		
+	    "ItemCost"				"99999"
+	    "ItemPurchasable"		"0"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "AbilityCooldown"		"25"
+
+	    "OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"		"scripts/vscripts/items/ItemAxe.lua"
+	    		"Target"			"TARGET"
+	    		"Function"			"OnTouluLiefuCast"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"item_zs_axe_toululiefu"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
+	    		}
+	    	}
+	    	"modifier_item_zs_axe_toululiefu"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"str_bonus"		"83"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"for_bonus"		"79"
+	    	}
+	    }
+	}
+	"item_recipe_zs_axe_toululiefu"//1407
+	{
+		"ID"							"1407"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_axe_toululiefu"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_axe_gaolitiefu;item_gem_manli;item_cf_feather"
+		}
+	}
+	"item_zs_axe_shuangyizhanfu"//1408
+	{
+		"ID"					"1408"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_axe_shuangyizhanfu"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
+		
+	    "ItemCost"				"99999"
+	    "ItemPurchasable"		"0"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "AbilityCooldown"		"0"
+
+	    "OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"		"scripts/vscripts/items/ItemAxe.lua"
+	    		"Target"			"POINT"
+	    		"Function"			"OnShuangyiZhanfuCast"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"item_zs_axe_shuangyizhanfu"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
+	    		}
+	    	}
+	    	"modifier_item_zs_axe_shuangyizhanfu"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"str_bonus"		"97"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"for_bonus"		"110"
+	    	}
+	    }
+	}
+	"item_recipe_zs_axe_shuangyizhanfu"//1409
+	{
+		"ID"							"1409"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_axe_shuangyizhanfu"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_axe_shijunzhifu;item_cf_feather;item_cf_feather"
+		}
+	}
+	"item_zs_axe_kaishanzhifu"//1410
+	{
+		"ID"					"1410"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_axe_kaishanzhifu"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		
+	    "ItemCost"				"99999"
+	    "ItemPurchasable"		"0"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+	    "ItemQuality"			"artifact"
+
+	    "AbilityCooldown"		"2"
+
+	    "OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"		"scripts/vscripts/items/ItemAxe.lua"
+	    		"Target"			"CASTER"
+	    		"Function"			"OnKaishanZhifuCast"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"item_zs_axe_kaishanzhifu"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
+	    		}
+	    	}
+	    	"modifier_item_zs_axe_kaishanzhifu"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"str_bonus"		"97"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"for_bonus"		"110"
+	    	}
+	    }
+	}
+	"item_recipe_zs_axe_kaishanzhifu"//1411
+	{
+		"ID"							"1411"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_axe_kaishanzhifu"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_axe_toululiefu;item_cf_feather;item_cf_feather"
+		}
+	}
+	"item_zs_axe_kuangzhanfu"//1412
+	{
+		"ID"					"1412"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_axe_kuangzhanfu"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"99999"
+	    "ItemPurchasable"		"0"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+	    "ItemQuality"			"artifact"
+	    "Modifiers"
+	    {
+	    	"item_zs_axe_kuangzhanfu"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
+	    		}
+	    	}
+	    	"modifier_item_zs_axe_kuangzhanfu"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"str_bonus"		"187"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"for_bonus"		"187"
+	    	}
+	    }
+	}
+	"item_recipe_zs_axe_kuangzhanfu"//1413
+	{
+		"ID"							"1413"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"10000"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_axe_kaishanzhifu"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_axe_shuangyizhanfu;item_zs_axe_kaishanzhifu;item_cf_feather"
+		}
+	}
+	//高级剑们   ID开始 1450
+	//高级暗器们 ID开始 1500
+	//高级法杖们 ID开始 1550
+
+	//===============================
+	//衣服 区域 开始ID 1600
+	//===============================
+	"item_yf_ruizhi"
+	{
+		"ID"					"1600"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_yf_ruizhi"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"3000"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+	    "Modifiers"
+	    {
+	    	"item_yf_ruizhi"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%armor_bonus"
+	    		}
+	    	}
+	    	"modifier_item_yf_ruizhi_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryWisdom"			"%wis_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryWisdom"			"%wis_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"armor_bonus"	"5"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"wis_bonus"		"30"
+	    	}
+	    }
+	}
+	"item_yf_lingmin"
+	{
+		"ID"					"1601"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_yf_lingmin"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"3000"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+		"Modifiers"
+	    {
+	    	"item_yf_lingmin"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%armor_bonus"
+	    		}
+	    	}
+	    	"modifier_item_yf_lingmin_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategorySensitive"			"%sen_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategorySensitive"			"%sen_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"armor_bonus"	"7"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"sen_bonus"		"30"
+	    	}
+	    }
+	}
+	"item_yf_jiaozha"
+	{
+		"ID"					"1602"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_yf_jiaozha"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"3000"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "Modifiers"
+	    {
+	    	"item_yf_jiaozha"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%armor_bonus"
+	    		}
+	    	}
+	    	"modifier_item_yf_jiaozha_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryCunning"			"%cun_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryCunning"			"%cun_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"armor_bonus"	"3"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"cun_bonus"		"30"
+	    	}
+	    }
+	}
+	"item_yf_manli"
+	{
+		"ID"					"1603"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_yf_manli"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"3000"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "Modifiers"
+	    {
+	    	"item_yf_manli"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%armor_bonus"
+	    		}
+	    	}
+	    	"modifier_item_yf_manli_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"armor_bonus"	"13"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"for_bonus"		"30"
+	    	}
+	    }
+	}
+	//======================================
+	//护手 区域 开始ID 1700
+	//======================================
+	"item_hs_ruizhi"
+	{
+		"ID"					"1700"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_hs_ruizhi"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"2500"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+	    "Modifiers"
+	    {
+	    	"item_hs_ruizhi"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%attack_speed"
+	    		}
+	    	}
+	    	"modifier_item_hs_ruizhi_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryWisdom"			"%wis_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryWisdom"			"%wis_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_speed"	"30"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"wis_bonus"		"30"
+	    	}
+	    }
+	}
+	"item_hs_lingmin"
+	{
+		"ID"					"1701"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_hs_lingmin"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"2500"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+		"Modifiers"
+	    {
+	    	"item_hs_lingmin"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%attack_speed"
+	    		}
+	    	}
+	    	"modifier_item_hs_lingmin_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategorySensitive"			"%sen_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategorySensitive"			"%sen_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_speed"	"7"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"sen_bonus"		"30"
+	    	}
+	    }
+	}
+	"item_hs_jiaozha"
+	{
+		"ID"					"1702"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_hs_jiaozha"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"2500"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "Modifiers"
+	    {
+	    	"item_hs_jiaozha"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%attack_speed"
+	    		}
+	    	}
+	    	"modifier_item_hs_jiaozha_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryCunning"			"%cun_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryCunning"			"%cun_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_speed"	"3"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"cun_bonus"		"30"
+	    	}
+	    }
+	}
+	"item_hs_manli"
+	{
+		"ID"					"1703"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_hs_manli"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"2500"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "Modifiers"
+	    {
+	    	"item_hs_manli"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%attack_speed"
+	    		}
+	    	}
+	    	"modifier_item_hs_manli_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_speed"	"13"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"for_bonus"		"30"
+	    	}
+	    }
+	}
+	//======================================
+	//腰带 区域 开始ID 1800
+	//======================================
+	"item_yd_ruizhi"
+	{
+		"ID"					"1800"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_yd_ruizhi"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"2000"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+	    "Modifiers"
+	    {
+	    	"item_yd_ruizhi"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"	"%health_regen"
+	    		}
+	    	}
+	    	"modifier_item_yd_ruizhi_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryWisdom"			"%wis_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryWisdom"			"%wis_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"health_regen"	"30"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"wis_bonus"		"30"
+	    	}
+	    }
+	}
+	"item_yd_lingmin"
+	{
+		"ID"					"1801"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_yd_lingmin"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"2000"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+		"Modifiers"
+	    {
+	    	"item_yd_lingmin"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"	"%health_regen"
+	    		}
+	    	}
+	    	"modifier_item_yd_lingmin_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategorySensitive"			"%sen_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategorySensitive"			"%sen_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"health_regen"	"7"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"sen_bonus"		"30"
+	    	}
+	    }
+	}
+	"item_yd_jiaozha"
+	{
+		"ID"					"1802"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_yd_jiaozha"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"2000"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "Modifiers"
+	    {
+	    	"item_yd_jiaozha"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"	"%health_regen"
+	    		}
+	    	}
+	    	"modifier_item_yd_jiaozha_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryCunning"			"%cun_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryCunning"			"%cun_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"health_regen"	"7"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"cun_bonus"		"30"
+	    	}
+	    }
+	}
+	"item_yd_manli"
+	{
+		"ID"					"1803"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_yd_manli"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"2000"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "Modifiers"
+	    {
+	    	"item_yd_manli"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"	"%health_regen"
+	    		}
+	    	}
+	    	"modifier_item_yd_manli_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"health_regen"	"13"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"for_bonus"		"30"
+	    	}
+	    }
+	}
+
+	//======================================
+	//首饰 区域 开始ID 1900
+	//======================================
+	"item_xl_ruizhi"
+	{
+		"ID"					"1900"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_xl_ruizhi"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"5000"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+	    "Modifiers"
+	    {
+	    	"item_xl_ruizhi"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int_bonus"
+	    		}
+	    	}
+	    	"modifier_item_xl_ruizhi_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryWisdom"			"%wis_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryWisdom"			"%wis_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"int_bonus"		"15"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"wis_bonus"		"30"
+	    	}
+	    }
+	}
+	"item_xl_lingmin"
+	{
+		"ID"					"1901"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_xl_lingmin"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"5000"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+		"Modifiers"
+	    {
+	    	"item_xl_lingmin"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"%agi_bonus"
+	    		}
+	    	}
+	    	"modifier_item_xl_lingmin_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategorySensitive"			"%sen_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategorySensitive"			"%sen_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"agi_bonus"	"7"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"sen_bonus"		"30"
+	    	}
+	    }
+	}
+	"item_xl_jiaozha"
+	{
+		"ID"					"1902"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_xl_jiaozha"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"5000"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "Modifiers"
+	    {
+	    	"item_xl_jiaozha"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"%agi_bonus"
+	    		}
+	    	}
+	    	"modifier_item_xl_jiaozha_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryCunning"			"%cun_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryCunning"			"%cun_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"agi_bonus"		"8"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"cun_bonus"		"30"
+	    	}
+	    }
+	}
+	"item_xl_manli"
+	{
+		"ID"					"1903"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_xl_manli"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"5000"
+	    "ItemQuality"			"rare"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+
+	    "Modifiers"
+	    {
+	    	"item_xl_manli"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
+	    		}
+	    	}
+	    	"modifier_item_xl_manli_applier"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"str_bonus"		"13"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"for_bonus"		"30"
+	    	}
+	    }
+	}
 
 	//精通等级的测试物品
 	"item_test_attribute"

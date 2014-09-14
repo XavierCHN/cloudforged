@@ -277,7 +277,7 @@
 		"Ability3"		"rubick_defend"
 		"Ability4"		"rubick_wise"
 		"Ability5"		"rubick_natural_shelter"
-		"Ability6"		""
+		"Ability6"		"attribute_bonus"
 		"Ability7"		""
 		"Ability8"		""
 		"Ability9"		""

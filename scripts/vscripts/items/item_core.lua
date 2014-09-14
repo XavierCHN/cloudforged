@@ -58,7 +58,8 @@ function OnAddItemCategory(keys)
         local value_old = tonumber( caster:GetContext(name) or "0" )
         local value_add = value_add[name]
         local value_new = value_old + value_add
-        caster:SetContext(name,value_new,0)
+        print('玩家的精通等级改变，改变类型:',name,'前后数值',value_old,value_new)
+        caster:SetContext(name,tostring( value_new ),0)
     end
 end
 -----------------------------------------------------------------------------------------------------------------
@@ -80,7 +81,8 @@ function OnRemoveItemCategory(keys)
         local value_old = tonumber( caster:GetContext(name) or "0" )
         local value_remove = value_remove[name]
         local value_new = value_old - value_remove
-        caster:SetContext(name,value_new,0)
+        print('玩家的精通等级改变，改变类型:',name,'前后数值',value_old,value_new)
+        caster:SetContext(name,tostring( value_new ),0)
     end
 end
 -----------------------------------------------------------------------------------------------------------------

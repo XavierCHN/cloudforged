@@ -82,6 +82,11 @@ function Precache( context )
     PrecacheSound( 'soundevents/game_sounds_creeps.vsndevts', context )
 
     PrecacheUnitByNameAsync('npc_dota_hero_invoker', function() print('precache finished') end) 
+    PrecacheUnitByNameAsync('npc_dota_hero_tusk', function() print('precache finished') end) 
+    PrecacheUnitByNameAsync('npc_dota_hero_earthshaker', function() print('precache finished') end) 
+    PrecacheUnitByNameAsync('npc_dota_hero_sven', function() print('precache finished') end) 
+    PrecacheUnitByNameAsync('npc_dota_hero_beastmaster', function() print('precache finished') end) 
+    
 
     -- 从KV文件统一载入小怪模型
     local unit_kv = LoadKeyValues("scripts/npc/npc_units_custom.txt")

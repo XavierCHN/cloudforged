@@ -4,7 +4,16 @@
 	{
 		"item"		"item_cf_feather"
 		"item"		"item_cf_increase_rest"
-		"item"		"item_gem"
+		"item"		"item_heal_lvl1"
+		"item"		"item_heal_lvl2"
+		"item"		"item_heal_lvl3"
+		"item"		"item_mana_lvl1"
+		"item"		"item_mana_lvl2"
+		"item"		"item_mana_lvl3"
+		"item"		"item_gem_manli"
+		"item"		"item_gem_lingmin"
+		"item"		"item_gem_jiaozha"
+		"item"		"item_gem_ruizhi"
 	}
 	"attributes"
 	{
@@ -16,18 +25,38 @@
 
 	"weapons_armor"
 	{
-
+		"item"		"item_yf_manli"
+		"item"		"item_yf_lingmin"
+		"item"		"item_yf_jiaozha"
+		"item"		"item_yf_ruizhi"
+		"item"		"item_yd_manli"
+		"item"		"item_yd_lingmin"
+		"item"		"item_yd_jiaozha"
+		"item"		"item_yd_ruizhi"
+		"item"		"item_hs_manli"
+		"item"		"item_hs_lingmin"
+		"item"		"item_hs_jiaozha"
+		"item"		"item_hs_ruizhi"
 	}
 	
 	"misc"
 	{
-
+		"item"		"item_xl_manli"
+		"item"		"item_xl_lingmin"
+		"item"		"item_xl_jiaozha"
+		"item"		"item_xl_ruizhi"
 	}	
 	
 	// Level 1 - Green Recipes
 	"basics"
 	{
-
+		"item"		"item_zs_axe_bingyuansuifu"
+		"item"		"item_zs_axe_gaolitiefu"
+		"item"		"item_zs_axe_shijunzhifu"
+		"item"		"item_zs_axe_toululiefu"
+		"item"		"item_zs_axe_shuangyizhanfu"
+		"item"		"item_zs_axe_kaishanzhifu"
+		"item"		"item_zs_axe_kuangzhanfu"
 	}
 
 	// Level 2 - Blue Recipes
