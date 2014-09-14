@@ -1018,7 +1018,7 @@
 	//=====================================================================================
 	"rubick_defend"
 	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"rubick_defend"
 		"AbilityCastPoint"				"0.3" 
@@ -1190,6 +1190,22 @@
 				"Aura_Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
 				"Aura_Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
 				"Aura_Flags" "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+			}
+
+			"modifier_learn_defend"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"Duration"		"0.1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+						"Function"		"rubick_learn_defend"
+						"Target"		"CASTER"
+					}
+				}
 			}
 
 			"create_wise_hidden"

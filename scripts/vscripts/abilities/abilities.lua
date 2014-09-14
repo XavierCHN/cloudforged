@@ -62,17 +62,31 @@ end
 function rubick_wise( keys )
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local ability=keys.ability
+	
 	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("rubick_wise_loop"), 
 		 											function()
-		 												local hp = caster:GetHealth()
-		 												local i=ability:GetLevel()-1
-		 												local x=ability:GetLevelSpecialValueFor("int", i)
-		 												local a_hp = caster:GetIntellect()*x
-		 												if hp<caster:GetMaxHealth() and caster:IsAlive() then
-		 													caster:SetHealth(hp+a_hp)
+		 												if caster:IsAlive() and IsValidEntity(caster) then
+			 												local hp = caster:GetHealth()
+			 												local i=ability:GetLevel()-1
+			 												local x=ability:GetLevelSpecialValueFor("int", i)
+			 												local a_hp = caster:GetIntellect()*x
+			 												if hp<caster:GetMaxHealth() then
+			 													caster:SetHealth(hp+a_hp)
+			 												end
+		 													return 1
+		 												else
+		 													caster:RemoveModifierByName("create_wise")
+		 													return nil
 		 												end
-		 												return 1
 		 											end, 0)
+end
+
+--学习守护
+function rubick_learn_defend( keys )
+	local caster = keys.caster
+	local ability_wise = caster:FindAbilityByName("rubick_wise")
+	local ability_defend = caster:FindAbilityByName("rubick_defend")
+	ability_defend:SetLevel(ability_wise:GetLevel())
 end
 
 
