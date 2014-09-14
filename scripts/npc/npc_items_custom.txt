@@ -41,7 +41,7 @@
 	{
 		"ID"					"1302"
 		"BaseClass"				"item_datadriven"
-	    "AbilityTextureName"	"item_steel_axe_lvl1"
+	    "AbilityTextureName"	"item_zs_steel_axe_lvl1"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		
 	    "ItemCost"				"500"
@@ -76,7 +76,7 @@
 	{
 		"ID"					"1303"
 		"BaseClass"				"item_datadriven"
-	    "AbilityTextureName"	"item_steel_axe_lvl2"
+	    "AbilityTextureName"	"item_zs_steel_axe_lvl2"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		
 	    "ItemCost"				"1000"
@@ -133,7 +133,7 @@
 	{
 		"ID"					"1305"
 		"BaseClass"				"item_datadriven"
-	    "AbilityTextureName"	"item_steel_axe_lvl3"
+	    "AbilityTextureName"	"item_zs_steel_axe_lvl3"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		
 	    "ItemCost"				"1500"
@@ -196,7 +196,7 @@
 	{
 		"ID"					"1307"
 		"BaseClass"				"item_datadriven"
-	    "AbilityTextureName"	"item_steel_axe_lvl4"
+	    "AbilityTextureName"	"item_zs_steel_axe_lvl4"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		
 	    "ItemCost"				"3000"
@@ -265,7 +265,7 @@
 	{
 		"ID"					"1309"
 		"BaseClass"				"item_datadriven"
-	    "AbilityTextureName"	"item_steel_axe_lvl5"
+	    "AbilityTextureName"	"item_zs_steel_axe_lvl5"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		
 	    "ItemCost"				"5000"
@@ -356,7 +356,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lvl1"
+	    	"modifier_steel_sword_lvl1"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -391,7 +391,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lv2"
+	    	"modifier_steel_sword_lv2"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -448,7 +448,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lvl3"
+	    	"modifier_steel_sword_lvl3"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -511,7 +511,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lvl4"
+	    	"modifier_steel_sword_lvl4"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -580,7 +580,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lvl5"
+	    	"modifier_steel_sword_lvl5"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -658,7 +658,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lvl1"
+	    	"modifier_steel_shuriken_lvl1"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -693,7 +693,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lv2"
+	    	"modifier_steel_shuriken_lv2"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -750,7 +750,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lvl3"
+	    	"modifier_steel_shuriken_lvl3"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -813,7 +813,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lvl4"
+	    	"modifier_steel_shuriken_lvl4"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -882,7 +882,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lvl5"
+	    	"modifier_steel_shuriken_lvl5"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -961,7 +961,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lvl1"
+	    	"modifier_basic_staff_lvl1"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -996,7 +996,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lv2"
+	    	"modifier_basic_staff_lv2"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -1053,7 +1053,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lvl3"
+	    	"modifier_basic_staff_lvl3"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -1116,7 +1116,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lvl4"
+	    	"modifier_basic_staff_lvl4"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -1185,7 +1185,7 @@
 
 	    "Modifiers"
 	    {
-	    	"modifier_steel_axe_lvl5"
+	    	"modifier_basic_staff_lvl5"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
