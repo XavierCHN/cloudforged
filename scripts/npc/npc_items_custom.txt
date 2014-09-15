@@ -2393,6 +2393,226 @@
 	//高级剑们   ID开始 1450
 	//高级暗器们 ID开始 1500
 	//高级法杖们 ID开始 1550
+	"item_zs_staff_zhiyuan"//1550
+	{
+		//智源法杖
+		"ID"					"1550"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_staff_zhiyuan"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"rare"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "OnSpellStart"
+	    {
+	    	"ApplyModifier"
+	    	{
+	    		"ModifierName"	"modifier_item_zs_staff_zhiyuan_buff"
+	    		"Target"		"CASTER"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_staff_zhiyuan"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_zhiyuan_wisdom"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+	    	}
+
+	    	"modifier_item_zs_staff_zhiyuan_buff"
+	    	{
+	    		"Duration"	"10"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"120"
+	    		}
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"int_bonus"		"55"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"wis_bonus"		"47"
+	    	}
+	    }
+	}
+	"item_recipe_zs_staff_zhiyuan"//1551
+	{
+		"ID"							"1551"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_staff_zhiyuan"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_basic_staff_lvl5;item_gem_manli"
+		}
+	}
+
+	"item_zs_staff_longtou"//1550
+	{
+		//龙头法杖
+		"ID"					"1552"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_staff_longtou"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"rare"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "OnSpellStart"
+	    {
+	    	"ApplyModifier"
+	    	{
+	    		"ModifierName"	"modifier_item_zs_staff_longtou_buff"
+	    		"Target"		"CASTER"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_staff_longtou"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_longtou_wisdom"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+	    	}
+
+	    	"modifier_item_zs_staff_longtou_buff"
+	    	{
+	    		"Duration"		"10"
+	    		"ThinkInterval"	"1"
+	    		"OnIntervalThink"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"scripts/vscripts/items/ItemStaff.lua"
+	    				"Function"		"OnStaffLongTou"
+	    				"Target"		"TARGET"
+	    			}
+	    		}
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"int_bonus"		"55"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"wis_bonus"		"47"
+	    	}
+	    	"03"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"heal_mana"		"120"
+	    	}
+	    }
+	}
+	"item_recipe_zs_staff_longtou"//1553
+	{
+		"ID"							"1553"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_staff_longtou"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_basic_staff_lvl5;item_gem_manli"
+		}
+	}
 
 	//===============================
 	//衣服 区域 开始ID 1600

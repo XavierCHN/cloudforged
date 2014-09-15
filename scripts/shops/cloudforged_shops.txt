@@ -62,7 +62,8 @@
 	// Level 2 - Blue Recipes
 	"support"
 	{
-
+		"item"		"item_zs_staff_zhiyuan"
+		"item"		"item_zs_staff_longtou"
 	}
 	
 	"magics"
