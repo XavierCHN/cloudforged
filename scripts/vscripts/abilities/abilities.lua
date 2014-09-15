@@ -221,6 +221,12 @@ function centaur_hoof_stomp( keys )
 	local time = 0
 	local overtime = 0.15
 
+	for i,unit in pairs(group) do
+		if unit:IsAlive() and IsValidEntity(unit) then
+			unit:AddNewModifier(caster, keys.ability, "modifier_phased", {duration=1})
+		end
+	end
+
 	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("centaur_hoof_stomp_1"), 
 		function( )
 			if time<overtime then
@@ -346,18 +352,17 @@ function rubick_defend( keys )
 
 	local caster = keys.caster
 	local vec = caster:GetOrigin() + 200*caster:GetForwardVector()
-	hRubickUnit = CreateUnitByName("npc_dota_rubick_defend", vec, false, nil, nil, caster:GetTeam())
-	hRubickUnit.vOwner=caster:GetOwner()
-	hRubickUnit:SetControllableByPlayer(caster:GetPlayerID(), true)
+	hRubickUnit = keys.target
+	hRubickUnit:SetAbsOrigin(caster:GetAbsOrigin() + 200*caster:GetForwardVector())
 	hRubickUnit:SetForwardVector((hRubickUnit:GetOrigin() - caster:GetOrigin()):Normalized())
 	local ability = keys.ability
 	local i = ability:GetLevel()-1
 
 	local ability_1 = hRubickUnit:FindAbilityByName("rubick_defend_ability_1")
-	ability_1:SetLevel(1)
+	ability_1:SetLevel(i+1)
 	rubick_defend_ability_1(hRubickUnit,caster)
 	local ability_2 = hRubickUnit:FindAbilityByName("rubick_defend_ability_2")
-	ability_2:SetLevel(1)
+	ability_2:SetLevel(i+1)
 
 	--获取最小攻击=施法者最小攻击+施法者的智力*智力加成系数
 	local BaseDamageMin=caster:GetBaseDamageMin() + caster:GetIntellect() * ability:GetLevelSpecialValueFor("int", i)
@@ -382,24 +387,31 @@ end
 
 --大兵正气
 function rubick_defend_ability_1(caster,hero)
-	local num = hero:GetIntellect()
+	local ability = caster:FindAbilityByName("rubick_defend_ability_1")
+	local i = ability:GetLevelSpecialValueFor("int", ability:GetLevel()-1)
 
 	local teams = DOTA_UNIT_TARGET_TEAM_ENEMY
 	local types = DOTA_UNIT_TARGET_BASIC+DOTA_UNIT_TARGET_HERO
 	local flags = DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES
 	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("rubick_defend_ability_1_time"), 
 		function( )
-			if caster:IsAlive() then
-				local group = FindUnitsInRadius(caster:GetTeam(), caster:GetOrigin(), nil, 250, teams, types, flags, FIND_CLOSEST, true)
+			if IsValidEntity(caster) then
+				if caster:IsAlive() then
+					local num = hero:GetIntellect()*i+caster:GetAttackDamage()
+					print(num)
+					local group = FindUnitsInRadius(caster:GetTeam(), caster:GetOrigin(), nil, 250, teams, types, flags, FIND_CLOSEST, true)
 
-				for i,unit in pairs(group) do
-					local damageTable = {victim=unit,
-										attacker=caster,
-										damage_type=DAMAGE_TYPE_MAGICAL,
-										damage=num}
-					ApplyDamage(damageTable)
+					for i,unit in pairs(group) do
+						local damageTable = {victim=unit,
+											attacker=caster,
+											damage_type=DAMAGE_TYPE_MAGICAL,
+											damage=num}
+						ApplyDamage(damageTable)
+					end
+					return 1
+				else
+					return nil
 				end
-				return 1
 			else
 				return nil
 			end
@@ -410,8 +422,10 @@ end
 function rubick_defend_ability_2( keys )
 	local caster = keys.caster
 	local target = keys.target
+	local ability = keys.ability
+	local i = ability:GetLevelSpecialValueFor("heal", ability:GetLevel()-1) * 0.01
 
-	local num = caster:GetHealth() * 0.1
+	local num = caster:GetHealth() * i
 	local damageTable = {victim=target,
 						attacker=caster,
 						damage_type=DAMAGE_TYPE_PHYSICAL,

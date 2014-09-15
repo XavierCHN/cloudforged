@@ -1013,7 +1013,7 @@
 		}
 	}
 
-	//隐修议员 3技能 被动
+	//隐修议员 3技能
 	//技能名字 守护
 	//=====================================================================================
 	"rubick_defend"
@@ -1027,11 +1027,22 @@
 
 		"OnSpellStart"
 		{
-			"RunScript"
+			"SpawnUnit"
 			{
-				"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
-				"Function"		"rubick_defend"
-				"Target"		"CASTER"
+				"UnitName"				"npc_dota_rubick_defend"
+				"Target" 				"CASTER"
+				"Duration"				"0"
+				"UnitCount"				"1"
+				"SpawnRadius"			"200"
+				"OnSpawn"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/abilities/abilities.lua"
+						"Function"		"rubick_defend"
+						"Target"		"UNIT"
+					}
+				}
 			}
 		}
 
@@ -1052,7 +1063,7 @@
 			"03"
 			{
 				"var_type"		"FIELD_FLOAT"
-				"str"			"10 20 30 40"
+				"str"			"100 150 200 250"
 			}
 		}
 	}
@@ -1069,7 +1080,7 @@
 		"AbilityCastRange"				"250"
 		"AbilityCooldown"		 		"0"
 		"AbilityManaCost"				"0"
-		"MaxLevel"						"1"
+		"MaxLevel"						"4"
 
 		"Modifiers"
 		{
@@ -1095,6 +1106,15 @@
 				}
 			}
 		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"int"			"0.5 0.7 0.9 1.1"
+			}
+		}
 	}
 
 	//隐修议员 守护 
@@ -1108,7 +1128,7 @@
 		"AbilityCastPoint"				"0.0" 
 		"AbilityCooldown"		 		"0"
 		"AbilityManaCost"				"0"
-		"MaxLevel"						"1"
+		"MaxLevel"						"4"
 
 		"Modifiers"
 		{
@@ -1146,7 +1166,7 @@
 			"02"
 			{
 				"var_type"		"FIELD_FLOAT"
-				"heal"			"10"
+				"heal"			"5 9 14 18"
 			}
 		}
 	}
@@ -1158,7 +1178,6 @@
 	{
 		// General
 		//---------------------------------------------------------------------------------------
-		//"AbilityName"					"rubick_wise"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE" 
 		"BaseClass"						"ability_datadriven"  
 		"AbilityTextureName"			"rubick_null_field"
@@ -1851,32 +1870,6 @@
 					{
 						"EffectName"	"Hero_ElderTitan.EchoStomp"
 						"Target"		"TARGET"
-					}
-
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"
-						{
-							"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
-							"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-							"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
-							"Radius"	"%radius"
-							"Center"	"CASTER"
-						}
-					}
-
-					"RemoveModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"
-						{
-							"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
-							"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-							"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
-							"Radius"	"%radius"
-							"Center"	"TARGET"
-						}
 					}
 				}
 			}
