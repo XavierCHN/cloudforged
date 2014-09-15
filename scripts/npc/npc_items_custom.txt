@@ -2498,7 +2498,7 @@
 		}
 	}
 
-	"item_zs_staff_longtou"//1550
+	"item_zs_staff_longtou"//1552
 	{
 		//龙头法杖
 		"ID"					"1552"
@@ -2611,6 +2611,441 @@
 		"ItemRequirements"
 		{
 			"01"						"item_zs_basic_staff_lvl5;item_gem_manli"
+		}
+	}
+
+	"item_zs_staff_conglin"//1554
+	{
+		//丛林法杖
+		"ID"					"1554"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_staff_conglin"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"rare"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_staff_conglin"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_conglin_wisdom"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"int_bonus"		"83"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"wis_bonus"		"79"
+	    	}
+	    }
+	}
+	"item_recipe_zs_staff_conglin"//1555
+	{
+		"ID"							"1555"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_staff_conglin"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_staff_longtou;item_gem_manli;item_cf_feather"
+		}
+	}
+
+	"item_zs_staff_bingfeng"//1556
+	{
+		//冰封法杖
+		"ID"					"1556"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_staff_bingfeng"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+
+	    "ItemCost"				"1"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"rare"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_staff_bingfeng"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_bingfeng_wisdom"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"int_bonus"		"83"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"wis_bonus"		"79"
+	    	}
+	    }
+	}
+	"item_recipe_zs_staff_bingfeng"//1557
+	{
+		"ID"							"1557"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_staff_bingfeng"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_staff_zhiyuan;item_gem_manli;item_cf_feather"
+		}
+	}
+
+	"item_zs_staff_guangming"//1558
+	{
+		//光明法杖
+		"ID"					"1558"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_staff_guangming"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"rare"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_staff_guangming"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_guangming_wisdom"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"int_bonus"		"97"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"wis_bonus"		"110"
+	    	}
+	    }
+	}
+	"item_recipe_zs_staff_guangming"//1559
+	{
+		"ID"							"1559"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_staff_guangming"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_staff_conglin;item_cf_feather;item_cf_feather"
+		}
+	}
+
+	"item_zs_staff_fengxue"//1560
+	{
+		//风雪法杖
+		"ID"					"1560"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_staff_fengxue"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+
+	    "ItemCost"				"1"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"rare"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_staff_fengxue"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_fengxue"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"int_bonus"		"97"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"wis_bonus"		"110"
+	    	}
+	    }
+	}
+	"item_recipe_zs_staff_fengxue"//1561
+	{
+		"ID"							"1561"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_staff_fengxue"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_staff_bingfeng;item_cf_feather;item_cf_feather"
+		}
+	}
+
+	"item_zs_staff_ningjing"//1562
+	{
+		//宁静法杖
+		"ID"					"1562"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_staff_ningjing"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"rare"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_staff_ningjing"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_ningjing"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"int_bonus"		"220"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"wis_bonus"		"250"
+	    	}
+	    }
+	}
+	"item_recipe_zs_staff_ningjing"//1563
+	{
+		"ID"							"1563"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_staff_ningjing"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_staff_guangming;item_zs_staff_fengxue;item_cf_feather"
 		}
 	}
 
