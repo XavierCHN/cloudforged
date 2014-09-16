@@ -2639,9 +2639,19 @@
 	    		"IsHidden"		"1"
 	    		"Passive"		"1"
 
+	    		"Aura" 			"modifier_item_zs_staff_conglin_buff"
+				"Aura_Radius" 	"%radius"
+				"Aura_Teams" 	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				"Aura_Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"Aura_Flags" 	"DOTA_UNIT_TARGET_FLAG_NONE"
+	    	}
+
+	    	"modifier_item_zs_staff_conglin_buff"
+	    	{
 	    		"Properties"
 	    		{
-	    			"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int_bonus"
+	    			"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"	"%heal"
+	    			"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"		"%mana"
 	    		}
 	    	}
 
@@ -2672,6 +2682,21 @@
 
 	    "AbilitySpecial"
 	    {
+	    	"03"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"radius"		"600"
+	    	}
+	    	"04"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"heal"			"10"
+	    	}
+	    	"04"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"mana"			"10"
+	    	}
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"

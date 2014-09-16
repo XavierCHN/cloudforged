@@ -19,24 +19,41 @@ end
 rubick_sacrifice_is=false
 --
 function rubick_sacrifice_on( keys )
+	--获取施法者
 	local caster = EntIndexToHScript(keys.caster_entindex)
+	--获取技能
 	local ability=keys.ability
+	--获取作用范围
 	local radius = ability:GetSpecialValueFor("radius") 
+
 	local teams =  DOTA_UNIT_TARGET_TEAM_FRIENDLY
 	local types = DOTA_UNIT_TARGET_BASIC+DOTA_UNIT_TARGET_HERO
 	local flags = DOTA_UNIT_TARGET_FLAG_NONE
-	rubick_sacrifice_is=true
+
+	--标记施法者开启技能
+	caster:SetContextNum("rubick_sacrifice_on", 1, 0)
+
+	--开启计时器
 	GameRules:GetGameModeEntity():SetContextThink(
 													DoUniqueString("sacrifice_on"),
 													function()
-														if rubick_sacrifice_is==true then
+														if caster:GetContext("rubick_sacrifice_on")==1 then
+
+															--获取技能等级
 															local i=ability:GetLevel()-1
+															--获取时间间隔
 															local time=ability:GetLevelSpecialValueFor("time",i) 
+															--获取生命值百分比
 															local p=ability:GetLevelSpecialValueFor("percentage",i) 
+
+															--获取单位组
 															local group = FindUnitsInRadius(caster:GetTeam(), caster:GetOrigin(), nil, radius, teams, types, flags, FIND_CLOSEST, true) 
+															
+															--计算生命值
 															local c_hp=(caster:GetHealth())*(p/100)
 															local hp=c_hp+caster:GetIntellect()
 															caster:SetHealth(caster:GetHealth()-c_hp)
+
 															for i,u in pairs(group) do
 																if u~=caster and u:IsAlive() and u:GetHealth()<u:GetMaxHealth() then
 																	u:SetHealth(u:GetHealth()+hp) 
@@ -54,7 +71,7 @@ end
 
 function rubick_sacrifice_off( keys )
 	local caster = keys.caster
-	rubick_sacrifice_is=false
+	caster:SetContextNum("rubick_sacrifice_on", 0, 0)
 	caster:RemoveModifierByName("create_rubick_sacrifice_effect")
 end
 
@@ -100,21 +117,39 @@ function rubick_Bless( keys )
 	local abilityName  =nil
 	local modifierName =nil
 
-	if target:IsOpposingTeam(caster:GetTeam()) then
+	if target:IsOpposingTeam(caster:GetTeam()) then	--是否是敌人
+
+		--设置技能名字和modifier的名称
 		abilityName="rubick_Bless_enemy_hidden"
 		modifierName="create_Bless_enemy"
+
+		--添加技能
 		target:AddAbility(abilityName)
+
+		--获取持续时间
 		overtime=keys.ability:GetLevelSpecialValueFor("time_enemy", i-1)
+
+		--获取技能并设置等级
 		ability = target:FindAbilityByName(abilityName)
 		ability:SetLevel(i)
+
 	else
+		--设置技能名字和modifier的名称
 		abilityName="rubick_Bless_friendly_hidden"
 		modifierName="create_Bless_friendly"
+
+		--添加技能
 		target:AddAbility(abilityName)
+
+		--获取持续时间
 		overtime=keys.ability:GetLevelSpecialValueFor("time_friendly", i-1)
+
+		--获取技能并设置等级
 		ability = target:FindAbilityByName(abilityName)
 		ability:SetLevel(i)
 	end
+
+	--开启计时器，计时器到期删除技能和modifier
 	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("rubick_Bless_time"), 
 		 											function()
 		 												target:RemoveAbility(abilityName)
@@ -126,65 +161,82 @@ end
 
 
 --隐修议员 大招
---全局变量
-rubick_natural_shelter_channel=false
---
 function rubick_natural_shelter( keys )
-	local caster = keys.caster
-	local vec_caster = caster:GetOrigin()
-	local dummy_left = {}
-	local dummy_right = {}
-	local i = 1
-	local angle = QAngle(0,-5,0)
-	local unitName = "npc_dummy"
-	local abilityName = "rubick_natural_shelter_dummy"
-	rubick_natural_shelter_channel=true
 
+	--获取施法者
+	local caster = keys.caster
+	--获取施法者所在位置
+	local vec_caster = caster:GetOrigin()
+	--获取施法者的向量
+	local face = caster:GetForwardVector()
+
+	--设置两个table来记录两组特效
+	local particle_1={}
+	local particle_2={}
+
+	--设置两个table来记录特效的位置
+	local vec_particle_1 = {}
+	local vec_particle_2 = {}
+
+	--设置旋转角度
+	local angle = QAngle(0,-5,0)
+
+	--标记施法者开始施法
+	caster:SetContextNum("rubick_natural_shelter",1,0)
+
+	--为施法者加入光环
 	local abilityName_aura = "rubick_natural_shelter_aura"
 	caster:AddAbility(abilityName_aura)
 	local ability_aura=caster:FindAbilityByName(abilityName_aura)
 	ability_aura:SetLevel(keys.ability:GetLevel())
 
-
-	for Len=100,800,100 do
-		local vec_left = vec_caster+Vector(0,Len,0)
-		local vec_right = vec_caster+Vector(0,-Len,0)
-		dummy_left[i]=CreateUnitByName(unitName, vec_left, false, caster, nil, caster:GetTeam())
-		dummy_left[i]:AddAbility(abilityName)
-		local ability1 = dummy_left[i]:FindAbilityByName(abilityName)
-		ability1:SetLevel(1)
-		dummy_right[i]=CreateUnitByName(unitName, vec_right, false, caster, nil, caster:GetTeam())
-		dummy_right[i]:AddAbility(abilityName)
-		local ability2 = dummy_right[i]:FindAbilityByName(abilityName)
-		ability2:SetLevel(1)
-		i=i+1
+	--开始创建特效并记录初始创建的位置
+	for i=1,8,1 do
+		particle_1[i]=ParticleManager:CreateParticle("particles/econ/courier/courier_greevil_green/courier_greevil_green_ambient_3.vpcf",PATTACH_WORLDORIGIN,caster)
+		particle_2[i]=ParticleManager:CreateParticle("particles/econ/courier/courier_greevil_green/courier_greevil_green_ambient_3.vpcf",PATTACH_WORLDORIGIN,caster)
+		vec_particle_1[i]=vec_caster + (i*100)*face
+		vec_particle_2[i]=vec_caster - (i*100)*face
 	end
+
+	--开启计时器
 	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("rubick_natural_shelter_time"), 
 		function( )
-			if rubick_natural_shelter_channel then
-				for k=1,8,1 do
-					local vec_left = dummy_left[k]:GetOrigin()
-					local vec_right = dummy_right[k]:GetOrigin()
-					local vec_left_rotate = RotatePosition(vec_caster, angle, vec_left)
-					local vec_right_rotate = RotatePosition(vec_caster, angle, vec_right)
-					dummy_left[k]:SetOrigin(vec_left_rotate)
-					dummy_right[k]:SetOrigin(vec_right_rotate)
+			if caster:GetContext("rubick_natural_shelter")==1 then
+				
+				for i=1,8,1 do
+
+					--绕vec_caster旋转
+					local rota_1 = RotatePosition(vec_caster,angle, vec_particle_1[i])
+					local rota_2 = RotatePosition(vec_caster,angle, vec_particle_2[i])
+
+					--设置特效所在位置
+					ParticleManager:SetParticleControl(particle_1[i],0,rota_1)
+					ParticleManager:SetParticleControl(particle_2[i],0,rota_2)
+
+					--更新记录的位置为旋转后的位置
+					vec_particle_1[i]=rota_1
+					vec_particle_2[i]=rota_2
+
 				end
+
 				return 0.03
 			else
-				for k=1,8,1 do
-					dummy_left[k]:RemoveSelf()
-					dummy_right[k]:RemoveSelf()
+				for i=1,8,1 do 		--删除特效
+					ParticleManager:DestroyParticle(particle_1[i],false)
+					ParticleManager:DestroyParticle(particle_2[i],false)
 				end
+
+				--删除光环
 				caster:RemoveAbility(abilityName_aura)
 				caster:RemoveModifierByName("create_rubick_natural_shelter_aura")
+				
 				return nil
 			end
 		end, 0)
 end
 
 function rubick_natural_shelter_channel_is( keys )
-	rubick_natural_shelter_channel=false
+	keys.caster:SetContextNum("rubick_natural_shelter",0,0)
 end
 
 
@@ -192,17 +244,22 @@ end
 function centaur_speed_support( keys )
 	local caster = keys.caster
 	local point = keys.target_points
+
+	--设置施法者面向角度
 	caster:SetForwardVector((point[1] - caster:GetOrigin()):Normalized())
 
+	--开启计时器
 	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("centaur_speed_support_time"), 
 		function( )
-			local vec_caster = caster:GetOrigin()
+
+			--获取施法者所在的位置
+			local vec_caster = caster:GetAbsOrigin()
+
+			--如果施法者与施法点的距离小于50就退出循环
 			if	(vec_caster - point[1]):Length()>=50 then
-				local vec_point = point[1]
-				local vec_caster_2=caster:GetAbsOrigin()
-				local face=(vec_point - vec_caster_2)
-				local vec=face:Normalized() * 50.0
-				caster:SetOrigin(vec_caster_2 + vec)
+				local face=(point[1] - vec_caster):Normalized()
+				local vec=face * 50.0
+				caster:SetOrigin(vec_caster + vec)
 				return 0.01
 			else
 				caster:RemoveModifierByName("modifier_phased")
@@ -217,10 +274,16 @@ end
 --征战暴君 2技能
 function centaur_hoof_stomp( keys )
 	local caster = keys.caster
+
+	--获取传递进来的单位组
 	local group = keys.target_entities
+
+	--用于记录时间
 	local time = 0
+	--结束时间
 	local overtime = 0.15
 
+	--如果单位不是死亡的就添加相位移动的BUFF
 	for i,unit in pairs(group) do
 		if unit:IsAlive() and IsValidEntity(unit) then
 			unit:AddNewModifier(caster, keys.ability, "modifier_phased", {duration=1})
@@ -230,15 +293,19 @@ function centaur_hoof_stomp( keys )
 	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("centaur_hoof_stomp_1"), 
 		function( )
 			if time<overtime then
-				local casterVec = caster:GetOrigin()
+
+				--获取施法者的位置
 				local casterAbs = caster:GetAbsOrigin()
 
 				for i,unit in pairs(group) do
-					local unitVec = unit:GetOrigin()
+
+					--获取单位的位置
 					local unitAbs = unit:GetAbsOrigin()
-					if (casterVec - unitVec):Length()>200 then
-						local face = casterAbs - unitAbs
-						local vec = face:Normalized() * 50.0
+
+					--如果单位距离施法者200以上就移动单位
+					if (casterAbs - unitAbs):Length()>200 then
+						local face = (casterAbs - unitAbs):Normalized()
+						local vec = face * 50.0
 						unit:SetAbsOrigin(unitAbs + vec)
 					end
 				end
@@ -346,6 +413,7 @@ end
 hRubickUnit=nil
 function rubick_defend( keys )
 	
+	--如果守护的单位不为空就删除单位
 	if hRubickUnit~=nil then
 		hRubickUnit:RemoveSelf() 
 	end
@@ -360,7 +428,11 @@ function rubick_defend( keys )
 
 	local ability_1 = hRubickUnit:FindAbilityByName("rubick_defend_ability_1")
 	ability_1:SetLevel(i+1)
+
+	--传递单位和施法者到函数
 	rubick_defend_ability_1(hRubickUnit,caster)
+
+	--获取并设置技能
 	local ability_2 = hRubickUnit:FindAbilityByName("rubick_defend_ability_2")
 	ability_2:SetLevel(i+1)
 

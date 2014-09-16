@@ -94,10 +94,10 @@
 	//马甲 用于技能的制作
 	"npc_dummy"
 	{
-		"Model"						"models/creeps/lane_creeps/creep_radiant_melee/radiant_melee.vmdl"
+		"Model"						"models/creeps/lane_creeps/creep_radiant_melee/radiant.vmdl"
 		"BaseClass"					"npc_dota_creature"
 		"Level"						"6"
-		"ModelScale" 				"0.0"
+		"ModelScale" 				"0.01"
 		"ArmorPhysical"				"0"	
 		"StatusHealth"				"75"		
 		"StatusHealthRegen"			"0.0"		
