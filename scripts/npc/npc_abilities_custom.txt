@@ -1092,15 +1092,23 @@
 				{
 					"AttachEffect"
 					{
+						"ControlPointEntities"
+						{
+							"CASTER"	"attach_hitloc"
+						}
 						"EffectName"	"particles\items2_fx\refresher.vpcf"
-						"EffectAttachType"	"follow_head"
+						"EffectAttachType"	"start_at_customorigin"
 						"Target"			"CASTER"
 					}
 
 					"AttachEffect"
 					{
+						"ControlPointEntities"
+						{
+							"CASTER"	"attach_hitloc"
+						}
 						"EffectName"	"particles\generic_gameplay\dropped_tango.vpcf"
-						"EffectAttachType"	"follow_head"
+						"EffectAttachType"	"start_at_customorigin"
 						"Target"			"CASTER"
 					}
 				}

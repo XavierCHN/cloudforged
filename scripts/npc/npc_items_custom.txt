@@ -2620,7 +2620,7 @@
 		"ID"					"1554"
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_staff_conglin"
-	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
 	    "ItemCost"				"99999"
 	    "ItemDroppable"			"1"
@@ -2678,6 +2678,47 @@
 		            }
 		        }
 	    	}
+
+	    	//攻击效果
+	    	"modifier_item_zs_staff_conglin_attack"
+	    	{
+	    		"IsHidden"	"1"
+	    		"Passive"	"1"
+	    		"OnAttack"
+	    		{
+	    			"Random"
+	    			{
+	    				"Chance"	"%chance"
+	    				"OnSuccess"
+	    				{
+	    					"ApplyModifier"
+	    					{
+	    						"ModifierName"	"modifier_item_zs_staff_conglin_attack_buff"
+	    						"Target"	
+	    						{
+									"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+									"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+									"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+									"Center"	"TARGET"
+									"Radius"	"%state_radius"
+								}
+	    					}
+	    				}
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_conglin_attack_buff"
+	    	{
+	    		"IsHidden"	"1"
+	    		"Duration"	"1"
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_ROOTED"		"MODIFIER_STATE_VALUE_ENABLED"	//禁止移动
+	    			"MODIFIER_STATE_DISARMED"	"MODIFIER_STATE_VALUE_ENABLED"	//无法攻击
+	    			"MODIFIER_STATE_SILENCED"	"MODIFIER_STATE_VALUE_ENABLED"	//沉默
+	    		}
+	    	}
 	    }
 
 	    "AbilitySpecial"
@@ -2687,15 +2728,25 @@
 	    		"var_type"		"FIELD_INTEGER"
 	    		"radius"		"600"
 	    	}
-	    	"04"
+	    	"04"	//生命恢复速度
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
 	    		"heal"			"10"
 	    	}
-	    	"04"
+	    	"04"	//魔法恢复速度
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
 	    		"mana"			"10"
+	    	}
+	    	"05"	//触发概率
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"chance"		"25"
+	    	}
+	    	"06"	//缠绕作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"state_radius"	"300"
 	    	}
 	    	"01"
 	    	{
@@ -2732,7 +2783,7 @@
 		"ID"					"1556"
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_staff_bingfeng"
-	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
 	    "ItemCost"				"1"
 	    "ItemDroppable"			"1"
@@ -2754,6 +2805,82 @@
 	    		"Properties"
 	    		{
 	    			"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int_bonus"
+	    		}
+
+	    		//攻击事件
+	    		"OnAttack"
+	    		{
+	    			"ApplyModifier"
+	    			{
+	    				"ModifierName"	"modifier_item_zs_staff_bingfeng_buff"
+	    				"Target"		"CASTER"
+	    			}
+
+	    			"ApplyModifier"
+	    			{
+	    				"ModifierName"	"modifier_item_zs_staff_bingfeng_buff_texture"
+	    				"Target"		"CASTER"
+	    			}
+	    		}
+
+	    		"OnAttackLanded"
+	    		{
+	    			"Random"
+	    			{
+	    				"Chance"	"%chance"
+	    				"OnSuccess"
+	    				{
+	    					"ApplyModifier"
+			    			{
+			    				"ModifierName"	"modifier_item_zs_staff_bingfeng_buff_ice"
+			    				"Target"		"TARGET"
+			    			}
+	    				}
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_bingfeng_buff"
+	    	{
+	    		"Duration"		"10"
+	    		"IsHidden"		"1"
+	    		"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int"
+	    		}
+	    	}
+	    	"modifier_item_zs_staff_bingfeng_buff_texture"
+	    	{
+	    		"Duration"		"10"
+	    	}
+
+	    	"modifier_item_zs_staff_bingfeng_buff_ice"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Duration"		"2"
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_FROZEN"		"MODIFIER_STATE_VALUE_ENABLED"	//冰冻
+	    			"MODIFIER_STATE_ROOTED"		"MODIFIER_STATE_VALUE_ENABLED"	//禁止移动
+	    			"MODIFIER_STATE_DISARMED"	"MODIFIER_STATE_VALUE_ENABLED"	//禁止攻击
+	    			"MODIFIER_STATE_SILENCED"	"MODIFIER_STATE_VALUE_ENABLED"	//禁止施法
+	    		}
+
+	    		"ThinkInterval"		"0.5"
+	    		"OnIntervalThink"
+	    		{
+	    			"RunScript"
+					{
+						"ScriptFile"		"scripts/vscripts/util/damage.lua"
+						"Function"			"DamageTarget"
+						"damage_increase"	"%increase"
+						"damage_type"		"DAMAGE_TYPE_MAGICAL"
+						"damage_category"	"wisdom"
+						"damage_str"		"%int_hurt"
+						"Target"			"TARGET"
+					}
 	    		}
 	    	}
 
@@ -2784,6 +2911,26 @@
 
 	    "AbilitySpecial"
 	    {
+	    	"03"	//攻击所获得智力
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"int"			"10"
+	    	}
+	    	"04"	//触发概率
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"chance"		"90"
+	    	}
+	    	"05"	//伤害系数
+			{
+				"var_type"			"FIELD_FLOAT"
+				"increase"			"1.2"
+			}
+			"06"	//伤害智力加成
+			{
+				"var_type"			"FIELD_FLOAT"
+				"int_hurt"			"1.5"
+			}
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
