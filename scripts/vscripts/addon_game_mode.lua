@@ -70,12 +70,17 @@ function Precache( context )
     PrecacheParticle( "particles/hero_templar/abysal/abyssal_blade.vpcf", context)
     PrecacheParticle( "particles/econ/courier/courier_jadehoof_ambient/jadehoof_special_blossoms.vpcf", context)
     PrecacheParticle( "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff.vpcf", context)
+    PrecacheParticle( "particles/units/heroes/hero_crystalmaiden/maiden_freezing_field_snow.vpcf", context)
+    PrecacheParticle( "particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf", context)
+    PrecacheParticle( "particles/units/heroes/hero_huskar/huskar_inner_vitality.vpcf", context)
+
     -- 音效文件
     PrecacheSound( 'soundevents/game_sounds_heroes/game_sounds_templar_assassin.vsndevts', context)
 	PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts", context )
 	PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_axe.vsndevts", context )
     PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_elder_titan.vsndevts", context )
     PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_crystalmaiden.vsndevts", context )
+    PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_huskar.vsndevts", context )
 
     -- 小兵的统一音效
     PrecacheSound( 'soundevents/game_sounds_heroes/game_sounds_undying.vsndevts', context)

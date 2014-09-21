@@ -2400,6 +2400,8 @@
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_staff_zhiyuan"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityCooldown"		"13"
+	    "AbilityManaCost"		"100"
 
 	    "ItemCost"				"99999"
 	    "ItemDroppable"			"1"
@@ -2505,6 +2507,8 @@
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_staff_longtou"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityCooldown"		"13"
+	    "AbilityManaCost"		"100"
 
 	    "ItemCost"				"99999"
 	    "ItemDroppable"			"1"
@@ -2523,6 +2527,12 @@
 	    		"ModifierName"	"modifier_item_zs_staff_longtou_buff"
 	    		"Target"		"CASTER"
 	    	}
+
+	    	"FireSound"
+	    	{
+	    		"EffectName"	"Hero_Huskar.Inner_Vitality"
+	    		"Target" 		"CASTER"
+	    	}	
 	    }
 
 	    "Modifiers"
@@ -2565,10 +2575,12 @@
 	    	"modifier_item_zs_staff_longtou_buff"
 	    	{
 	    		"Duration"		"10"
+	    		"EffectName"	"particles\units\heroes\hero_huskar\huskar_inner_vitality.vpcf"
+	    		"EffectAttachType"	"follow_chest"
 	    		"ThinkInterval"	"1"
 	    		"OnIntervalThink"
 	    		{
-	    			"RunScript"
+	    			"RunScript"  //通过运行函数来恢复魔法
 	    			{
 	    				"ScriptFile"	"scripts/vscripts/items/ItemStaff.lua"
 	    				"Function"		"OnStaffLongTou"
@@ -2590,7 +2602,7 @@
 	    		"var_type"		"FIELD_INTEGER"
 	    		"wis_bonus"		"47"
 	    	}
-	    	"03"
+	    	"03"  //生命值和魔法值恢复的大小
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
 	    		"heal_mana"		"120"
@@ -2971,6 +2983,7 @@
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_staff_guangming"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityCooldown"		"10"
 
 	    "ItemCost"				"99999"
 	    "ItemDroppable"			"1"
@@ -2981,6 +2994,15 @@
 	    "ItemStackable"			"0"
 	    "ItemKillable"			"1"
 	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "OnSpellStart"
+	    {
+	    	"ApplyModifier"  //给予攻击造成纯粹伤害的BUFF
+	    	{
+	    		"Target" 			"CASTER"
+	    		"ModifierName"		"modifier_item_zs_staff_guangming_damage"
+	    	}
+	    }
 
 	    "Modifiers"
 	    {
@@ -3018,10 +3040,100 @@
 		            }
 		        }
 	    	}
+
+	    	"modifier_item_zs_staff_guangming_damage"
+	    	{
+	    		"Duration"		"%duration"
+
+	    		"OnAttackLanded"  //攻击伴随纯粹伤害
+	    		{
+	    			"RunScript"
+					{
+						"ScriptFile"		"scripts/vscripts/util/damage.lua"
+						"Function"			"DamageTarget"
+						"damage_increase"	"%increase"
+						"damage_type"		"DAMAGE_TYPE_PURE"
+						"damage_category"	"wisdom"
+						"damage_str"		"%int_hurt"
+						"Target"			"TARGET"
+					}
+
+					"Random"  //触发成功给予被攻击者百分百Miss
+					{
+						"Chance"	"%chance"
+						"PseudeoRandom"		"DOTA_PSEUDO_RANDOM_JUGG_CRIT"
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"Target" 			"TARGET"
+								"ModifierName"		"modifier_item_zs_staff_guangming_miss"
+							}
+						}
+					}
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_guangming_attack"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+	    		"OnAttackLanded"
+	    		{
+					"Random"  //触发成功给予被攻击者百分百Miss
+					{
+						"Chance"	"%chance"
+						"PseudeoRandom"		"DOTA_PSEUDO_RANDOM_JUGG_CRIT"
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"Target" 			"TARGET"
+								"ModifierName"		"modifier_item_zs_staff_guangming_miss"
+							}
+						}
+					}
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_guangming_miss"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Duration"		"%miss_duration"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_MISS_PERCENTAGE"		"100"
+	    		}
+	    	}
 	    }
 
 	    "AbilitySpecial"
 	    {
+	    	"03"	//使用效果持续时间
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"duration"		"10"
+	    	}
+	    	"04"	//触发概率
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"chance"		"35"
+	    	}
+	    	"03"	//Miss持续时间
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"miss_duration"	"5"
+	    	}
+	    	"05"	//伤害系数
+			{
+				"var_type"			"FIELD_FLOAT"
+				"increase"			"1.4"
+			}
+			"06"	//伤害智力加成
+			{
+				"var_type"			"FIELD_FLOAT"
+				"int_hurt"			"1.8"
+			}
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
@@ -3058,6 +3170,8 @@
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_staff_fengxue"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityCooldown"		"14"
+	    "AbilityManaCost"		"150"
 
 	    "ItemCost"				"1"
 	    "ItemDroppable"			"1"
@@ -3068,6 +3182,34 @@
 	    "ItemStackable"			"0"
 	    "ItemKillable"			"1"
 	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile" 	"scripts/vscripts/items/ItemStaff.lua"
+	    		"Target"		"CASTER"
+	    		"Function"		"OnStaffFengXue"
+	    	}
+	    	"ApplyModifier"
+	    	{
+	    		"Target"
+	    		{
+					"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_MECHANICAL"
+					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+					"Center"	"CASTER"
+					"Radius"	"%radius"
+				}
+	    		"ModifierName"	"modifier_item_zs_staff_fengxue_buff"
+	    	}
+
+	    	"FireSound"
+	    	{
+	    		"EffectName"		"Hero_Crystal.CrystalNova"
+	    		"Target" 			"CASTER"
+	    	}	
+	    }
 
 	    "Modifiers"
 	    {
@@ -3105,10 +3247,60 @@
 		            }
 		        }
 	    	}
+
+	    	"modifier_item_zs_staff_fengxue_buff"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Duration"		"%duration"
+	    		"EffectName"	"particles\units\heroes\hero_crystalmaiden\maiden_frostbite_buff.vpcf"
+	    		"EffectAttachType"	"follow_chest"
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_FROZEN"		"MODIFIER_STATE_VALUE_ENABLED"	//冰冻
+	    			"MODIFIER_STATE_ROOTED"		"MODIFIER_STATE_VALUE_ENABLED"	//禁止移动
+	    			"MODIFIER_STATE_DISARMED"	"MODIFIER_STATE_VALUE_ENABLED"	//禁止攻击
+	    			"MODIFIER_STATE_SILENCED"	"MODIFIER_STATE_VALUE_ENABLED"	//禁止施法
+	    		}
+
+	    		"ThinkInterval"		"0.5"
+	    		"OnIntervalThink"
+	    		{
+	    			"RunScript"
+					{
+						"ScriptFile"		"scripts/vscripts/util/damage.lua"
+						"Function"			"DamageTarget"
+						"damage_increase"	"%increase"
+						"damage_type"		"DAMAGE_TYPE_MAGICAL"
+						"damage_category"	"wisdom"
+						"damage_str"		"%int_hurt"
+						"Target"			"TARGET"
+					}
+	    		}
+	    	}
 	    }
 
 	    "AbilitySpecial"
 	    {
+	    	"03"	//作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"radius"		"800"
+	    	}
+	    	"07"	//持续时间
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"duration"		"4"
+	    	}
+	    	"05"	//伤害系数
+			{
+				"var_type"			"FIELD_FLOAT"
+				"increase"			"2.0"
+			}
+			"06"	//伤害智力加成
+			{
+				"var_type"			"FIELD_FLOAT"
+				"int_hurt"			"2.0"
+			}
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
