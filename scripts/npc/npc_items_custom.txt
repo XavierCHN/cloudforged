@@ -2712,6 +2712,8 @@
 	    	{
 	    		"IsHidden"	"1"
 	    		"Duration"	"1"
+	    		"EffectName"	"particles\units\heroes\hero_treant\treant_overgrowth_vines.vpcf"
+	    		"EffectAttachType"	"follow_chest"
 	    		"States"
 	    		{
 	    			"MODIFIER_STATE_ROOTED"		"MODIFIER_STATE_VALUE_ENABLED"	//禁止移动
@@ -2860,6 +2862,8 @@
 	    	{
 	    		"IsHidden"		"1"
 	    		"Duration"		"2"
+	    		"EffectName"	"particles\units\heroes\hero_crystalmaiden\maiden_frostbite_buff.vpcf"
+	    		"EffectAttachType"	"follow_chest"
 	    		"States"
 	    		{
 	    			"MODIFIER_STATE_FROZEN"		"MODIFIER_STATE_VALUE_ENABLED"	//冰冻
@@ -2919,7 +2923,7 @@
 	    	"04"	//触发概率
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
-	    		"chance"		"90"
+	    		"chance"		"25"
 	    	}
 	    	"05"	//伤害系数
 			{

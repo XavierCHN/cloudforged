@@ -69,7 +69,7 @@ function Precache( context )
     PrecacheParticle( "particles/hero_templar/antimage_manavoid_explode_b.vpcf", context)
     PrecacheParticle( "particles/hero_templar/abysal/abyssal_blade.vpcf", context)
     PrecacheParticle( "particles/econ/courier/courier_jadehoof_ambient/jadehoof_special_blossoms.vpcf", context)
-
+    PrecacheParticle( "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff.vpcf", context)
     -- 音效文件
     PrecacheSound( 'soundevents/game_sounds_heroes/game_sounds_templar_assassin.vsndevts', context)
 	PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts", context )
