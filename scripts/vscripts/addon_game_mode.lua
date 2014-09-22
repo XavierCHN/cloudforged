@@ -73,6 +73,8 @@ function Precache( context )
     PrecacheParticle( "particles/units/heroes/hero_crystalmaiden/maiden_freezing_field_snow.vpcf", context)
     PrecacheParticle( "particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf", context)
     PrecacheParticle( "particles/units/heroes/hero_huskar/huskar_inner_vitality.vpcf", context)
+    PrecacheParticle( "particles/units/heroes/hero_juggernaut/juggernaut_healing_ward_variation01.vpcf", context)
+    
 
     -- 音效文件
     PrecacheSound( 'soundevents/game_sounds_heroes/game_sounds_templar_assassin.vsndevts', context)

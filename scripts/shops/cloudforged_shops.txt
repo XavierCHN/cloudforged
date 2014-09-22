@@ -64,6 +64,12 @@
 	{
 		"item"		"item_zs_staff_zhiyuan"
 		"item"		"item_zs_staff_longtou"
+		"item"		"item_zs_staff_conglin"
+		"item"		"item_zs_staff_bingfeng"
+		"item"		"item_zs_staff_guangming"
+		"item"		"item_zs_staff_fengxue"
+		"item"		"item_zs_staff_ningjing"
+		"item"		"item_zs_staff_dongjie"
 	}
 	
 	"magics"

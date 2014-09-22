@@ -1,4 +1,5 @@
 
+--龙头法杖
 function OnStaffLongTou( keys )
 	local caster = keys.caster
 	local x = keys.ability:GetLevelSpecialValueFor("heal_mana", keys.ability:GetLevel() - 1)
@@ -6,6 +7,7 @@ function OnStaffLongTou( keys )
 	caster:SetMana(caster:GetMana() + x)
 end
 
+--风雪法杖
 function OnStaffFengXue( keys )
 	local caster = keys.caster
 
@@ -68,4 +70,38 @@ function OnStaffFengXue( keys )
 		--调用移动函数
 		FengXue(particle[i],particle_vec[i],particle_over[i],ice)
 	end
+end
+
+
+function OnStaffNingJing( keys )
+	local caster = keys.caster
+	local group = keys.target_entities
+
+	--获取生命值百分比
+	local heal_percent = keys.ability:GetSpecialValueFor("heal_percent") /100
+
+	for i,unit in pairs(group) do
+		local heal = unit:GetHealth() * heal_percent
+		unit:SetHealth(unit:GetHealth() - heal)
+		caster:SetHealth(caster:GetHealth() + heal)
+	end
+end
+
+function OnStaffNingJingAttack( keys )
+	local caster = keys.caster
+	local target = keys.target
+
+	--获取最大最小纯粹伤害
+	local min = keys.ability:GetSpecialValueFor("pure_min")
+	local max = keys.ability:GetSpecialValueFor("pure_max")
+
+	--随机伤害
+	local rdamage = RandomInt(min, max)
+
+	local damageTable = {victim=target,
+						attacker=caster,
+						damage=rdamage,
+						damage_type=DAMAGE_TYPE_PURE}
+
+	ApplyDamage(damageTable)
 end

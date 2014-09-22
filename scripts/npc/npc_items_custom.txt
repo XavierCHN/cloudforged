@@ -2988,7 +2988,7 @@
 	    "ItemCost"				"99999"
 	    "ItemDroppable"			"1"
 	    "ItemSellable"			"1"
-	    "ItemQuality"			"rare"
+	    "ItemQuality"			"epic"
 	    "ItemPurchasable"		"1"
 	    "ItemPermanent"			"1"
 	    "ItemStackable"			"0"
@@ -3176,7 +3176,7 @@
 	    "ItemCost"				"1"
 	    "ItemDroppable"			"1"
 	    "ItemSellable"			"1"
-	    "ItemQuality"			"rare"
+	    "ItemQuality"			"epic"
 	    "ItemPurchasable"		"1"
 	    "ItemPermanent"			"1"
 	    "ItemStackable"			"0"
@@ -3332,16 +3332,220 @@
 
 	"item_zs_staff_ningjing"//1562
 	{
-		//宁静法杖
+		//宁静之力
 		"ID"					"1562"
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_staff_ningjing"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityCooldown"		"20"
+	    "AbilityManaCost"		"200"
+	    "AbilityCastRange"		"%radius"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"artifact"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "OnSpellStart"
+	    {
+	    	"ApplyModifier"  //每秒降低周围敌人的生命值的一定百分比
+	    	{
+	    		"Target" 			"CASTER"
+	    		"ModifierName"		"modifier_item_zs_staff_ningjing_buff"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_staff_ningjing"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_ningjing"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryWisdom"    "%wis_bonus"
+		            }
+		        }
+	    	}
+
+	    	"modifier_item_zs_staff_ningjing_buff"
+	    	{
+	    		"Duration"		"%duration"
+	    		"IsHidden"		"1"
+	    		"ThinkInterval"	"1"
+	    		"OnIntervalThink"
+	    		{
+	    			"RunScript"  //每秒传递周围的敌人到函数里面
+	    			{
+	    				"ScriptFile" 	"scripts/vscripts/items/ItemStaff.lua"
+	    				"Function"		"OnStaffNingJing"
+	    				"Target"
+	    				{
+	    					"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+							"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+							"Center"	"TARGET"
+							"Radius"	"%radius"
+	    				}
+	    			}
+	    		}
+
+	    		"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"	"particles\units\heroes\hero_juggernaut\juggernaut_healing_ward_variation01.vpcf"
+	    				"EffectAttachType"	"start_at_customorigin"
+						"Target" 		"TARGET"
+						"ControlPointEntities"
+						{
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+						}
+					}
+				}		
+	    	}
+
+	    	"modifier_item_zs_staff_ningjing_aura"
+	    	{
+	    		//光环
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+
+	    		"Aura" 			"modifier_item_zs_staff_ningjing_aura_buff"
+				"Aura_Radius" 	"%radius"
+				"Aura_Teams" 	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				"Aura_Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"Aura_Flags" 	"DOTA_UNIT_TARGET_FLAG_NONE"
+	    	}
+	    	"modifier_item_zs_staff_ningjing_aura_buff"
+	    	{
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE"	"%attack"
+	    			"MODIFIER_PROPERTY_HEALTH_BONUS"				"%heal"
+	    		}
+
+	    		"OnAttackLanded"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile" 	"scripts/vscripts/items/ItemStaff.lua"
+	    				"Target"		"UNIT"
+	    				"Function"		"OnStaffNingJingAttack"
+	    			}
+	    		}
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"03"  //持续时间
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"duration"		"10"
+	    	}
+	    	"09"  //作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"radius"		"700"
+	    	}
+	    	"04"  //生命值百分比
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"heal_percent"	"2"
+	    	}
+	    	"05"  //攻击力百分比加成
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack"		"25"
+	    	}
+	    	"06"  //生命值加成
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"heal"			"1000"
+	    	}
+	    	"07"  //最低纯粹伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"pure_min"		"50"
+	    	}
+	    	"08"  //最高纯粹伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"pure_max"		"500"
+	    	}
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"int_bonus"		"220"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"wis_bonus"		"250"
+	    	}
+	    }
+	}
+	"item_recipe_zs_staff_ningjing"//1563
+	{
+		"ID"							"1563"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"0"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_staff_ningjing"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_staff_guangming;item_cf_feather;item_cf_feather;item_cf_feather"
+		}
+	}
+
+	"item_zs_staff_dongjie"//1564
+	{
+		//冻结之力
+		"ID"					"1564"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_staff_dongjie"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 
 	    "ItemCost"				"99999"
 	    "ItemDroppable"			"1"
 	    "ItemSellable"			"1"
-	    "ItemQuality"			"rare"
+	    "ItemQuality"			"artifact"
 	    "ItemPurchasable"		"1"
 	    "ItemPermanent"			"1"
 	    "ItemStackable"			"0"
@@ -3400,20 +3604,20 @@
 	    	}
 	    }
 	}
-	"item_recipe_zs_staff_ningjing"//1563
+	"item_recipe_zs_staff_dongjie"//1565
 	{
-		"ID"							"1563"
+		"ID"							"1565"
 		"BaseClass"						"item_recipe_arcane_boots"
-		"ItemCost"						"500"	
+		"ItemCost"						"0"	
 		"ItemShopTags"					""
 		
 		// Recipe
 		//-----------------------------------------------------------
 		"ItemRecipe"					"1"
-		"ItemResult"					"item_zs_staff_ningjing"
+		"ItemResult"					"item_zs_staff_dongjie"
 		"ItemRequirements"
 		{
-			"01"						"item_zs_staff_guangming;item_zs_staff_fengxue;item_cf_feather"
+			"01"						"item_zs_staff_fengxue;item_cf_feather;item_cf_feather;item_cf_feather"
 		}
 	}
 

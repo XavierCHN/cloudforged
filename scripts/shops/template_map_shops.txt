@@ -69,6 +69,7 @@
 		"item"		"item_zs_staff_guangming"
 		"item"		"item_zs_staff_fengxue"
 		"item"		"item_zs_staff_ningjing"
+		"item"		"item_zs_staff_dongjie"
 	}
 	
 	"magics"
