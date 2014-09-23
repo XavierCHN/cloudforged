@@ -3339,7 +3339,7 @@
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 	    "AbilityCooldown"		"20"
 	    "AbilityManaCost"		"200"
-	    "AbilityCastRange"		"%radius"
+	    "AbilityCastRange"		"700"
 
 	    "ItemCost"				"99999"
 	    "ItemDroppable"			"1"
@@ -3456,7 +3456,7 @@
 	    			"MODIFIER_PROPERTY_HEALTH_BONUS"				"%heal"
 	    		}
 
-	    		"OnAttackLanded"
+	    		"OnAttackLanded"  //攻击将造成纯粹伤害
 	    		{
 	    			"RunScript"
 	    			{
@@ -3541,6 +3541,9 @@
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_staff_dongjie"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityCooldown"		"20"
+	    "AbilityManaCost"		"200"
+	    "AbilityCastRange"		"500"
 
 	    "ItemCost"				"99999"
 	    "ItemDroppable"			"1"
@@ -3551,6 +3554,88 @@
 	    "ItemStackable"			"0"
 	    "ItemKillable"			"1"
 	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "OnSpellStart"
+	    {
+	    	"ActOnTargets"
+	    	{
+	    		"Target"
+	    		{
+	    			"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+					"Center"	"CASTER"
+					"Radius"	"%sd_radius"
+	    		}
+
+	    		"Action"
+	    		{
+	    			"TrackingProjectile"
+			    	{
+			    		"Dodgeable"			"false"
+			    		"ProvidesVision"	"true"
+			    		"VisionRadius"		"300"
+			    		"EffectName"		"particles\units\heroes\hero_lich\lich_chain_frost.vpcf"
+			    		"MoveSpeed"			"1000"
+			    		"SourceAttachment"	"DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"  
+			    		"Target"			"TARGET"
+			    	}
+	    		}
+	    	}
+
+	    	"FireSound"
+	    	{
+	    		"EffectName"		"Hero_Lich.ChainFrost"
+	    		"Target"  			"CASTER"
+	    	}
+	    }	
+
+	    "OnProjectileHitUnit"
+	    {
+	    	"RunScript"  //伤害
+			{
+				"ScriptFile"		"scripts/vscripts/util/damage.lua"
+				"Function"			"DamageTarget"
+				"damage_increase"	"%increase"
+				"damage_type"		"DAMAGE_TYPE_MAGICAL"
+				"damage_category"	"wisdom"
+				"damage_str"		"%int_hurt"
+				"Target"			"TARGET"
+			}
+
+			"RunScript"  //AOE随机魔法伤害
+			{
+				"ScriptFile" 	"scripts/vscripts/items/ItemStaff.lua"
+				"Function"		"OnStaffDongJieDamageAOE"
+				"Target"
+	    		{
+	    			"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+					"Center"	"TARGET"
+					"Radius"	"%radius"
+	    		}
+			}
+
+			"FireSound"
+	    	{
+	    		"EffectName"		"Hero_Lich.ChainFrostImpact.Hero"
+	    		"Target"  			"CASTER"
+	    	}
+
+	    	"ApplyModifier"  //减速
+	    	{
+	    		"ModifierName"		"modifier_item_zs_staff_dongjie_buff"
+	    		"Target"
+	    		{
+	    			"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+					"Center"	"TARGET"
+					"Radius"	"%radius"
+	    		}
+	    	}
+	    }
 
 	    "Modifiers"
 	    {
@@ -3588,10 +3673,122 @@
 		            }
 		        }
 	    	}
+
+	    	"modifier_item_zs_staff_dongjie_buff"
+	    	{
+	    		//降低移动速度
+	    		"IsHidden"		"1"
+	    		"Duration"		"%duration"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%move_speed"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_dongjie_aura"
+	    	{
+	    		"Passive"		"1"
+
+	    		"Aura" 			"modifier_item_zs_staff_dongjie_aura_buff"
+				"Aura_Radius" 	"%sd_radius"
+				"Aura_Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"Aura_Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+				"Aura_Flags" 	"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+	    	}
+
+	    	"modifier_item_zs_staff_dongjie_aura_buff"
+	    	{
+	    		"IsDebuff"		"1"
+	    		"OnCreated"  //进入光环范围
+	    		{
+	    			"ApplyModifier"
+	    			{
+	    				"Target" 			"TARGET"
+	    				"ModifierName"		"modifier_item_zs_staff_dongjie_aura_buff_ice"
+	    			}
+
+	    			"RunScript"  //随机魔法伤害
+					{
+						"ScriptFile" 	"scripts/vscripts/items/ItemStaff.lua"
+						"Function"		"OnStaffDongJieDamage"
+						"Target"		"TARGET"
+					}
+	    		}
+	    		"OnDestroy"  //离开光环范围
+	    		{
+	    			"ApplyModifier"
+	    			{
+	    				"Target" 			"TARGET"
+	    				"ModifierName"		"modifier_item_zs_staff_dongjie_aura_buff_ice"
+	    			}
+
+	    			"RunScript"  //随机魔法伤害
+					{
+						"ScriptFile" 	"scripts/vscripts/items/ItemStaff.lua"
+						"Function"		"OnStaffDongJieDamage"
+						"Target"		"TARGET"
+					}
+	    		}
+	    	}
+
+	    	"modifier_item_zs_staff_dongjie_aura_buff_ice"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Duration"		"%duration"
+	    		"EffectName"	"particles\units\heroes\hero_crystalmaiden\maiden_frostbite_buff.vpcf"
+	    		"EffectAttachType"	"follow_chest"
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_FROZEN"		"MODIFIER_STATE_VALUE_ENABLED"	//冰冻
+	    			"MODIFIER_STATE_ROOTED"		"MODIFIER_STATE_VALUE_ENABLED"	//禁止移动
+	    			"MODIFIER_STATE_DISARMED"	"MODIFIER_STATE_VALUE_ENABLED"	//禁止攻击
+	    			"MODIFIER_STATE_SILENCED"	"MODIFIER_STATE_VALUE_ENABLED"	//禁止施法
+	    		}
+	    	}
 	    }
 
 	    "AbilitySpecial"
 	    {
+	    	"03"  //霜冻炮作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"radius"		"200"
+	    	}
+	    	"04"  //冻结领域作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"sd_radius"		"500"
+	    	}
+	    	"11"  //减速和冻结时间
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"duration"		"5"
+	    	}
+	    	"08"  //移动速度降低
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"move_speed"	"-20"
+	    	}
+	    	"09"  //最低魔法伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"mag_min"		"50"
+	    	}
+	    	"10"  //最高魔法伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"mag_max"		"500"
+	    	}
+	    	"05"	//伤害系数
+			{
+				"var_type"			"FIELD_FLOAT"
+				"increase"			"2.0"
+			}
+			"06"	//伤害智力加成
+			{
+				"var_type"			"FIELD_FLOAT"
+				"int_hurt"			"2.0"
+			}
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"

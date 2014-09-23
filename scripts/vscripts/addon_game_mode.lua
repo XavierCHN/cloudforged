@@ -74,7 +74,7 @@ function Precache( context )
     PrecacheParticle( "particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf", context)
     PrecacheParticle( "particles/units/heroes/hero_huskar/huskar_inner_vitality.vpcf", context)
     PrecacheParticle( "particles/units/heroes/hero_juggernaut/juggernaut_healing_ward_variation01.vpcf", context)
-    
+    PrecacheParticle( "particles/units/heroes/hero_lich/lich_chain_frost.vpcf", context)
 
     -- 音效文件
     PrecacheSound( 'soundevents/game_sounds_heroes/game_sounds_templar_assassin.vsndevts', context)
@@ -83,6 +83,7 @@ function Precache( context )
     PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_elder_titan.vsndevts", context )
     PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_crystalmaiden.vsndevts", context )
     PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_huskar.vsndevts", context )
+    PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_lich.vsndevts", context )
 
     -- 小兵的统一音效
     PrecacheSound( 'soundevents/game_sounds_heroes/game_sounds_undying.vsndevts', context)
