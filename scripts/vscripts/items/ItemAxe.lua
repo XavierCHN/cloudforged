@@ -1,105 +1,47 @@
-function OnBingyuanSuifuCast(keys)
+
+--最高最低混合伤害
+function OnAxeRandomDamageComposite( keys )
     local caster = keys.caster
-    local point = keys.target_points[1]
-    local mana = caster:GetMana()
-    caster:AddAbility('tusk_ice_shards') 
-    local ABILITY = caster:FindAbilityByName('tusk_ice_shards')
-    ABILITY:SetLevel(4) 
-    ABILITY:SetOverrideCastPoint(0)
-    ABILITY:EndCooldown() 
-    caster:CastAbilityOnPosition(point, ABILITY, caster:GetPlayerID()) 
-    caster:SetContextThink(DoUniqueString('remove_ability') ,
-        function()
-            caster:RemoveAbility('tusk_ice_shards')
-            caster:SetMana(mana)
-        end,
-    0.2)
+    local target = keys.target
+
+    --获取最低最高伤害
+    local damage_min = keys.damage_min or 1
+    local damage_max = keys.damage_max or 1
+
+    local damageTable = {victim=target,
+                        attacker=caster,
+                        damage=RandomInt(damage_min, damage_max),
+                        damage_type=DAMAGE_TYPE_COMPOSITE}
+    ApplyDamage(damageTable)
 end
 
-function OnGaoliTiefuCast(keys)
+--天使战斧
+function OnAxeTianShi( keys )
     local caster = keys.caster
-    local point = keys.target_points[1]
-    local mana = caster:GetMana()
-    caster:AddAbility('earthshaker_fissure') 
-    local ABILITY = caster:FindAbilityByName('earthshaker_fissure')
-    ABILITY:SetLevel(4) 
-    ABILITY:SetOverrideCastPoint(0)
-    ABILITY:EndCooldown() 
-    caster:CastAbilityOnPosition(point, ABILITY, caster:GetPlayerID()) 
-    caster:SetContextThink(DoUniqueString('earthshaker_fissure') ,
-        function()
-            caster:RemoveAbility('earthshaker_fissure')
-            caster:SetMana(mana)
-        end,
-    0.2)
+    local target = keys.target
+
+    --获取恢复的生命值百分比
+    local heal_percent = keys.ability:GetSpecialValueFor("heal_percent") /100
+
+    --获取最高恢复的生命值
+    local heal_max = keys.ability:GetSpecialValueFor("heal_max")
+
+    --计算
+    local heal = caster:GetHealth() * heal_percent
+
+    --如果生命值高于heal_max
+    if heal>=heal_max then
+        heal=heal_max
+    end
+
+    caster:SetHealth(caster:GetHealth() + heal)
+    
+    --设置table用于调用OnAxeRandomDamageComposite
+    local table = {caster=caster,
+                    target=target,
+                    damage_min=heal,
+                    damage_max=heal,
+                    }
+    OnAxeRandomDamageComposite(table)
 end
 
-function OnTouluLiefuCast(keys)
-    local caster = keys.caster
-    local target = keys.target_entities[1]
-    local mana = caster:GetMana()
-    caster:AddAbility('axe_culling_blade') 
-    local ABILITY = caster:FindAbilityByName('axe_culling_blade')
-    ABILITY:SetLevel(3) 
-    ABILITY:SetOverrideCastPoint(0)
-    ABILITY:EndCooldown() 
-    caster:CastAbilityOnTarget(target, ABILITY, caster:GetPlayerID())
-    caster:SetContextThink(DoUniqueString('axe_culling_blade') ,
-        function()
-            caster:RemoveAbility('axe_culling_blade')
-            caster:SetMana(mana)
-        end,
-    0.2)
-end
-function OnShijunZhifuCast(keys)
-    local caster = keys.caster
-    local mana = caster:GetMana()
-    caster:AddAbility('sven_warcry') 
-    local ABILITY = caster:FindAbilityByName('sven_warcry')
-    ABILITY:SetLevel(4) 
-    ABILITY:SetOverrideCastPoint(0)
-    ABILITY:EndCooldown() 
-    caster:CastAbilityNoTarget(ABILITY, caster:GetPlayerID()) 
-    caster:SetContextThink(DoUniqueString('sven_warcry') ,
-        function()
-            caster:RemoveAbility('sven_warcry')
-            caster:SetMana(mana)
-        end,
-    0.2)
-end
-
-function OnShuangyiZhanfuCast(keys)
-    local caster = keys.caster
-    local point = keys.target_points[1]
-    local mana = caster:GetMana()
-    caster:AddAbility('beastmaster_wild_axes') 
-    local ABILITY = caster:FindAbilityByName('beastmaster_wild_axes')
-    ABILITY:SetLevel(4) 
-    ABILITY:SetOverrideCastPoint(0)
-    ABILITY:EndCooldown() 
-    caster:CastAbilityOnPosition(point, ABILITY, caster:GetPlayerID()) 
-    caster:SetContextThink(DoUniqueString('beastmaster_wild_axes') ,
-        function()
-            caster:RemoveAbility('beastmaster_wild_axes')
-            caster:SetMana(mana)
-        end,
-    0.2)
-end
-
-
-function OnKaishanZhifuCast(keys)
-    local caster = keys.caster
-    local mana = caster:GetMana()
-    caster:AddAbility('tusk_walrus_punch') 
-    local ABILITY = caster:FindAbilityByName('tusk_walrus_punch')
-    ABILITY:SetLevel(3) 
-    ABILITY:SetOverrideCastPoint(0)
-    ABILITY:EndCooldown() 
-    caster:CastAbilityNoTarget(ABILITY, caster:GetPlayerID()) 
-    caster:SetContextThink(DoUniqueString('tusk_walrus_punch') ,
-        function()
-            caster:RemoveAbility('tusk_walrus_punch')
-            caster:SetMana(mana)
-        end,
-    0.2)
-end

@@ -1758,13 +1758,16 @@
 	// 结束区域：基础法杖
 
 	//高级斧子们 ID开始 1400
-	"item_zs_axe_bingyuansuifu"//1400
+	"item_zs_axe_huihuangzhanfu"//1400
 	{
+		//辉煌战斧
 		"ID"					"1400"
 		"BaseClass"				"item_datadriven"
-	    "AbilityTextureName"	"item_zs_axe_bingyuansuifu"
-	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
-		
+	    "AbilityTextureName"	"item_zs_axe_huihuangzhanfu"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCooldown"		"10"
+	    "AbilityManaCost"		"20"
+
 	    "ItemCost"				"99999"
 	    "ItemPurchasable"		"0"
 	    "ItemQuality"			"rare"
@@ -1773,15 +1776,12 @@
 	    "ItemPermanent"			"0"
 	    "ItemKillable"			"1"
 
-	    "AbilityCooldown"		"5"
-
 	    "OnSpellStart"
 	    {
-	    	"RunScript"
+	    	"ApplyModifier"  //添加BUFF
 	    	{
-	    		"ScriptFile"		"scripts/vscripts/items/ItemAxe.lua"
-	    		"Target"			"POINT"
-	    		"Function"			"OnBingyuanSuifuCast"
+	    		"Target" 			"CASTER"
+	    		"ModifierName"		"modifier_item_zs_axe_huihuangzhanfu_buff"
 	    	}
 	    }
 	    "Modifiers"
@@ -1818,9 +1818,41 @@
 					}
 				}
 			}
+
+			"modifier_item_zs_axe_huihuangzhanfu_buff"
+			{
+				"Duration"		"%duration"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"	"%attack" //攻击力
+					"MODIFIER_PROPERTY_HEALTH_BONUS"			"%heal"   //生命值
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%armor"  //护甲
+				}
+			}
 	    }
 	    "AbilitySpecial"
 	    {
+	    	"06"  //持续时间
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"duration"		"6"
+	    	}
+	    	"03"  //攻击力
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack"		"40"
+	    	}
+	    	"04"  //生命值
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"heal"			"700"
+	    	}
+	    	"05"  //护甲
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"armor"			"30"
+	    	}
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
@@ -1833,7 +1865,7 @@
 	    	}
 	    }
 	}
-	"item_recipe_zs_axe_bingyuansuifu"//1401
+	"item_recipe_zs_axe_huihuangzhanfu"//1401
 	{
 		"ID"							"1401"
 		"BaseClass"						"item_recipe_arcane_boots"
@@ -1843,19 +1875,22 @@
 		// Recipe
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
-		"ItemResult"					"item_zs_axe_bingyuansuifu"
+		"ItemResult"					"item_zs_axe_huihuangzhanfu"
 		"ItemRequirements"
 		{
 			"01"						"item_zs_steel_axe_lvl5;item_gem_manli"
 		}
 	}
-	"item_zs_axe_gaolitiefu"//1402
+	"item_zs_axe_shenyuanzhanfu"//1402
 	{
+		//深渊战斧
 		"ID"					"1402"
 		"BaseClass"				"item_datadriven"
-	    "AbilityTextureName"	"item_zs_axe_gaolitiefu"
-	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
-		
+	    "AbilityTextureName"	"item_zs_axe_shenyuanzhanfu"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCooldown"		"10"
+	    "AbilityManaCost"		"20"
+
 	    "ItemCost"				"99999"
 	    "ItemPurchasable"		"0"
 	    "ItemQuality"			"rare"
@@ -1864,15 +1899,12 @@
 	    "ItemPermanent"			"0"
 	    "ItemKillable"			"1"
 
-	    "AbilityCooldown"		"15"
-
 	    "OnSpellStart"
 	    {
-	    	"RunScript"
+	    	"ApplyModifier"  //给予攻击速度和攻击带有混合伤害的BUFF
 	    	{
-	    		"ScriptFile"		"scripts/vscripts/items/ItemAxe.lua"
-	    		"Target"			"POINT"
-	    		"Function"			"OnGaoliTiefuCast"
+	    		"Target" 			"CASTER"
+	    		"ModifierName"		"modifier_item_zs_axe_shenyuanzhanfu_buff"
 	    	}
 	    }
 
@@ -1910,9 +1942,51 @@
 					}
 				}
 			}
+
+			"modifier_item_zs_axe_shenyuanzhanfu_buff"
+			{
+				"Duration"		"%duration"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%attack_speed" //攻击速度
+				}
+
+				"OnAttackLanded"  //攻击带有混合伤害
+				{
+					"RunScript"
+					{
+						"ScriptFile" 	"scripts/vscripts/items/ItemAxe.lua"
+						"Target"		"UNIT"
+						"Function"		"OnAxeRandomDamageComposite"
+						"damage_min" 	"%damage_min"
+						"damage_max" 	"%damage_max"
+					}
+				}
+			}
 	    }
 	    "AbilitySpecial"
 	    {
+	    	"06"  //持续时间
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"duration"		"6"
+	    	}
+	    	"03"  //攻击速度加成
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_speed"	"200"
+	    	}
+	    	"04"  //最低混合伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"damage_min"	"30"
+	    	}
+	    	"05"  //最高混合伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"damage_max"	"80"
+	    	}
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
@@ -1925,7 +1999,7 @@
 	    	}
 	    }
 	}
-	"item_recipe_zs_axe_gaolitiefu"//1403
+	"item_recipe_zs_axe_shenyuanzhanfu"//1403
 	{
 		"ID"							"1403"
 		"BaseClass"						"item_recipe_arcane_boots"
@@ -1935,18 +2009,19 @@
 		// Recipe
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
-		"ItemResult"					"item_zs_axe_gaolitiefu"
+		"ItemResult"					"item_zs_axe_shenyuanzhanfu"
 		"ItemRequirements"
 		{
-			"01"						"item_zs_steel_axe_lvl5;item_gem_manli;item_cf_feather"
+			"01"						"item_zs_steel_axe_lvl5;item_gem_manli"
 		}
 	}
-	"item_zs_axe_shijunzhifu"//1404
+	"item_zs_axe_tianshizhanfu"//1404
 	{
+		//天使战斧
 	    "ID"					"1404"
 		"BaseClass"				"item_datadriven"
-	    "AbilityTextureName"	"item_zs_axe_shijunzhifu"
-	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	    "AbilityTextureName"	"item_zs_axe_tianshizhanfu"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		
 	    "ItemCost"				"99999"
 	    "ItemPurchasable"		"0"
@@ -1955,18 +2030,6 @@
 	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
 	    "ItemPermanent"			"0"
 	    "ItemKillable"			"1"
-
-	    "AbilityCooldown"		"10"
-
-	    "OnSpellStart"
-	    {
-	    	"RunScript"
-	    	{
-	    		"ScriptFile"		"scripts/vscripts/items/ItemAxe.lua"
-	    		"Target"			"CASTER"
-	    		"Function"			"OnShijunZhifuCast"
-	    	}
-	    }
 
 	    "Modifiers"
 	    {
@@ -2002,9 +2065,35 @@
 					}
 				}
 			}
+
+			"modifier_item_zs_axe_tianshizhanfu_buff"
+			{
+				"Passive"			"1"
+				"IsHidden"			"1"
+
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile" 	"scripts/vscripts/items/ItemAxe.lua"
+						"Target"		"UNIT"
+						"Function"		"OnAxeTianShi"
+					}
+				}
+			}
 	    }
 	    "AbilitySpecial"
 	    {
+	    	"03"  //恢复的生命值百分比
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"heal_percent"	"10"
+	    	}
+	    	"03"  //最高恢复的生命值
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"heal_max"		"450"
+	    	}
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
@@ -2017,7 +2106,7 @@
 	    	}
 	    }
 	}
-	"item_recipe_zs_axe_shijunzhifu"//1405
+	"item_recipe_zs_axe_tianshizhanfu"//1405
 	{
 		"ID"							"1405"
 		"BaseClass"						"item_recipe_arcane_boots"
@@ -2027,20 +2116,20 @@
 		// Recipe
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
-		"ItemResult"					"item_zs_axe_shijunzhifu"
+		"ItemResult"					"item_zs_axe_tianshizhanfu"
 		"ItemRequirements"
 		{
-			"01"						"item_zs_axe_bingyuansuifu;item_gem_manli;item_cf_feather"
+			"01"						"item_zs_axe_huihuangzhanfu;item_gem_manli;item_cf_feather"
 		}
 	}
-	"item_zs_axe_toululiefu"//1406
+
+	"item_zs_axe_emozhanfu"//1406
 	{
+		//恶魔战斧
 		"ID"					"1406"
 		"BaseClass"				"item_datadriven"
-	    "AbilityTextureName"	"item_zs_axe_toululiefu"
-	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-	    "AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-	    "AbilityUnitTargetType"	"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_MECHANICAL"
+	    "AbilityTextureName"	"item_zs_axe_emozhanfu"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		
 	    "ItemCost"				"99999"
 	    "ItemPurchasable"		"0"
@@ -2049,18 +2138,6 @@
 	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
 	    "ItemPermanent"			"0"
 	    "ItemKillable"			"1"
-
-	    "AbilityCooldown"		"25"
-
-	    "OnSpellStart"
-	    {
-	    	"RunScript"
-	    	{
-	    		"ScriptFile"		"scripts/vscripts/items/ItemAxe.lua"
-	    		"Target"			"TARGET"
-	    		"Function"			"OnTouluLiefuCast"
-	    	}
-	    }
 
 	    "Modifiers"
 	    {
@@ -2096,9 +2173,89 @@
 					}
 				}
 			}
+
+			"modifier_item_zs_axe_emozhanfu_buff"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+
+				"OnAttack"
+				{
+					"Random"
+					{
+						"Chance"			"%chance"
+						"PseudeoRandom"		"DOTA_PSEUDO_RANDOM_JUGG_CRIT" 
+						"OnSuccess"
+						{
+							"FireEffect"
+							{
+								"EffectName"		"particles\units\heroes\hero_centaur\centaur_warstomp.vpcf"
+								"EffectAttachType"  "world_origin"
+								"Target"   			"TARGET"
+							}	
+
+							"RunScript"
+							{
+								"ScriptFile"		"scripts/vscripts/util/damage.lua"
+								"Function"			"DamageTarget"
+								"damage_increase"	"%increase"
+								"damage_type"		"DAMAGE_TYPE_COMPOSITE"
+								"damage_category"	"force"
+								"damage_str"		"%str_hurt"
+								"Target"
+								{
+									"Types"			"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+									"Teams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+									"Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+									"Center"		"TARGET"
+									"Radius"		"%radius"
+								}
+							}
+
+							"Stun"
+							{
+								"Duration"			"%duration"
+								"Target"
+								{
+									"Types"			"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+									"Teams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+									"Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+									"Center"		"TARGET"
+									"Radius"		"%radius"
+								}
+							}
+						}
+					}
+				}
+			}
 	    }
 	    "AbilitySpecial"
 	    {
+	    	"06"  //触发概率
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"chance"		"50"
+	    	}
+	    	"07"  //作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"radius"		"300"
+	    	}
+	    	"03"  //眩晕时间
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"duration"		"0.5"
+	    	}
+	    	"04"	//伤害系数
+			{
+				"var_type"			"FIELD_FLOAT"
+				"increase"			"1.2"
+			}
+			"05"	//伤害力量加成
+			{
+				"var_type"			"FIELD_FLOAT"
+				"str_hurt"			"1.4"
+			}
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
@@ -2111,7 +2268,7 @@
 	    	}
 	    }
 	}
-	"item_recipe_zs_axe_toululiefu"//1407
+	"item_recipe_zs_axe_emozhanfu"//1407
 	{
 		"ID"							"1407"
 		"BaseClass"						"item_recipe_arcane_boots"
@@ -2121,22 +2278,24 @@
 		// Recipe
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
-		"ItemResult"					"item_zs_axe_toululiefu"
+		"ItemResult"					"item_zs_axe_emozhanfu"
 		"ItemRequirements"
 		{
-			"01"						"item_zs_axe_gaolitiefu;item_gem_manli;item_cf_feather"
+			"01"						"item_zs_axe_shenyuanzhanfu;item_gem_manli;item_cf_feather"
 		}
 	}
-	"item_zs_axe_shuangyizhanfu"//1408
+
+	"item_zs_axe_jiushizhanfu"//1408
 	{
+		//救世战斧
 		"ID"					"1408"
 		"BaseClass"				"item_datadriven"
-	    "AbilityTextureName"	"item_zs_axe_shuangyizhanfu"
+	    "AbilityTextureName"	"item_zs_axe_jiushizhanfu"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
 		
 	    "ItemCost"				"99999"
 	    "ItemPurchasable"		"0"
-	    "ItemQuality"			"rare"
+	    "ItemQuality"			"epic"
 	    "ItemStackable"			"0"
 	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
 	    "ItemPermanent"			"0"
@@ -2146,12 +2305,7 @@
 
 	    "OnSpellStart"
 	    {
-	    	"RunScript"
-	    	{
-	    		"ScriptFile"		"scripts/vscripts/items/ItemAxe.lua"
-	    		"Target"			"POINT"
-	    		"Function"			"OnShuangyiZhanfuCast"
-	    	}
+	    	
 	    }
 
 	    "Modifiers"
@@ -2203,7 +2357,7 @@
 	    	}
 	    }
 	}
-	"item_recipe_zs_axe_shuangyizhanfu"//1409
+	"item_recipe_zs_axe_jiushizhanfu"//1409
 	{
 		"ID"							"1409"
 		"BaseClass"						"item_recipe_arcane_boots"
@@ -2213,17 +2367,19 @@
 		// Recipe
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
-		"ItemResult"					"item_zs_axe_shuangyizhanfu"
+		"ItemResult"					"item_zs_axe_jiushizhanfu"
 		"ItemRequirements"
 		{
-			"01"						"item_zs_axe_shijunzhifu;item_cf_feather;item_cf_feather"
+			"01"						"item_zs_axe_tianshizhanfu;item_cf_feather;item_cf_feather"
 		}
 	}
-	"item_zs_axe_kaishanzhifu"//1410
+
+	"item_zs_axe_huimiezhanfu"//1410
 	{
+		//毁灭战斧
 		"ID"					"1410"
 		"BaseClass"				"item_datadriven"
-	    "AbilityTextureName"	"item_zs_axe_kaishanzhifu"
+	    "AbilityTextureName"	"item_zs_axe_huimiezhanfu"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		
 	    "ItemCost"				"99999"
@@ -2232,18 +2388,13 @@
 	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
 	    "ItemPermanent"			"0"
 	    "ItemKillable"			"1"
-	    "ItemQuality"			"artifact"
+	    "ItemQuality"			"epic"
 
 	    "AbilityCooldown"		"2"
 
 	    "OnSpellStart"
 	    {
-	    	"RunScript"
-	    	{
-	    		"ScriptFile"		"scripts/vscripts/items/ItemAxe.lua"
-	    		"Target"			"CASTER"
-	    		"Function"			"OnKaishanZhifuCast"
-	    	}
+	    	
 	    }
 
 	    "Modifiers"
@@ -2295,7 +2446,7 @@
 	    	}
 	    }
 	}
-	"item_recipe_zs_axe_kaishanzhifu"//1411
+	"item_recipe_zs_axe_huimiezhanfu"//1411
 	{
 		"ID"							"1411"
 		"BaseClass"						"item_recipe_arcane_boots"
@@ -2305,17 +2456,19 @@
 		// Recipe
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
-		"ItemResult"					"item_zs_axe_kaishanzhifu"
+		"ItemResult"					"item_zs_axe_huimiezhanfu"
 		"ItemRequirements"
 		{
-			"01"						"item_zs_axe_toululiefu;item_cf_feather;item_cf_feather"
+			"01"						"item_zs_axe_emozhanfu;item_cf_feather;item_cf_feather"
 		}
 	}
-	"item_zs_axe_kuangzhanfu"//1412
+
+	"item_zs_axe_tianshenzhifu"//1412
 	{
+		//天神战斧
 		"ID"					"1412"
 		"BaseClass"				"item_datadriven"
-	    "AbilityTextureName"	"item_zs_axe_kuangzhanfu"
+	    "AbilityTextureName"	"item_zs_axe_tianshenzhifu"
 	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		
 	    "ItemCost"				"99999"
@@ -2325,6 +2478,7 @@
 	    "ItemPermanent"			"0"
 	    "ItemKillable"			"1"
 	    "ItemQuality"			"artifact"
+
 	    "Modifiers"
 	    {
 	    	"item_zs_axe_kuangzhanfu"
@@ -2365,29 +2519,111 @@
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
-	    		"str_bonus"		"187"
+	    		"str_bonus"		"220"
 	    	}
 	    	"02"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
-	    		"for_bonus"		"187"
+	    		"for_bonus"		"250"
 	    	}
 	    }
 	}
-	"item_recipe_zs_axe_kuangzhanfu"//1413
+	"item_recipe_zs_axe_tianshenzhifu"//1413
 	{
 		"ID"							"1413"
 		"BaseClass"						"item_recipe_arcane_boots"
-		"ItemCost"						"10000"	
+		"ItemCost"						"0"	
 		"ItemShopTags"					""
 		
 		// Recipe
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
-		"ItemResult"					"item_zs_axe_kaishanzhifu"
+		"ItemResult"					"item_zs_axe_tianshenzhifu"
 		"ItemRequirements"
 		{
-			"01"						"item_zs_axe_shuangyizhanfu;item_zs_axe_kaishanzhifu;item_cf_feather"
+			"01"						"item_zs_axe_jiushizhanfu;item_cf_feather;item_cf_feather;item_cf_feather"
+		}
+	}
+
+	"item_zs_axe_diyuzhanfu"//1414
+	{
+		//地狱战斧
+		"ID"					"1414"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_axe_diyuzhanfu"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+	    "ItemCost"				"99999"
+	    "ItemPurchasable"		"0"
+	    "ItemStackable"			"0"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+	    "ItemPermanent"			"0"
+	    "ItemKillable"			"1"
+	    "ItemQuality"			"artifact"
+
+	    "Modifiers"
+	    {
+	    	"item_zs_axe_kuangzhanfu"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
+	    		}
+	    	}
+	    	"modifier_item_zs_axe_kuangzhanfu"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"//CategoryForce CategorySensitive CategoryCunning CategoryWisdom
+						"Function"				"OnAddItemCategory"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"scripts/vscripts/items/item_core.lua"
+						"CategoryForce"			"%for_bonus"
+						"Function"				"OnRemoveItemCategory"
+					}
+				}
+			}
+	    }
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"str_bonus"		"220"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"for_bonus"		"250"
+	    	}
+	    }
+	}
+	"item_recipe_zs_axe_diyuzhanfu"//1415
+	{
+		"ID"							"1415"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"0"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_axe_diyuzhanfu"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_axe_huimiezhanfu;item_cf_feather;item_cf_feather;item_cf_feather"
 		}
 	}
 	//高级剑们   ID开始 1450
@@ -3603,10 +3839,8 @@
 				"Target"			"TARGET"
 			}
 
-			"RunScript"  //AOE随机魔法伤害
+			"ActOnTargets"  //AOE魔法伤害
 			{
-				"ScriptFile" 	"scripts/vscripts/items/ItemStaff.lua"
-				"Function"		"OnStaffDongJieDamageAOE"
 				"Target"
 	    		{
 	    			"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
@@ -3614,6 +3848,15 @@
 					"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
 					"Center"	"TARGET"
 					"Radius"	"%radius"
+	    		}
+	    		"Action"
+	    		{
+	    			"RunScript"  //随机魔法伤害
+					{
+						"ScriptFile" 	"scripts/vscripts/items/ItemStaff.lua"
+						"Function"		"OnStaffDongJieDamage"
+						"Target"		"TARGET"
+					}
 	    		}
 			}
 

@@ -50,13 +50,14 @@
 	// Level 1 - Green Recipes
 	"basics"
 	{
-		"item"		"item_zs_axe_bingyuansuifu"
-		"item"		"item_zs_axe_gaolitiefu"
-		"item"		"item_zs_axe_shijunzhifu"
-		"item"		"item_zs_axe_toululiefu"
-		"item"		"item_zs_axe_shuangyizhanfu"
-		"item"		"item_zs_axe_kaishanzhifu"
-		"item"		"item_zs_axe_kuangzhanfu"
+		"item"		"item_zs_axe_huihuangzhanfu"
+		"item"		"item_zs_axe_shenyuanzhanfu"
+		"item"		"item_zs_axe_tianshizhanfu"
+		"item"		"item_zs_axe_emozhanfu"
+		"item"		"item_zs_axe_jiushizhanfu"
+		"item"		"item_zs_axe_huimiezhanfu"
+		"item"		"item_zs_axe_tianshenzhifu"
+		"item"		"item_zs_axe_diyuzhanfu"
 	}
 
 	// Level 2 - Blue Recipes

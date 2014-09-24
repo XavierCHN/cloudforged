@@ -126,22 +126,3 @@ function OnStaffDongJieDamage( keys )
 						damage_type=DAMAGE_TYPE_MAGICAL}
 	ApplyDamage(damageTable)
 end
-
---冻结之力 最大最小魔法伤害 AOE
-function OnStaffDongJieDamageAOE( keys )
-	local caster = keys.caster
-	local group = keys.target_entities
-
-	--获取最大最小魔法伤害
-	local magmin = keys.ability:GetSpecialValueFor("mag_min")
-	local magmax = keys.ability:GetSpecialValueFor("mag_max")
-
-	--循环对单位造成伤害
-	for i,unit in pairs(group) do
-		local damageTable = {victim=unit,
-							attacker=caster,
-							damage_type=DAMAGE_TYPE_MAGICAL,
-							damage=RandomInt(magmin, magmax)}
-		ApplyDamage(damageTable)
-	end
-end
