@@ -2291,7 +2291,9 @@
 		"ID"					"1408"
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_axe_jiushizhanfu"
-	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCooldown"		"15"
+	    "AbilityManaCost"		"75"
 		
 	    "ItemCost"				"99999"
 	    "ItemPurchasable"		"0"
@@ -2305,7 +2307,18 @@
 
 	    "OnSpellStart"
 	    {
-	    	
+	    	"ApplyModifier"
+	    	{
+	    		"Target" 		
+	    		{
+					"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+					"Teams"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+					"Center"	"CASTER"
+					"Radius"	"%radius"
+				}
+	    		"ModifierName"		"modifier_item_zs_axe_jiushizhanfu_buff"
+	    	}	
 	    }
 
 	    "Modifiers"
@@ -2342,9 +2355,81 @@
 					}
 				}
 			}
+
+			"modifier_item_zs_axe_jiushizhanfu_buff"
+			{
+				"Duration"		"%duration"
+
+				"ThinkInterval"	"0.75"
+				"OnIntervalThink"
+				{
+					"Heal"
+					{
+						"HealAmount"	"%zy_heal"
+						"Target" 		
+			    		{
+							"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+							"Teams"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+							"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+							"Center"	"TARGET"
+							"Radius"	"%zy_radius"
+						}
+					}
+				}	
+
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"		"particles\econ\items\windrunner\windrunner_cape_cascade\windrunner_windrun_cascade.vpcf"
+						"EffectAttachType"  "follow_origin"
+						"Target"   			"TARGET"
+					}
+				}	
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile" 	"scripts/vscripts/items/ItemAxe.lua"
+						"Target"		"UNIT"
+						"Function"		"OnAxeJiuShi"
+					}
+				}
+			}
 	    }
 	    "AbilitySpecial"
 	    {
+	    	"03"  //使用效果作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"radius"		"700"
+	    	}
+	    	"08"  //自愈种子持续时间
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"duration"		"5"
+	    	}
+	    	"04"  //自愈种子作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"zy_radius"		"250"
+	    	}
+	    	"07"  //自愈种子恢复的生命值
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"zy_heal"		"100"
+	    	}
+	    	"05"  //伤害中最大生命值的百分比
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"heal_percent"	"10"
+	    	}
+	    	"06"  //伤害作用范围
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"damage_radius" "500"
+	    	}
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
@@ -2380,7 +2465,9 @@
 		"ID"					"1410"
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_axe_huimiezhanfu"
-	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCooldown"		"15"
+	    "AbilityManaCost"		"75"
 		
 	    "ItemCost"				"99999"
 	    "ItemPurchasable"		"0"
@@ -2394,7 +2481,41 @@
 
 	    "OnSpellStart"
 	    {
-	    	
+	    	"AttachEffect"
+	    	{
+	    		"EffectName"		"particles\units\heroes\hero_undying\undying_tombstone_spawn.vpcf"
+	    		"EffectAttachType"  "follow_origin"
+	    		"Target"  			"CASTER"
+	    	}	
+	    	"AttachEffect"
+	    	{
+	    		"EffectName"		"particles\units\heroes\hero_nevermore\nevermore_wings.vpcf"
+	    		"EffectAttachType"  "follow_origin"
+	    		"Target"  			"CASTER"
+	    	}	
+	    	"FireSound"
+	    	{
+	    		"EffectName"		"Hero_Nevermore.RequiemOfSouls"
+	    		"Target"  			"CASTER"
+	    	}
+
+	    	"RunScript"
+			{
+				"ScriptFile"		"scripts/vscripts/util/damage.lua"
+				"Function"			"DamageTarget"
+				"damage_increase"	"%increase"
+				"damage_type"		"DAMAGE_TYPE_COMPOSITE"
+				"damage_category"	"force"
+				"damage_str"		"%str_hurt"
+				"Target"
+				{
+					"Types"			"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+					"Teams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+					"Center"		"CASTER"
+					"Radius"		"%radius"
+				}
+			}
 	    }
 
 	    "Modifiers"
@@ -2407,6 +2528,12 @@
 	    		{
 	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
 	    		}
+
+	    		"Aura" 			"modifier_item_zs_axe_huimiezhanfu_debuff"
+				"Aura_Radius" 	"%p_radius"
+				"Aura_Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"Aura_Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"Aura_Flags" 	"DOTA_UNIT_TARGET_FLAG_NONE"
 	    	}
 	    	"modifier_item_zs_axe_kaishanzhifu"
 			{
@@ -2431,9 +2558,84 @@
 					}
 				}
 			}
+
+			"modifier_item_zs_axe_huimiezhanfu_debuff"
+			{
+				"IsDebuff"		"1"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE"	"%attack" //攻击力
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%armor"  //护甲
+				}
+
+				"OnCreated"  //减少生命值
+				{
+					"RunScript"
+					{
+						"ScriptFile" 	"scripts/vscripts/items/ItemAxe.lua"
+						"Target"		"UNIT"
+						"Function"		"OnAxeHuiMieCreated"
+					}
+				}
+
+				"OnDestroy"  //增加减少的生命值
+				{
+					"RunScript"
+					{
+						"ScriptFile" 	"scripts/vscripts/items/ItemAxe.lua"
+						"Target"		"UNIT"
+						"Function"		"OnAxeHuiMieDestroy"
+					}
+				}
+			}
+
+			"modifier_item_zs_axe_huimiezhanfu_debuff_heal" //减少生命值
+			{
+				"IsHidden"		"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_HEALTH_BONUS"	"%heal" //生命值
+				}
+			}
 	    }
 	    "AbilitySpecial"
 	    {
+	    	"03"	//使用效果作用范围
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"700"
+			}
+	    	"06"	//被动效果作用范围
+			{
+				"var_type"			"FIELD_INTEGER"
+				"p_radius"			"300"
+			}
+			"07"	//攻击力降低百分比
+			{
+				"var_type"			"FIELD_INTEGER"
+				"attack"			"-25"
+			}
+			"08"	//护甲降低
+			{
+				"var_type"			"FIELD_INTEGER"
+				"armor"				"-30"
+			}
+			"09"	//生命值降低
+			{
+				"var_type"			"FIELD_INTEGER"
+				"heal"				"-600"
+			}
+	    	"04"	//伤害系数
+			{
+				"var_type"			"FIELD_FLOAT"
+				"increase"			"2.0"
+			}
+			"05"	//伤害力量加成
+			{
+				"var_type"			"FIELD_FLOAT"
+				"str_hurt"			"2.0"
+			}
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
@@ -2469,7 +2671,9 @@
 		"ID"					"1412"
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_axe_tianshenzhifu"
-	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityCooldown"		"15"
+	    "AbilityManaCost"		"150"
 		
 	    "ItemCost"				"99999"
 	    "ItemPurchasable"		"0"
@@ -2479,9 +2683,31 @@
 	    "ItemKillable"			"1"
 	    "ItemQuality"			"artifact"
 
+	    "OnSpellStart"
+	    {
+	    	"AttachEffect"
+	    	{
+	    		"EffectName"		"particles\units\unit_greevil\loot_greevil_death.vpcf"
+	    		"EffectAttachType"  "follow_origin"
+	    		"Target" 			"CASTER"
+	    	}
+	    	"FireSound"
+	    	{
+	    		"EffectName"		"Hero_SkywrathMage.MysticFlare.Cast"
+	    		"Target" 			"CASTER"
+	    	}
+
+	    	"RunScript"
+	    	{
+	    		"ScriptFile" 	"scripts/vscripts/items/ItemAxe.lua"
+	    		"Target"		"CASTER"
+	    		"Function"		"OnAxeTianShen"
+	    	}
+	    }	
+
 	    "Modifiers"
 	    {
-	    	"item_zs_axe_kuangzhanfu"
+	    	"item_zs_axe_tianshenzhifu"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -2490,7 +2716,7 @@
 	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
 	    		}
 	    	}
-	    	"modifier_item_zs_axe_kuangzhanfu"
+	    	"modifier_item_zs_axe_tianshenzhifu"
 			{
 				"Passive"		"1"
 				"IsHidden"		"1"
@@ -2513,9 +2739,90 @@
 					}
 				}
 			}
+
+			"modifier_item_zs_axe_tianshenzhifu_buff_main"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+
+				"Aura" 			"modifier_item_zs_axe_tianshenzhifu_buff"
+				"Aura_Radius" 	"%p_radius"
+				"Aura_Teams" 	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				"Aura_Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"Aura_Flags" 	"DOTA_UNIT_TARGET_FLAG_NONE"
+			}
+
+			"modifier_item_zs_axe_tianshenzhifu_buff"
+			{
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%armor" //护甲
+					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"%mag" //魔抗
+					"MODIFIER_PROPERTY_PHYSICAL_CONSTANT_BLOCK"	"%phy" //物理格挡
+				}
+
+				"OnAttackLanded"
+				{
+					"Heal"
+					{
+						"Target"   		"ATTACKER"
+						"HealAmount"	"%heal"
+					}
+				}	
+			}
 	    }
 	    "AbilitySpecial"
 	    {
+	    	"03"  //召唤时间
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"time"			"2.5"
+	    	}
+	    	"04"  //持续时间
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"duration"		"5"
+	    	}
+	    	"05"  //使用效果作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"radius"		"800"
+	    	}
+	    	"12"  //被动效果作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"p_radius"		"500"
+	    	}
+	    	"08"  //护甲
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"armor"			"50"
+	    	}
+	    	"09"  //魔抗
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"mag"			"40"
+	    	}
+	    	"10"  //物理格挡
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"phy"			"50"
+	    	}
+	    	"11"  //攻击恢复的生命值
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"heal"			"100"
+	    	}
+	    	"06"	//伤害系数
+			{
+				"var_type"			"FIELD_FLOAT"
+				"increase"			"2.3"
+			}
+			"07"	//伤害力量加成
+			{
+				"var_type"			"FIELD_FLOAT"
+				"str_hurt"			"2.3"
+			}
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
@@ -2551,7 +2858,9 @@
 		"ID"					"1414"
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_axe_diyuzhanfu"
-	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityCooldown"		"15"
+	    "AbilityManaCost"		"150"
 		
 	    "ItemCost"				"99999"
 	    "ItemPurchasable"		"0"
@@ -2560,6 +2869,21 @@
 	    "ItemPermanent"			"0"
 	    "ItemKillable"			"1"
 	    "ItemQuality"			"artifact"
+
+	    "OnSpellStart"
+	    {
+	    	"FireSound"
+	    	{
+	    		"EffectName"		"Hero_ElderTitan.EarthSplitter.Projectile"
+	    		"Target"      		"CASTER"
+	    	}	
+	    	"RunScript"
+	    	{
+	    		"ScriptFile" 	"scripts/vscripts/items/ItemAxe.lua"
+	    		"Target"		"CASTER"
+	    		"Function"		"OnAxeDiYu"
+	    	}
+	    }
 
 	    "Modifiers"
 	    {
@@ -2595,9 +2919,90 @@
 					}
 				}
 			}
+
+			"modifier_item_zs_axe_diyuzhanfu_buff"
+			{
+				"Passive"		"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE"	"%attack" //攻击力
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%attack_speed" //攻击速度
+				}
+
+				"OnTakeDamage"
+				{
+					"Random"  //受到伤害有一定几率免受魔法伤害
+					{
+						"Chance"			"%chance"
+						"PseudeoRandom"		"DOTA_PSEUDO_RANDOM_JUGG_CRIT"
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"Target" 			"CASTER"
+								"ModifierName"		"modifier_item_zs_axe_diyuzhanfu_buff_mag"
+							}
+						}
+					}
+				}	
+			}
+
+			"modifier_item_zs_axe_diyuzhanfu_buff_mag"
+			{
+				"Duration"		"%mag_duration"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL"	"1" //免受魔法伤害
+				}
+			}
 	    }
 	    "AbilitySpecial"
 	    {
+	    	"03"  //地面碎裂时间
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"time"			"3.5"
+	    	}
+	    	"04"  //地狱火持续时间
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"duration"		"5"
+	    	}
+	    	"05"  //使用效果作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"radius"		"800"
+	    	}
+	    	"09"  //攻击力
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack"		"25"
+	    	}
+	    	"10"  //攻击速度
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_speed"	"50"
+	    	}
+	    	"11"  //触发概率
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"chance"		"8"
+	    	}
+	    	"12"  //免受魔法伤害持续时间
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"mag_duration"	"3"
+	    	}
+	    	"07"	//伤害系数
+			{
+				"var_type"			"FIELD_FLOAT"
+				"increase"			"2.3"
+			}
+			"08"	//伤害力量加成
+			{
+				"var_type"			"FIELD_FLOAT"
+				"str_hurt"			"2.3"
+			}
 	    	"01"
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
