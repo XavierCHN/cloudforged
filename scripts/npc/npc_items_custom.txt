@@ -1786,7 +1786,7 @@
 	    }
 	    "Modifiers"
 	    {
-	    	"item_zs_axe_bingyuansuifu"
+	    	"item_zs_axe_huihuangzhanfu"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -1795,7 +1795,7 @@
 	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
 	    		}
 	    	}
-	    	"modifier_item_zs_axe_bingyuansuifu"
+	    	"modifier_item_zs_axe_huihuangzhanfu"
 			{
 				"Passive"		"1"
 				"IsHidden"		"1"
@@ -1910,7 +1910,7 @@
 
 	    "Modifiers"
 	    {
-	    	"item_zs_axe_gaolitiefu"
+	    	"item_zs_axe_shenyuanzhanfu"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -1919,7 +1919,7 @@
 	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
 	    		}
 	    	}
-	    	"modifier_item_zs_axe_gaolitiefu"
+	    	"modifier_item_zs_axe_shenyuanzhanfu"
 			{
 				"Passive"		"1"
 				"IsHidden"		"1"
@@ -2033,7 +2033,7 @@
 
 	    "Modifiers"
 	    {
-	    	"item_zs_axe_shijunzhifu"
+	    	"item_zs_axe_tianshizhanfu"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -2042,7 +2042,7 @@
 	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
 	    		}
 	    	}
-	    	"modifier_item_zs_axe_shijunzhifu"
+	    	"modifier_item_zs_axe_tianshizhanfu"
 			{
 				"Passive"		"1"
 				"IsHidden"		"1"
@@ -2141,7 +2141,7 @@
 
 	    "Modifiers"
 	    {
-	    	"item_zs_axe_toululiefu"
+	    	"item_zs_axe_emozhanfu"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -2150,7 +2150,7 @@
 	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
 	    		}
 	    	}
-	    	"modifier_item_zs_axe_toululiefu"
+	    	"modifier_item_zs_axe_emozhanfu"
 			{
 				"Passive"		"1"
 				"IsHidden"		"1"
@@ -2323,7 +2323,7 @@
 
 	    "Modifiers"
 	    {
-	    	"item_zs_axe_shuangyizhanfu"
+	    	"item_zs_axe_jiushizhanfu"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -2332,7 +2332,7 @@
 	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
 	    		}
 	    	}
-	    	"modifier_item_zs_axe_shuangyizhanfu"
+	    	"modifier_item_zs_axe_jiushizhanfu"
 			{
 				"Passive"		"1"
 				"IsHidden"		"1"
@@ -2520,7 +2520,7 @@
 
 	    "Modifiers"
 	    {
-	    	"item_zs_axe_kaishanzhifu"
+	    	"item_zs_axe_huimiezhanfu"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -2535,7 +2535,7 @@
 				"Aura_Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 				"Aura_Flags" 	"DOTA_UNIT_TARGET_FLAG_NONE"
 	    	}
-	    	"modifier_item_zs_axe_kaishanzhifu"
+	    	"modifier_item_zs_axe_huimiezhanfu"
 			{
 				"Passive"		"1"
 				"IsHidden"		"1"
@@ -2887,7 +2887,7 @@
 
 	    "Modifiers"
 	    {
-	    	"item_zs_axe_kuangzhanfu"
+	    	"item_zs_axe_diyuzhanfu"
 	    	{
 	    		"Passive"		"1"
 	    		"IsHidden"		"1"
@@ -2896,7 +2896,7 @@
 	    			"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%str_bonus"
 	    		}
 	    	}
-	    	"modifier_item_zs_axe_kuangzhanfu"
+	    	"modifier_item_zs_axe_diyuzhanfu"
 			{
 				"Passive"		"1"
 				"IsHidden"		"1"
@@ -3033,6 +3033,687 @@
 	}
 	//高级剑们   ID开始 1450
 	//高级暗器们 ID开始 1500
+	"item_zs_dagger_zhiming"//1500
+	{
+		//致命之刃
+		"ID"					"1500"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_dagger_zhiming"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"rare"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_dagger_zhiming"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"%agi_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_dagger_zhiming_cunning"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+	    	}
+
+	    	"modifier_item_zs_dagger_zhiming_buff" //被动效果
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+
+	    		"OnAttackLanded"
+	    		{
+	    			"Random"
+	    			{
+	    				"Chance"			"%chance"
+	    				"PseudeoRandom"		"DOTA_PSEUDO_RANDOM_JUGG_CRIT" 
+	    				"OnSuccess"
+	    				{
+	    					"RunScript"
+	    					{
+	    						"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    						"Target"		"UNIT"
+	    						"Function"		"OnDaggerZhiMing"
+	    					}
+	    				}
+	    			}
+	    		}
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"06"  //触发概率
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"chance"		"25"
+	    	}
+	    	"03"  //基于攻击力倍数
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack"		"150"
+	    	}
+	    	"04"  //最大物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_max"	"100"
+	    	}
+	    	"05"  //最小物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_min"	"50"
+	    	}
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"agi_bonus"		"55"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"cun_bonus"		"47"
+	    	}
+	    }
+	}
+	"item_recipe_zs_dagger_zhiming"//1501
+	{
+		"ID"							"1501"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_dagger_zhiming"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_steel_shuriken_lvl5;item_gem_manli"
+		}
+	}
+
+	"item_zs_dagger_gangli"//1502
+	{
+		//钢力之刃
+		"ID"					"1502"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_dagger_gangli"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"rare"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_dagger_gangli"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"%agi_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_dagger_gangli_cunning"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+	    	}
+
+	    	"modifier_item_zs_dagger_gangli_buff" //被动效果
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+
+	    		"OnAttackLanded"
+	    		{
+	    			"Random"
+	    			{
+	    				"Chance"			"%chance"
+	    				"PseudeoRandom"		"DOTA_PSEUDO_RANDOM_JUGG_CRIT" 
+	    				"OnSuccess"
+	    				{
+	    					"RunScript"
+	    					{
+	    						"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    						"Target"		"UNIT"
+	    						"Function"		"OnDaggerZhiMing"
+	    					}
+
+	    					"ApplyModifier"
+	    					{
+	    						"Target" 			"TARGET"
+	    						"ModifierName"		"modifier_item_zs_dagger_gangli_debuff"
+	    					}
+
+	    					"Stun"
+	    					{
+	    						"Duration"		"%duration"
+	    						"Target"		"TARGET"
+	    					}
+	    				}
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_item_zs_dagger_gangli_debuff"
+	    	{
+	    		"Duration"		"%duration"
+	    		"IsHidden"		"1"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%armor"
+	    		}
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"06"  //触发概率
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"chance"		"30"
+	    	}
+	    	"03"  //基于攻击力倍数
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack"		"170"
+	    	}
+	    	"04"  //最大物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_max"	"125"
+	    	}
+	    	"05"  //最小物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_min"	"75"
+	    	}
+	    	"07"  //眩晕时间
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"duration"		"3"
+	    	}
+	    	"08"  //护甲降低
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"armor"			"-30"
+	    	}
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"agi_bonus"		"83"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"cun_bonus"		"79"
+	    	}
+	    }
+	}
+	"item_recipe_zs_dagger_gangli"//1503
+	{
+		"ID"							"1503"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_dagger_gangli"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_dagger_zhiming;item_gem_manli;item_cf_feather"
+		}
+	}
+
+	"item_zs_dagger_menglong"//1504
+	{
+		//猛龙之刃
+		"ID"					"1504"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_dagger_menglong"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"epic"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_dagger_menglong"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"%agi_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_dagger_menglong_cunning"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+	    	}
+
+	    	"modifier_item_zs_dagger_menglong_buff" //被动效果
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+
+	    		"OnAttackLanded"
+	    		{
+	    			"Random"
+	    			{
+	    				"Chance"			"%chance"
+	    				"PseudeoRandom"		"DOTA_PSEUDO_RANDOM_JUGG_CRIT" 
+	    				"OnSuccess"
+	    				{
+	    					"ApplyModifier"
+	    					{
+	    						"Target" 			"TARGET"
+	    						"ModifierName"		"modifier_item_zs_dagger_menglong_debuff"
+	    					}
+
+	    					"RunScript"
+	    					{
+	    						"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    						"Target"		"UNIT"
+	    						"Function"		"OnDaggerZhiMing"
+	    					}
+	    				}
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_item_zs_dagger_menglong_debuff"
+	    	{
+	    		"Duration"		"%duration"
+	    		"IsHidden"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%armor" //护甲
+	    			"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%speed" //攻击速度
+	    		}
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"06"  //触发概率
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"chance"		"35"
+	    	}
+	    	"03"  //基于攻击力倍数
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack"		"180"
+	    	}
+	    	"04"  //最大物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_max"	"175"
+	    	}
+	    	"05"  //最小物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_min"	"125"
+	    	}
+	    	"07"  //眩晕时间
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"duration"		"5"
+	    	}
+	    	"08"  //护甲降低
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"armor"			"-500"
+	    	}
+	    	"09"  //攻击速度降低
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"speed"			"-300"
+	    	}
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"agi_bonus"		"97"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"cun_bonus"		"110"
+	    	}
+	    }
+	}
+	"item_recipe_zs_dagger_menglong"//1505
+	{
+		"ID"							"1505"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_dagger_menglong"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_dagger_gangli;item_cf_feather;item_cf_feather"
+		}
+	}
+
+	"item_zs_dagger_tiantang"//1506
+	{
+		//天堂之刃
+		"ID"					"1506"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_dagger_tiantang"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"artifact"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "OnProjectileHitUnit"
+	    {
+	    	"RunScript"
+			{
+				"ScriptFile"		"scripts/vscripts/util/damage.lua"
+				"Function"			"DamageTarget"
+				"damage_increase"	"%increase"
+				"damage_type"		"DAMAGE_TYPE_MAGICAL"
+				"damage_category"	"cunning"
+				"damage_str"		"%agi_hurt"
+				"Target"			"TARGET"
+			}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_dagger_tiantang"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"%agi_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_dagger_tiantang_cunning"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+	    	}
+
+	    	"modifier_item_zs_dagger_tiantang_buff" //被动效果
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+
+	    		"OnAttackLanded"
+	    		{
+	    			"Random"
+	    			{
+	    				"Chance"			"%chance"
+	    				"PseudeoRandom"		"DOTA_PSEUDO_RANDOM_JUGG_CRIT" 
+	    				"OnSuccess"
+	    				{
+	    					"ApplyModifier"
+	    					{
+	    						"Target" 			"TARGET"
+	    						"ModifierName"		"modifier_item_zs_dagger_tiantang_debuff"
+	    					}
+
+	    					"RunScript"
+	    					{
+	    						"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    						"Target"		"UNIT"
+	    						"Function"		"OnDaggerZhiMing"
+	    					}
+	    				}
+	    				"OnFailure"
+	    				{
+	    					"TrackingProjectile"
+	    					{
+	    						"Target"
+	    						{
+									"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+									"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+									"Flags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+									"Center"	"CASTER"
+									"Radius"	"%radius"
+								}
+								"EffectName"	"particles\econ\items\bounty_hunter\bounty_hunter_shuriken_creeper\bounty_hunter_suriken_toss_creepers_cruel.vpcf"
+								"Dodgeable"		"0"
+								"ProvidesVision"	"1"
+								"VisionRadius"		"300"
+								"MoveSpeed"			"1000"
+								"SourceAttachment"	"DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
+	    					}
+	    				}
+	    			}
+
+	    			"Random"
+	    			{
+	    				"Chance"			"%chance2"
+	    				"PseudeoRandom"		"DOTA_PSEUDO_RANDOM_JUGG_CRIT" 
+	    				"OnSuccess"
+	    				{
+	    					
+	    				}
+	    			}
+	    		}
+	    	}
+	    	"modifier_item_zs_dagger_tiantang_debuff"
+	    	{
+	    		"Duration"		"%duration"
+	    		"IsHidden"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%armor" //护甲
+	    			"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%mag" //魔抗
+	    		}
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"06"  //被动效果1触发概率
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"chance"		"40"
+	    	}
+	    	"13"  //被动效果2作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"radius"		"600"
+	    	}
+	    	"03"  //基于攻击力倍数
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack"		"180"
+	    	}
+	    	"04"  //最大物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_max"	"250"
+	    	}
+	    	"05"  //最小物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_min"	"200"
+	    	}
+	    	"07"  //眩晕时间
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"duration"		"5"
+	    	}
+	    	"08"  //护甲降低
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"armor"			"-100"
+	    	}
+	    	"09"  //魔抗降低
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"mag"			"-80"
+	    	}
+	    	"10"	//伤害系数
+			{
+				"var_type"			"FIELD_FLOAT"
+				"increase"			"2.0"
+			}
+			"11"	//伤害敏捷加成
+			{
+				"var_type"			"FIELD_FLOAT"
+				"agi_hurt"			"2.0"
+			}
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"agi_bonus"		"220"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"cun_bonus"		"250"
+	    	}
+	    }
+	}
+	"item_recipe_zs_dagger_tiantang"//1507
+	{
+		"ID"							"1507"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"0"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_dagger_tiantang"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_dagger_menglong;item_cf_feather;item_cf_feather;item_cf_feather"
+		}
+	}
+
+
 	//高级法杖们 ID开始 1550
 	"item_zs_staff_zhiyuan"//1550
 	{
@@ -3269,7 +3950,7 @@
 
 	"item_zs_staff_conglin"//1554
 	{
-		//丛林法杖
+		//森林之源
 		"ID"					"1554"
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_staff_conglin"
@@ -3434,7 +4115,7 @@
 
 	"item_zs_staff_bingfeng"//1556
 	{
-		//冰封法杖
+		//冰清渊洁
 		"ID"					"1556"
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_staff_bingfeng"
@@ -3619,7 +4300,7 @@
 
 	"item_zs_staff_guangming"//1558
 	{
-		//光明法杖
+		//光明守护
 		"ID"					"1558"
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_staff_guangming"
@@ -3806,7 +4487,7 @@
 
 	"item_zs_staff_fengxue"//1560
 	{
-		//风雪法杖
+		//风雪之语
 		"ID"					"1560"
 		"BaseClass"				"item_datadriven"
 	    "AbilityTextureName"	"item_zs_staff_fengxue"

@@ -75,7 +75,10 @@
 	
 	"magics"
 	{
-
+		"item"		"item_zs_dagger_zhiming"
+		"item"		"item_zs_dagger_gangli"
+		"item"		"item_zs_dagger_menglong"
+		"item"		"item_zs_dagger_tiantang"
 	}
 	
 	// Level 3 - Purple Recipes
