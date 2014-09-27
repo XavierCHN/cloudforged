@@ -51,12 +51,12 @@
 	"basics"
 	{
 		"item"		"item_zs_axe_huihuangzhanfu"
-		"item"		"item_zs_axe_shenyuanzhanfu"
 		"item"		"item_zs_axe_tianshizhanfu"
-		"item"		"item_zs_axe_emozhanfu"
 		"item"		"item_zs_axe_jiushizhanfu"
-		"item"		"item_zs_axe_huimiezhanfu"
 		"item"		"item_zs_axe_tianshenzhifu"
+		"item"		"item_zs_axe_shenyuanzhanfu"
+		"item"		"item_zs_axe_emozhanfu"
+		"item"		"item_zs_axe_huimiezhanfu"
 		"item"		"item_zs_axe_diyuzhanfu"
 	}
 
@@ -64,13 +64,14 @@
 	"support"
 	{
 		"item"		"item_zs_staff_zhiyuan"
+		"item"		"item_zs_staff_bingfeng"
+		"item"		"item_zs_staff_fengxue"
+		"item"		"item_zs_staff_dongjie"
 		"item"		"item_zs_staff_longtou"
 		"item"		"item_zs_staff_conglin"
-		"item"		"item_zs_staff_bingfeng"
 		"item"		"item_zs_staff_guangming"
-		"item"		"item_zs_staff_fengxue"
 		"item"		"item_zs_staff_ningjing"
-		"item"		"item_zs_staff_dongjie"
+		
 	}
 	
 	"magics"
@@ -79,6 +80,10 @@
 		"item"		"item_zs_dagger_gangli"
 		"item"		"item_zs_dagger_menglong"
 		"item"		"item_zs_dagger_tiantang"
+		"item"		"item_zs_dagger_liming"
+		"item"		"item_zs_dagger_anying"
+		"item"		"item_zs_dagger_linghun"
+		"item"		"item_zs_dagger_yinhe"
 	}
 	
 	// Level 3 - Purple Recipes

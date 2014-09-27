@@ -3419,8 +3419,7 @@
 
 	    		"Properties"
 	    		{
-	    			"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%armor" //护甲
-	    			"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%speed" //攻击速度
+	    			"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"		"%damage" //伤害加深
 	    		}
 	    	}
 	    }
@@ -3452,15 +3451,10 @@
 	    		"var_type"		"FIELD_FLOAT"
 	    		"duration"		"5"
 	    	}
-	    	"08"  //护甲降低
+	    	"08"  //伤害加深
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
-	    		"armor"			"-500"
-	    	}
-	    	"09"  //攻击速度降低
-	    	{
-	    		"var_type"		"FIELD_INTEGER"
-	    		"speed"			"-300"
+	    		"damage"		"300"
 	    	}
 	    	"01"
 	    	{
@@ -3607,16 +3601,6 @@
 	    					}
 	    				}
 	    			}
-
-	    			"Random"
-	    			{
-	    				"Chance"			"%chance2"
-	    				"PseudeoRandom"		"DOTA_PSEUDO_RANDOM_JUGG_CRIT" 
-	    				"OnSuccess"
-	    				{
-	    					
-	    				}
-	    			}
 	    		}
 	    	}
 	    	"modifier_item_zs_dagger_tiantang_debuff"
@@ -3626,8 +3610,7 @@
 
 	    		"Properties"
 	    		{
-	    			"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%armor" //护甲
-	    			"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%mag" //魔抗
+	    			"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"		"%damage" //伤害加深
 	    		}
 	    	}
 	    }
@@ -3664,15 +3647,10 @@
 	    		"var_type"		"FIELD_FLOAT"
 	    		"duration"		"5"
 	    	}
-	    	"08"  //护甲降低
+	    	"08"  //伤害加深
 	    	{
 	    		"var_type"		"FIELD_INTEGER"
-	    		"armor"			"-100"
-	    	}
-	    	"09"  //魔抗降低
-	    	{
-	    		"var_type"		"FIELD_INTEGER"
-	    		"mag"			"-80"
+	    		"damage"			"200"
 	    	}
 	    	"10"	//伤害系数
 			{
@@ -3710,6 +3688,854 @@
 		"ItemRequirements"
 		{
 			"01"						"item_zs_dagger_menglong;item_cf_feather;item_cf_feather;item_cf_feather"
+		}
+	}
+
+	"item_zs_dagger_liming"//1508
+	{
+		//黎明之刃
+		"ID"					"1508"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_dagger_liming"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityCooldown"		"15"
+	    "AbilityManaCost"		"20"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"rare"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    		"Target"		"CASTER"
+	    		"Function"		"OnDaggerInvisible"
+	    	}
+	    	"ApplyModifier"
+	    	{
+	    		"Target" 			"CASTER"
+	    		"ModifierName"		"modifier_item_zs_dagger_liming_invisible_remove"
+	    	}
+	    	"AttachEffect"
+	    	{
+	    		"EffectName"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf"
+	    		"EffectAttachType"  "follow_origin"
+	    		"Target"  			"CASTER"
+	    	}
+	    	"FireSound"
+	    	{
+	    		"EffectName"		"Hero_TemplarAssassin.Meld"
+	    		"Target"  			"CASTER"
+	    	}	
+	    }
+
+	    "OnProjectileHitUnit"
+	    {
+	    	"RunScript"
+			{
+				"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+				"Target"		"TARGET"
+				"Function"		"OnDaggerZhiMing"
+			}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_dagger_liming"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"%agi_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_dagger_liming_cunning"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+	    	}
+
+	    	"modifier_item_zs_dagger_liming_invisible_remove"
+	    	{
+	    		"Duration"			"%duration"
+	    		"IsHidden"			"1"
+
+	    		"OnAttack"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    				"Target"		"UNIT"
+	    				"Function"		"OnDaggerInvisibleRemove"
+	    			}
+
+	    			"TrackingProjectile"
+			        {
+			            "Target"			"TARGET"
+			            "EffectName"        "particles/dagger_blue_tp/dagger_blue_tp_attack.vpcf"
+			            "Dodgeable"         "0"
+			            "ProvidesVision"    "1"
+			            "VisionRadius"      "300"
+			            "MoveSpeed"         "1100"
+			            "SourceAttachment"  "DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
+			        }
+	    		}
+
+	    		"OnAbilityExecuted"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    				"Target"		"CASTER"
+	    				"Function"		"OnDaggerInvisibleRemove"
+	    			}
+	    		}
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"03"  //隐身持续时间
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"duration"		"10"
+	    	}
+	    	"04"  //最大物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_max"	"150"
+	    	}
+	    	"05"  //最小物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_min"	"100"
+	    	}
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"agi_bonus"		"55"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"cun_bonus"		"47"
+	    	}
+	    }
+	}
+	"item_recipe_zs_dagger_liming"//1509
+	{
+		"ID"							"1509"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_dagger_liming"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_steel_shuriken_lvl5;item_gem_manli"
+		}
+	}
+
+	"item_zs_dagger_anying"//1510
+	{
+		//暗影之刃
+		"ID"					"1510"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_dagger_anying"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityCooldown"		"15"
+	    "AbilityManaCost"		"20"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"rare"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    		"Target"		"CASTER"
+	    		"Function"		"OnDaggerInvisible"
+	    	}
+	    	"ApplyModifier"
+	    	{
+	    		"Target" 			"CASTER"
+	    		"ModifierName"		"modifier_item_zs_dagger_anying_invisible_remove"
+	    	}
+	    	"AttachEffect"
+	    	{
+	    		"EffectName"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf"
+	    		"EffectAttachType"  "follow_origin"
+	    		"Target"  			"CASTER"
+	    	}
+	    	"FireSound"
+	    	{
+	    		"EffectName"		"Hero_TemplarAssassin.Meld"
+	    		"Target"  			"CASTER"
+	    	}	
+	    }
+
+	    "OnProjectileHitUnit"
+	    {
+	    	"RunScript"
+			{
+				"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+				"Target"		"TARGET"
+				"Function"		"OnDaggerZhiMing"
+			}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_dagger_anying"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"%agi_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_dagger_anying_cunning"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+	    	}
+
+	    	"modifier_item_zs_dagger_anying_invisible_remove"
+	    	{
+	    		"Duration"			"%duration"
+	    		"IsHidden"			"1"
+
+	    		"OnAttack"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    				"Target"		"UNIT"
+	    				"Function"		"OnDaggerInvisibleRemove"
+	    			}
+
+	    			"ActOnTargets"
+	    			{
+	    				"Target"
+	    			 	{
+				            "Types"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+				            "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+				            "Flags"     "DOTA_UNIT_TARGET_FLAG_NONE"
+				            "Center"    "ATTACKER"
+				            "Radius"    "%radius"
+				        }
+
+	    				"Action"
+	    				{
+	    					"TrackingProjectile"
+					        {
+					            "Target"			"TARGET"
+					            "EffectName"        "particles/dagger_blue_tp/dagger_blue_tp_attack.vpcf"
+					            "Dodgeable"         "0"
+					            "ProvidesVision"    "1"
+					            "VisionRadius"      "300"
+					            "MoveSpeed"         "1100"
+					            "SourceAttachment"  "DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
+					        }
+	    				}
+	    			}
+	    		}
+
+	    		"OnAbilityExecuted"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    				"Target"		"CASTER"
+	    				"Function"		"OnDaggerInvisibleRemove"
+	    			}
+	    		}
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"03"  //隐身持续时间
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"duration"		"10"
+	    	}
+	    	"06"  //作用范围
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"radius"		"600"
+	    	}
+	    	"04"  //最大物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_max"	"175"
+	    	}
+	    	"05"  //最小物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_min"	"125"
+	    	}
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"agi_bonus"		"83"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"cun_bonus"		"79"
+	    	}
+	    }
+	}
+	"item_recipe_zs_dagger_anying"//1511
+	{
+		"ID"							"1511"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_dagger_anying"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_dagger_liming;item_gem_manli;item_cf_feather"
+		}
+	}
+
+	"item_zs_dagger_linghun"//1512
+	{
+		//灵魂之刃
+		"ID"					"1512"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_dagger_linghun"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityCooldown"		"15"
+	    "AbilityManaCost"		"20"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"rare"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    		"Target"		"CASTER"
+	    		"Function"		"OnDaggerInvisible"
+	    	}
+	    	"ApplyModifier"
+	    	{
+	    		"Target" 			"CASTER"
+	    		"ModifierName"		"modifier_item_zs_dagger_linghun_invisible_remove"
+	    	}
+	    	"AttachEffect"
+	    	{
+	    		"EffectName"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf"
+	    		"EffectAttachType"  "follow_origin"
+	    		"Target"  			"CASTER"
+	    	}
+	    	"FireSound"
+	    	{
+	    		"EffectName"		"Hero_TemplarAssassin.Meld"
+	    		"Target"  			"CASTER"
+	    	}	
+	    }
+
+	    "OnProjectileHitUnit"
+	    {
+	    	"RunScript"
+			{
+				"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+				"Target"		"TARGET"
+				"Function"		"OnDaggerZhiMing"
+			}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_dagger_linghun"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"%agi_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_dagger_linghun_cunning"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+	    	}
+
+	    	"modifier_item_zs_dagger_linghun_invisible_remove"
+	    	{
+	    		"Duration"			"%duration"
+	    		"IsHidden"			"1"
+
+	    		"OnAttack"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    				"Target"		"UNIT"
+	    				"Function"		"OnDaggerInvisibleRemove"
+	    			}
+
+	    			"ActOnTargets"
+	    			{
+	    				"Target"
+	    			 	{
+				            "Types"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+				            "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+				            "Flags"     "DOTA_UNIT_TARGET_FLAG_NONE"
+				            "Center"    "ATTACKER"
+				            "Radius"    "%radius"
+				        }
+
+	    				"Action"
+	    				{
+	    					"TrackingProjectile"
+					        {
+					            "Target"			"TARGET"
+					            "EffectName"        "particles/dagger_blue_tp/dagger_blue_tp_attack.vpcf"
+					            "Dodgeable"         "0"
+					            "ProvidesVision"    "1"
+					            "VisionRadius"      "300"
+					            "MoveSpeed"         "1100"
+					            "SourceAttachment"  "DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
+					        }
+	    				}
+	    			}
+	    		}
+
+	    		"OnAbilityExecuted"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    				"Target"		"CASTER"
+	    				"Function"		"OnDaggerInvisibleRemove"
+	    			}
+	    		}
+
+	    		"OnDestroy"
+	    		{
+	    			"ApplyModifier"
+	    			{
+	    				"Target" 			"TARGET"
+	    				"ModifierName"		"modifier_item_zs_dagger_linghun_buff"
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_item_zs_dagger_linghun_buff"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Duration"		"%duration_buff"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%attack_spped" //攻击速度
+	    			"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"	"%damage"
+	    		}
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"03"  //隐身持续时间
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"duration"		"10"
+	    	}
+	    	"07"  //BUFF持续时间
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"duration_buff"	"5"
+	    	}
+	    	"08"  //攻击速度
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_spped"	"150"
+	    	}
+	    	"09"  //伤害降低
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"damage"		"-40"
+	    	}
+	    	"06"  //作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"radius"		"600"
+	    	}
+	    	"04"  //最大物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_max"	"200"
+	    	}
+	    	"05"  //最小物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_min"	"150"
+	    	}
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"agi_bonus"		"97"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"cun_bonus"		"110"
+	    	}
+	    }
+	}
+	"item_recipe_zs_dagger_linghun"//1513
+	{
+		"ID"							"1513"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"500"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_dagger_linghun"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_dagger_anying;item_cf_feather;item_cf_feather"
+		}
+	}
+
+	"item_zs_dagger_yinhe"//1514
+	{
+		//银河之刃
+		"ID"					"1514"
+		"BaseClass"				"item_datadriven"
+	    "AbilityTextureName"	"item_zs_dagger_yinhe"
+	    "AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityCooldown"		"15"
+	    "AbilityManaCost"		"20"
+
+	    "ItemCost"				"99999"
+	    "ItemDroppable"			"1"
+	    "ItemSellable"			"1"
+	    "ItemQuality"			"rare"
+	    "ItemPurchasable"		"1"
+	    "ItemPermanent"			"1"
+	    "ItemStackable"			"0"
+	    "ItemKillable"			"1"
+	    "ItemShareability"		"ITEM_FULLY_SHAREABLE"
+
+	    "OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    		"Target"		"CASTER"
+	    		"Function"		"OnDaggerInvisible"
+	    	}
+	    	"ApplyModifier"
+	    	{
+	    		"Target" 			"CASTER"
+	    		"ModifierName"		"modifier_item_zs_dagger_yinhe_invisible_remove"
+	    	}
+	    	"AttachEffect"
+	    	{
+	    		"EffectName"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf"
+	    		"EffectAttachType"  "follow_origin"
+	    		"Target"  			"CASTER"
+	    	}
+	    	"FireSound"
+	    	{
+	    		"EffectName"		"Hero_TemplarAssassin.Meld"
+	    		"Target"  			"CASTER"
+	    	}	
+	    }
+
+	    "OnProjectileHitUnit"
+	    {
+	    	"RunScript"
+			{
+				"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+				"Target"		"TARGET"
+				"Function"		"OnDaggerZhiMing"
+			}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_item_zs_dagger_yinhe"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Passive"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"%agi_bonus"
+	    		}
+	    	}
+
+	    	"modifier_item_zs_dagger_yinhe_cunning"
+	    	{
+	    		"Passive"   "1"
+		        "IsHidden"  "1"
+		        "OnCreated"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnAddItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+		        "OnDestroy"
+		        {
+		            "RunScript"
+		            {
+		                "ScriptFile"        "scripts/vscripts/items/item_core.lua"
+		                "Function"          "OnRemoveItemCategory"
+		                "CategoryCunning"    "%cun_bonus"
+		            }
+		        }
+	    	}
+
+	    	"modifier_item_zs_dagger_yinhe_invisible_remove"
+	    	{
+	    		"Duration"			"%duration"
+	    		"IsHidden"			"1"
+
+	    		"OnAttack"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    				"Target"		"UNIT"
+	    				"Function"		"OnDaggerInvisibleRemove"
+	    			}
+
+	    			"ActOnTargets"
+	    			{
+	    				"Target"
+	    			 	{
+				            "Types"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+				            "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+				            "Flags"     "DOTA_UNIT_TARGET_FLAG_NONE"
+				            "Center"    "ATTACKER"
+				            "Radius"    "%radius"
+				        }
+	    				"Action"
+	    				{
+	    					"TrackingProjectile"
+					        {
+					            "Target"			"TARGET"
+					            "EffectName"        "particles/dagger_blue_tp/dagger_blue_tp_attack.vpcf"
+					            "Dodgeable"         "0"
+					            "ProvidesVision"    "1"
+					            "VisionRadius"      "300"
+					            "MoveSpeed"         "1100"
+					            "SourceAttachment"  "DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
+					        }
+	    				}
+	    			}
+	    		}
+
+	    		"OnAbilityExecuted"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    				"Target"		"CASTER"
+	    				"Function"		"OnDaggerInvisibleRemove"
+	    			}
+	    		}
+
+	    		"OnDestroy"
+	    		{
+	    			"ApplyModifier"
+	    			{
+	    				"Target" 			"TARGET"
+	    				"ModifierName"		"modifier_item_zs_dagger_yinhe_buff"
+	    			}
+
+	    			"RunScript"
+	    			{
+	    				"ScriptFile" 	"scripts/vscripts/items/ItemDagger.lua"
+	    				"Target"		"TARGET"
+	    				"Function"		"OnDaggerYinHe"
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_item_zs_dagger_yinhe_buff"
+	    	{
+	    		"IsHidden"		"1"
+	    		"Duration"		"%duration_buff"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"	"%damage"
+	    		}
+	    	}
+	    }
+
+	    "AbilitySpecial"
+	    {
+	    	"03"  //隐身持续时间
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"duration"		"10"
+	    	}
+	    	"06"  //作用范围
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"radius"		"600"
+	    	}
+	    	"07"  //BUFF持续时间
+	    	{
+	    		"var_type"		"FIELD_FLOAT"
+	    		"duration_buff"	"5"
+	    	}
+	    	"09"  //伤害降低
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"damage"		"-60"
+	    	}
+	    	"04"  //最大物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_max"	"250"
+	    	}
+	    	"05"  //最小物理伤害
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"attack_min"	"200"
+	    	}
+	    	"10"	//伤害系数
+			{
+				"var_type"			"FIELD_FLOAT"
+				"increase"			"2.0"
+			}
+			"11"	//伤害敏捷加成
+			{
+				"var_type"			"FIELD_FLOAT"
+				"agi_hurt"			"2.0"
+			}
+	    	"01"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"agi_bonus"		"220"
+	    	}
+	    	"02"
+	    	{
+	    		"var_type"		"FIELD_INTEGER"
+	    		"cun_bonus"		"250"
+	    	}
+	    }
+	}
+	"item_recipe_zs_dagger_yinhe"//1515
+	{
+		"ID"							"1515"
+		"BaseClass"						"item_recipe_arcane_boots"
+		"ItemCost"						"0"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-----------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_zs_dagger_yinhe"
+		"ItemRequirements"
+		{
+			"01"						"item_zs_dagger_linghun;item_cf_feather;item_cf_feather;item_cf_feather"
 		}
 	}
 

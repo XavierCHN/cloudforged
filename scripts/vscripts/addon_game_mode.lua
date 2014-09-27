@@ -85,7 +85,8 @@ function Precache( context )
     PrecacheParticle( "particles/units/heroes/hero_elder_titan/elder_titan_earth_splitter_b.vpcf", context)
     PrecacheParticle( "particles/units/heroes/hero_jakiro/jakiro_macropyre.vpcf", context)
     PrecacheParticle( "particles/econ/items/bounty_hunter/bounty_hunter_shuriken_creeper/bounty_hunter_suriken_toss_creepers_cruel.vpcf", context)
-
+    PrecacheParticle( "particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf", context)
+    PrecacheResource( "particles/dagger_blue_tp", context )
     -- 音效文件
     PrecacheSound( 'soundevents/game_sounds_heroes/game_sounds_templar_assassin.vsndevts', context)
 	PrecacheSound( "soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts", context )
